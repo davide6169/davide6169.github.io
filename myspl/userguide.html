@@ -1,0 +1,697 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.5.2" />
+<meta name="description" content="an open source UNIX framework for shell script based web service provider" />
+<meta name="keywords" content="mysvc, shell script, web service, provider, service, soa, template, engine, myste, mysde, mysvcd" />
+<link rel="stylesheet" href="../xhtml11.css" type="text/css" />
+<link rel="stylesheet" href="../xhtml11-quirks.css" type="text/css" />
+<link rel="stylesheet" href="../layout1.css" type="text/css" />
+<script type="text/javascript">
+/*<![CDATA[*/
+window.onload = function(){generateToc(2)}
+/*]]>*/
+</script>
+<script type="text/javascript" src="../toc.js"></script>
+<title>MySVC</title>
+</head>
+<body>
+<div id="layout-banner">
+  <div id="layout-title">MySVC</div>
+  <div id="layout-description">an open source UNIX framework for shell script based web services provider</div>
+</div>
+<table>
+<tr valign="top">
+<td id="layout-menu">
+  <div>&#187;<a href="../index.html">Home</a></div>
+  <div>&#187;<a href="../tools.html">Tools</a></div>
+  <div>&#187;<a href="../manpage.html">Man&nbsp;Page</a></div>
+  <div>&#187;<a href="../userguide.html">User&nbsp;Guide</a></div>
+  <div>&#187;<a href="../changelog.html">ChangeLog</a></div>
+  <div>&#187;<a href="../install.html">Installation</a></div>
+  <div>&#187;<a href="../sourcecode.html">Source Code</a></div>
+  <div>&#187;<a href="../downloads.html">Downloads</a></div>
+  <div>&#187;<a href="../faq.html">FAQ</a></div>
+  <div>&#187;<a href="../support.html">Support</a></div>
+  <div>&#187;<a href="../license.html">License</a></div>
+  <hr/>
+  <div>&#187;<a href="../myapps/index.html">My Apps</a></div>
+  <div>
+  <hr/>
+  <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+  <input type="hidden" name="cmd" value="_s-xclick">
+  <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+  ">
+  <input type="image" src="https://www.paypal.com/en_US/IT/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="">
+  <img alt="" border="0" src="https://www.paypal.com/it_IT/i/scr/pixel.gif" width="1" height="1">
+  </form>
+  </div>
+</td>
+<td>
+<div id="layout-content">
+<div id="header">
+<h1>MySPL User Guide</h1>
+</div>
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+<h2 id="_introduction">Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>MySPL (<em>My Service Protocol Library</em>) is a C++ library to implement any TCP/IP socket client/server
+for binary or ASCII protocols.</p></div>
+<div class="paragraph"><p>It&#8217;s made from two source code files:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="protocol.hh.html">protocol.hh</a>
+</p>
+</li>
+<li>
+<p>
+<a href="protocol.cc.html">protocol.cc</a>
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>For example, to implement a socket client for a binary protocol you must:
+- use the library classes defining your protocol messages from their fields, where messages
+  can be:
+    * flat (a sequence of fields each of its type and size)
+    * a tree hierarchy
+- using them:
+  * creating a SocketClient from ip address and port
+  * instantiating the message objects
+  * implementing the workflow corresponding to the protocol
+    reading and writing messages simply using the operators
+    &lt;&lt; and &gt;&gt;, or accessing their fields by name or by
+    index</p></div>
+<div class="paragraph"><p>The same to implement a socket client for an ASCII protocol but using <em>false</em> for parameter <em>binary</em>
+to SocketClient constructor</p></div>
+<div class="paragraph"><p>To implement a socket server you must use the SocketServer class</p></div>
+</div>
+<h2 id="_examples">Examples</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre><tt>...
+//
+// Socket client for a binary protocol
+//
+
+// define message classes...
+
+//
+// VERSION
+//
+
+class UPSPVersion: public Message
+{
+  public:
+    UPSPVersion():
+      Message(5,"VERSION")
+    {
+      // Header fields
+      assign(0,new Int4Field("length",18));
+      assign(1,new Int2Field("msg_type",UPSP_VERSION));
+      assign(2,new Int4Field("client_data_1"));
+      assign(3,new Int4Field("client_data_2"));
+
+      // Body field
+      assign(4,new Int4Field("version",4));
+    }
+};
+
+//
+// LOGIN_REQ
+//
+
+class UPSPLoginReq: public Message
+{
+  public:
+    UPSPLoginReq():
+      Message(6,"LOGIN_REQ")
+    {
+      // Header fields
+      assign(0,new Int4Field("length",71));
+      assign(1,new Int2Field("msg_type",UPSP_LOGIN_REQ));
+      assign(2,new Int4Field("client_data_1"));
+      assign(3,new Int4Field("client_data_2"));
+
+      // Body fields
+      assign(4,new StringField(32,"username"));  // to init
+      assign(5,new StringField(25,"password"));  // to init
+    }
+};
+
+//
+// LOGIN_ACK
+//
+
+class UPSPLoginAck: public Message
+{
+  public:
+    UPSPLoginAck():
+      Message(4,"LOGIN_ACK")
+    {
+      // Header fields
+      assign(0,new Int4Field("length",14));
+      assign(1,new Int2Field("msg_type",UPSP_LOGIN_ACK));
+      assign(2,new Int4Field("client_data_1"));
+      assign(3,new Int4Field("client_data_2"));
+    }
+};
+
+//
+// LOGIN_NACK
+//
+
+class UPSPLoginNAck: public Message
+{
+  public:
+    UPSPLoginNAck():
+      Message(6,"LOGIN_NACK")
+    {
+      // Header fields
+      assign(0,new Int4Field("length",530));
+      assign(1,new Int2Field("msg_type",UPSP_LOGIN_NACK));
+      assign(2,new Int4Field("client_data_1"));
+      assign(3,new Int4Field("client_data_2"));
+
+      // Body fields
+      assign(4,new Int4Field("error_code"));
+      assign(5,new StringField(512,"error_msg"));
+    }
+};
+...
+
+//
+// create a SocketClient from ip address and port
+// and use message classes to implement the
+// protocol workflow reading and writing messages
+// simply using the operators &gt;&gt; and &lt;&lt;
+// or accessing their fields by name or by index...
+//
+
+  ...
+  try
+  {
+    SocketClient wildfire(ipaddress,port);
+
+    // Connection to wildfire ...
+
+    if(upsp_log)
+      cerr &lt;&lt; "Connecting to Wildfire ..." &lt;&lt; endl;
+
+    wildfire.connect();
+
+    UPSPHeader               header;
+
+    UPSPVersion              version;
+    UPSPLoginReq             login_req;
+    ...
+    int msg_type;
+    ...
+
+    // Login ...
+
+    if(upsp_log)
+      cerr &lt;&lt; "Sending version ..." &lt;&lt; endl;
+
+    version[4] = "1.0";
+
+    if(upsp_log)
+    {
+      if(upsp_trace)
+        cerr &lt;&lt; version &lt;&lt; endl;
+      cerr &lt;&lt; "  &lt;version&gt; = &lt;"
+           &lt;&lt; ((Int4Field&amp;) version[4]).value()
+           &lt;&lt; "&gt;" &lt;&lt; endl;
+    }
+
+    wildfire &lt;&lt; version;
+
+    login_req[4] = "myusername";
+    login_req[5] = "mypassword";
+
+    if(upsp_log)
+    {
+      cerr &lt;&lt; "Sending login_req ..." &lt;&lt; endl;
+      if(upsp_trace)
+        cerr &lt;&lt; login_req;
+      cerr &lt;&lt; "  &lt;username&gt; = &lt;" &lt;&lt; username &lt;&lt; "&gt;" &lt;&lt; endl;
+      cerr &lt;&lt; "  &lt;password&gt; = &lt;" &lt;&lt; password &lt;&lt; "&gt;" &lt;&lt; endl;
+    }
+
+    wildfire &lt;&lt; login_req;
+
+    if(upsp_log)
+      cerr &lt;&lt; "Reading ..." &lt;&lt; endl;
+
+    wildfire &gt;&gt; header;
+
+    if(upsp_log)
+    {
+      if(upsp_trace)
+        cerr &lt;&lt; header &lt;&lt; endl;
+    }
+
+    msg_type = (Int2Field&amp;) header[1];
+
+    switch(msg_type)
+    {
+      case UPSP_LOGIN_ACK:
+      {
+        if(upsp_log)
+          cerr &lt;&lt; "Received login_ack ..." &lt;&lt; endl;
+
+        break;
+      }
+      case UPSP_LOGIN_NACK:
+      {
+        if(upsp_log)
+        {
+          cerr &lt;&lt; "Received login_nack ..." &lt;&lt; endl;
+          cerr &lt;&lt; "Reading login_nack body ..." &lt;&lt; endl;
+        }
+
+        wildfire &gt;&gt; login_nack_body;
+
+        if(upsp_log)
+        {
+          if(upsp_trace)
+            cerr &lt;&lt; login_nack_body &lt;&lt; endl;
+          cerr &lt;&lt; "  &lt;error_code&gt; = &lt;"
+               &lt;&lt; ((Int4Field&amp;) login_nack_body[0]).value()
+               &lt;&lt; "&gt;" &lt;&lt; endl;
+          cerr &lt;&lt; "  &lt;error_msg&gt; = &lt;"
+               &lt;&lt; ((StringField&amp;) login_nack_body[1]).value()
+               &lt;&lt; "&gt;" &lt;&lt; endl;
+        }
+
+        break;
+      }
+      ...
+   }
+   ...
+  }
+  catch(SocketException e)
+  {
+    cerr &lt;&lt; e &lt;&lt; endl;
+
+    return WF_CONNECTION_ERROR;
+  }
+  ...
+
+//
+// Socket client for an ASCII protocol
+//
+  ...
+  try
+  {
+    // Connect to server (ascii mode) ...
+
+    SocketClient client(addr,port,false);
+
+    client.connect();
+
+    StringField request;
+    StringField response(APT_MAXLINESIZE);
+
+    string requeststr;
+    string responsestr;
+
+    // input is a sequence of &lt;request_block&gt;;
+    // each &lt;request_block&gt; has the following syntax:
+    //
+    // &lt;request_line&gt;
+    // &lt;request_line&gt;
+    // ...
+    // &lt;request_line&gt;
+    // %&lt;substring_of_last_response_line&gt;%
+    //
+    // Send request lines of input stream to server
+    // and write response lines from server to output stream ...
+
+    while(getline(*inputstream,requeststr))
+    {
+      if ((requeststr.length() &gt;= 2) &amp;&amp;
+          (requeststr[0] == '%') &amp;&amp;
+          (requeststr[requeststr.length()-1] == '%'))
+      {
+        string last;
+
+        if(requeststr.length() &gt; 2)
+          last = requeststr.substr(1,requeststr.length()-2);
+
+        while(1)
+        {
+          try
+          {
+            // Reading response ...
+            client &gt;&gt; response;
+
+            responsestr = response.value();
+          }
+          catch(...)
+          {
+            cerr &lt;&lt; APT_RECV_MSGERROR &lt;&lt; endl;
+
+            try
+            {
+              client.close();
+            }
+            catch(...)
+            {
+            }
+
+            return APT_RECV_ERROR;
+          }
+
+          (*outputstream) &lt;&lt; responsestr &lt;&lt; endl;
+
+          if(responsestr.find(last) != string::npos)
+            break;
+        }
+
+        continue;
+      }
+
+      request = requeststr;
+
+      try
+      {
+        // Sending request ...
+        client &lt;&lt; request;
+      }
+      catch(...)
+      {
+        cerr &lt;&lt; APT_SEND_MSGERROR &lt;&lt; endl;
+
+        try
+        {
+          client.close();
+        }
+        catch(...)
+        {
+        }
+
+        return APT_SEND_ERROR;
+      }
+    }
+
+    client.close();
+  }
+  catch(SocketException e)
+  {
+    cerr &lt;&lt; e &lt;&lt; endl;
+
+    return APT_CONNECTION_ERROR;
+  }
+  ...
+
+//
+// Socket client for a binary protocol with tree messages
+//
+
+// define fields and messages...
+
+...
+class SMIShortField: public Int2Field
+{
+  public:
+    SMIShortField(short value = 0,string name = "SMIShort"):
+      Int2Field(name,value)
+    {
+    }
+};
+
+class SMIShort: public FieldMessage
+{
+  public:
+     SMIShort(short value = 0,string name = "SMIShort"):
+       FieldMessage(new SMIShortField(value,name),name)
+     {
+     }
+
+     short value()
+     {
+       return ((SMIShortField&amp;)(*this)[0]).value();
+     }
+
+     operator short()
+     {
+       return value();
+     }
+
+     SMIShort&amp; operator=(short value)
+     {
+       (Int2Field&amp;)(*this)[0] = value;
+       return *this;
+     }
+};
+...
+class SMIOctetField: public OctetField
+{
+  public:
+    SMIOctetField(char value = '\0',string name = "SMIOctet"):
+      OctetField(name,value)
+    {
+    }
+};
+...
+class SMIString: public TreeMessage
+{
+  public:
+    SMIString(string value = "",string name = "SMIString"):
+      TreeMessage(1+value.length(),name)
+    {
+       (*this)(0) = new TreeMessage(
+         new SMIULong(size()-1,"SMIString length"));
+
+       for(int i=1;i&lt;size();i++)
+         (*this)(i) = new TreeMessage(
+           new SMIOctet(value[i-1]));
+    }
+
+    string value()
+    {
+      string s;
+
+      for(int i=1;i&lt;size();i++)
+        s += ((SMIOctet&amp;)(*this)[i]()).value();
+
+      return s;
+    }
+
+     operator string()
+     {
+       return value();
+     }
+
+     SMIString&amp; operator=(string value)
+     {
+       init(1+value.length());
+
+       (*this)(0) = new TreeMessage(
+         new SMIULong(size()-1,"SMIString length"));
+
+       for(int i=1;i&lt;size();i++)
+         (*this)(i) = new TreeMessage(
+           new SMIOctet(value[i-1]));
+
+       return *this;
+     }
+
+  protected:
+    TreeMessage* child(int i)
+    {
+      return new TreeMessage(
+        new SMIOctet());
+    }
+
+    int update(int size_)
+    {
+       int length = ((SMIULong*)(*this)[0].info())-&gt;value();
+
+       if((size_ == 1) &amp;&amp; (length &gt; 0))
+         return 1 + length;
+       else
+         return 0;
+    }
+};
+...
+
+// use messages to implement the protocol workflow...
+
+  try
+  {
+    SocketClient client(scp_addr,scp_port);
+
+    if(scp_log)
+      cerr &lt;&lt; "Connecting to SCP ..." &lt;&lt; endl;
+
+    try
+    {
+      client.connect();
+    }
+    catch(Exception&amp; e)
+    {
+      if(scp_log)
+        cerr &lt;&lt; "Error connecting to SCP ..." &lt;&lt; endl;
+
+      return SCP_CONNECTION_ERROR;
+    }
+
+    // Login
+
+    SMILogin login(scp_username,scp_password);
+
+    if(scp_log)
+      cerr &lt;&lt; "Sending login message ..." &lt;&lt; endl;
+
+    if(scp_trace)
+    {
+      login.updateTree();
+
+      cerr &lt;&lt; "&lt;smi&gt;" &lt;&lt; endl;
+
+      cerr &lt;&lt; login &lt;&lt; endl;
+    }
+
+    client &lt;&lt; login;
+
+    SMILoginResp loginresp;
+
+    client &gt;&gt; loginresp;
+    ...
+  }
+  catch(Exception&amp; e)
+  {
+     cerr &lt;&lt; e &lt;&lt; endl;
+
+     return 1;
+  }
+  ...</tt></pre>
+</div></div>
+<div class="paragraph"><p>To use <em>myspl</em> library (<em>libmyspl.a</em>):</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+include <em>protocol.hh</em> into your C++ source code
+</p>
+</li>
+<li>
+<p>
+link the library to your C++ main application
+  with a command like the following
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>g++ -lmyspl myapp.cc</tt></pre>
+</div></div>
+<div class="paragraph"><p>or</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>g++ -L&lt;myspldir&gt; -lmyspl myapp.cc</tt></pre>
+</div></div>
+<div class="paragraph"><p>to specify the dir containing &lt;myspldir&gt;, if different from current directory</p></div>
+<div class="paragraph"><p>For details see entire the MySPL example clients source code:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Wildfire VMS Client, realized for provisioning of <em>Memory</em> service
+  in <a href="http://www.youtube.com/watch?gl=IT&amp;hl=it&amp;v=paWCExcupc0"><strong>blu</strong></a> mobile telephone operator:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="upsp.hh.html">upsp.hh</a>
+</p>
+</li>
+<li>
+<p>
+<a href="wildfire.cc.html">wildfire.cc</a>
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Nortel Networks IN (Intelligent Network) SMI (Service Management Interface) Client,
+  realized for provisioning of VPN service on SCP
+  in <a href="http://www.youtube.com/watch?gl=IT&amp;hl=it&amp;v=paWCExcupc0"><strong>blu</strong></a> mobile telephone operator:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="smi.hh.html">smi.hh</a>
+</p>
+</li>
+<li>
+<p>
+<a href="scp.cc.html">scp.cc</a>
+</p>
+</li>
+<li>
+<p>
+<a href="scp.xml.html">scp.xml</a> (log example)
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Simple tester application for ASCII protocols,
+  realized to test many provisioning protocols on Network Elements
+  in <a href="http://www.youtube.com/watch?gl=IT&amp;hl=it&amp;v=paWCExcupc0"><strong>blu</strong></a> mobile telephone operator:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="apt.cc.html">apt.cc</a>
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 0.400<br />
+Last updated 2014-06-28 16:23:47 CEST
+</div>
+<div id="footer-badges">
+<img style="border:none; width:88px; height:31px;"
+     src="../images/gplv3-127x51.png"
+     alt="GPL Version 3" />
+<!-- Histats.com  START  -->
+<a href="http://www.histats.com" target="_blank" title="simple hit counter" >
+<script  type="text/javascript" language="javascript">
+var s_sid = 675659;var st_dominio = 4;
+var cimg = 0;var cwi =112;var che =48;
+</script></a><script  type="text/javascript" language="javascript" src="http://s10.histats.com/js9.js"></script>
+<noscript><a href="http://www.histats.com" target="_blank">
+<img  src="http://s4.histats.com/stats/0.gif?675659&1" alt="simple hit counter" border="0"></a>
+</noscript>
+<!-- Histats.com  END  -->
+</div>
+</div>
+</div>
+</td>
+</tr>
+</table>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-11334618-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>

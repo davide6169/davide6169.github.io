@@ -1,0 +1,4 @@
+if power reaches the plugs and the plugs are
+clean then the sparks are ok
+.
+(PowerToPlugs and PlugsClean) -> GoodSpark

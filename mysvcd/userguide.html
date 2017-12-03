@@ -1,0 +1,2094 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.5.2" />
+<meta name="description" content="an open source UNIX framework for shell script based web service provider" />
+<meta name="keywords" content="mysvc, shell script, web service, provider, service, soa, template, engine, myste, mysde, mysvcd" />
+<link rel="stylesheet" href="../xhtml11.css" type="text/css" />
+<link rel="stylesheet" href="../xhtml11-quirks.css" type="text/css" />
+<link rel="stylesheet" href="../layout1.css" type="text/css" />
+<script type="text/javascript">
+/*<![CDATA[*/
+window.onload = function(){generateToc(2)}
+/*]]>*/
+</script>
+<script type="text/javascript" src="../toc.js"></script>
+<title>MySVC</title>
+</head>
+<body>
+<div id="layout-banner">
+  <div id="layout-title">MySVC</div>
+  <div id="layout-description">an open source UNIX framework for shell script based web services provider</div>
+</div>
+<table>
+<tr valign="top">
+<td id="layout-menu">
+  <div>&#187;<a href="../index.html">Home</a></div>
+  <div>&#187;<a href="../tools.html">Tools</a></div>
+  <div>&#187;<a href="../manpage.html">Man&nbsp;Page</a></div>
+  <div>&#187;<a href="../userguide.html">User&nbsp;Guide</a></div>
+  <div>&#187;<a href="../changelog.html">ChangeLog</a></div>
+  <div>&#187;<a href="../install.html">Installation</a></div>
+  <div>&#187;<a href="../sourcecode.html">Source Code</a></div>
+  <div>&#187;<a href="../downloads.html">Downloads</a></div>
+  <div>&#187;<a href="../faq.html">FAQ</a></div>
+  <div>&#187;<a href="../support.html">Support</a></div>
+  <div>&#187;<a href="../license.html">License</a></div>
+  <hr/>
+  <div>&#187;<a href="../myapps/index.html">My Apps</a></div>
+  <div>
+  <hr/>
+  <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+  <input type="hidden" name="cmd" value="_s-xclick">
+  <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----MIIHPwYJKoZIhvcNAQcEoIIHMDCCBywCAQExggEwMIIBLAIBADCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwDQYJKoZIhvcNAQEBBQAEgYAWiqN5fcvDviZYNLmeRPAOeH+059PTyUtOFN8++Bx9+RhWYfjY/XwEwfKVwaEeK0+pLj9TDs/FW9ChZZF3FNPjR1Xlg0E3S37taxsarZ2NM6iBhXjSapQPgVGtrCqibd0Diq48ouQTcXPMxKON1Anv/fDoHjjaFPTRVI+KMQX0JTELMAkGBSsOAwIaBQAwgbwGCSqGSIb3DQEHATAUBggqhkiG9w0DBwQInBnxX7TxZ3mAgZhXvGov9cuq17ycIBz4CjE/MwjHddefpVXoPyyh89d/ieP1b6rehpp1R/aW8QBbnS1Fl/INzPU38Y3NTqX7oMhFYsLN1D6YSPjAeoFqIXp1rrTEIDLZRSSIwo8OXuEsPHqK/P+l7S4awyCyWJxdMkqSDK2hPoKXSUHIGA8jf6Rq4DV0CsJzljLJSW8WJMfdpXvKuff4HiEZPaCCA4cwggODMIIC7KADAgECAgEAMA0GCSqGSIb3DQEBBQUAMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbTAeFw0wNDAyMTMxMDEzMTVaFw0zNTAyMTMxMDEzMTVaMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbTCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAwUdO3fxEzEtcnI7ZKZL412XvZPugoni7i7D7prCe0AtaHTc97CYgm7NsAtJyxNLixmhLV8pyIEaiHXWAh8fPKW+R017+EmXrr9EaquPmsVvTywAAE1PMNOKqo2kl4Gxiz9zZqIajOm1fZGWcGS0f5JQ2kBqNbvbg2/Za+GJ/qwUCAwEAAaOB7jCB6zAdBgNVHQ4EFgQUlp98u8ZvF71ZP1LXChvsENZklGswgbsGA1UdIwSBszCBsIAUlp98u8ZvF71ZP1LXChvsENZklGuhgZSkgZEwgY4xCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDQTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLUGF5UGFsIEluYy4xEzARBgNVBAsUCmxpdmVfY2VydHMxETAPBgNVBAMUCGxpdmVfYXBpMRwwGgYJKoZIhvcNAQkBFg1yZUBwYXlwYWwuY29tggEAMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEFBQADgYEAgV86VpqAWuXvX6Oro4qJ1tYVIT5DgWpE692Ag422H7yRIr/9j/iKG4Thia/Oflx4TdL+IFJBAyPK9v6zZNZtBgPBynXb048hsP16l2vi0k5Q2JKiPDsEfBhGI+HnxLXEaUWAcVfCsQFvd2A1sxRr67ip5y2wwBelUecP3AjJ+YcxggGaMIIBlgIBATCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwCQYFKw4DAhoFAKBdMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA4MTAyNTE1NTQzMlowIwYJKoZIhvcNAQkEMRYEFMsXBheWWoPdxAigpR2+KpSpl3NXMA0GCSqGSIb3DQEBAQUABIGAMwKAzwiLVvhRLUQBUUgK5IJQOq4Ci0W9bVWiiCIF3g/DOWMzoJvlQRyxelM5jg2wChbtvg1sj5AoyXaqCdbuEI/7rP0/RhrfFxDqkSbWTOqkcgkMPgNeKvXAC9oD2Dflep/uDlUC2E0w9XEPtps7a5jCiJX5//huQ/usU3f5wmI=-----END PKCS7-----
+  ">
+  <input type="image" src="https://www.paypal.com/en_US/IT/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="">
+  <img alt="" border="0" src="https://www.paypal.com/it_IT/i/scr/pixel.gif" width="1" height="1">
+  </form>
+  </div>
+</td>
+<td>
+<div id="layout-content">
+<div id="header">
+<h1>MySVCD User Guide</h1>
+</div>
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+<h2 id="_introduction">Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>MySVCD (<em>My Service Daemon</em>) is an expect script to be used as configurable generic (tcp/ip or http) server or client, where single operation implementation can be implemented as expect procedure or external process such as a shell script.</p></div>
+</div>
+<h2 id="_using_mysvcd_as_server">Using mysvcd as server</h2>
+<div class="sectionbody">
+<h3 id="_test_server_default">Test Server (default)</h3><div style="clear:left"></div>
+<div class="listingblock">
+<div class="title">Usage</div>
+<div class="content">
+<pre><tt>  mysvcd [-l] [-p &lt;port&gt;]
+    (put on stdout requests from client and get from stdin responses for client)</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>-p &lt;port&gt;</em> specify the tcp/ip server port (default is 1036)
+</p>
+</li>
+<li>
+<p>
+<em>-l</em> option enable logs.
+</p>
+</li>
+<li>
+<p>
+the client request is write on standard output (one or more lines)
+</p>
+</li>
+<li>
+<p>
+the server response is read from standard input (one or more lines)
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>When log is enabled each request from client is echoed to stdout so it is written twice.</p></div>
+<div class="paragraph"><p>Example:</p></div>
+<div class="listingblock">
+<div class="title">Server Side without log enabled</div>
+<div class="content">
+<pre><tt>$ mysvcd
+my request 1...
+my response 1...
+my last request...
+my last response...</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Server Side with log enabled</div>
+<div class="content">
+<pre><tt>$ mysvcd -l
+2014-05-12 23:48:16 0   I start [8012]
+2014-05-12 23:48:17 0   I server 192.168.0.105:10306
+2014-05-12 23:48:33 0   I opening connection to client 127.0.0.1:50797
+2014-05-12 23:48:33 0   I waiting for request from client 127.0.0.1:50797
+2014-05-12 23:48:44 0   I received request from client 127.0.0.1:50797
+my request 1...
+my request 1...
+my response 1...
+2014-05-12 23:49:06 0   I sending response to client 127.0.0.1:50797
+my response 1...
+2014-05-12 23:49:35 0   I received request from client 127.0.0.1:50797
+my last request...
+my last request...
+my last response...
+2014-05-12 23:49:59 0   I sending response to client 127.0.0.1:50797
+my last response...
+^C2014-05-12 23:50:04 0   I received signal SIGINT
+2014-05-12 23:50:04 0   I stop [8012]</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Client Side</div>
+<div class="content">
+<pre><tt>$ telnet localhost 10306
+Trying ::1...
+telnet: connect to address ::1: Connection refused
+Trying 127.0.0.1...
+Connected to localhost.
+Escape character is '^]'.
+my request 1...
+my response 1...
+my last request...
+my last response...
+Connection closed by foreign host.</tt></pre>
+</div></div>
+<h3 id="_generic_server_default_if_path_to_server_is_specified">Generic Server (default if /path/to/server is specified)</h3><div style="clear:left"></div>
+<div class="listingblock">
+<div class="title">Usage</div>
+<div class="content">
+<pre><tt>  mysvcd [-1] [-l|-d [-l -o &lt;logfile&gt; [-L &lt;loglevels&gt;]]] [-p &lt;port&gt;] /path/to/server
+    (put on server stdin requests from client
+     get from server stdout response for client
+     where server is any executable application)</tt></pre>
+</div></div>
+<div class="paragraph"><p>The server is an external application that:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+read the client requests from standard input
+</p>
+</li>
+<li>
+<p>
+process the client requests
+</p>
+</li>
+<li>
+<p>
+write the server responses to standard output
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>If -1 option is not specified, a connection with server is
+opened first once, when the client open connection, and closed when the server exits</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+The client requests are sent to stdin of server
+</p>
+</li>
+<li>
+<p>
+The server responses are read from stdout of server
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>If -1 option is specified a single instance of server is shared by all clients</p></div>
+<div class="paragraph"><p>Example:</p></div>
+<div class="listingblock">
+<div class="title">Server Script (myserver.sh)</div>
+<div class="content">
+<pre><tt>#!/bin/sh
+
+while :
+do
+  read request
+
+  echo "received request $request ..."
+  echo "response to request &lt;$request&gt; ..."
+
+  if [ "$request" = "quit" ]
+  then
+    echo "exit"
+
+    exit
+  fi
+done</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Server Side without log enabled</div>
+<div class="content">
+<pre><tt>$ mysvcd /path/to/myserver.sh</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Server Side with log enabled (without -1 option)</div>
+<div class="content">
+<pre><tt>$ mysvcd -l /path/to/myserver.sh
+2014-06-07 00:40:18 0   I start [2122]
+2014-06-07 00:40:18 0   I server 192.168.0.104:1036
+2014-06-07 00:40:24 0   I opening connection to client 127.0.0.1:49884
+2014-06-07 00:40:24 0   I executing server /path/to/myserver.sh
+2014-06-07 00:40:24 0   I waiting for request from client 127.0.0.1:49884
+2014-06-07 00:40:28 0   I received request from client 127.0.0.1:49884
+myrequest1
+2014-06-07 00:40:28 1   I received response from server for client 127.0.0.1:49884
+server <b>&lt;2125&gt;</b>, received request myrequest1 ...
+2014-06-07 00:40:28 1   I sending response to client 127.0.0.1:49884
+2014-06-07 00:40:28 1   I received response from server for client 127.0.0.1:49884
+server <b>&lt;2125&gt;</b>, response to request &lt;myrequest1&gt; ...
+2014-06-07 00:40:28 1   I sending response to client 127.0.0.1:49884
+2014-06-07 00:40:33 0   I received request from client 127.0.0.1:49884
+myrequest2
+2014-06-07 00:40:33 1   I received response from server for client 127.0.0.1:49884
+server <b>&lt;2125&gt;</b>, received request myrequest2 ...
+2014-06-07 00:40:33 1   I sending response to client 127.0.0.1:49884
+2014-06-07 00:40:33 1   I received response from server for client 127.0.0.1:49884
+server <b>&lt;2125&gt;</b>, response to request &lt;myrequest2&gt; ...
+2014-06-07 00:40:33 1   I sending response to client 127.0.0.1:49884
+2014-06-07 00:40:50 0   I opening connection to client 127.0.0.1:49885
+2014-06-07 00:40:50 0   I executing server /path/to/myserver.sh
+2014-06-07 00:40:50 0   I waiting for request from client 127.0.0.1:49885
+2014-06-07 00:41:01 0   I received request from client 127.0.0.1:49885
+myrequest3
+2014-06-07 00:41:01 1   I received response from server for client 127.0.0.1:49885
+server <b>&lt;2130&gt;</b>, received request myrequest3 ...
+2014-06-07 00:41:01 1   I sending response to client 127.0.0.1:49885
+2014-06-07 00:41:01 1   I received response from server for client 127.0.0.1:49885
+server <b>&lt;2130&gt;</b>, response to request &lt;myrequest3&gt; ...
+2014-06-07 00:41:01 1   I sending response to client 127.0.0.1:49885
+2014-06-07 00:41:15 0   I received request from client 127.0.0.1:49885
+myrequest4
+2014-06-07 00:41:15 1   I received response from server for client 127.0.0.1:49885
+server <b>&lt;2130&gt;</b>, received request myrequest4 ...
+2014-06-07 00:41:15 1   I sending response to client 127.0.0.1:49885
+2014-06-07 00:41:15 1   I received response from server for client 127.0.0.1:49885
+server <b>&lt;2130&gt;</b>, response to request &lt;myrequest4&gt; ...
+2014-06-07 00:41:15 1   I sending response to client 127.0.0.1:49885
+2014-06-07 00:41:25 0   I received request from client 127.0.0.1:49884
+quit
+2014-06-07 00:41:25 1   I received response from server for client 127.0.0.1:49884
+server <b>&lt;2125&gt;</b>, received request quit ...
+2014-06-07 00:41:25 1   I sending response to client 127.0.0.1:49884
+2014-06-07 00:41:25 1   I received response from server for client 127.0.0.1:49884
+server <b>&lt;2125&gt;</b>, response to request &lt;quit&gt; ...
+2014-06-07 00:41:25 1   I sending response to client 127.0.0.1:49884
+2014-06-07 00:41:25 1   I received response from server for client 127.0.0.1:49884
+server <b>&lt;2125&gt;</b>, exit
+2014-06-07 00:41:25 1   I sending response to client 127.0.0.1:49884
+2014-06-07 00:41:25 0   I detected EOF from server for client 127.0.0.1:49884
+2014-06-07 00:41:25 0   I closing server for client 127.0.0.1:49884
+2014-06-07 00:41:25 0   I closing connection to client 127.0.0.1:49884
+2014-06-07 00:41:34 0   I received request from client 127.0.0.1:49885
+quit
+2014-06-07 00:41:34 1   I received response from server for client 127.0.0.1:49885
+server <b>&lt;2130&gt;</b>, received request quit ...
+2014-06-07 00:41:34 1   I sending response to client 127.0.0.1:49885
+2014-06-07 00:41:34 1   I received response from server for client 127.0.0.1:49885
+server <b>&lt;2130&gt;</b>, response to request &lt;quit&gt; ...
+2014-06-07 00:41:34 1   I sending response to client 127.0.0.1:49885
+2014-06-07 00:41:34 1   I received response from server for client 127.0.0.1:49885
+server <b>&lt;2130&gt;</b>, exit
+2014-06-07 00:41:34 1   I sending response to client 127.0.0.1:49885
+2014-06-07 00:41:34 0   I detected EOF from server for client 127.0.0.1:49885
+2014-06-07 00:41:34 0   I closing server for client 127.0.0.1:49885
+2014-06-07 00:41:34 0   I closing connection to client 127.0.0.1:49885</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Client 1 Side (without -1 option)</div>
+<div class="content">
+<pre><tt>$ telnet 0 1036
+Trying 0.0.0.0...
+Connected to 0.
+Escape character is '^]'.
+myrequest1
+server <b>&lt;2125&gt;</b>, received request myrequest1 ...
+server <b>&lt;2125&gt;</b>, response to request &lt;myrequest1&gt; ...
+myrequest2
+server <b>&lt;2125&gt;</b>, received request myrequest2 ...
+server <b>&lt;2125&gt;</b>, response to request &lt;myrequest2&gt; ...
+quit
+server <b>&lt;2125&gt;</b>, received request quit ...
+server <b>&lt;2125&gt;</b>, response to request &lt;quit&gt; ...
+server <b>&lt;2125&gt;</b>, exit
+Connection closed by foreign host.</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Client 2 Side (without -1 option)</div>
+<div class="content">
+<pre><tt>$ telnet 0 1036
+Trying 0.0.0.0...
+Connected to 0.
+Escape character is '^]'.
+myrequest3
+server <b>&lt;2130&gt;</b>, received request myrequest3 ...
+server <b>&lt;2130&gt;</b>, response to request &lt;myrequest3&gt; ...
+myrequest4
+server <b>&lt;2130&gt;</b>, received request myrequest4 ...
+server <b>&lt;2130&gt;</b>, response to request &lt;myrequest4&gt; ...
+quit
+server <b>&lt;2130&gt;</b>, received request quit ...
+server <b>&lt;2130&gt;</b>, response to request &lt;quit&gt; ...
+server <b>&lt;2130&gt;</b>, exit
+Connection closed by foreign host.</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Server Side with log enabled (with -1 option)</div>
+<div class="content">
+<pre><tt>$ mysvcd -1 -l /path/to/myserver.sh
+2014-06-07 23:42:12 0   I start [9879]
+2014-06-07 23:42:12 0   I server 192.168.0.104:1036
+2014-06-07 23:42:35 0   I opening connection to client 127.0.0.1:57259
+2014-06-07 23:42:35 0   I executing server /path/to/myserver.sh
+2014-06-07 23:42:35 0   I unique instance of server shared by clients
+2014-06-07 23:42:35 0   I waiting for request from client 127.0.0.1:57259
+2014-06-07 23:43:08 0   I received request from client 127.0.0.1:57259
+myrequest5
+2014-06-07 23:43:08 1   I received response from server for client 127.0.0.1:57259
+server <b>&lt;9883&gt;</b>, received request myrequest5 ...
+2014-06-07 23:43:08 1   I sending response to client 127.0.0.1:57259
+2014-06-07 23:43:08 1   I received response from server for client 127.0.0.1:57259
+server <b>&lt;9883&gt;</b>, response to request &lt;myrequest5&gt; ...
+2014-06-07 23:43:08 1   I sending response to client 127.0.0.1:57259
+2014-06-07 23:43:26 0   I received request from client 127.0.0.1:57259
+myrequest6
+2014-06-07 23:43:26 1   I received response from server for client 127.0.0.1:57259
+server <b>&lt;9883&gt;</b>, received request myrequest6 ...
+2014-06-07 23:43:26 1   I sending response to client 127.0.0.1:57259
+2014-06-07 23:43:26 1   I received response from server for client 127.0.0.1:57259
+server <b>&lt;9883&gt;</b>, response to request &lt;myrequest6&gt; ...
+2014-06-07 23:43:26 1   I sending response to client 127.0.0.1:57259
+2014-06-07 23:43:34 0   I opening connection to client 127.0.0.1:57264
+2014-06-07 23:43:34 0   W refused connection to client 127.0.0.1:57264
+2014-06-07 23:43:45 0   I received request from client 127.0.0.1:57259
+quit
+2014-06-07 23:43:45 1   I received response from server for client 127.0.0.1:57259
+server <b>&lt;9883&gt;</b>, received request quit ...
+2014-06-07 23:43:45 1   I sending response to client 127.0.0.1:57259
+2014-06-07 23:43:45 1   I received response from server for client 127.0.0.1:57259
+server <b>&lt;9883&gt;</b>, response to request &lt;quit&gt; ...
+2014-06-07 23:43:45 1   I sending response to client 127.0.0.1:57259
+2014-06-07 23:43:45 1   I received response from server for client 127.0.0.1:57259
+server <b>&lt;9883&gt;</b>, exit
+2014-06-07 23:43:45 1   I sending response to client 127.0.0.1:57259
+2014-06-07 23:43:45 0   I detected EOF from server for client 127.0.0.1:57259
+2014-06-07 23:43:45 0   I closing server for client 127.0.0.1:57259
+2014-06-07 23:43:45 0   I closing connection to client 127.0.0.1:57259</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Client 1 Side (with -1 option)</div>
+<div class="content">
+<pre><tt>$ telnet 0 1036
+Trying 0.0.0.0...
+Connected to 0.
+Escape character is '^]'.
+myrequest5
+server <b>&lt;9883&gt;</b>, received request myrequest5 ...
+server <b>&lt;9883&gt;</b>, response to request &lt;myrequest5&gt; ...
+myrequest6
+server <b>&lt;9883&gt;</b>, received request myrequest6 ...
+server <b>&lt;9883&gt;</b>, response to request &lt;myrequest6&gt; ...
+quit
+server <b>&lt;9883&gt;</b>, received request quit ...
+server <b>&lt;9883&gt;</b>, response to request &lt;quit&gt; ...
+server <b>&lt;9883&gt;</b>, exit
+Connection closed by foreign host.</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Client 2 Side (with -1 option)</div>
+<div class="content">
+<pre><tt>telnet 0 1036
+Trying 0.0.0.0...
+Connected to 0.
+Escape character is '^]'.
+Connection closed by foreign host.</tt></pre>
+</div></div>
+<h3 id="_simple_server">Simple Server</h3><div style="clear:left"></div>
+<div class="listingblock">
+<div class="title">Usage</div>
+<div class="content">
+<pre><tt>  mysvcd [-1] -s [-l|-d [-l -o &lt;logfile&gt; [-L &lt;loglevels&gt;]]] [-p &lt;port&gt;] /path/to/server
+    (put on server stdin each line read from client as request
+     get from server stdout response for client)</tt></pre>
+</div></div>
+<div class="paragraph"><p>The server is an external application that:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+read the client requests from standard input (a single line)
+</p>
+</li>
+<li>
+<p>
+process the client requests
+</p>
+</li>
+<li>
+<p>
+write the server responses to standard output (one or more lines)
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>If -1 option is not specified a connection with client is opened when the client open connection and
+closed after server exits</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+The client requests are sent to stdin of server
+</p>
+</li>
+<li>
+<p>
+The server responses are read from stdout of server
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>If -1 option is specified the connection with client is opened when the client open connection and keeped
+opened even when the server exits</p></div>
+<div class="listingblock">
+<div class="title">Server Side with log enabled (without -1 option)</div>
+<div class="content">
+<pre><tt>$ mysvcd -l -s /path/to/myserver.sh
+2014-06-09 22:37:22 0   I start [3959]
+2014-06-09 22:37:22 0   I server 192.168.0.104:1036
+2014-06-09 22:37:35 0   I opening connection to client 127.0.0.1:51741
+2014-06-09 22:37:35 0   I waiting for request from client 127.0.0.1:51741
+2014-06-09 22:37:46 0   I received request from client 127.0.0.1:51741
+myrequest1
+2014-06-09 22:37:46 0   I executing external application /path/to/myserver.sh
+2014-06-09 22:37:46 1   I received response from external application /path/to/myserver.sh for client 127.0.0.1:51741
+server <b>&lt;3966&gt;</b>
+2014-06-09 22:37:46 1   I sending response to client 127.0.0.1:51741
+2014-06-09 22:37:46 1   I received response from external application /path/to/myserver.sh for client 127.0.0.1:51741
+server <b>&lt;3966&gt;</b>, response to request &lt;myrequest1&gt;
+2014-06-09 22:37:46 1   I sending response to client 127.0.0.1:51741
+2014-06-09 22:37:46 0   I detected EOF from external application /path/to/myserver.sh for client 127.0.0.1:51741
+2014-06-09 22:37:46 0   I closing external application /path/to/myserver.sh for client 127.0.0.1:51741
+2014-06-09 22:37:46 0   I closing connection to client 127.0.0.1:51741
+2014-06-09 22:38:07 0   I opening connection to client 127.0.0.1:51828
+2014-06-09 22:38:07 0   I waiting for request from client 127.0.0.1:51828
+2014-06-09 22:38:11 0   I received request from client 127.0.0.1:51828
+myrequest2
+2014-06-09 22:38:11 0   I executing external application /path/to/myserver.sh
+2014-06-09 22:38:11 1   I received response from external application /path/to/myserver.sh for client 127.0.0.1:51828
+server <b>&lt;3971&gt;</b>
+2014-06-09 22:38:11 1   I sending response to client 127.0.0.1:51828
+2014-06-09 22:38:11 1   I received response from external application /path/to/myserver.sh for client 127.0.0.1:51828
+server <b>&lt;3971&gt;</b>, response to request &lt;myrequest2&gt;
+2014-06-09 22:38:11 1   I sending response to client 127.0.0.1:51828
+2014-06-09 22:38:11 0   I detected EOF from external application /path/to/myserver.sh for client 127.0.0.1:51828
+2014-06-09 22:38:11 0   I closing external application /path/to/myserver.sh for client 127.0.0.1:51828
+2014-06-09 22:38:11 0   I closing connection to client 127.0.0.1:51828
+^C2014-06-09 22:38:21 0   I received signal SIGINT
+2014-06-09 22:38:21 0   I stop [3959]</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Client 1 Side (without -1 option)</div>
+<div class="content">
+<pre><tt>$ telnet 0 1036
+Trying 0.0.0.0...
+Connected to 0.
+Escape character is '^]'.
+myrequest1
+server <b>&lt;3966&gt;</b>
+server <b>&lt;3966&gt;</b>, response to request &lt;myrequest1&gt;
+Connection closed by foreign host.</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Client 1 Side (without -1 option)</div>
+<div class="content">
+<pre><tt>$ telnet 0 1036
+Trying 0.0.0.0...
+Connected to 0.
+Escape character is '^]'.
+myrequest2
+server <b>&lt;3971&gt;</b>
+server <b>&lt;3971&gt;</b>, response to request &lt;myrequest2&gt;
+Connection closed by foreign host.</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Server Side with log enabled</div>
+<div class="content">
+<pre><tt>$ mysvcd -l -1 -s /path/to/myserver.sh
+2014-06-09 22:50:46 0   I start [4111]
+2014-06-09 22:50:47 0   I server 192.168.0.104:1036
+2014-06-09 22:50:53 0   I opening connection to client 127.0.0.1:52322
+2014-06-09 22:50:53 0   I waiting for request from client 127.0.0.1:52322
+2014-06-09 22:50:58 0   I received request from client 127.0.0.1:52322
+myrequest3
+2014-06-09 22:50:58 0   I executing external application /path/to/myserver.sh
+2014-06-09 22:50:58 0   I sending response to client 127.0.0.1:52322
+server <b>&lt;4115&gt;</b>
+server <b>&lt;4115&gt;</b>, response to request &lt;myrequest3&gt;
+2014-06-09 22:50:58 0   I closing connection to client 127.0.0.1:52322
+2014-06-09 22:51:02 0   I received request from client 127.0.0.1:52322
+myrequest4
+2014-06-09 22:51:02 0   I executing external application /path/to/myserver.sh
+2014-06-09 22:51:02 0   I sending response to client 127.0.0.1:52322
+server <b>&lt;4116&gt;</b>
+server <b>&lt;4116&gt;</b>, response to request &lt;myrequest4&gt;
+2014-06-09 22:51:02 0   I closing connection to client 127.0.0.1:52322
+2014-06-09 22:51:37 0   I detected EOF from client 127.0.0.1:52322
+2014-06-09 22:51:37 0   I closing connection to client 127.0.0.1:52322
+2014-06-09 22:51:43 0   I opening connection to client 127.0.0.1:52327
+2014-06-09 22:51:43 0   I waiting for request from client 127.0.0.1:52327
+2014-06-09 22:51:55 0   I received request from client 127.0.0.1:52327
+myrequest5
+2014-06-09 22:51:55 0   I executing external application /path/to/myserver.sh
+2014-06-09 22:51:55 0   I sending response to client 127.0.0.1:52327
+server <b>&lt;4125&gt;</b>
+server <b>&lt;4125&gt;</b>, response to request &lt;myrequest5&gt;
+2014-06-09 22:51:55 0   I closing connection to client 127.0.0.1:52327
+2014-06-09 22:52:00 0   I received request from client 127.0.0.1:52327
+myrequest6
+2014-06-09 22:52:00 0   I executing external application /path/to/myserver.sh
+2014-06-09 22:52:00 0   I sending response to client 127.0.0.1:52327
+server <b>&lt;4126&gt;</b>
+server <b>&lt;4126&gt;</b>, response to request &lt;myrequest6&gt;
+2014-06-09 22:52:00 0   I closing connection to client 127.0.0.1:52327
+^C2014-06-09 22:52:09 0   I received signal SIGINT
+2014-06-09 22:52:09 0   I stop [4111]</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Client 1 Side</div>
+<div class="content">
+<pre><tt>$ telnet 0 1036
+Trying 0.0.0.0...
+Connected to 0.
+Escape character is '^]'.
+myrequest3
+server <b>&lt;4115&gt;</b>
+server <b>&lt;4115&gt;</b>, response to request &lt;myrequest3&gt;
+myrequest4
+server <b>&lt;4116&gt;</b>
+server <b>&lt;4116&gt;</b>, response to request &lt;myrequest4&gt;
+^]
+telnet&gt; quit
+Connection closed.</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Client 2 Side</div>
+<div class="content">
+<pre><tt>telnet 0 1036
+Trying 0.0.0.0...
+Connected to 0.
+Escape character is '^]'.
+myrequest5
+server <b>&lt;4125&gt;</b>
+server <b>&lt;4125&gt;</b>, response to request &lt;myrequest5&gt;
+myrequest6
+server <b>&lt;4126&gt;</b>
+server <b>&lt;4126&gt;</b>, response to request &lt;myrequest6&gt;
+Connection closed by foreign host.</tt></pre>
+</div></div>
+<h3 id="_web_server">Web Server</h3><div style="clear:left"></div>
+<div class="listingblock">
+<div class="title">Usage</div>
+<div class="content">
+<pre><tt>  mysvcd -w [-1] [-l|-d [-l -o &lt;logfile&gt;] [-L &lt;loglevels&gt;]] [-p &lt;port&gt;] [-D] /path/to/(server|root)
+    (if server is specified put on server stdin HTTP GET or POST requests from client
+     get from server stdout HTTP responses for client,
+     if root is specified return to clients server files corresponding to HTTP requests)</tt></pre>
+</div></div>
+<div class="paragraph"><p>There are two ways of usage:</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+if /path/to/server is specified a single application handling as CGI all HTTP client requests
+</p>
+</li>
+<li>
+<p>
+if /path/to/root is specified the resources related to HTTP client requests are retrieved
+   on filesystem under this root directory or obtained as output of resource
+   if it is related to an external executable application
+   else obtained as output of internal expect procedure with same resource name
+</p>
+</li>
+</ol></div>
+<div class="paragraph"><p>Only GET and POST method supported.</p></div>
+<div class="paragraph"><p>Handled file types for first usage mode:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+.html files are returned to client with MIME type "text/html"
+</p>
+</li>
+<li>
+<p>
+.gif files are returned to client with MIME type "image/gif"
+   and are encoded using base64
+</p>
+</li>
+<li>
+<p>
+.jpeg files are returned to client with MIME type "image/jpeg"
+   and are encoded using base64
+</p>
+</li>
+<li>
+<p>
+.txt files are returned to client with MIME type "text/plain"
+</p>
+</li>
+<li>
+<p>
+.xml files are returned to client with MIME type "text/xml"
+</p>
+</li>
+<li>
+<p>
+other files are return to client with MIME type "application/octet-stream"
+           (useful to download a file from server)
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Supported CGI variables setted by the server for second usage mode:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+REQUEST_METHOD (set as GET or POST)
+</p>
+</li>
+<li>
+<p>
+QUERY_STRING (only for GET)
+</p>
+</li>
+<li>
+<p>
+CONTENT_LENGTH (only for POST)
+</p>
+</li>
+<li>
+<p>
+REQUEST_URI (for GET and POST)
+</p>
+</li>
+<li>
+<p>
+PATH_INFO (for GET and POST)
+</p>
+</li>
+<li>
+<p>
+REMOTE_ADDR (for GET and POST)
+</p>
+</li>
+<li>
+<p>
+SOAP_ACTION (for POST)
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>/path/to/root:</p></div>
+<div class="listingblock">
+<div class="title">Server Side with log enabled (without -1 option)</div>
+<div class="content">
+<pre><tt>$ mysvcd -l -w /path/to/root
+2014-06-19 23:43:37 0   I start [7297]
+2014-06-19 23:43:37 0   I server 192.168.0.105:1036
+2014-06-19 23:43:41 0   I opening connection to client 127.0.0.1:55438
+2014-06-19 23:43:50 0   I received request from client 127.0.0.1:55438
+GET /index.html HTTP/1.0
+2014-06-19 23:43:50 0   I sending response to client 127.0.0.1:55438
+2014-06-19 23:43:50 0   I closing connection to client 127.0.0.1:55438</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Client Side</div>
+<div class="content">
+<pre><tt>$ telnet 0 1036
+Trying 0.0.0.0...
+Connected to 0.
+Escape character is '^]'.
+^]
+telnet&gt; quit
+Connection closed.</tt></pre>
+</div></div>
+<div class="paragraph"><p>/path/to/server:</p></div>
+<div class="listingblock">
+<div class="title">myserver.sh</div>
+<div class="content">
+<pre><tt>#!/bin/sh
+
+echo "Content-Type: text/xml"
+echo ""
+echo "&lt;?xml version=\"1.0\"?&gt;"
+echo "&lt;instance&gt;$$&lt;/instance&gt;"
+echo "&lt;service&gt;"
+echo "&lt;input&gt;"
+cat
+echo "&lt;/input&gt;"
+echo "&lt;query_string&gt;&lt;![CDATA[${QUERY_STRING}]]&gt;&lt;query_string&gt;"
+echo "&lt;output&gt;this is the output response&lt;/output&gt;"
+echo "&lt;/service&gt;"</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Server Side with log enabled (without -1 option)</div>
+<div class="content">
+<pre><tt>$ mysvcd -l -w /path/to/myserver.sh
+2014-06-22 15:23:13 0   I start [60186]
+2014-06-22 15:23:13 0   I server 192.168.0.105:1036
+2014-06-22 15:23:16 0   I opening connection to client 127.0.0.1:63531
+2014-06-22 15:23:21 0   I received request from client 127.0.0.1:63531
+GET /my/path?p1=A&amp;p2=B HTTP/1.0
+HEADER_1: 11
+HEADER_2: 22
+2014-06-22 15:23:25 0   I executing server /path/to/myserver.sh
+2014-06-22 15:23:25 0   I GET request method
+p1=A&amp;p2=B
+2014-06-22 15:23:25 0   I sending response to client 127.0.0.1:63531
+2014-06-22 15:23:25 0   I waiting for request from client 127.0.0.1:63531
+2014-06-22 15:23:25 1   I received response from server for client 127.0.0.1:63531
+Content-Type: text/xml
+2014-06-22 15:23:25 1   I sending response to client 127.0.0.1:63531
+2014-06-22 15:23:25 1   I received response from server for client 127.0.0.1:63531
+
+2014-06-22 15:23:25 1   I sending response to client 127.0.0.1:63531
+2014-06-22 15:23:25 1   I received response from server for client 127.0.0.1:63531
+&lt;?xml version="1.0"?&gt;
+2014-06-22 15:23:25 1   I sending response to client 127.0.0.1:63531
+2014-06-22 15:23:25 1   I received response from server for client 127.0.0.1:63531
+&lt;instance&gt;60191&lt;/instance&gt;
+2014-06-22 15:23:25 1   I sending response to client 127.0.0.1:63531
+2014-06-22 15:23:25 1   I received response from server for client 127.0.0.1:63531
+&lt;service&gt;
+2014-06-22 15:23:25 1   I sending response to client 127.0.0.1:63531
+2014-06-22 15:23:25 1   I received response from server for client 127.0.0.1:63531
+&lt;input&gt;
+2014-06-22 15:23:25 1   I sending response to client 127.0.0.1:63531
+2014-06-22 15:23:25 1   I received response from server for client 127.0.0.1:63531
+GET /my/path?p1=A&amp;p2=B HTTP/1.0
+2014-06-22 15:23:25 1   I sending response to client 127.0.0.1:63531
+2014-06-22 15:23:25 1   I received response from server for client 127.0.0.1:63531
+HEADER_1: 11
+2014-06-22 15:23:25 1   I sending response to client 127.0.0.1:63531
+2014-06-22 15:23:25 1   I received response from server for client 127.0.0.1:63531
+HEADER_2: 22
+2014-06-22 15:23:25 1   I sending response to client 127.0.0.1:63531
+2014-06-22 15:23:25 1   I received response from server for client 127.0.0.1:63531
+&lt;/input&gt;
+2014-06-22 15:23:25 1   I sending response to client 127.0.0.1:63531
+2014-06-22 15:23:25 1   I received response from server for client 127.0.0.1:63531
+&lt;query_string&gt;&lt;![CDATA[p1=A&amp;p2=B]]&gt;&lt;query_string&gt;
+2014-06-22 15:23:25 1   I sending response to client 127.0.0.1:63531
+2014-06-22 15:23:25 1   I received response from server for client 127.0.0.1:63531
+&lt;output&gt;this is the output response&lt;/output&gt;
+2014-06-22 15:23:25 1   I sending response to client 127.0.0.1:63531
+2014-06-22 15:23:25 1   I received response from server for client 127.0.0.1:63531
+&lt;/service&gt;
+2014-06-22 15:23:25 1   I sending response to client 127.0.0.1:63531
+2014-06-22 15:23:25 0   I detected EOF from server for client 127.0.0.1:63531
+2014-06-22 15:23:25 0   I closing server for client 127.0.0.1:63531
+2014-06-22 15:23:25 0   I closing connection to client 127.0.0.1:63531
+2014-06-22 15:24:13 0   I opening connection to client 127.0.0.1:63587
+2014-06-22 15:24:52 0   I received request from client 127.0.0.1:63587
+POST /my/path2 HTTP/1.0
+HEADER_3: 33
+HEADER_4: 44
+Content-Length: 20
+2014-06-22 15:26:30 0   I executing cgi /path/to/myserver.sh
+2014-06-22 15:26:30 0   I POST request method
+p1=C&amp;p2=D&amp;p3=E&amp;p4=FG
+2014-06-22 15:26:30 0   I waiting for request from client 127.0.0.1:63587
+2014-06-22 15:26:30 1   I received response from server for client 127.0.0.1:63587
+Content-Type: text/xml
+2014-06-22 15:26:30 1   I sending response to client 127.0.0.1:63587
+2014-06-22 15:26:30 1   I received response from server for client 127.0.0.1:63587
+
+2014-06-22 15:26:30 1   I sending response to client 127.0.0.1:63587
+2014-06-22 15:26:30 1   I received response from server for client 127.0.0.1:63587
+&lt;?xml version="1.0"?&gt;
+2014-06-22 15:26:30 1   I sending response to client 127.0.0.1:63587
+2014-06-22 15:26:30 1   I received response from server for client 127.0.0.1:63587
+&lt;instance&gt;60364&lt;/instance&gt;
+2014-06-22 15:26:30 1   I sending response to client 127.0.0.1:63587
+2014-06-22 15:26:30 1   I received response from server for client 127.0.0.1:63587
+&lt;service&gt;
+2014-06-22 15:26:30 1   I sending response to client 127.0.0.1:63587
+2014-06-22 15:26:30 1   I received response from server for client 127.0.0.1:63587
+&lt;input&gt;
+2014-06-22 15:26:30 1   I sending response to client 127.0.0.1:63587
+2014-06-22 15:26:30 1   I received response from server for client 127.0.0.1:63587
+POST /my/path2 HTTP/1.0
+2014-06-22 15:26:30 1   I sending response to client 127.0.0.1:63587
+2014-06-22 15:26:30 1   I received response from server for client 127.0.0.1:63587
+HEADER_3: 33
+2014-06-22 15:26:30 1   I sending response to client 127.0.0.1:63587
+2014-06-22 15:26:30 1   I received response from server for client 127.0.0.1:63587
+HEADER_4: 44
+2014-06-22 15:26:30 1   I sending response to client 127.0.0.1:63587
+2014-06-22 15:26:30 1   I received response from server for client 127.0.0.1:63587
+Content-Length=20
+2014-06-22 15:26:30 1   I sending response to client 127.0.0.1:63587
+2014-06-22 15:26:30 1   I received response from server for client 127.0.0.1:63587
+
+2014-06-22 15:26:30 1   I sending response to client 127.0.0.1:63587
+2014-06-22 15:26:30 1   I received response from server for client 127.0.0.1:63587
+p1=C&amp;p2=D&amp;p3=E&amp;p4=FG
+2014-06-22 15:26:30 1   I sending response to client 127.0.0.1:63587
+2014-06-22 15:26:30 1   I received response from server for client 127.0.0.1:63587
+&lt;/input&gt;
+2014-06-22 15:26:30 1   I sending response to client 127.0.0.1:63587
+2014-06-22 15:26:30 1   I received response from server for client 127.0.0.1:63587
+&lt;query_string&gt;&lt;![CDATA[p1=C&amp;p2=D&amp;p3=E&amp;p4=FG]]&gt;&lt;query_string&gt;
+2014-06-22 15:26:30 1   I sending response to client 127.0.0.1:63587
+2014-06-22 15:26:30 1   I received response from server for client 127.0.0.1:63587
+&lt;output&gt;this is the output response&lt;/output&gt;
+2014-06-22 15:26:30 1   I sending response to client 127.0.0.1:63587
+2014-06-22 15:26:30 1   I received response from server for client 127.0.0.1:63587
+&lt;/service&gt;
+2014-06-22 15:26:30 1   I sending response to client 127.0.0.1:63587
+2014-06-22 15:26:30 0   I detected EOF from server for client 127.0.0.1:63587
+2014-06-22 15:26:30 0   I closing server for client 127.0.0.1:63587
+2014-06-22 15:26:30 0   I closing connection to client 127.0.0.1:63587
+^C2014-06-22 15:27:19 0   I received signal SIGINT
+2014-06-22 15:27:19 0   I stop [60186]</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Client 1 Side</div>
+<div class="content">
+<pre><tt>$ telnet 0 1036
+Trying 0.0.0.0...
+Connected to 0.
+Escape character is '^]'.
+GET /my/path?p1=A&amp;p2=B HTTP/1.0
+HEADER_1: 11
+HEADER_2: 22
+
+HTTP/1.0 200 OK
+Content-Type: text/xml
+
+&lt;?xml version="1.0"?&gt;
+&lt;instance&gt;60191&lt;/instance&gt;
+&lt;service&gt;
+&lt;input&gt;
+GET /my/path?p1=A&amp;p2=B HTTP/1.0
+HEADER_1: 11
+HEADER_2: 22
+&lt;/input&gt;
+&lt;query_string&gt;&lt;![CDATA[p1=A&amp;p2=B]]&gt;&lt;query_string&gt;
+&lt;output&gt;this is the output response&lt;/output&gt;
+&lt;/service&gt;
+Connection closed by foreign host.</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Client 2 Side</div>
+<div class="content">
+<pre><tt>$ telnet 0 1036
+Trying 0.0.0.0...
+Connected to 0.
+Escape character is '^]'.
+POST /my/path2 HTTP/1.0
+HEADER_3: 33
+HEADER_4: 44
+Content-Length: 20
+
+p1=C&amp;p2=D&amp;p3=E&amp;p4=FG
+HTTP/1.0 200 OK
+Content-Type: text/xml
+
+&lt;?xml version="1.0"?&gt;
+&lt;instance&gt;60364&lt;/instance&gt;
+&lt;service&gt;
+&lt;input&gt;
+POST /my/path2 HTTP/1.0
+HEADER_3: 33
+HEADER_4: 44
+Content-Length: 20
+
+p1=C&amp;p2=D&amp;p3=E&amp;p4=FG
+&lt;/input&gt;
+&lt;query_string&gt;&lt;![CDATA[p1=C&amp;p2=D&amp;p3=E&amp;p4=FG]]&gt;&lt;query_string&gt;
+&lt;output&gt;this is the output response&lt;/output&gt;
+&lt;/service&gt;
+Connection closed by foreign host.</tt></pre>
+</div></div>
+<h3 id="_expect_server">Expect Server</h3><div style="clear:left"></div>
+<div class="paragraph"><p><em>Internal</em>:</p></div>
+<div class="listingblock">
+<div class="title">Usage</div>
+<div class="content">
+<pre><tt>  mysvcd -e [-1] [-l|-d [-l -o &lt;logfile&gt;] [-L &lt;loglevels&gt;]] [-p &lt;port&gt;] [-q "&lt;queues&gt;"] [-u "&lt;users&gt;"] -f &lt;configfile&gt; -c &lt;configproc&gt;
+    (expect based server where client requests are calling to expect procedures
+     configured on expect script &lt;configfile&gt; with &lt;configproc&gt; being an expect procedure
+     inside &lt;configfile&gt; returing a list of &lt;name,value&gt; configuration parameters
+     where expect procedure output is returned to client and by default
+     using "kill -9 SIGUSR1 &lt;pid&gt;" the configuration file is reloaded and
+     using "kill -9 SIGUSR2 &lt;pid&gt;" the server status is swapped from ON to OFF)</tt></pre>
+</div></div>
+<div class="paragraph"><p><em>External</em>:</p></div>
+<div class="listingblock">
+<div class="title">Usage</div>
+<div class="content">
+<pre><tt>  mysvcd -x [-1] [-l|-d [-l -o &lt;logfile&gt;] [-L &lt;loglevels&gt;]] [-p &lt;port&gt;] [-q "&lt;queues&gt;"] [-u "&lt;users&gt;"] -f &lt;configfile&gt; -c &lt;configproc&gt;
+    (expect based server where client requests are calling to expect procedures
+     configured on expect script &lt;configfile&gt; with &lt;configproc&gt; being an expect procedure
+     inside &lt;configfile&gt; returing a list of &lt;name,value&gt; configuration parameters
+     where the expect procedures return the path of an external command to execute
+     whose standard output is returned to client and by default
+     using "kill -9 SIGUSR1 &lt;pid&gt;" the configuration file is reloaded and
+     using "kill -9 SIGUSR2 &lt;pid&gt;" the server status is swapped from ON to OFF)</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+The protocol used is the Expect language
+</p>
+</li>
+<li>
+<p>
+With the "internal" server (option -e) is returned to client the output of Expect procedures
+</p>
+</li>
+<li>
+<p>
+With the "external" server (option -r) is returned to client the output of external commands
+  whose path must be returned by Expect procedures
+</p>
+</li>
+<li>
+<p>
+The configuration file, specified with option
+    &lt;configfile&gt;
+  is itself an Expect script executed by the server
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+on startup
+      and
+</p>
+</li>
+<li>
+<p>
+on demand, when it receive the signal SIGUSR1
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+The configuration handler, specified with option
+    &lt;configproc&gt;
+  is the name of an Expect procedure
+  (inside &lt;configfile&gt;)
+  that must return a list of key-value pairs
+  (the order is not relevant)
+  e.g.:
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>    ...
+    proc myConfigHandler {} {
+      return {
+        key1 value1
+        key2 value2
+        ...
+        keyN valueN
+      }
+    }
+    ...</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>  Each key is a configuration parameter
+  (with its value)
+- The main predefined configuration parameters are
+  the following:
+    enabledcommands
+    users
+    userenabledcommands
+- Others configuration parameters:</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>    clienthandlers
+    serverhandlers
+    starthandler
+    stophandler
+    signalhandler
+    resourcehandler
+    log
+    logenabler
+    logfile
+    loglevels
+    eof
+    serial
+    server
+    queues
+    status</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+"enabledcommands":
+  its value is the list of enabled commands
+  Each command is an Expect procedure
+  (inside &lt;configfile&gt;)
+  that each client can execute
+  If the value is "*" then all commands are enabled
+  (is used a safe interpreter which for default
+   has a minimal set of enabled commands)
+  e.g.:
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>    ...
+    proc myCommand1 {args1} {
+      ...
+    }
+    ...
+    proc myCommand2 {args2} {
+      ...
+    }
+    ...
+    proc myConfigHandler {} {
+      return {
+      ...
+        enabledcommands {
+          ...
+          myCommand1
+          myCommand2
+          ...
+        }
+      ...
+      }
+    }
+    ...</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+"clienthandlers":
+  its value is a list of three procedures,
+  the handler for open, read, close and error
+  (the last is optional, the order is relevant)
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>    ...
+    proc myClientOpenHandler {in out client} {
+      ...
+      ;# called when a client open the connection
+      ;# (client is &lt;clientaddr&gt;:&lt;clientport&gt;)
+      ;# to read from client use in
+      ;# to write to client use out
+      ;# must return:
+      ;#   (*) 1 if the connection can be accepted
+      ;#   (*) 0 elsewhere
+      ;# useful to handle client authentication
+      ...
+    }
+    ...
+    proc myClientReadHandler {in out client request} {
+      ...
+      ;# called each time a client send a
+      ;# request (a single line);
+      ;# the predefined read handler
+      ;# (handleClientRead)
+      ;# wait for a complete command and
+      ;# execute it as Expect procedure (if exists)
+      ;# or as input for external command mysvc
+      ...
+    }
+    ...
+    proc myClientCloseHandler {in out client} {
+    ...
+      ;# executed when a client close
+      ;# the connection
+      ;# the default (handleClientClose)
+      ;# is empty
+    ...
+    }
+    ...
+    proc myClientExecHandler {in out client command} {
+    ...
+      ;# to handle expect procedure execution
+      ;# the default (handleClientExec)
+      ;#   (*) return procedure output to client if serial option is set
+      ;#   (*) execute the external command specified by procedure output
+      ;#       elsewhere, sending:
+      ;#         (*) partial external procedure output to client if flush option is set
+      ;#         (*) complete external procedure output to client elsewhere
+      ;# the predefined mysvc procedure execute the $MYSVC_HOME/bin/mysvc external command
+    ...
+    }
+    ...
+    proc myConfigHandler {} {
+      return {
+      ...
+        clienthandlers {
+          myClientOpenHandler
+          myClientReadHandler
+          myClientCloseHandler
+          myClientExecHandler
+        }
+      ...
+      }
+    }
+    ...</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+"serverhandlers":
+  its value is a list of three procedures,
+  the handler for open, read and close
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>    ...
+    proc myServerOpenHandler {inout server} {
+      ...
+      ;# called when connect is called
+      ;# (server is &lt;serveraddr&gt;:&lt;serverport&gt;)
+      ;# to read from or write to server
+      ;# use inout
+      ;# must return:
+      ;#   (*) 1 if the connection can be accepted
+      ;#   (*) 0 elsewhere
+      ...
+    }
+    ...
+    proc myServerReadHandler {inout response server} {
+      ...
+      ;# called each time a server send a
+      ;# response (a single line);
+      ;# the predefined read handler
+      ;# (handleServerRead) handle mysvcd
+      ;# as a client instead of as a server
+      ...
+    }
+    ...
+    proc myServerCloseHandler {inout server} {
+    ...
+      ;# executed when a server close
+      ;# the connection
+      ;# the default (handleServerClose)
+      ;# is empty
+    ...
+    }
+    ...
+    proc myConfigHandler {} {
+      return {
+      ...
+        serverhandlers {
+          myServerOpenHandler
+          myServerReadHandler
+          myServerCloseHandler
+        }
+      ...
+      }
+    }
+    ...</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+"starthandler":
+  its value is the name of a procedure
+  called when the server is started
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  ...
+  proc myStartHandler {} {
+    ;# ...
+    ;# handle server start
+    ;# ...
+  }
+  ...
+  proc myConfigHandler {} {
+    return {
+    ...
+      starthandler myStartHandler
+    ...
+    }
+  }
+  ...</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+"stophandler":
+  its value is the name of a procedure
+  called when the server is stopped
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  ...
+  proc myStopHandler {} {
+    ;# ...
+    ;# handle server stop
+    ;# ...
+  }
+  ...
+  proc myConfigHandler {} {
+    return {
+    ...
+      stophandler myStopHandler
+    ...
+    }
+  }
+  ...</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+"signalhandler":
+  its value is the name of a procedure
+  that handle the USR2 signal
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>    ...
+    proc mySignalHandler {} {
+      ...
+      ;# the predefined signal handler
+      ;# (handleSignal) call switchStatus
+      ;# that switch the server status
+      ;# between on and off
+      ;# (if status is off the server
+      ;#  don't accept any new client
+      ;#  connection)
+      ...
+    }
+    ...
+    proc myConfigHandler {} {
+      return {
+      ...
+        signalhandler mySignalHandler
+      ...
+      }
+    }
+    ...</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+"resourcehandler":
+  its value is the name of a procedure
+  that handle the resource when mysvcd
+  is used as HTTP server and a "GET &lt;resource&gt;"
+  request is received by a client
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>    ...
+    proc myResourceHandler {in out client resource} {
+      ;# ...
+      ;# return (filtered) resource to client
+      ;# ...
+    }
+    ...
+    proc myConfigHandler {} {
+      return {
+      ...
+        resourcehandler myResourceHandler
+      ...
+      }
+    }
+    ...</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+"queues":
+  its value is a list containing
+  a pair of directory:
+  the queue input directory and
+  the queue output directory
+  (default values are $MYSVC_HOME/in and $MYSVC_HOME/out)
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>    ...
+    proc myConfigHandler {} {
+      return {
+      ...
+        queues {
+          "/my/path/to/queue/inputdir"
+          "/my/path/to/queue/outputdir"
+        }
+      ...
+      }
+    }
+    ...</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+"users":
+  its value is a list of username/password pairs:
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>    ...
+    proc myConfigHandler {} {
+      return {
+      ...
+        users {
+          username1/password1
+          username2/password2
+          ...
+          usernameN/passwordN
+        }
+      ...
+      }
+    }
+    ...</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+"userenabledcommands":
+  its value is a list of pairs;
+  each pair is a username followed
+  by a list ef enabled commands
+  for that user
+  Note: regular expressions can be
+  used as enabled commands
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>    ...
+    proc myConfigHandler {} {
+      return {
+      ...
+        userenabledcommands {
+          username1 {
+            enabledcommand11
+            enabledcommand12
+            ...
+            enabledcommand1N
+          }
+          username2 {
+            enabledcommand21
+            enabledcommand22
+            ...
+            enabledcommand2N
+          }
+          ...
+          usernameM {
+            enabledcommandM1
+            enabledcommandM2
+            ...
+            enabledcommandMN
+          }
+        }
+      ...
+      }
+    }
+    ...</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+"server":
+  its value is the id of server
+  when mysvcd is used as client
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>    ...
+    proc myConfigHandler {} {
+      return {
+      ...
+        server &lt;serveraddr&gt;[:&lt;serverport&gt;]
+      ...
+      }
+    }
+    ...</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+"log":
+  its value can be:
+    1 if log is enabled
+    0 elsewhere
+    (the predefined value is 0)
+  to change its value you can use the command
+    log [1|0]
+  (with no argument the actual value is returned)
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>    ...
+    proc myConfigHandler {} {
+      return {
+      ...
+        log 1
+      ...
+      }
+    }
+    ...</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+"logenabler":
+  its value is the name of a procedure
+  that must enable a log
+  the default procedure (logEnabler)
+  enable a log iff its level
+  is into one of &lt;loglevels&gt; parameter
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>    ...
+    proc myLogEnabler {level type text} {
+      ...
+      # must return:
+      #   1 if log is enabled
+      #   0 elsewhere
+      ...
+    }
+    ...
+    proc myConfigHandler {} {
+      ...
+        logenabler myLogEnabler
+      ...
+    }
+    ...</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+"logfile":
+  its value is the name of log file
+  (same as &lt;logfile&gt; command line option)
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>    ...
+    proc myConfigHandler {} {
+      return {
+      ...
+        logfile "/my/path/to/logfile"
+      ...
+      }
+    }
+    ...</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+"loglevels":
+  its value is a list of (comma separated)
+  log items, where each log item is a
+  single log level or a range of log levels
+  (same as &lt;loglevels&gt; command line option)
+     &lt;loglevels&gt; ::= &lt;logitem&gt;","&#8230;","&lt;logitem&gt;
+     &lt;logitem&gt; ::= &lt;loglevel&gt; | &lt;logrange&gt;
+     &lt;loglevel&gt; ::= 0&#8230;999
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>    ...
+    proc myConfigHandler {} {
+      return {
+      ...
+        loglevels "0-8,12,24-32,128-134,138"
+      ...
+      }
+    }
+    ...</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+"eof":
+  its value is a regular expression;
+  used into "test" mode (-t flag specified);
+  if input (read from stdin) match this regular
+  expression, then the connection with client
+  is closed default value is {^\.$}
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>    ...
+    proc myConfigHandler {} {
+      return {
+      ...
+        eof {^EOF$}
+      ...
+      }
+    }
+    ...</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+"serial":
+  its value can be:
+    1 if the server is serial
+    0 elsewhere
+    (the predefined value is 0)
+    (same as -1 command line option)
+  if server is not serial can handle
+  more client together
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>    ...
+    proc myConfigHandler {} {
+      return {
+      ...
+        serial 1
+      ...
+      }
+    }
+    ...</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+"status":
+  its value can be:
+    1 if the server accept client connections
+    0 elsewhere
+    (the predefined value is 1)
+  to change its value you can use the command
+    status [1|0]
+  (with no argument the actual value is returned)
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>    ...
+    proc myConfigHandler {} {
+      return {
+      ...
+        status 0
+      ...
+      }
+    }
+    ...</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">mysvcd.conf</div>
+<div class="content">
+<pre><tt>proc mysvc_myservice1 {{config {}} {input {}} {username {}} {password {}}} {
+  return [mysvc myservice1 $config $input $username $password]
+}
+
+proc mysvc_myservice2 {{config {}} {input {}} {username {}} {password {}}} {
+  return [mysvc myservice2 $config $input $username $password]
+}
+
+proc mysvc_myservice3 {{config {}} {input {}} {username {}} {password {}}} {
+  return "ls -lrt"
+}
+
+proc mysvc_myservice4 {{config {}} {input {}} {username {}} {password {}}} {
+  return "output of mysvc_myservice4 to input &lt;$input&gt;"
+}
+
+proc mysvc_myservice5 {{config {}} {input {}} {username {}} {password {}}} {
+  return "output of mysvc_myservice5 to input &lt;$input&gt;"
+}
+
+proc mysvc.config {} {
+  return {
+    enabledcommands {
+      mysvc
+      mysvc_myservice1
+      mysvc_myservice2
+      mysvc_myservice3
+      mysvc_myservice4
+      mysvc_myservice5
+    }
+
+    users {
+      mysvcadm/mysvcadm01
+      mysvcusr1/mysvcusr01
+      mysvcusr2/mysvcusr02
+      mysvcusr3/mysvcusr03
+    }
+
+    userenabledcommands {
+      mysvcadm {
+        mysvc
+        mysvc_myservice1
+        mysvc_myservice2
+        mysvc_myservice3
+        mysvc_myservice4
+        mysvc_myservice5
+      }
+      mysvcusr1 {
+        mysvc_myservice1
+      }
+      mysvcusr2 {
+        mysvc_myservice2
+      }
+      mysvcusr3 {
+        mysvc_myservice3
+        mysvc_myservice4
+        mysvc_myservice5
+      }
+    }
+  }
+}</tt></pre>
+</div></div>
+<div class="paragraph"><p><em>login with wrong password</em>:</p></div>
+<div class="listingblock">
+<div class="title">Server side with log enabled</div>
+<div class="content">
+<pre><tt>$ mysvcd -e -l -f mysvcd.conf -c mysvc.config
+2014-06-27 22:17:18 0   I start [4683]
+2014-06-27 22:17:18 0   I server 192.168.0.105:1036
+2014-06-27 22:17:24 0   I opening connection to client 127.0.0.1:56983
+2014-06-27 22:17:24 0   I waiting for request from client 127.0.0.1:56983
+2014-06-27 22:17:37 0   I received request from client 127.0.0.1:56983
+login mysvcusr3/mysvcusr00
+2014-06-27 22:17:37 0   I login request received
+2014-06-27 22:17:37 0   W login mysvcusr3/mysvcusr00 refused
+2014-06-27 22:17:37 0   W invalid username or password mysvcusr3/mysvcusr00
+2014-06-27 22:17:37 0   I sending NACK to client 127.0.0.1:56983
+2014-06-27 22:17:37 0   I closing connection to client 127.0.0.1:56983</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Client side</div>
+<div class="content">
+<pre><tt>$ telnet 0 1036
+Trying 0.0.0.0...
+Connected to 0.
+Escape character is '^]'.
+login mysvcusr3/mysvcusr00
+1
+Connection closed by foreign host.</tt></pre>
+</div></div>
+<div class="paragraph"><p><em>Internal</em>:</p></div>
+<div class="listingblock">
+<div class="title">Server side with log enabled</div>
+<div class="content">
+<pre><tt>$ mysvcd -e -l -f mysvcd.conf -c mysvc.config
+2014-06-27 22:20:27 0   I start [4851]
+2014-06-27 22:20:27 0   I server 192.168.0.105:1036
+2014-06-27 22:20:30 0   I opening connection to client 127.0.0.1:57145
+2014-06-27 22:20:30 0   I waiting for request from client 127.0.0.1:57145
+2014-06-27 22:20:38 0   I received request from client 127.0.0.1:57145
+login mysvcusr3/mysvcusr03
+2014-06-27 22:20:38 0   I login request received
+2014-06-27 22:20:38 0   I login mysvcusr3/mysvcusr03 accepted
+2014-06-27 22:20:38 0   I sending ACK to client 127.0.0.1:57145
+2014-06-27 22:21:54 0   I received request from client 127.0.0.1:57145
+mysvc_myservice3 myconfig myinput myusername mypassword
+2014-06-27 22:21:54 0   I command mysvc_myservice3 enabled to user mysvcusr3
+2014-06-27 22:21:54 0   I sending ACK to client 127.0.0.1:57145
+mysvc_myservice3 myconfig myinput myusername mypassword
+2014-06-27 22:21:54 0   I sending response to client 127.0.0.1:57145
+ls -lrt
+2014-06-27 22:22:24 0   I received request from client 127.0.0.1:57145
+logout
+2014-06-27 22:22:24 0   I logout request received
+2014-06-27 22:22:24 0   I sending ACK to client 127.0.0.1:57145
+2014-06-27 22:22:24 0   I closing connection to client 127.0.0.1:57145</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Client side</div>
+<div class="content">
+<pre><tt>$ telnet 0 1036
+Trying 0.0.0.0...
+Connected to 0.
+Escape character is '^]'.
+login mysvcusr3/mysvcusr03
+0
+mysvc_myservice3 myconfig myinput myusername mypassword
+0
+ls -lrt
+.
+logout
+0
+Connection closed by foreign host.</tt></pre>
+</div></div>
+<div class="paragraph"><p><em>External</em>:</p></div>
+<div class="listingblock">
+<div class="title">Server side with log enabled</div>
+<div class="content">
+<pre><tt>$ mysvcd -r -l -f mysvcd.conf -c mysvc.config
+2014-06-27 22:24:53 0   I start [5039]
+2014-06-27 22:24:53 0   I server 192.168.0.105:1036
+2014-06-27 22:24:56 0   I opening connection to client 127.0.0.1:57372
+2014-06-27 22:24:56 0   I waiting for request from client 127.0.0.1:57372
+2014-06-27 22:25:01 0   I received request from client 127.0.0.1:57372
+login mysvcusr3/mysvcusr03
+2014-06-27 22:25:01 0   I login request received
+2014-06-27 22:25:01 0   I login mysvcusr3/mysvcusr03 accepted
+2014-06-27 22:25:01 0   I sending ACK to client 127.0.0.1:57372
+2014-06-27 22:25:27 0   I received request from client 127.0.0.1:57372
+mysvc_myservice3 myconfig myinput myusername mypassword
+2014-06-27 22:25:27 0   I command mysvc_myservice3 enabled to user mysvcusr3
+2014-06-27 22:25:27 0   I sending ACK to client 127.0.0.1:57372
+mysvc_myservice3 myconfig myinput myusername mypassword
+2014-06-27 22:25:27 0   I executing external command for client 127.0.0.1:57372
+ls -lrt
+2014-06-27 22:25:27 1   I received response from command mysvc_myservice3 for client 127.0.0.1:57372
+total 15
+2014-06-27 22:25:27 1   I received response from command mysvc_myservice3 for client 127.0.0.1:57372
+2014-06-27 22:25:27 1   I received response from command mysvc_myservice3 for client 127.0.0.1:57372
+2014-06-27 22:25:27 1   I received response from command mysvc_myservice3 for client 127.0.0.1:57372
+2014-06-27 22:25:27 0   I detected EOF from command mysvc_myservice3 for client 127.0.0.1:57372
+2014-06-27 22:25:27 1   I sending response to client 127.0.0.1:57372
+2014-06-27 22:25:27 0   I closing command mysvc_myservice3 for client 127.0.0.1:57372
+2014-06-27 22:25:31 0   I received request from client 127.0.0.1:57372
+logout
+2014-06-27 22:25:31 0   I logout request received
+2014-06-27 22:25:31 0   I sending ACK to client 127.0.0.1:57372
+2014-06-27 22:25:31 0   I closing connection to client 127.0.0.1:57372</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Client side</div>
+<div class="content">
+<pre><tt>$ telnet 0 1036
+Trying 0.0.0.0...
+Connected to 0.
+Escape character is '^]'.
+login mysvcusr3/mysvcusr03
+0
+mysvc_myservice3 myconfig myinput myusername mypassword
+0
+total 30
+-rwxr-xr-x  1 davide  staff    10 Jun 25  2012 file1
+-rwxr-xr-x  1 davide  staff     5 Jun 25  2012 file2
+-rw-r--r--  1 davide  staff    15 Jun 25  2012 file3
+.
+logout
+0
+Connection closed by foreign host.</tt></pre>
+</div></div>
+<h3 id="_proxy_server">Proxy Server</h3><div style="clear:left"></div>
+<div class="listingblock">
+<div class="title">Usage</div>
+<div class="content">
+<pre><tt>  mysvcd -x [-l|-d [-l -o &lt;logfile&gt;] [-L &lt;loglevels&gt;]] [-p &lt;port&gt;] -f &lt;configfile&gt; -c &lt;configproc&gt; &lt;host&gt;[:&lt;port&gt;]
+    (run as proxy server from clients and remote server &lt;host&gt;:&lt;port&gt;,
+     if &lt;port&gt; is not specified then default port is used)</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Server side with log enabled</div>
+<div class="content">
+<pre><tt>$ mysvcd -l -w /path/to/myserver.sh
+2014-06-22 21:55:27 0   I start [9221]
+2014-06-22 21:55:27 0   I server 192.168.0.105:1036
+2014-06-22 21:56:56 0   I opening connection to client 127.0.0.1:62440
+2014-06-22 21:57:05 0   I received request from client 127.0.0.1:62440
+GET /my/path?p1=A&amp;p2=B HTTP/1.0
+XX:1
+YY:2
+2014-06-22 21:57:33 0   I executing server /path/to/myserver.sh
+2014-06-22 21:57:33 0   I GET request method
+p1=A&amp;p2=B
+2014-06-22 21:57:33 0   I sending response to client 127.0.0.1:62440
+2014-06-22 21:57:33 0   I waiting for request from client 127.0.0.1:62440
+2014-06-22 21:57:33 1   I received response from server for client 127.0.0.1:62440
+Content-Type: text/xml
+2014-06-22 21:57:33 1   I sending response to client 127.0.0.1:62440
+2014-06-22 21:57:33 1   I received response from server for client 127.0.0.1:62440
+
+2014-06-22 21:57:33 1   I sending response to client 127.0.0.1:62440
+2014-06-22 21:57:33 1   I received response from server for client 127.0.0.1:62440
+&lt;?xml version="1.0"?&gt;
+2014-06-22 21:57:33 1   I sending response to client 127.0.0.1:62440
+2014-06-22 21:57:33 1   I received response from server for client 127.0.0.1:62440
+&lt;instance&gt;9381&lt;/instance&gt;
+2014-06-22 21:57:33 1   I sending response to client 127.0.0.1:62440
+2014-06-22 21:57:33 1   I received response from server for client 127.0.0.1:62440
+&lt;service&gt;
+2014-06-22 21:57:33 1   I sending response to client 127.0.0.1:62440
+2014-06-22 21:57:33 1   I received response from server for client 127.0.0.1:62440
+&lt;input&gt;
+2014-06-22 21:57:33 1   I sending response to client 127.0.0.1:62440
+2014-06-22 21:57:33 1   I received response from server for client 127.0.0.1:62440
+GET /my/path?p1=A&amp;p2=B HTTP/1.0
+2014-06-22 21:57:33 1   I sending response to client 127.0.0.1:62440
+2014-06-22 21:57:33 1   I received response from server for client 127.0.0.1:62440
+XX:1
+2014-06-22 21:57:33 1   I sending response to client 127.0.0.1:62440
+2014-06-22 21:57:33 1   I received response from server for client 127.0.0.1:62440
+YY:2
+2014-06-22 21:57:33 1   I sending response to client 127.0.0.1:62440
+2014-06-22 21:57:33 1   I received response from server for client 127.0.0.1:62440
+&lt;/input&gt;
+2014-06-22 21:57:33 1   I sending response to client 127.0.0.1:62440
+2014-06-22 21:57:33 1   I received response from server for client 127.0.0.1:62440
+&lt;query_string&gt;&lt;![CDATA[p1=A&amp;p2=B]]&gt;&lt;query_string&gt;
+2014-06-22 21:57:33 1   I sending response to client 127.0.0.1:62440
+2014-06-22 21:57:33 1   I received response from server for client 127.0.0.1:62440
+&lt;output&gt;this is the output response&lt;/output&gt;
+2014-06-22 21:57:33 1   I sending response to client 127.0.0.1:62440
+2014-06-22 21:57:33 1   I received response from server for client 127.0.0.1:62440
+&lt;/service&gt;
+2014-06-22 21:57:33 1   I sending response to client 127.0.0.1:62440
+2014-06-22 21:57:33 0   I detected EOF from server for client 127.0.0.1:62440
+2014-06-22 21:57:33 0   I closing server for client 127.0.0.1:62440
+2014-06-22 21:57:33 0   I closing connection to client 127.0.0.1:62440</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Proxy Side</div>
+<div class="content">
+<pre><tt>$ mysvcd -x -l -p 1037 0:1036
+2014-06-22 21:56:39 0   I start [9303]
+2014-06-22 21:56:39 0   I server 192.168.0.105:1037
+2014-06-22 21:56:56 0   I opening connection to client 127.0.0.1:62439
+2014-06-22 21:56:56 0   I opening connection to server 0:1036
+2014-06-22 21:56:56 0   I waiting for request from client 127.0.0.1:62439
+2014-06-22 21:57:05 0   I received request from client 127.0.0.1:62439
+GET /my/path?p1=A&amp;p2=B HTTP/1.0
+2014-06-22 21:57:05 0   I sending request to server 0
+2014-06-22 21:57:08 0   I received request from client 127.0.0.1:62439
+XX:1
+2014-06-22 21:57:08 0   I sending request to server 0
+2014-06-22 21:57:12 0   I received request from client 127.0.0.1:62439
+YY:2
+2014-06-22 21:57:12 0   I sending request to server 0
+2014-06-22 21:57:33 0   I received request from client 127.0.0.1:62439
+
+2014-06-22 21:57:33 0   I sending request to server 0
+2014-06-22 21:57:33 0   I received response from server 0:1036
+HTTP/1.0 200 OK
+2014-06-22 21:57:33 0   I sending response to client 127.0.0.1:62439
+2014-06-22 21:57:33 0   I received response from server 0:1036
+Content-Type: text/xml
+2014-06-22 21:57:33 0   I sending response to client 127.0.0.1:62439
+2014-06-22 21:57:33 0   I received response from server 0:1036
+
+2014-06-22 21:57:33 0   I sending response to client 127.0.0.1:62439
+2014-06-22 21:57:33 0   I received response from server 0:1036
+&lt;?xml version="1.0"?&gt;
+2014-06-22 21:57:33 0   I sending response to client 127.0.0.1:62439
+2014-06-22 21:57:33 0   I received response from server 0:1036
+&lt;instance&gt;9381&lt;/instance&gt;
+2014-06-22 21:57:33 0   I sending response to client 127.0.0.1:62439
+2014-06-22 21:57:33 0   I received response from server 0:1036
+&lt;service&gt;
+2014-06-22 21:57:33 0   I sending response to client 127.0.0.1:62439
+2014-06-22 21:57:33 0   I received response from server 0:1036
+&lt;input&gt;
+2014-06-22 21:57:33 0   I sending response to client 127.0.0.1:62439
+2014-06-22 21:57:33 0   I received response from server 0:1036
+GET /my/path?p1=A&amp;p2=B HTTP/1.0
+2014-06-22 21:57:33 0   I sending response to client 127.0.0.1:62439
+2014-06-22 21:57:33 0   I received response from server 0:1036
+XX:1
+2014-06-22 21:57:33 0   I sending response to client 127.0.0.1:62439
+2014-06-22 21:57:33 0   I received response from server 0:1036
+YY:2
+2014-06-22 21:57:33 0   I sending response to client 127.0.0.1:62439
+2014-06-22 21:57:33 0   I received response from server 0:1036
+&lt;/input&gt;
+2014-06-22 21:57:33 0   I sending response to client 127.0.0.1:62439
+2014-06-22 21:57:33 0   I received response from server 0:1036
+&lt;query_string&gt;&lt;![CDATA[p1=A&amp;p2=B]]&gt;&lt;query_string&gt;
+2014-06-22 21:57:33 0   I sending response to client 127.0.0.1:62439
+2014-06-22 21:57:33 0   I received response from server 0:1036
+&lt;output&gt;this is the output response&lt;/output&gt;
+2014-06-22 21:57:33 0   I sending response to client 127.0.0.1:62439
+2014-06-22 21:57:33 0   I received response from server 0:1036
+&lt;/service&gt;
+2014-06-22 21:57:33 0   I sending response to client 127.0.0.1:62439
+2014-06-22 21:57:33 0   I received response from server 0:1036
+
+2014-06-22 21:57:33 0   I sending response to client 127.0.0.1:62439
+2014-06-22 21:57:33 0   I closing connection to server 0:1036
+2014-06-22 21:57:33 0   I closing connection to client 127.0.0.1:62439</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Client Side</div>
+<div class="content">
+<pre><tt>$ telnet 0 1037
+Trying 0.0.0.0...
+Connected to 0.
+Escape character is '^]'.
+GET /my/path?p1=A&amp;p2=B HTTP/1.0
+XX:1
+YY:2
+
+HTTP/1.0 200 OK
+Content-Type: text/xml
+
+&lt;?xml version="1.0"?&gt;
+&lt;instance&gt;9381&lt;/instance&gt;
+&lt;service&gt;
+&lt;input&gt;
+GET /my/path?p1=A&amp;p2=B HTTP/1.0
+XX:1
+YY:2
+&lt;/input&gt;
+&lt;query_string&gt;&lt;![CDATA[p1=A&amp;p2=B]]&gt;&lt;query_string&gt;
+&lt;output&gt;this is the output response&lt;/output&gt;
+&lt;/service&gt;
+
+Connection closed by foreign host.</tt></pre>
+</div></div>
+</div>
+<h2 id="_using_mysvcd_as_client">Using mysvcd as client</h2>
+<div class="sectionbody">
+<h3 id="_generic_client">Generic Client</h3><div style="clear:left"></div>
+<div class="listingblock">
+<div class="title">Usage</div>
+<div class="content">
+<pre><tt>  mysvcd [-l|-d [-l -o &lt;logfile&gt;] [-L &lt;loglevels&gt;]] [-p &lt;port&gt;] &lt;host&gt;[:&lt;port&gt;]
+    (run as client for remote server &lt;host&gt;:&lt;port&gt;)</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+client standard input is sent as input to server
+</p>
+</li>
+<li>
+<p>
+server output is sent to client standard output
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="title">Server Side with log enabled</div>
+<div class="content">
+<pre><tt>$ mysvcd -l -w /path/to/myserver.sh
+2014-06-22 22:14:24 0   I start [10282]
+2014-06-22 22:14:24 0   I server 192.168.0.105:1036
+2014-06-22 22:14:27 0   I opening connection to client 127.0.0.1:63146
+2014-06-22 22:14:32 0   I received request from client 127.0.0.1:63146
+GET /my/path?p1=A&amp;p2=B HTTP/1.0
+XX: 3
+YY: 4
+2014-06-22 22:14:34 0   I executing server /path/to/myserver.sh
+2014-06-22 22:14:34 0   I GET request method
+p1=A&amp;p2=B
+2014-06-22 22:14:34 0   I sending response to client 127.0.0.1:63146
+2014-06-22 22:14:34 0   I waiting for request from client 127.0.0.1:63146
+2014-06-22 22:14:34 1   I received response from server for client 127.0.0.1:63146
+Content-Type: text/xml
+2014-06-22 22:14:34 1   I sending response to client 127.0.0.1:63146
+2014-06-22 22:14:34 1   I received response from server for client 127.0.0.1:63146
+
+2014-06-22 22:14:34 1   I sending response to client 127.0.0.1:63146
+2014-06-22 22:14:34 1   I received response from server for client 127.0.0.1:63146
+&lt;?xml version="1.0"?&gt;
+2014-06-22 22:14:34 1   I sending response to client 127.0.0.1:63146
+2014-06-22 22:14:34 1   I received response from server for client 127.0.0.1:63146
+&lt;instance&gt;10288&lt;/instance&gt;
+2014-06-22 22:14:34 1   I sending response to client 127.0.0.1:63146
+2014-06-22 22:14:34 1   I received response from server for client 127.0.0.1:63146
+&lt;service&gt;
+2014-06-22 22:14:34 1   I sending response to client 127.0.0.1:63146
+2014-06-22 22:14:34 1   I received response from server for client 127.0.0.1:63146
+&lt;input&gt;
+2014-06-22 22:14:34 1   I sending response to client 127.0.0.1:63146
+2014-06-22 22:14:34 1   I received response from server for client 127.0.0.1:63146
+GET /my/path?p1=A&amp;p2=B HTTP/1.0
+2014-06-22 22:14:34 1   I sending response to client 127.0.0.1:63146
+2014-06-22 22:14:34 1   I received response from server for client 127.0.0.1:63146
+XX: 3
+2014-06-22 22:14:34 1   I sending response to client 127.0.0.1:63146
+2014-06-22 22:14:34 1   I received response from server for client 127.0.0.1:63146
+YY: 4
+2014-06-22 22:14:34 1   I sending response to client 127.0.0.1:63146
+2014-06-22 22:14:34 1   I received response from server for client 127.0.0.1:63146
+&lt;/input&gt;
+2014-06-22 22:14:34 1   I sending response to client 127.0.0.1:63146
+2014-06-22 22:14:34 1   I received response from server for client 127.0.0.1:63146
+&lt;query_string&gt;&lt;![CDATA[p1=A&amp;p2=B]]&gt;&lt;query_string&gt;
+2014-06-22 22:14:34 1   I sending response to client 127.0.0.1:63146
+2014-06-22 22:14:34 1   I received response from server for client 127.0.0.1:63146
+&lt;output&gt;this is the output response&lt;/output&gt;
+2014-06-22 22:14:34 1   I sending response to client 127.0.0.1:63146
+2014-06-22 22:14:34 1   I received response from server for client 127.0.0.1:63146
+&lt;/service&gt;
+2014-06-22 22:14:34 1   I sending response to client 127.0.0.1:63146
+2014-06-22 22:14:34 0   I detected EOF from server for client 127.0.0.1:63146
+2014-06-22 22:14:34 0   I closing server for client 127.0.0.1:63146
+2014-06-22 22:14:34 0   I closing connection to client 127.0.0.1:63146</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Client Side</div>
+<div class="content">
+<pre><tt>$ cat | mysvcd 0:1036
+GET /my/path?p1=A&amp;p2=B HTTP/1.0
+XX: 3
+YY: 4
+
+HTTP/1.0 200 OK
+Content-Type: text/xml
+
+&lt;?xml version="1.0"?&gt;
+&lt;instance&gt;10288&lt;/instance&gt;
+&lt;service&gt;
+&lt;input&gt;
+GET /my/path?p1=A&amp;p2=B HTTP/1.0
+XX: 3
+YY: 4
+&lt;/input&gt;
+&lt;query_string&gt;&lt;![CDATA[p1=A&amp;p2=B]]&gt;&lt;query_string&gt;
+&lt;output&gt;this is the output response&lt;/output&gt;
+&lt;/service&gt;
+
+^C</tt></pre>
+</div></div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 0.400<br />
+Last updated 2014-06-28 16:24:02 CEST
+</div>
+<div id="footer-badges">
+<img style="border:none; width:88px; height:31px;"
+     src="../images/gplv3-127x51.png"
+     alt="GPL Version 3" />
+<!-- Histats.com  START  -->
+<a href="http://www.histats.com" target="_blank" title="simple hit counter" >
+<script  type="text/javascript" language="javascript">
+var s_sid = 675659;var st_dominio = 4;
+var cimg = 0;var cwi =112;var che =48;
+</script></a><script  type="text/javascript" language="javascript" src="http://s10.histats.com/js9.js"></script>
+<noscript><a href="http://www.histats.com" target="_blank">
+<img  src="http://s4.histats.com/stats/0.gif?675659&1" alt="simple hit counter" border="0"></a>
+</noscript>
+<!-- Histats.com  END  -->
+</div>
+</div>
+</div>
+</td>
+</tr>
+</table>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-11334618-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>

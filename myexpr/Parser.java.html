@@ -1,0 +1,625 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.5.2" />
+<meta name="description" content="an open source UNIX framework for shell script based web service provider" />
+<meta name="keywords" content="mysvc, shell script, web service, provider, service, soa, template, engine, myste, mysde, mysvcd" />
+<link rel="stylesheet" href="../xhtml11.css" type="text/css" />
+<link rel="stylesheet" href="../xhtml11-quirks.css" type="text/css" />
+<link rel="stylesheet" href="../layout1.css" type="text/css" />
+<title>MySVC</title>
+</head>
+<body>
+<div id="layout-banner">
+  <div id="layout-title">MySVC</div>
+  <div id="layout-description">an open source UNIX framework for shell script based web services provider</div>
+</div>
+<table>
+<tr valign="top">
+<td id="layout-menu">
+  <div>&#187;<a href="../index.html">Home</a></div>
+  <div>&#187;<a href="../tools.html">Tools</a></div>
+  <div>&#187;<a href="../manpage.html">Man&nbsp;Page</a></div>
+  <div>&#187;<a href="../userguide.html">User&nbsp;Guide</a></div>
+  <div>&#187;<a href="../changelog.html">ChangeLog</a></div>
+  <div>&#187;<a href="../install.html">Installation</a></div>
+  <div>&#187;<a href="../sourcecode.html">Source Code</a></div>
+  <div>&#187;<a href="../downloads.html">Downloads</a></div>
+  <div>&#187;<a href="../faq.html">FAQ</a></div>
+  <div>&#187;<a href="../support.html">Support</a></div>
+  <div>&#187;<a href="../license.html">License</a></div>
+  <hr/>
+  <div>&#187;<a href="../myapps/index.html">My Apps</a></div>
+  <div>
+  <hr/>
+  <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+  <input type="hidden" name="cmd" value="_s-xclick">
+  <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+  ">
+  <input type="image" src="https://www.paypal.com/en_US/IT/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="">
+  <img alt="" border="0" src="https://www.paypal.com/it_IT/i/scr/pixel.gif" width="1" height="1">
+  </form>
+  </div>
+</td>
+<td>
+<div id="layout-content">
+<div id="header">
+<h1>MyExpr Source Code</h1>
+</div>
+<h2 id="_parser_java">Parser.java</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre><tt>// $Id$
+
+//  myexpr - My Service Expression Engine - Version 1.0 (www.mysvc.it)
+//  Copyright (C) 2009 Davide Cucciniello &lt;davide6169@gmail.com&gt;
+//
+//  This program is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+
+/* **********************************************************************
+ *
+ *  ***   **        *** **  **  ****
+ *   **  **        *  *  *  ** **  *
+ *   *** **  **  * ***   *  *  *
+ *   * ** *   * **   **   * *  *
+ *   * *  *   * *  *  *   **   **
+ *  ***  ***   **  ***     *    ****
+ *             *
+ *            *
+ *
+ *  My Service
+ *
+ * ***********************************************************************
+ *
+ *  ***   **       *****
+ *   **  **         *  *
+ *   *** **  **  *  ***  ***** ****  ****
+ *   * ** *   * **  *     ***   *  *  * *
+ *   * *  *   * *   *  *  ***   *  *  *
+ *  ***  ***   **  ***** ** **  ***  ***
+ *             *                *
+ *            *                ***
+ *
+ *  My Service Expression Engine
+ *
+ *  File: Parser.java
+ *
+ *  Description:
+ *    class Parser: Parser of an expression
+ *    MyExpr: Java library implementing an advanced generic
+ *    expression parser based on precedence operator
+ *
+ * ***********************************************************************
+ *
+ *  History:
+ *    1.0               first version
+ *
+ * *********************************************************************** */
+
+package it.mysvc.myexpr;
+
+import java.util.Stack;
+import java.util.Queue;
+import java.util.LinkedList;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
+public class Parser
+{
+    /*
+     Operator precedence parser
+
+     &lt;Expr&gt; ::= &lt;Term&gt; |
+                &lt;Term&gt; BinaryOperator &lt;Expr&gt;
+
+     &lt;Term&gt; ::= Operand |
+                UnaryOperator &lt;Term&gt; |
+                &lt;Term&gt; UnaryOperator |
+                OpenedParenthesis &lt;Formula&gt; ClosedParenthesis
+
+     Non terminal symbols:
+       { &lt;Expr&gt;, &lt;Term&gt; }
+
+     Terminal symbols:
+       {
+         Operand,
+         UnaryOperator,
+         BinaryOperator,
+         OpenedParenthesis,
+         ClosedParenthesis
+       }
+  */
+
+  private Operators operators;
+  private Lexer lexer;
+  private Factory factory;
+  private Queue&lt;Token&gt; stream;
+  private Precedence precedence;
+
+  private Pattern[] blanks;
+
+  private Pattern[] binaryOperators;
+  private Pattern[] unaryOperators;
+  private Pattern[] operands;
+  private Pattern[] openedParenthesis;
+  private Pattern[] closedParenthesis;
+
+  public Parser(Operators operators,Lexer lexer,Factory factory)
+  {
+    this.operators = operators;
+    this.lexer = lexer;
+    this.factory = factory;
+    this.precedence = new Precedence(operators);
+
+    binaryOperators = new Pattern[lexer.getBinaryOperators().length];
+
+    for(int i=0;i&lt;lexer.getBinaryOperators().length;i++)
+      binaryOperators[i] = Pattern.compile(lexer.getBinaryOperators()[i]);
+
+    unaryOperators = new Pattern[lexer.getUnaryOperators().length];
+
+    for(int i=0;i&lt;lexer.getUnaryOperators().length;i++)
+      unaryOperators[i] = Pattern.compile(lexer.getUnaryOperators()[i]);
+
+    operands = new Pattern[lexer.getOperands().length];
+
+    for(int i=0;i&lt;lexer.getOperands().length;i++)
+      operands[i] = Pattern.compile(lexer.getOperands()[i]);
+
+    openedParenthesis = new Pattern[lexer.getOpenedParenthesis().length];
+
+    for(int i=0;i&lt;lexer.getOpenedParenthesis().length;i++)
+      openedParenthesis[i] = Pattern.compile(lexer.getOpenedParenthesis()[i]);
+
+    closedParenthesis = new Pattern[lexer.getClosedParenthesis().length];
+
+    for(int i=0;i&lt;lexer.getClosedParenthesis().length;i++)
+      closedParenthesis[i] = Pattern.compile(lexer.getClosedParenthesis()[i]);
+
+    blanks = new Pattern[lexer.getBlanks().length];
+
+    for(int i=0;i&lt;lexer.getBlanks().length;i++)
+      blanks[i] = Pattern.compile(lexer.getBlanks()[i]);
+  }
+
+  public Expr parse(String expr)
+    throws SyntaxException
+  {
+    return parse(getStream(expr));
+  }
+
+  public Expr parse(Queue&lt;Token&gt; stream)
+    throws SyntaxException
+  {
+    this.stream = stream;
+
+    return expr();
+  }
+
+  Expr term()
+  {
+    Expr t;
+
+    Token token,lookahead = stream.peek();
+
+    if(lookahead.getType()==Token.Type.UnaryOperator)
+    {
+      /* &lt;Term&gt; ::= UnaryOperator &lt;Term&gt; ... */
+      token = stream.poll();
+      t = getExpr(token.getCode(),token.getInfo(),term());
+    }
+    else if(lookahead.getType()==Token.Type.Operand)
+    {
+      /* &lt;Term&gt; ::= Operand ... */
+      token = stream.poll();
+      t = getExpr(token.getCode(),token.getInfo());
+    }
+    else
+    {
+      /* &lt;Term&gt; ::= OpenedParenthesis &lt;Expr&gt; ClosedParenthesis ... */
+      stream.poll();
+      t = expr();
+      stream.poll();
+    }
+
+    /* &lt;Term&gt; ::= &lt;Term&gt; UnaryOperator ... */
+    while(!(stream.isEmpty()) &amp;&amp;
+           ((stream.peek()).type==Token.Type.UnaryOperator))
+      t = getExpr(stream.peek().getCode(),stream.poll().getInfo(),t,false);
+
+    return t;
+  }
+
+  Expr expr()
+  {
+    /* &lt;Expr&gt; ::= &lt;Term&gt; ... */
+    Expr e = term();
+    if(!(stream.isEmpty())&amp;&amp;((stream.peek()).type!=Token.Type.ClosedParenthesis))
+    {
+      /* &lt;Expr&gt; ::= &lt;Term&gt; BinaryOperator &lt;Expr&gt; ... */
+      Stack&lt;Expr&gt; stack = new Stack&lt;Expr&gt;();
+      Token token=stream.poll();
+      e = getExpr(token.getCode(),token.getInfo(),e,term());
+      stack.push(e);
+
+      while(!(stream.isEmpty())&amp;&amp;((stream.peek()).type!=Token.Type.ClosedParenthesis))
+      {
+        /* &lt;Expr&gt; ::= &lt;Term&gt; BinaryOperator &lt;Expr&gt; ... */
+        Expr current;
+
+        int binOp1,
+            binOp2 = stream.peek().getCode();
+
+        do
+        {
+          current = stack.pop();
+          binOp1 = current.getCode();
+        }while(!(stack.isEmpty())&amp;&amp;(precedence.greaterThan(binOp1,binOp2)));
+
+        if(precedence.greaterThan(binOp1,binOp2))
+        {
+          token = stream.poll();
+          e = getExpr(token.getCode(),token.getInfo(),e,term());
+          stack.push(e);
+        }
+        else
+        {
+          token = stream.poll();
+          current.setRight(getExpr(token.getCode(),token.getInfo(),current.getRight(),term()));
+          stack.push(current);
+          stack.push(current.getRight());
+        }
+      }
+    }
+
+    return e;
+  }
+
+  public Queue&lt;Token&gt; getStream(String expr)
+    throws SyntaxException
+  {
+    Queue&lt;Token&gt; stream = new LinkedList&lt;Token&gt;();
+
+    String e = new String(expr);
+
+    String last = "";
+
+    boolean found = false;
+
+    int i = 0;
+    int c = 0;
+    int k = 0;
+    int m = 0;
+    int n = expr.length();
+
+    int t = 0;
+
+    int p = 0;
+    int h = 0;
+
+    boolean accept = false;
+    boolean error = false;
+
+    if(expr.length() &gt; 0)
+    do
+    {
+      expr = expr.substring(i);
+
+      found = false;
+
+      Token token = new Token();
+
+      String info = "";
+
+      for(int j=0;j&lt;blanks.length;j++)
+      {
+        Pattern pattern = blanks[j];
+
+        Matcher matcher = pattern.matcher(expr);
+
+        if(matcher.lookingAt())
+        {
+          found = true;
+
+          int g = matcher.groupCount()==0?0:1;
+
+          info = matcher.group(g);
+          k = matcher.end(g);
+          m = j;
+        }
+      }
+
+      if(found)
+      {
+        i = k;
+
+        continue;
+      }
+
+      for(int j=0;j&lt;binaryOperators.length;j++)
+      {
+        Pattern pattern = binaryOperators[j];
+
+        Matcher matcher = pattern.matcher(expr);
+
+        if(matcher.lookingAt())
+        {
+          found = true;
+
+          int g = matcher.groupCount()==0?0:1;
+
+          if(matcher.group(g).length() &gt; info.length())
+          {
+            token.type = Token.Type.BinaryOperator;
+            info = matcher.group(g);
+            k = matcher.end(g);
+            m = j;
+          }
+        }
+      }
+
+      for(int j=0;j&lt;unaryOperators.length;j++)
+      {
+        Pattern pattern = unaryOperators[j];
+
+        Matcher matcher = pattern.matcher(expr);
+
+        if(matcher.lookingAt())
+        {
+          found = true;
+
+          int g = matcher.groupCount()==0?0:1;
+
+          if(matcher.group(g).length() &gt; info.length())
+          {
+            token.type = Token.Type.UnaryOperator;
+            info = matcher.group(g);
+            k = matcher.end(g);
+            m = j;
+          }
+        }
+      }
+
+      for(int j=0;j&lt;operands.length;j++)
+      {
+        Pattern pattern = operands[j];
+
+        Matcher matcher = pattern.matcher(expr);
+
+        if(matcher.lookingAt())
+        {
+          found = true;
+
+          int g = matcher.groupCount()==0?0:1;
+
+          if(matcher.group(g).length() &gt; info.length())
+          {
+            token.type = Token.Type.Operand;
+            info = matcher.group(g);
+            k = matcher.end(g);
+            m = j;
+          }
+        }
+      }
+
+      for(int j=0;j&lt;openedParenthesis.length;j++)
+      {
+        Pattern pattern = openedParenthesis[j];
+
+        Matcher matcher = pattern.matcher(expr);
+
+        if(matcher.lookingAt())
+        {
+          found = true;
+
+          int g = matcher.groupCount()==0?0:1;
+
+          if(matcher.group(g).length() &gt; info.length())
+          {
+            token.type = Token.Type.OpenedParenthesis;
+            info = matcher.group(g);
+            k = matcher.end(g);
+            m = j;
+          }
+        }
+      }
+
+      for(int j=0;j&lt;closedParenthesis.length;j++)
+      {
+        Pattern pattern = closedParenthesis[j];
+
+        Matcher matcher = pattern.matcher(expr);
+
+        if(matcher.lookingAt())
+        {
+          found = true;
+
+          int g = matcher.groupCount()==0?0:1;
+
+          if(matcher.group(g).length() &gt; info.length())
+          {
+            token.type = Token.Type.ClosedParenthesis;
+            info = matcher.group(g);
+            k = matcher.end(g);
+            m = j;
+          }
+        }
+      }
+
+      if(found)
+      {
+        i = k;
+
+        switch(token.type)
+        {
+          case BinaryOperator:
+            token.code = lexer.getBinaryOperator(m,info);
+            token.info = lexer.getBinaryOperator(info);
+            break;
+          case UnaryOperator:
+            token.code = lexer.getUnaryOperator(m,info);
+            token.info = lexer.getUnaryOperator(info);
+            break;
+          case Operand:
+            token.code = lexer.getOperand(m,info);
+            token.info = lexer.getOperand(info);
+            break;
+          case OpenedParenthesis:
+            token.code = lexer.getOpenedParenthesis(m,info);
+            token.info = lexer.getOpenedParenthesis(info);
+            break;
+          case ClosedParenthesis:
+            token.code = lexer.getClosedParenthesis(m,info);
+            token.info = lexer.getClosedParenthesis(info);
+            break;
+        }
+
+        c += i;
+
+        t++;
+
+        if(!accept)
+          switch(token.type)
+          {
+            case BinaryOperator:
+              throw new SyntaxException(e,expr,info,SyntaxException.Type.InvalidBinaryOperator,t,c);
+            case UnaryOperator:
+              if(!operators.isPrefix(token.code))
+                throw new SyntaxException(e,expr,info,SyntaxException.Type.InvalidUnaryOperator,t,c);
+              break;
+            case Operand:
+              accept = true;
+              break;
+            case OpenedParenthesis:
+              p++;
+              break;
+            case ClosedParenthesis:
+              throw new SyntaxException(e,expr,info,SyntaxException.Type.InvalidClosedParenthesis,t,c);
+          }
+        else
+          switch(token.type)
+          {
+            case BinaryOperator:
+              accept = false;
+              break;
+            case UnaryOperator:
+              if(!operators.isPostfix(token.code))
+                throw new SyntaxException(e,expr,info,SyntaxException.Type.InvalidUnaryOperator,t,c);
+              break;
+            case Operand:
+              throw new SyntaxException(e,expr,info,SyntaxException.Type.InvalidOperand,t,c);
+            case OpenedParenthesis:
+              throw new SyntaxException(e,expr,info,SyntaxException.Type.InvalidOpenedParenthesis,t,c);
+            case ClosedParenthesis:
+              p--;
+              break;
+          }
+
+        last = info;
+
+        stream.add(lexer.getToken(token));
+      }
+      else
+      {
+        throw new SyntaxException(e,expr,info,SyntaxException.Type.UnknownToken,t,c);
+      }
+    }
+    while(found &amp;&amp; (i&gt;=0) &amp;&amp; (i&lt;expr.length()));
+
+    if(p&gt;0)
+      throw new SyntaxException(e,expr,last,SyntaxException.Type.ClosedParenthesisExpected,t,c);
+    else if(p&lt;0)
+      throw new SyntaxException(e,expr,last,SyntaxException.Type.OpenedParenthesisExpected,t,c);
+
+    return stream;
+  }
+
+  public Expr getExpr(int code,String info)
+  {
+    return factory.getExpr(code,info);
+  }
+
+  public Expr getExpr(int code,String info,Expr left)
+  {
+    return factory.getExpr(code,info,left);
+  }
+
+  public Expr getExpr(int code,String info,Expr left,boolean prefix)
+  {
+    return factory.getExpr(code,info,left,prefix);
+  }
+
+  public Expr getExpr(int code,String info,Expr left,Expr right)
+  {
+    return factory.getExpr(code,info,left,right);
+  }
+
+  public Operators getOperators()
+  {
+    return operators;
+  }
+
+  public Lexer getLexer()
+  {
+    return lexer;
+  }
+
+  public Precedence getPrecedence()
+  {
+    return precedence;
+  }
+}
+
+/* end of file */</tt></pre>
+</div></div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 0.400<br />
+Last updated 2014-06-28 16:23:54 CEST
+</div>
+<div id="footer-badges">
+<img style="border:none; width:88px; height:31px;"
+     src="../images/gplv3-127x51.png"
+     alt="GPL Version 3" />
+<!-- Histats.com  START  -->
+<a href="http://www.histats.com" target="_blank" title="simple hit counter" >
+<script  type="text/javascript" language="javascript">
+var s_sid = 675659;var st_dominio = 4;
+var cimg = 0;var cwi =112;var che =48;
+</script></a><script  type="text/javascript" language="javascript" src="http://s10.histats.com/js9.js"></script>
+<noscript><a href="http://www.histats.com" target="_blank">
+<img  src="http://s4.histats.com/stats/0.gif?675659&1" alt="simple hit counter" border="0"></a>
+</noscript>
+<!-- Histats.com  END  -->
+</div>
+</div>
+</div>
+</td>
+</tr>
+</table>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-11334618-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>

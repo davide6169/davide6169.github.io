@@ -1,0 +1,2029 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.5.2" />
+<meta name="description" content="an open source UNIX framework for shell script based web service provider" />
+<meta name="keywords" content="mysvc, shell script, web service, provider, service, soa, template, engine, myste, mysde, mysvcd" />
+<link rel="stylesheet" href="../xhtml11.css" type="text/css" />
+<link rel="stylesheet" href="../xhtml11-quirks.css" type="text/css" />
+<link rel="stylesheet" href="../layout1.css" type="text/css" />
+<script type="text/javascript">
+/*<![CDATA[*/
+window.onload = function(){generateToc(2)}
+/*]]>*/
+</script>
+<script type="text/javascript" src="../toc.js"></script>
+<title>MySVC</title>
+</head>
+<body>
+<div id="layout-banner">
+  <div id="layout-title">MySVC</div>
+  <div id="layout-description">an open source UNIX framework for shell script based web services provider</div>
+</div>
+<table>
+<tr valign="top">
+<td id="layout-menu">
+  <div>&#187;<a href="../index.html">Home</a></div>
+  <div>&#187;<a href="../tools.html">Tools</a></div>
+  <div>&#187;<a href="../manpage.html">Man&nbsp;Page</a></div>
+  <div>&#187;<a href="../userguide.html">User&nbsp;Guide</a></div>
+  <div>&#187;<a href="../changelog.html">ChangeLog</a></div>
+  <div>&#187;<a href="../install.html">Installation</a></div>
+  <div>&#187;<a href="../sourcecode.html">Source Code</a></div>
+  <div>&#187;<a href="../downloads.html">Downloads</a></div>
+  <div>&#187;<a href="../faq.html">FAQ</a></div>
+  <div>&#187;<a href="../support.html">Support</a></div>
+  <div>&#187;<a href="../license.html">License</a></div>
+  <hr/>
+  <div>&#187;<a href="../myapps/index.html">My Apps</a></div>
+  <div>
+  <hr/>
+  <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+  <input type="hidden" name="cmd" value="_s-xclick">
+  <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----MIIHPwYJKoZIhvcNAQcEoIIHMDCCBywCAQExggEwMIIBLAIBADCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwDQYJKoZIhvcNAQEBBQAEgYAWiqN5fcvDviZYNLmeRPAOeH+059PTyUtOFN8++Bx9+RhWYfjY/XwEwfKVwaEeK0+pLj9TDs/FW9ChZZF3FNPjR1Xlg0E3S37taxsarZ2NM6iBhXjSapQPgVGtrCqibd0Diq48ouQTcXPMxKON1Anv/fDoHjjaFPTRVI+KMQX0JTELMAkGBSsOAwIaBQAwgbwGCSqGSIb3DQEHATAUBggqhkiG9w0DBwQInBnxX7TxZ3mAgZhXvGov9cuq17ycIBz4CjE/MwjHddefpVXoPyyh89d/ieP1b6rehpp1R/aW8QBbnS1Fl/INzPU38Y3NTqX7oMhFYsLN1D6YSPjAeoFqIXp1rrTEIDLZRSSIwo8OXuEsPHqK/P+l7S4awyCyWJxdMkqSDK2hPoKXSUHIGA8jf6Rq4DV0CsJzljLJSW8WJMfdpXvKuff4HiEZPaCCA4cwggODMIIC7KADAgECAgEAMA0GCSqGSIb3DQEBBQUAMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbTAeFw0wNDAyMTMxMDEzMTVaFw0zNTAyMTMxMDEzMTVaMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbTCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAwUdO3fxEzEtcnI7ZKZL412XvZPugoni7i7D7prCe0AtaHTc97CYgm7NsAtJyxNLixmhLV8pyIEaiHXWAh8fPKW+R017+EmXrr9EaquPmsVvTywAAE1PMNOKqo2kl4Gxiz9zZqIajOm1fZGWcGS0f5JQ2kBqNbvbg2/Za+GJ/qwUCAwEAAaOB7jCB6zAdBgNVHQ4EFgQUlp98u8ZvF71ZP1LXChvsENZklGswgbsGA1UdIwSBszCBsIAUlp98u8ZvF71ZP1LXChvsENZklGuhgZSkgZEwgY4xCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDQTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLUGF5UGFsIEluYy4xEzARBgNVBAsUCmxpdmVfY2VydHMxETAPBgNVBAMUCGxpdmVfYXBpMRwwGgYJKoZIhvcNAQkBFg1yZUBwYXlwYWwuY29tggEAMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEFBQADgYEAgV86VpqAWuXvX6Oro4qJ1tYVIT5DgWpE692Ag422H7yRIr/9j/iKG4Thia/Oflx4TdL+IFJBAyPK9v6zZNZtBgPBynXb048hsP16l2vi0k5Q2JKiPDsEfBhGI+HnxLXEaUWAcVfCsQFvd2A1sxRr67ip5y2wwBelUecP3AjJ+YcxggGaMIIBlgIBATCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwCQYFKw4DAhoFAKBdMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA4MTAyNTE1NTQzMlowIwYJKoZIhvcNAQkEMRYEFMsXBheWWoPdxAigpR2+KpSpl3NXMA0GCSqGSIb3DQEBAQUABIGAMwKAzwiLVvhRLUQBUUgK5IJQOq4Ci0W9bVWiiCIF3g/DOWMzoJvlQRyxelM5jg2wChbtvg1sj5AoyXaqCdbuEI/7rP0/RhrfFxDqkSbWTOqkcgkMPgNeKvXAC9oD2Dflep/uDlUC2E0w9XEPtps7a5jCiJX5//huQ/usU3f5wmI=-----END PKCS7-----
+  ">
+  <input type="image" src="https://www.paypal.com/en_US/IT/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="">
+  <img alt="" border="0" src="https://www.paypal.com/it_IT/i/scr/pixel.gif" width="1" height="1">
+  </form>
+  </div>
+</td>
+<td>
+<div id="layout-content">
+<div id="header">
+<h1>MySDE User Guide</h1>
+</div>
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+<h2 id="_introduction">Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><em>MySDE</em> (My Service Development Environment) is a light UNIX
+development environment makefile based for <em>C/C++</em> and <em>Java</em> software projects.</p></div>
+<div class="paragraph"><p>It is the development environment of <tt>MySVC</tt> framework and includes support:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+for build external libraries and binaries from packages sources
+  with configuration for more UNIX environments
+</p>
+</li>
+<li>
+<p>
+for configuration management (RCS)
+</p>
+</li>
+<li>
+<p>
+for third party C/C++ and Java libraries
+  (including J2EE web applications .war)
+</p>
+</li>
+<li>
+<p>
+for Lex &amp; Jacc compilers
+</p>
+</li>
+<li>
+<p>
+for AsciiDoc based web sites
+</p>
+</li>
+<li>
+<p>
+for FTP deploy
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>This environment is configured as:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+a base environment
+  (under $MYSDE_BASE)
+</p>
+</li>
+<li>
+<p>
+a root environment, which is a subset of the base environment
+  (under $MYSDE_ROOT=$MYSDE_BASE/src/mysde)
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>The base environment contains:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+all package sources and binaries
+</p>
+</li>
+<li>
+<p>
+all makefiles to build binaries from sources
+</p>
+</li>
+<li>
+<p>
+the support to create initial configuration for more UNIX
+  environments and switch from one environment to another
+  (each environment using its environment variable name for
+   shared libraries)
+</p>
+</li>
+<li>
+<p>
+the support to archive system binaries and sources
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>The root environment contains all system sources and
+its configured as a tree with three logical levels:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+The system is the root of the tree
+</p>
+</li>
+<li>
+<p>
+The subsystems are the childs of the system
+</p>
+</li>
+<li>
+<p>
+The software units are the childs of each subsystem
+  and the leafs of the tree
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>system
+  |
+  | ---- subsystem1
+  |          |
+  |          | ---- softwareunit11
+  |          | ---- softwareunit12
+  |          | ---- ...
+  |          | ---- softwareunit1M
+  | ---- subsystem2
+  |          |
+  |          | ---- softwareunit21
+  |          | ---- softwareunit22
+  |          | ---- ...
+  |          | ---- softwareunit2M
+  | ...
+  | ---- subsystemN
+             |
+             | ---- softwareunitN1
+             | ---- softwareunitN2
+             | ---- ...
+             | ---- softwareunitNM</tt></pre>
+</div></div>
+<div class="paragraph"><p>Each of the three levels (system, subsystem and software unit)
+has an src subdirectory containing the corresponding
+Makefile to customize filling some variables</p></div>
+<div class="paragraph"><p>There is also a forth Makefile, included by other three makefiles,
+that is the "engine" of the development environment</p></div>
+<div class="paragraph"><p>The src subdirectories of the software units contain all the
+software (including scripts and configuration files)</p></div>
+<div class="paragraph"><p>Each software unit can generate one the following objects:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+a C/C++ application
+</p>
+</li>
+<li>
+<p>
+a C/C++ library (lib*.a or lib*.so) that can be used (linked):
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+only from other software units of its own subsystem
+      ("subsystem" library)
+        or
+</p>
+</li>
+<li>
+<p>
+also from software units of other subsystems
+      ("system" library)
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+a Java application
+</p>
+</li>
+<li>
+<p>
+a Java library (.jar)
+</p>
+</li>
+<li>
+<p>
+a Java/J2EE web application (.war)
+</p>
+</li>
+<li>
+<p>
+an AsciiDoc based Web Site
+  (with automatic FTP deploy)
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>From the system level is then possible to generate Java libraries
+(<strong>.jar) or web applications (</strong>.war)</p></div>
+</div>
+<h2 id="_setup">Setup</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The MySDE installation kit is made only of the mysde shell script</p></div>
+<div class="paragraph"><p>In order to install MySDE you must:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+execute mysde script
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>       mysde [-e]
+             [-1]
+             [-n &lt;name&gt;=default]
+             [-l &lt;libpath&gt;=LD_LIBRARY_PATH]
+             [-S &lt;subsystems&gt;]
+             [-s &lt;softwareunits&gt;]
+             [&lt;basedir&gt;=$HOME/mysde]
+        -S-|-s- =&gt; read subsystems or softwareunits from stdin
+        &lt;subsystems&gt;="&lt;subsystem1&gt; &lt;subsystem2&gt; ...&lt;subsystemN&gt;" |
+                     "&lt;subsystem1&gt;
+                      &lt;subsystem2&gt;
+                      ...
+                      &lt;subsystemN&gt;" |
+                      &lt;subsystem1&gt;,&lt;subsystem2&gt;[,...],&lt;subsystemN&gt;
+        &lt;softwareunits&gt;="[&lt;subsystem1&gt;/]&lt;softwareunit1&gt; [&lt;subsystem2&gt;/]&lt;softwareunit2&gt; ... [&lt;subsystemN&gt;/]&lt;softwareunitN&gt;" |
+                        "[&lt;subsystem1&gt;/]&lt;softwareunit1&gt;
+                         [&lt;subsystem2&gt;/]&lt;softwareunit2&gt;
+                         ...
+                         [&lt;subsystemN&gt;/]&lt;softwareunitN&gt;" |
+                         [&lt;subsystem1&gt;/]&lt;softwareunit1&gt;,[&lt;subsystem2&gt;/]&lt;softwareunit2&gt;[,...],[&lt;subsystemN&gt;/]&lt;softwareunitN&gt;
+      -e =&gt; get only configuration for $HOME/.profile
+      -s =&gt; configure for only one environment
+      -n =&gt; set name of default environment
+      -l =&gt; set name of environment variable used for shared libraries
+      &lt;basedir&gt; =&gt;base directory of the service development tree
+      (e.g. /home/mysystem)</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+you can add later other subsystems and/or software units using
+  the same mysde script with the same base directory of
+  the existing development tree
+</p>
+</li>
+<li>
+<p>
+add the output of mysde script to $HOME/.profile
+  (this output is always stored as $MYSDE_BASE/.profile)
+</p>
+</li>
+<li>
+<p>
+execute . $HOME/.profile
+</p>
+</li>
+<li>
+<p>
+the MYSDE_ROOT is automatically set to $MYSDE_BASE/src/mysde
+</p>
+</li>
+<li>
+<p>
+the MYSDE_HOME is automatically set to $MYSDE_BASE/bin/mysde
+</p>
+</li>
+<li>
+<p>
+if a base directory was specified as argument on mysde script
+  then the prefix of environment variables for base and root
+  direcotory are based on <em>basename</em> of base directory; e.g.
+  if $HOME/mysystem is the base directory then
+  MYSYSTEM_BASE and MYSYSTEM_ROOT are the names of
+  environment variables
+</p>
+</li>
+<li>
+<p>
+if default $HOME/mysde was used as base directory this create
+  under $MYSDE_BASE the following tree:
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>      mysde/
+         |
+         | --- README
+         | --- .mysde (-&gt; .mysde.&lt;name&gt;)
+         | --- .mysderc (-&gt; .mysderc.&lt;name&gt;)
+         | --- bin/
+         |      |
+         |      | --- &lt;binaries&gt; (empty)
+         | --- src/
+         |      |
+         |      | --- &lt;sources&gt; (see tree under $MYSDE_ROOT)
+         ! --- makefiles/
+         |      |
+         |      | --- Makefile (-&gt; Makefile.&lt;name&gt;)
+         | --- local/ (-&gt; local.&lt;name&gt;)
+         | --- build/ (-&gt; build.&lt;name&gt;)
+         | --- makefiles/
+         | --- pkg/
+         | --- docs/
+         | --- man/
+         | --- usr/
+         |      |
+         |      | --- bin
+         |      | --- lib
+         | --- arc/
+         |      |
+         |      | --- bin
+         |      | --- lib
+         | --- sys/
+         |      |
+         |      | --- bin
+         |      | --- lib</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+$MYSDE_BASE/bin is the directory of mysde binaries
+</p>
+</li>
+<li>
+<p>
+$MYSDE_BASE/src is the directory of mysde sources
+</p>
+</li>
+<li>
+<p>
+$MYSDE_BASE/pkg is the directory for package sources (.tar.gz)
+</p>
+</li>
+<li>
+<p>
+$MYSDE_BASE/usr is the directory for external binaries and libraries
+  not buildable from package sources
+</p>
+</li>
+<li>
+<p>
+$MYSDE_BASE/arc is the directory for mysde binaries and sources archive
+</p>
+</li>
+<li>
+<p>
+$MYSDE_BASE/makefiles/Makefile is the base Makefile to build
+  package binaries from package sources
+  (if not -1 option is specified to mysde then is a symbolic link to current
+   Makefile.&lt;name&gt; of &lt;name&gt; environment)
+</p>
+</li>
+<li>
+<p>
+$MYSDE_BASE/build and $MYSDE_BASE/local are the directories
+  for build and install of package sources
+  (if not -1 option is specified to mysde then is a symbolic link to current
+   build.&lt;name&gt; and local.&lt;name&gt; directories of &lt;name&gt; environment)
+</p>
+</li>
+<li>
+<p>
+$MYSDE_BASE/Makefile is the base Makefile with targets for
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+build and clean a single package or all packages
+     (make build, make clean)
+</p>
+</li>
+<li>
+<p>
+build and clean all packages
+     (make build-all, make clean-all)
+</p>
+</li>
+<li>
+<p>
+tar all system base tree
+</p>
+</li>
+<li>
+<p>
+init one or more &lt;name&gt; environments
+     (make init names="osx sun linux")
+</p>
+</li>
+<li>
+<p>
+configure a &lt;name&gt; as current environment
+     (make init name="osx")
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+under $MYSDE_ROOT the following tree:
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>      mysde/
+         |
+         | --- .mysde (-&gt; .mysde.&lt;name&gt;)
+         | --- .mysderc (-&gt; .mysderc.&lt;name&gt;)
+         | --- README
+         | --- sys/
+         |      |
+         |      | --- bin/
+         |      |      |
+         |      |      | --- mysde
+         | --- src/
+         |      |
+         |      | --- Makefile
+         |      | --- RCS/
+         !      | --- makefiles/
+         |             |
+         |             | --- Makefile
+         |             | --- Makefile.system
+         |             | --- Makefile.subsystem
+         |             | --- Makefile.softwareunit
+         | --- bin/
+         | --- lib/
+         | --- include/
+         | --- classes/
+         | --- conf/
+         | --- docs/
+         | --- web/</tt></pre>
+</div></div>
+<div class="paragraph"><p>in which $MYSDE_ROOT/src/Makefile is a copy of Makefile.system</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+go to the $MYSDE_ROOT/src directory
+</p>
+</li>
+<li>
+<p>
+create the web applications and web sites (AsciiDoc based) root directories
+  executing the command:
+    make init webapps="mywebapp1 &#8230; mywebappN"
+    make init websites="mywebsite1 &#8230; mywebsiteN"
+  this create the following tree:
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>      mysde/
+         |
+         | --- .mysde (-&gt; .mysde.&lt;name&gt;)
+         | --- .mysderc (-&gt; .mysderc.&lt;name&gt;)
+         | --- README
+         | --- sys/
+         |      |
+         |      | --- bin/
+         |      |      |
+         |      |      | --- mysde
+         | --- src/
+         |      |
+         |      | --- Makefile
+         |      | --- RCS/
+         !      | --- makefiles/
+         |             |
+         |             | --- Makefile
+         |             | --- Makefile.system
+         |             | --- Makefile.subsystem
+         |             | --- Makefile.softwareunit
+         | --- bin/
+         | --- lib/
+         | --- include/
+         | --- classes/
+         | --- conf/
+         | --- docs/
+         | --- web/
+                |
+                | --- MyWebApp1/
+                !         |
+                |         | --- WEB-INF/
+                |                  | --- classes/
+                |                  | --- lib/
+                | --- MyWebApp2/
+                !         |
+                |         | --- WEB-INF/
+                |                  | --- classes/
+                |                  | --- lib/
+                | --- .../
+                | --- MyWebAppN/
+                |         |
+                |         | --- WEB-INF/
+                |                  | --- classes/
+                |                  | --- lib/
+                | --- MyWebSite1/
+                | --- MyWebSite2/
+                | ...
+                | --- MyWebSiteN/</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+edit the system Makefile ($MYSDE_ROOT/src/Makefile) setting the
+  SUBSYSTEMS variable, as:
+    SUBSYSTEMS=\
+      MySubsystem1 \
+      MySubsystem2 \
+</p>
+<div class="olist lowerroman"><ol class="lowerroman">
+<li>
+<p>
+\
+      MySubsystemN
+  (note the &lt;end of line&gt; after each backslash <em>\</em>)
+</p>
+</li>
+</ol></div>
+</li>
+<li>
+<p>
+create the subtrees corresponding to each of the subsystems,
+  executing from the $MYSDE_ROOT/src directory the command:
+    make init subsystems="MySubsystem1 MySubsystem2 &#8230; MySubsystemN"
+  that creates the following tree:
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>      mysde/
+         |
+         | --- .mysde (-&gt; .mysde.&lt;name&gt;)
+         | --- .mysderc (-&gt; .mysderc.&lt;name&gt;)
+         | --- README
+         | --- sys/
+         |      |
+         |      | --- bin/
+         |      |      |
+         |      |      | --- mysde
+         | --- src/
+         |      |
+         |      | --- Makefile
+         |      | --- RCS/
+         !      | --- bin/
+         |      |      |
+         |      |      | --- mysde
+         !      | --- makefiles/
+         |      !      |
+         |      |      | --- Makefile
+         |      |      | --- Makefile.system
+         |      |      | --- Makefile.subsystem
+         |      |      | --- Makefile.softwareunit
+         |      | --- MySubsystem1/
+         |      |          | --- include/
+         |      !          | --- lib/
+         |      |          | --- src/
+         |      |                 | --- Makefile
+         |      |                 | --- RCS/
+         |      | --- MySubsystem2/
+         |                 | --- include/
+         |                 | --- lib/
+         |                 | --- src/
+         |      |                 | --- Makefile
+         |      |                 | --- RCS/
+         |      | --- ...
+         |      | --- MySubsystemN
+         |                 | --- include/
+         |                 | --- lib/
+         |                 | --- src/
+         | --- bin/
+         | --- lib/
+         | --- include/
+         | --- classes/
+         | --- conf/
+         | --- docs/
+         | --- web/
+                |
+                | --- MyWebApp1/
+                !         |
+                |         | --- WEB-INF/
+                |                  | --- classes/
+                |                  | --- lib/
+                | --- MyWebApp2/
+                !         |
+                |         | --- WEB-INF/
+                |                  | --- classes/
+                |                  | --- lib/
+                | --- .../
+                | --- MyWebAppN/
+                |         |
+                |         | --- WEB-INF/
+                |                  | --- classes/
+                |                  | --- lib/
+                | --- MyWebSite1/
+                | --- MyWebSite2/
+                | ...
+                | --- MyWebSiteN/</tt></pre>
+</div></div>
+<div class="paragraph"><p>each subsystem subdirectory contains the include, lib and src subdirectories,
+where the $MYSDE_ROOT/src/MySubsystem/src/Makefile is a copy of
+Makefile.subsystem</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+edit each subsystem Makefile ($MYSDE_ROOT/src/MySubsystem/src/Makefile)
+  setting the SOFTWAREUNITS variable, as:
+    SOFTWAREUNITS=\
+      MySoftwareUnit1 \
+      MySoftwareUnit2 \
+</p>
+<div class="olist lowerroman"><ol class="lowerroman">
+<li>
+<p>
+\
+      MySoftwareUnitM
+  (note the &lt;end of line&gt; after each backslash <em>\</em>)
+</p>
+</li>
+</ol></div>
+</li>
+<li>
+<p>
+create the subtrees corresponding to each of the software units,
+  executing from each of the $MYSDE_ROOT/src/MySubsystem/src directory
+  the command:
+    make init softwareunits="MySoftwareUnit1 MySoftwareUnit2 &#8230; MySoftwareUnitN"
+  that creates the following tree:
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>      mysde/
+         |
+         | --- .mysde (-&gt; .mysde.&lt;name&gt;)
+         | --- .mysderc (-&gt; .mysderc.&lt;name&gt;)
+         | --- README
+         | --- sys/
+         |      |
+         |      | --- bin/
+         |      |      |
+         |      |      | --- mysde
+         | --- src/
+         |      |
+         |      | --- Makefile
+         |      | --- RCS/
+         !      | --- makefiles/
+         |      !      |
+         |      |      | --- Makefile
+         |      |      | --- Makefile.system
+         |      |      | --- Makefile.subsystem
+         |      |      | --- Makefile.softwareunit
+         |      | --- MySubsystem1/
+         |      |          | --- include/
+         |      !          | --- lib/
+         |      |          | --- src/
+         |      |                 | --- Makefile
+         |      |                 | --- RCS/
+         |      |                 | --- MySoftwareUnit11/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- MySoftwareUnit12/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- ...
+         |      |                 | --- MySoftwareUnit1M/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      | --- MySubsystem2/
+         |      |          | --- include/
+         |      |          | --- lib/
+         |      |          | --- src/
+         |      |                 | --- Makefile
+         |      |                 | --- RCS/
+         |      |                 | --- MySoftwareUnit21/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- MySoftwareUnit22/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- ...
+         |      |                 | --- MySoftwareUnit2M/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      | --- ...
+         |      | --- MySubsystemN
+         |      |          | --- include/
+         |      |          | --- lib/
+         |      |          | --- src/
+         |      |                 | --- MySoftwareUnit21/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- MySoftwareUnit22/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- ...
+         |      |                 | --- MySoftwareUnit2M/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         | --- bin/
+         | --- lib/
+         | --- include/
+         | --- classes/
+         | --- conf/
+         | --- docs/
+         | --- web/
+                |
+                | --- MyWebApp1/
+                !         |
+                |         | --- WEB-INF/
+                |                  | --- classes/
+                |                  | --- lib/
+                | --- MyWebApp2/
+                !         |
+                |         | --- WEB-INF/
+                |                  | --- classes/
+                |                  | --- lib/
+                | --- .../
+                | --- MyWebAppN/
+                |          |
+                |          | --- WEB-INF/
+                |                   | --- classes/
+                |                   | --- lib/
+                | --- MyWebSite1/
+                | --- MyWebSite2/
+                | ...
+                | --- MyWebSiteN/</tt></pre>
+</div></div>
+<div class="paragraph"><p>each software unit subdirectory contains only the src subdirectories,
+where the $MYSDE_ROOT/src/MySubsystem/src/MySoftwareUnit/src/Makefile
+is a copy of Makefile.softwareunit</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+for the software units containing Java packages
+  (sources java files that contains "package declaration")
+  execute from the corresponding src subdirectory
+  ($MYSDE_ROOT/src/MySubsystem/src/MySoftwareUnit/src)
+  the command:
+    make init packages="mypackage1.mysubpackage1 &#8230; mypackageN.mysubpackageN"
+  that create into software unit src subdirectory the
+  directory structure corresponding to the package names,
+  creating also an RCS subdirectory for each leaf
+  (for configuration management support)
+  e.g. if the software unit is MySoftwareUnit11
+  this creates the following tree:
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>      mysde/
+         |
+         | --- .mysde (-&gt; .mysde.&lt;name&gt;)
+         | --- .mysderc (-&gt; .mysderc.&lt;name&gt;)
+         | --- README
+         | --- sys/
+         |      |
+         |      | --- bin/
+         |      |      |
+         |      |      | --- mysde
+         | --- src/
+         |      |
+         |      | --- Makefile
+         |      | --- RCS/
+         !      | --- makefiles/
+         |      !      |
+         |      |      | --- Makefile
+         |      |      | --- Makefile.system
+         |      |      | --- Makefile.subsystem
+         |      |      | --- Makefile.softwareunit
+         |      | --- MySubsystem1/
+         |      |          | --- include/
+         |      !          | --- lib/
+         |      |          | --- src/
+         |      |                 | --- Makefile
+         |      |                 | --- RCS/
+         |      |                 | --- MySoftwareUnit11/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- mypackage1/
+         |      |                 |                 |         |--- mysubpackage1/
+         |      |                 |                 |                   |--- RCS/
+         |      |                 |                 | --- mypackage2/
+         |      |                 |                 |         |--- mysubpackage2/
+         |      |                 |                 |                   |--- RCS/
+         |      |                 |                 | --- .../
+         |      |                 |                 | --- mypackageN/
+         |      |                 |                 |         |--- mysubpackageN/
+         |      |                 |                 |                   |--- RCS/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- MySoftwareUnit12/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- ...
+         |      |                 | --- MySoftwareUnit1M/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      | --- MySubsystem2/
+         |      |          | --- include/
+         |      |          | --- lib/
+         |      |          | --- src/
+         |      |                 | --- Makefile
+         |      |                 | --- RCS/
+         |      |                 | --- MySoftwareUnit21/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- MySoftwareUnit22/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- ...
+         |      |                 | --- MySoftwareUnit2M/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      | --- ...
+         |      | --- MySubsystemN
+         |      |          | --- include/
+         |      |          | --- lib/
+         |      |          | --- src/
+         |      |                 | --- MySoftwareUnit21/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- MySoftwareUnit22/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- ...
+         |      |                 | --- MySoftwareUnit2M/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         | --- bin/
+         | --- lib/
+         | --- include/
+         | --- classes/
+         | --- conf/
+         | --- docs/
+         | --- web/
+                |
+                | --- MyWebApp1/
+                !         |
+                |         | --- WEB-INF/
+                |                  | --- classes/
+                |                  | --- lib/
+                | --- MyWebApp2/
+                !         |
+                |         | --- WEB-INF/
+                |                  | --- classes/
+                |                  | --- lib/
+                | --- .../
+                | --- MyWebAppN/
+                |         |
+                |         | --- WEB-INF/
+                |                  | --- classes/
+                |                  | --- lib/
+                | --- MyWebSite1/
+                | --- MyWebSite2/
+                | ...
+                | --- MyWebSiteN/</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+for the software units containing, into separate directories,
+  web application files other than class files (e.g. *.html, *.js)
+  execute from the corresponding src subdirectory
+  ($MYSDE_ROOT/src/MySubsystem/src/MySoftwareUnit/src)
+  the command:
+    make init webappdirs="mywebappdir1 &#8230; mywebappdirN"
+  (where each "mywebappdir" can contains subdirectories)
+  that:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+create into software unit src subdirectory the
+      directory structure corresponding to the web application
+      directories, creating also an RCS subdirectory for each leaf
+</p>
+</li>
+<li>
+<p>
+create into web application root directory the
+      same directories (without RCS)
+  e.g. if TARGET_WEB=MyWebApp1 and software unit is MySoftwareUnit11
+  this creates the following tree:
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>      mysde/
+         |
+         | --- .mysde (-&gt; .mysde.&lt;name&gt;)
+         | --- .mysderc (-&gt; .mysderc.&lt;name&gt;)
+         | --- README
+         | --- sys/
+         |      |
+         |      | --- bin/
+         |      |      |
+         |      |      | --- mysde
+         | --- src/
+         |      |
+         |      | --- Makefile
+         |      | --- RCS/
+         !      | --- makefiles/
+         |      !      |
+         |      |      | --- Makefile
+         |      |      | --- Makefile.system
+         |      |      | --- Makefile.subsystem
+         |      |      | --- Makefile.softwareunit
+         |      | --- MySubsystem1/
+         |      |          | --- include/
+         |      !          | --- lib/
+         |      |          | --- src/
+         |      |                 | --- Makefile
+         |      |                 | --- RCS/
+         |      |                 | --- MySoftwareUnit11/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- mywebappdir1/
+         |      |                 |                 |         | --- RCS/
+         |      |                 |                 | --- mywebappdir2/
+         |      |                 |                 |         | --- RCS/
+         |      |                 |                 | --- ...
+         |      |                 |                 | --- mywebappdirN/
+         |      |                 |                 |         | --- RCS/
+         |      |                 |                 | --- mypackage1/
+         |      |                 |                 |         |--- mysubpackage1/
+         |      |                 |                 |                   |--- RCS/
+         |      |                 |                 | --- mypackage2/
+         |      |                 |                 |         |--- mysubpackage2/
+         |      |                 |                 |                   |--- RCS/
+         |      |                 |                 | --- .../
+         |      |                 |                 | --- mypackageN/
+         |      |                 |                 |         |--- mysubpackageN/
+         |      |                 |                 |                   |--- RCS/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- MySoftwareUnit12/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- ...
+         |      |                 | --- MySoftwareUnit1M/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      | --- MySubsystem2/
+         |      |          | --- include/
+         |      |          | --- lib/
+         |      |          | --- src/
+         |      |                 | --- Makefile
+         |      |                 | --- RCS/
+         |      |                 | --- MySoftwareUnit21/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- MySoftwareUnit22/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- ...
+         |      |                 | --- MySoftwareUnit2M/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      | --- ...
+         |      | --- MySubsystemN
+         |      |          | --- include/
+         |      |          | --- lib/
+         |      |          | --- src/
+         |      |                 | --- MySoftwareUnit21/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- MySoftwareUnit22/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- ...
+         |      |                 | --- MySoftwareUnit2M/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         | --- bin/
+         | --- lib/
+         | --- include/
+         | --- classes/
+         | --- conf/
+         | --- docs/
+         | --- web/
+                |
+                | --- MyWebApp1/
+                !         |
+                !         | --- mywebappdir1/
+                !         | --- mywebappdir2/
+                !         | --- ...
+                !         | --- mywebappdirN/
+                |         | --- WEB-INF/
+                |                  | --- classes/
+                |                  | --- lib/
+                | --- MyWebApp2/
+                !         |
+                |         | --- WEB-INF/
+                |                  | --- classes/
+                |                  | --- lib/
+                | --- .../
+                | --- MyWebAppN/
+                |          |
+                |          | --- WEB-INF/
+                |                   | --- classes/
+                |                   | --- lib/
+                | --- MyWebSite1/
+                | --- MyWebSite2/
+                | ...
+                | --- MyWebSiteN/</tt></pre>
+</div></div>
+<div class="paragraph"><p>Note that you can add other subsystems and software units later,
+but to generate an application or a library you must create
+at least a subsystem and for this subsystem at least a software unit</p></div>
+</div>
+<h2 id="_variables">Variables</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Before using the MySDE development environment you must fill some
+variables into all three Makefiles at system, subsystem and
+software unit level:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+system:
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  SUBSYSTEMS=\
+    MySubsystem1 \
+    MySubsystem2 \
+    ...\
+    MySubsystemN
+
+  TARGET_JARS=\
+    mywebapp1.war[:mywebapp1manifestfilepath]\
+    mywebapp2.war[:mywebapp2manifestfilepath]\
+    ...\
+    mywebappN.war[:mywebappNmanifestfilepath]\
+    myjar1name.jar[:myjar1dir[:myjar1file1,...,myjar1fileM[:myjar1manifestfilepath]]]\
+    myjar2name.jar[:myjar2dir[:myjar2file1,...,myjar2fileM[:myjar2manifestfilepath]]]\
+    ...\
+    myjarNname.jar[:myjarNdir[:myjarNfile1,...,myjarNfileM[:myjarNmanifestfilepath]]]
+    (default: myjardir = classes, myjarfiles = .)
+
+  SYS_JARS=\
+    /path/to/myjarfile1.jar \
+    /path/to/myjarfile2.jar \
+    ...\
+    /path/to/myjarfileN.jar
+
+  SYS_LIBS=\
+    -l/path/to/mylibfile1.a \
+    -l/path/to/mylibfile2.a \
+    ...\
+    -l/path/to/mylibfileN.a
+
+  SYS_INC_PATH=\
+    -I/path/to/myincludedir1 \
+    -I/path/to/myincludedir2 \
+    ...\
+    -I/path/to/myincludedirN
+
+  SYS_LIB_PATH=\
+    -L/path/to/mylibdir1 \
+    -L/path/to/mylibdir2 \
+    ...\
+    -L/path/to/mylibdirN
+
+  # System Java virtual machine options
+  SYS_JAVA_OPTS=myjavavmoptions
+
+  # System javadoc options
+  SYS_JDOC_OPTS=myjavadocoptions
+
+  # System flags for C/C++, Java, Lex and Yacc compilers, AsciiDoc tool
+  SYS_CFLAGS=
+  SYS_JFLAGS=
+  SYS_LFLAGS=
+  SYS_YFLAGS=
+  SYS_AFLAGS=
+
+  # System flags for checkin and checkout (RCS)
+  SYS_CIFLAGS=
+  SYS_COFLAGS=</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+subsystem:
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  SOFTWAREUNITS=\
+    MySoftwareUnit1 \
+    MySoftwareUnit2 \
+    ...\
+    MySoftwareUnitN
+
+  SUB_JARS=\
+    /path/to/myjarfile1.jar \
+    /path/to/myjarfile2.jar \
+    ...\
+    /path/to/myjarfileN.jar
+
+  SUB_LIBS=\
+    -l/path/to/mylibfile1.a \
+    -l/path/to/mylibfile2.a \
+    ...\
+    -l/path/to/mylibfileN.a
+
+  SUB_INC_PATH=\
+    -I/path/to/myincludedir1 \
+    -I/path/to/myincludedir2 \
+    ...\
+    -I/path/to/myincludedirN
+
+  SUB_LIB_PATH=\
+    -L/path/to/mylibdir1 \
+    -L/path/to/mylibdir2 \
+    ...\
+    -L/path/to/mylibdirN
+
+  # Subsystem Java virtual machine options
+  SUB_JAVA_OPTS=myjavavmoptions
+
+  # Subsystem javadoc options
+  SUB_JDOC_OPTS=myjavadocoptions
+
+  # Subsystem flags for C/C++, Java, Lex and Yacc compilers, AsciiDoc tool
+  SUB_CFLAGS=
+  SUB_JFLAGS=
+  SUB_LFLAGS=
+  SUB_YFLAGS=
+  SUB_AFLAGS=
+
+  # Subsystem flags for checkin and checkout (RCS)
+  SUB_CIFLAGS=
+  SUB_COFLAGS=</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+software unit:
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>  # Java WEB application
+  TARGET_WEB=mywebapp
+
+  # Java main class name and args
+  TARGET_MAIN=my.java.main.class
+  TARGET_ARGS=myjavamainargs
+
+  # AsciiDoc based web site
+  TARGET_WEBSITE=mywebsite
+
+  TARGET_BIN=myapplication
+
+  SYS_TARGET_LIB=libmysystem.a
+  # or
+  SYS_TARGET_LIB=libmysystem.so
+
+  SUB_TARGET_LIB=libmysubsystem.a
+  # or
+  SUB_TARGET_LIB=libmysubsystem.so
+
+  TARGET_SCRIPTS=\
+    myscript1.sh \
+    myscript2.awk \
+    ...\
+    myscriptN.pl
+
+  TARGET_CONF=\
+    myconfigfile1.conf \
+    myconfigfile2.conf \
+    ...\
+    myconfigfileN.conf
+
+  JARS=\
+    /path/to/myjarfile1.jar \
+    /path/to/myjarfile2.jar \
+    ...\
+    /path/to/myjarfileN.jar
+
+  EXTERN_WEB=\
+    /my/external/web/resourcefile1[:my/local/webapp/outputdir1] \
+    /my/external/web/resourcefile2[:my/local/webapp/outputdir2] \
+    ...\
+    /my/external/web/resourcefileN[:my/local/webapp/outputdirN]
+    (default: my/local/webapp/outputdir = WEB-INF/lib)
+
+  EXTERN_WEB=\
+    /my/external/web/resourcefile1[:my/local/webapp/outputdir1] \
+    /my/external/web/resourcefile2[:my/local/webapp/outputdir2] \
+    ...\
+    /my/external/web/resourcefileN[:my/local/webapp/outputdirN]
+    (default: my/local/webapp/outputdir = .)
+
+  EXTERN_ROOT=\
+    /my/external/website/resources/root/dir
+
+  LIBS=\
+    -l/path/to/mylibfile1.a \
+    -l/path/to/mylibfile2.a \
+    ...\
+    -l/path/to/mylibfileN.a
+
+  INC_PATH=\
+    -I/path/to/myincludedir1 \
+    -I/path/to/myincludedir2 \
+    ...\
+    -I/path/to/myincludedirN
+
+  LIB_PATH=\
+    -L/path/to/mylibdir1 \
+    -L/path/to/mylibdir2 \
+    ...\
+    -L/path/to/mylibdirN
+
+  SYS_HEADERS.h=\
+    mysystemheaderfile1.h \
+    mysytemsheaderfile2.h \
+    ...
+    mysystemheaderfileN.h
+
+  SUB_HEADERS.h=\
+    mysubsystemheaderfile1.h \
+    mysubsytemsheaderfile2.h \
+    ...
+    mysubsystemheaderfileN.h
+
+  HEADERS.h=\
+    mylocalheaderfile1.h \
+    mylocalheaderfile2.h \
+    ...
+    mylocalheaderfileN.h
+
+  SOURCES.c=\
+    mycsourcefile1.h \
+    mycsourcefile2.h \
+    ...
+    mycsourcefileN.h
+
+  SOURCES.c=\
+    mycsourcefile1.h \
+    mycsourcefile2.h \
+    ...
+    mycsourcefileN.h
+
+  SOURCES.cc=\
+    mycplusplussourcefile1.cc \
+    mycplusplussourcefile2.cc \
+    ...
+    mycplusplussourcefileN.cc
+
+  SOURCES.java=\
+    myjavasourcefile1.java \
+    my/package/path/from/src/javasourcefile2.java \
+    ...
+    my/package/path/from/src/javasourcefileN.java
+
+  SOURCES.web=\
+    mywebsourcefile1.html \
+    mywebsourcefile2.txt \
+    ...
+    mywebsourcefileN.js
+
+  SOURCES.l=\
+    mylexsourcefile1.l \
+    mylexsourcefile2.l \
+    ...
+    mylexsourcefileN.l
+
+  SOURCES.y=\
+    myyaccsourcefile1.y \
+    myyaccsourcefile2.y \
+    ...
+    myyaccsourcefileN.y
+
+  SOURCES.txt=\
+    myasciidocsourcefile1.txt \
+    myasciidocsourcefile2.txt \
+    ...
+    myasciidocsourcefileN.txt
+
+  # Software Unit Java virtual machine options
+  JAVA_OPTS=myjavavmoptions
+
+  # Software Unit javadoc options
+  JDOC_OPTS=myjavadocoptions
+
+  # Software Unit flags for C/C++, Java, Lex and Yacc compilers, AsciiDoc tool
+  CFLAGS=
+  JFLAGS=
+  LFLAGS=
+  YFLAGS=
+  AFLAGS=
+
+  # Software Unit flags for checkin and checkout (RCS)
+  CIFLAGS=
+  COFLAGS=
+
+  # Software Unit FTP deploy parameters
+  FTP_HOST=
+  FTP_USERNAME=
+  FTP_PASSWORD=
+  FTP_REMOTEDIR=
+  FTP_LOCALDIR=
+
+  if FTP_LOCALDIR is empty and TARGET_WEBSITE is not empty
+  then default value of FTP_LOCALDIR is ${MYSDE_ROOT}/web/${TARGET_WEBSITE}</tt></pre>
+</div></div>
+<div class="paragraph"><p>The common Makefile can be edited to modify the path of compilers
+and tools</p></div>
+</div>
+<h2 id="_usage">Usage</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>To use the MySDE development environment you must execute the make command
+from one of the src subdirectories at the three levels:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+system level:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>make</em>
+        create all objects of the systems
+</p>
+</li>
+<li>
+<p>
+<em>make clean</em>
+        delete all objects of the systems
+</p>
+</li>
+<li>
+<p>
+<em>make tar</em>
+        make a tar of the system src subdirectory
+</p>
+</li>
+<li>
+<p>
+<em>make checkin [rev=&lt;revision&gt;]</em>
+        make the checkin of all objects of the system
+</p>
+</li>
+<li>
+<p>
+<em>make checkout [rev=&lt;revision&gt;]</em>
+        make the checkout of all objects of the system
+</p>
+</li>
+<li>
+<p>
+<em>make jar</em>
+        create all java libraries
+</p>
+</li>
+<li>
+<p>
+<em>make javadoc</em>
+        execute javadoc for all classes of the system
+</p>
+</li>
+<li>
+<p>
+<em>make deploy</em>
+        execute FTP deploy for all subsystems
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+subsystem level
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>make</em>
+        create all objects of the subsystem
+</p>
+</li>
+<li>
+<p>
+<em>make clean</em>
+        delete all objects of the subsystem
+</p>
+</li>
+<li>
+<p>
+<em>make tar</em>
+        make a tar of the subsystem src subdirectory
+</p>
+</li>
+<li>
+<p>
+<em>make checkin [rev=&lt;revision&gt;]</em>
+        make the checkin of all objects of the subsystem
+</p>
+</li>
+<li>
+<p>
+<em>make checkout [rev=&lt;revision&gt;]</em>
+        make the checkout of all objects of the subsystem
+</p>
+</li>
+<li>
+<p>
+<em>make javadoc</em>
+        execute javadoc for all classes of the subsystem
+</p>
+</li>
+<li>
+<p>
+<em>make deploy</em>
+        execute FTP deploy for all software units
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+software unit level
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>make</em>
+        create all objects of the software unit
+</p>
+</li>
+<li>
+<p>
+<em>make clean</em>
+        delete all objects of the software unit
+</p>
+</li>
+<li>
+<p>
+<em>make tar</em>
+        make a tar of the software unit src subdirectory
+</p>
+</li>
+<li>
+<p>
+<em>make checkin [rev=&lt;revision&gt;]</em>
+        make the checkin of all objects of the software unit
+</p>
+</li>
+<li>
+<p>
+<em>make checkout [rev=&lt;revision&gt;]</em>
+        make the checkout of all objects of the software unit
+</p>
+</li>
+<li>
+<p>
+<em>make javadoc</em>
+        execute javadoc for all classes of the software unit
+</p>
+</li>
+<li>
+<p>
+<em>make install</em>
+        install the objects of the software unit:
+</p>
+</li>
+<li>
+<p>
+C/C++ application and scripts into bin system subdirectory
+</p>
+</li>
+<li>
+<p>
+C/C++ library into lib system or subsystem subdirectory
+</p>
+</li>
+<li>
+<p>
+Java classes into classes system subdirectory
+            (removing them from src software unit subdirectory)
+            or in web application classes subdirectory
+</p>
+</li>
+<li>
+<p>
+configuration files into conf system subdirectory
+</p>
+</li>
+<li>
+<p>
+local and external web application files into
+            web application root subdirectory
+</p>
+</li>
+<li>
+<p>
+<em>&#8230; | make path</em>
+        print on standard output the string evaluated joining
+        all strings from standard input with ":"
+</p>
+</li>
+<li>
+<p>
+<em>make classpath</em>
+        print on standard output the string to use as CLASSPATH value
+        (including classes system subdirectory and all Java libraries)
+</p>
+</li>
+<li>
+<p>
+<em>make run</em>
+        execute the Java application configured in the software unit
+        Makefile
+</p>
+</li>
+<li>
+<p>
+<em>make deploy</em>
+        execute FTP deploy of software unit
+</p>
+</li>
+<li>
+<p>
+<em>make webappdeploy</em>
+        deploy the web application to the web server
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="paragraph"><p>The command <em>make help</em> from each src level give a summary of the
+available commands</p></div>
+</div>
+<h2 id="_notes">Notes</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+in order to use the MySDE environment the following tools
+  must be installed and available for command-line execution:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+make
+</p>
+</li>
+<li>
+<p>
+tar
+</p>
+</li>
+<li>
+<p>
+gzip
+</p>
+</li>
+<li>
+<p>
+ci and co
+      (for checkin and checkout with RCS)
+</p>
+</li>
+<li>
+<p>
+asciidoc
+      (for websites)
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+for each web application archive must be specified into TARGET_JARS
+  the .war filename (e.g. TARGET_JARS=mywebapp.war)
+  and optionally the path to relative manifest file
+</p>
+</li>
+</ul></div>
+</div>
+<h2 id="_examples">Examples</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The MySDE installation kit is made only of the mysde shell script.</p></div>
+<div class="paragraph"><p>In order to use MySDE you must:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+create the development environment executing mysde (specifying
+  as optional argument its base directory):
+      mysde
+  (if not base directory is specified then $HOME/mysde is used as default)
+</p>
+</li>
+<li>
+<p>
+to use the development environment execute:
+</p>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+$HOME/mysde/.profile
+  (to set all environment variables including
+   $MYSDE_BASE as the base directory $HOME/mysde and
+   $MYSDE_ROOT as the root directory $HOME/mysde/src/mysde,
+   or $MYSYSTEM_BASE and $MYSYSTEM_ROOT if, for example,
+   $HOME/mysystem was specified as base directory)
+</p>
+</li>
+</ol></div>
+</li>
+<li>
+<p>
+if necessary customize file $MYSDE_BASE/.mysderc with
+  environment variables, such as external PATH or
+  LD_LIBRARY_PATH or others environment variables
+  (or $MYSYSTEM_BASE/.mysystemrc if, for example,
+   $HOME/mysystem was specified as base directory)
+</p>
+</li>
+<li>
+<p>
+copy under $MYSDE_BASE/pkg the source packages .tar.gz
+  to be used by development environment (e.g. rcs-5.7.tar.gz),
+  buildable with commands such as:
+  configure
+  make
+  make install
+</p>
+</li>
+<li>
+<p>
+customize $MYSDE_BASE/makefiles/Makefile to add actions
+  to build each source package copying the predefined templates
+  build.mypkg and clean.mypkg (or customizing it if the commands
+  specified into build.mypkg.template and clean.mypkg.template
+  templates are not ok to build or clean the package)
+</p>
+<div class="literalblock">
+<div class="content">
+<pre><tt>build.rcs-5.7:
+      make build package=rcs-5.7</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>clean.rcs-5.7:
+      make clean package=rcs-5.7</tt></pre>
+</div></div>
+</li>
+<li>
+<p>
+build each package executing under $MYSDE_BASE:
+  make build.rcs-5.7
+</p>
+</li>
+<li>
+<p>
+add some subsystem and/or softwareunit to development
+  environment:
+      mysde -S mysubsystem1/mysoftwareunit1,mysubsystem2/mysoftwareunit2
+  (or mysde -S mysubsystem1/mysoftwareunit1,mysubsystem2/mysoftwareunit2 $HOME/mysystem
+   if, for example, $HOME/mysystem was specified as base directory)
+</p>
+</li>
+<li>
+<p>
+note that you can specify once the subsytem for all software units (if is common)
+   with -S &lt;subsystem&gt; and -s &lt;softwareunits&gt;
+   or specify for each software unit its corresponding subsystem with
+    -s &lt;subsystem1&gt;/&lt;softwareunit1&gt;,&lt;subsystem2&gt;/&lt;softwareunit2&gt;,&#8230;,&lt;subsystemN&gt;/&lt;softwareunitN&gt;
+   or as
+    -s "&lt;subsystem1&gt;/&lt;softwareunit1&gt; &lt;subsystem2&gt;/&lt;softwareunit2&gt; &lt;subsystemN&gt;/&lt;softwareunitN&gt;"
+</p>
+</li>
+<li>
+<p>
+another way to add a subsystem is to execute under $MYSDE_ROOT/src
+      make init subsystems="mysubsystem"
+</p>
+</li>
+<li>
+<p>
+another way to add a software unit is to execute under $MYSDE_ROOT/src/mysubsystem/src
+      make init softwareunits="mysoftwareunit"
+</p>
+</li>
+<li>
+<p>
+customize $MYSDE_ROOT/src/Makefile specifying into variable SUBSYSTEMS
+  the list of added subsystems (using one backslash as line terminator,
+  for each line, if muliple lines are used to specify the list
+  instead of spaces)
+</p>
+</li>
+<li>
+<p>
+for each subsystem customize $MYSDE_ROOT/src/mysubsystem/src/Makefile
+  specifying into variable SOFTWAREUNITS the list of its softwareunits
+</p>
+</li>
+<li>
+<p>
+for each softwareunit of each subsystem copy under
+  $MYSDE_ROOT/src/mysubsytem/src/mysoftwareunit/src the source code and
+  configuration files used by that softwareunit
+</p>
+</li>
+<li>
+<p>
+for each softwareunit of each subsystem customize
+  $MYSYSTEM_ROOT/src/mysubsytem/src/mysoftwareunit/src/Makefile
+  specifying values for variables corresponding to source code
+  files, binary targets, library paths, library names  or other
+  options (e.g. for a C+\+ main application TARGET_BIN for the name
+  of executable and SOURCES.cc and SOURCES.hh the name of C++ source
+  code files)
+</p>
+</li>
+<li>
+<p>
+build the softwareunit and install (e.g. under $MYSDE_ROOT/bin,
+  $MYSDE_ROOT/lib, $MYSDE_ROOT/classes of $MYSDE_ROOT/web)
+  its deliverables (e.g. C+\+ executable, Java or C++ library)
+  executing under $MYSDE_ROOT/src/mysubsytem/src/mysoftwareunit/src:
+      make
+      make install
+</p>
+</li>
+<li>
+<p>
+to backup only the development environment root tree execute
+  under $MYSDE_ROOT/src:
+      make tar
+  (creating under $MYSDE_ROOT/.. a file mysde-YYYYMMDDhhmmssr-src.tar.gz)
+</p>
+</li>
+<li>
+<p>
+to backup your entire development environment base tree execute
+  under $MYSDE_BASE:
+      make tar
+  (creating under $MYSDE_BASE/.. a file mysde-YYYYMMDDhhmmss.tar.gz)
+</p>
+</li>
+<li>
+<p>
+to use the development environment under another UNIX OS
+  (e.g. a sun) is sufficient
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+make a backup of the entire development environment
+      base tree
+</p>
+</li>
+<li>
+<p>
+copy via ftp this backup file mysde-YYYYMMDDhhmmss.tar.gz
+      on the new sun host
+</p>
+</li>
+<li>
+<p>
+untar the backup:
+        gunzip mysde-YYYYMMDDhhmmss.tar.gz
+        tar xvf mysde-YYYYMMDDhhmmss.tar
+</p>
+</li>
+<li>
+<p>
+execute . $MYSDE_BASE/.profile to init all environment
+      variables
+</p>
+</li>
+<li>
+<p>
+setup a new environment executing under $MYSDE_BASE:
+      make init names="sun"
+      (to create a new default set of sun configuration files)
+      make conf name="sun"
+      (to switch all symbolic links
+       to sun files $MYSDE_BASE/.profile.sun, $MYSDE_BASE/.mysderc.sun,
+       $MYSDE_BASE/local.sun, $MYSDE_BASE/.build.sun and
+       $MYSDE_BASE/makefiles/Makefile.sun)
+</p>
+</li>
+<li>
+<p>
+customize (if necessary) $MYSDE_BASE/.mysderc and
+      $MYSDE_BASE/makefiles/Makefile
+</p>
+</li>
+<li>
+<p>
+rebuild all packages from their sources executing the same
+      "make build" commands from $MYSDE_BASE
+      (e.g. make build package=rcs-5.7)
+</p>
+</li>
+<li>
+<p>
+rebuild all subsystems and sofwareunit, e.g. executing
+      from $MYSDE_ROOT/src:
+          make clean
+          make
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+to return developing on the previous UNIX OS (e.g. "default"
+  created as default when setup the development environment)
+  is sufficient:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+backup the entire development environment base tree
+</p>
+</li>
+<li>
+<p>
+copy and untar this backup on the previous UNIX
+</p>
+</li>
+<li>
+<p>
+execute:
+        make conf name="default"
+        (to switch all symbolic links
+         to default files $MYSDE_BASE/.profile.default, $MYSDE_BASE/.mysderc.default,
+         $MYSDE_BASE/local.default, $MYSDE_BASE/.build.default and
+         $MYSDE_BASE/makefiles/Makefile.default)
+</p>
+</li>
+<li>
+<p>
+rebuild all subsystems and sofwareunits executing
+      from $MYSDE_ROOT/src:
+          make clean
+          make
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+to get help on make commands availables execute
+  from $MYSDE_BASE and $MYSDE_ROOT/src:
+      make help
+</p>
+</li>
+<li>
+<p>
+two main rules when edit a Makefile:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+when assign a value to a variable
+        don&#8217;t put spaces after equal (<em>=</em>)
+        if a value is multi-line end each line
+        with a backspace (<em>\</em>)
+</p>
+</li>
+<li>
+<p>
+each command of a target must begin
+      with a single tab character
+  use ": set list" editing files with vi to view
+  the hidden characters such as tabs and end of lines
+  (then ":set nolist" to switch off)
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+look at $MYSDE_ROOT/src/makefiles/Makefile as Makefile example
+</p>
+</li>
+</ul></div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 0.400<br />
+Last updated 2014-06-28 16:23:35 CEST
+</div>
+<div id="footer-badges">
+<img style="border:none; width:88px; height:31px;"
+     src="../images/gplv3-127x51.png"
+     alt="GPL Version 3" />
+<!-- Histats.com  START  -->
+<a href="http://www.histats.com" target="_blank" title="simple hit counter" >
+<script  type="text/javascript" language="javascript">
+var s_sid = 675659;var st_dominio = 4;
+var cimg = 0;var cwi =112;var che =48;
+</script></a><script  type="text/javascript" language="javascript" src="http://s10.histats.com/js9.js"></script>
+<noscript><a href="http://www.histats.com" target="_blank">
+<img  src="http://s4.histats.com/stats/0.gif?675659&1" alt="simple hit counter" border="0"></a>
+</noscript>
+<!-- Histats.com  END  -->
+</div>
+</div>
+</div>
+</td>
+</tr>
+</table>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-11334618-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>

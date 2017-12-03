@@ -1,0 +1,1968 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.3.5" />
+<meta name="description" content="an open source UNIX framework for shell script based web service provider" />
+<meta name="keywords" content="mysvc, shell script, web service, provider, service, soa, template, engine, myste, mysde, mysvcd" />
+<link rel="stylesheet" href="../../xhtml11.css" type="text/css" />
+<link rel="stylesheet" href="../../xhtml11-quirks.css" type="text/css" />
+<link rel="stylesheet" href="../../layout1.css" type="text/css" />
+<title>MySVC</title>
+</head>
+<body>
+<div id="layout-banner">
+  <div id="layout-title">MySVC</div>
+  <div id="layout-description">an open source UNIX framework for shell script based web services provider</div>
+</div>
+<table>
+<tr valign="top">
+<td id="layout-menu">
+  <div>&#187;<a href="../../index.html">Home</a></div>
+  <div>&#187;<a href="../../tools.html">Tools</a></div>
+  <div>&#187;<a href="../../manpage.html">Man&nbsp;Page</a></div>
+  <div>&#187;<a href="../../userguide.html">User&nbsp;Guide</a></div>
+  <div>&#187;<a href="../../changelog.html">ChangeLog</a></div>
+  <div>&#187;<a href="../../install.html">Installation</a></div>
+  <div>&#187;<a href="../../sourcecode.html">Source Code</a></div>
+  <div>&#187;<a href="../../downloads.html">Downloads</a></div>
+  <div>&#187;<a href="../../faq.html">FAQ</a></div>
+  <div>&#187;<a href="../../support.html">Support</a></div>
+  <div>&#187;<a href="../../license.html">License</a></div>
+  <hr/>
+  <div>&#187;<a href="../../myapps/index.html">My Apps</a></div>
+  <div>
+  <hr/>
+  <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+  <input type="hidden" name="cmd" value="_s-xclick">
+  <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----MIIHPwYJKoZIhvcNAQcEoIIHMDCCBywCAQExggEwMIIBLAIBADCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwDQYJKoZIhvcNAQEBBQAEgYAWiqN5fcvDviZYNLmeRPAOeH+059PTyUtOFN8++Bx9+RhWYfjY/XwEwfKVwaEeK0+pLj9TDs/FW9ChZZF3FNPjR1Xlg0E3S37taxsarZ2NM6iBhXjSapQPgVGtrCqibd0Diq48ouQTcXPMxKON1Anv/fDoHjjaFPTRVI+KMQX0JTELMAkGBSsOAwIaBQAwgbwGCSqGSIb3DQEHATAUBggqhkiG9w0DBwQInBnxX7TxZ3mAgZhXvGov9cuq17ycIBz4CjE/MwjHddefpVXoPyyh89d/ieP1b6rehpp1R/aW8QBbnS1Fl/INzPU38Y3NTqX7oMhFYsLN1D6YSPjAeoFqIXp1rrTEIDLZRSSIwo8OXuEsPHqK/P+l7S4awyCyWJxdMkqSDK2hPoKXSUHIGA8jf6Rq4DV0CsJzljLJSW8WJMfdpXvKuff4HiEZPaCCA4cwggODMIIC7KADAgECAgEAMA0GCSqGSIb3DQEBBQUAMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbTAeFw0wNDAyMTMxMDEzMTVaFw0zNTAyMTMxMDEzMTVaMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbTCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAwUdO3fxEzEtcnI7ZKZL412XvZPugoni7i7D7prCe0AtaHTc97CYgm7NsAtJyxNLixmhLV8pyIEaiHXWAh8fPKW+R017+EmXrr9EaquPmsVvTywAAE1PMNOKqo2kl4Gxiz9zZqIajOm1fZGWcGS0f5JQ2kBqNbvbg2/Za+GJ/qwUCAwEAAaOB7jCB6zAdBgNVHQ4EFgQUlp98u8ZvF71ZP1LXChvsENZklGswgbsGA1UdIwSBszCBsIAUlp98u8ZvF71ZP1LXChvsENZklGuhgZSkgZEwgY4xCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDQTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLUGF5UGFsIEluYy4xEzARBgNVBAsUCmxpdmVfY2VydHMxETAPBgNVBAMUCGxpdmVfYXBpMRwwGgYJKoZIhvcNAQkBFg1yZUBwYXlwYWwuY29tggEAMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEFBQADgYEAgV86VpqAWuXvX6Oro4qJ1tYVIT5DgWpE692Ag422H7yRIr/9j/iKG4Thia/Oflx4TdL+IFJBAyPK9v6zZNZtBgPBynXb048hsP16l2vi0k5Q2JKiPDsEfBhGI+HnxLXEaUWAcVfCsQFvd2A1sxRr67ip5y2wwBelUecP3AjJ+YcxggGaMIIBlgIBATCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwCQYFKw4DAhoFAKBdMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA4MTAyNTE1NTQzMlowIwYJKoZIhvcNAQkEMRYEFMsXBheWWoPdxAigpR2+KpSpl3NXMA0GCSqGSIb3DQEBAQUABIGAMwKAzwiLVvhRLUQBUUgK5IJQOq4Ci0W9bVWiiCIF3g/DOWMzoJvlQRyxelM5jg2wChbtvg1sj5AoyXaqCdbuEI/7rP0/RhrfFxDqkSbWTOqkcgkMPgNeKvXAC9oD2Dflep/uDlUC2E0w9XEPtps7a5jCiJX5//huQ/usU3f5wmI=-----END PKCS7-----
+  ">
+  <input type="image" src="https://www.paypal.com/en_US/IT/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="">
+  <img alt="" border="0" src="https://www.paypal.com/it_IT/i/scr/pixel.gif" width="1" height="1">
+  </form>
+  </div>
+</td>
+<td>
+<div id="layout-content">
+<div id="header">
+<h1>Services</h1>
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="sidebarblock">
+<div class="sidebar-content">
+<div class="paragraph"><p>The <em>Services</em> iOS application is available on <a href="http://itunes.com/apps/services"><em>App Store</em></a> for <em>iPod touch</em> and <em>iPhone</em> with iOS version &gt;= 3.2</p></div>
+</div></div>
+</div>
+</div>
+<h2 id="Features">Features</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The "Services" app is a generic client of REST web services based on a synchronous request/reply interface protocol using standard HTTP (GET or POST) and XML respectively as request and response message types accessing any application server as web service provider (e.g. a J2EE servlet as adapter to access IT legacy systems), where the app user interface and managed web services info are configurable from a single XML configuration file, with advanced features such as export to a mailing list of sent/received HTTP messages or mapping from nodes of XML response tree and response fields on user interface through XPATH formulas in order to drill down to response details with custom user interface navigation.</p></div>
+</div>
+<h2 id="Configuration">Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>From the app XML configuration file, imported from an http URL or from clipboard (or exported to email or clipboard):</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+can be specified a set of "applications" logically grouped into "systems"
+</p>
+</li>
+</ul></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>    &lt;?xml version="1.0"?&gt;
+    &lt;services&gt;
+      &lt;system name="mysystem_1"&gt;
+        &lt;application name="myapplication_11" url="http://www.myapp_11"&gt;
+          &lt;description&gt;...&lt;/description&gt;
+          ...
+        &lt;/application&gt;
+        ...
+        &lt;application name="myapplication_1N" url="http://www.myapp_1N"&gt;
+          &lt;description&gt;...&lt;/description&gt;
+        ...
+        &lt;/application&gt;
+      &lt;/system&gt;
+      ...
+      &lt;system name="mysystem_N"&gt;
+        &lt;application name="myapplication_N1" url="http://www.myapp_N1"&gt;
+          &lt;description&gt;...&lt;/description&gt;
+          ...
+        &lt;/application&gt;
+        ...
+        &lt;application name="myapplication_NN" url="http://www.myapp_NN"&gt;
+          &lt;description&gt;...&lt;/description&gt;
+        ...
+        &lt;/application&gt;
+      &lt;/system&gt;
+    &lt;/services&gt;</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+each application, identified by an http URL, provide a set of "operations" logically grouped into "services"
+</p>
+</li>
+</ul></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>        &lt;application name="myapplication" url="http://www.myapplication"&gt;
+          &lt;service name="myservice_1"&gt;
+            &lt;operation name="myoperation_11" path="/path/to/myoperation_11"&gt;
+              &lt;description&gt;...&lt;/description&gt;
+              ...
+            &lt;/operation&gt;
+            ...
+            &lt;operation name="myoperation_1N" path="/path/to/myoperation_1N"&gt;
+              &lt;description&gt;...&lt;/description&gt;
+              ...
+            &lt;/operation&gt;
+          &lt;/service&gt;
+          ...
+          &lt;service name="myservice_N"&gt;
+            &lt;operation name="myoperation_N1" path="/path/to/myoperation_N1"&gt;
+              &lt;description&gt;...&lt;/description&gt;
+              ...
+            &lt;/operation&gt;
+            ...
+            &lt;operation name="myoperation_NN" path="/path/to/myoperation_NN"&gt;
+              &lt;description&gt;...&lt;/description&gt;
+              ...
+            &lt;/operation&gt;
+          &lt;/service&gt;
+        &lt;/application&gt;</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+for each operation, identified by a path (e.g. "/myservice/myoperation"), the server, from the URL having the application URL as prefix (e.g. "http://www.myserver.com/myapp/myservice/myoperation") provide the XML response corresponding to its own specific HTTP GET or POST request
+</p>
+</li>
+<li>
+<p>
+each "operation" contains its own "request" and "response" message
+</p>
+</li>
+<li>
+<p>
+each "request" and "response" message contains the list of its "fields", logically grouped into field "groups"
+</p>
+</li>
+</ul></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>            &lt;operation name="myoperation" path="/path/to/myoperation"&gt;
+              &lt;description&gt;...&lt;/description&gt;
+              &lt;request name="request"&gt;
+                &lt;group name="group_1"&gt;
+                  &lt;field name="field_11"/&gt;
+                  &lt;field name="field_12" type="text"/&gt;
+                  &lt;field name="field_13" type="number" default="1"/&gt;
+                  ...
+                  &lt;field name="field_1N" value="value_1"&gt;
+                   &lt;value&gt;value_1&lt;value&gt;
+                   &lt;value&gt;value_2&lt;value&gt;
+                   ...
+                   &lt;value&gt;value_K&lt;value&gt;
+                  &lt;/field&gt;
+                &lt;/group&gt;
+                 ...
+                &lt;group name="group_M"&gt;
+                  &lt;field name="field_M1"/&gt;
+                  &lt;field name="field_M2"/&gt;
+                  ...
+                  &lt;field name="field_MN"/&gt;
+                &lt;/group&gt;
+              &lt;/request&gt;
+              &lt;response name="response"&gt;
+                &lt;group name="group_L"&gt;
+                  &lt;field name="field_L1" path="/xpath/to/xml/response/node/attribute/for/field/@value"/&gt;
+                  &lt;field name="field_L2" path="/xpath/to/xml/response/node/for/field/value"/&gt;
+                  &lt;field name="details"&gt;
+                    &lt;group name="orders"&gt;
+                      &lt;field name="product A" path="/data/product_A/orders_num"/&gt;
+                      &lt;field name="product B" path="/data/product_B/orders_num"/&gt;
+                      &lt;field name="payment method" path="/data/payment_method"/&gt;
+                    &lt;/group&gt;
+                    &lt;group name="trouble tickets"&gt;
+                      &lt;field name="total" path="/data/trouble_tickets/number"/&gt;
+                      &lt;field name="opened" path="/data/@opened_trouble_tickets"/&gt;
+                    &lt;/group&gt;
+                  &lt;/field&gt;
+                  ...
+                  &lt;field name="contacts"&gt;
+                    &lt;group name="contact" path="/data/contact"&gt;
+                      &lt;field name="first name" path="first_name"/&gt;
+                      &lt;field name="last name" path="last_name"/&gt;
+                      &lt;field name="email" path="email"/&gt;
+                      &lt;field name="telephone" path="telephone"/&gt;
+                    &lt;/group&gt;
+                  &lt;/field&gt;
+                &lt;/group&gt;
+                 ...
+                &lt;group name="group_P"&gt;
+                  &lt;field name="field_P1"/&gt;
+                  &lt;field name="field_P2"/&gt;
+                  ...
+                  &lt;field name="field_PN"/&gt;
+                &lt;/group&gt;
+              &lt;/response&gt;
+            &lt;/operation&gt;</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+each request field (corresponding to a &lt;name&gt;=&lt;value&gt; pair on HTTP request message):
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+has a "name" attribute used by user interface label
+</p>
+</li>
+<li>
+<p>
+has an optional "http-name" attribute used to set name of corresponding HTTP parameter (default as "name")
+</p>
+</li>
+<li>
+<p>
+has its own "type" attribute:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+"string" (default)
+</p>
+</li>
+<li>
+<p>
+"text" (can contains more lines of text, to be used with POST HTTP method)
+</p>
+</li>
+<li>
+<p>
+"number"
+</p>
+</li>
+<li>
+<p>
+"password"
+</p>
+</li>
+<li>
+<p>
+list of values (if contains one or more "value" child node)
+</p>
+</li>
+<li>
+<p>
+"ref" (to use if the field is a reference to another field, identified by the "id" attribute)
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+has an optional "required" attribute (default to "false") used to require (if set to "true") a not empty value
+</p>
+</li>
+<li>
+<p>
+has an optional "value" attribute as default value of field (also used as default for list of value fields)
+</p>
+</li>
+<li>
+<p>
+has an optional "read-only" attribute (default to "false") set to "true" if the field value cannot be modified
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+each response field:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+has a "path" attribute representing the xpath formula of a node of XML response tree
+</p>
+</li>
+<li>
+<p>
+can contains recursively a list of more field groups or a single field group identified by an xpath formula of a node of XML response tree having more occurrences
+</p>
+</li>
+<li>
+<p>
+has an optional "subtype" attribute: if set to "error" then is used for system level and application level mapping from error codes and popup error description on user interface, else if set to "password" show an hidden input field
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+each field can be a reference to any another field (if type is "ref")
+</p>
+</li>
+<li>
+<p>
+each "application" and "system" can contains an optional list of error codes with related descriptions for popup messages on user interface
+</p>
+</li>
+</ul></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>    &lt;errors&gt;
+      &lt;error code="1"&gt;Invalid email or password&lt;/error&gt;
+      &lt;error code="2"&gt;Email already used&lt;/error&gt;
+      &lt;error code="3"&gt;Password too short&lt;/error&gt;
+    &lt;/errors&gt;</tt></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+can be defined at system or application level a mailing list for log export by email
+</p>
+</li>
+</ul></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>    &lt;emails&gt;
+      &lt;email type="cc"&gt;email_1@gmail.com&lt;/email&gt;
+      &lt;email&gt;email_2@gmail.com&lt;/email&gt;
+      &lt;email&gt;email_3@gmail.com&lt;/email&gt;
+    &lt;/emails&gt;</tt></pre>
+</div></div>
+</div>
+<h2 id="Entities">Entities</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Starting from root to leafs of the tree related to the XML configuration file, we have "system&#8594;application&#8594;service&#8594;operation&#8594;request/response&#8594;group&#8594;field" entities, where:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+"services", "systems" and "groups" are only logical entities to group respectly "operations", "applications" and "fields": each "system" is a list of "applications", each "service" is a list of "operations" and each "group" is a list of "fields"
+</p>
+</li>
+<li>
+<p>
+"operations" and "applications" are the physical entities: each "application", identified by the URL prefix common to all its own "operations", provides a set of "operations", each identified by the ending path of the complete URL (e.g. the path of a PHP script or the path to a J2EE servlet or JSP page)and corresponding to an HTTP GET or POST REST request/reply web service returning an XML as response
+</p>
+</li>
+</ul></div>
+</div>
+<h2 id="Interface">Interface</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Regarding to the app user interface:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+there are three main screen tabs: "Services", "Settings" and "Log"
+</p>
+</li>
+<li>
+<p>
+each "service", a logical group of "operations", is represented on the app as a separated table section of the first screen tab "Services"
+</p>
+</li>
+<li>
+<p>
+each "operation" related to a "service" is represented as a row on the table section related to that "service"
+</p>
+</li>
+<li>
+<p>
+each list of "services" on the first screen tab "Services" is related to an "application" corresponding to the current selected "application"
+</p>
+</li>
+<li>
+<p>
+the current "application" is selected with the first table section and row of each of the three ta b screens, where you get a screen with the list of "applications", grouped into "systems" where each system is represented as a separate table section whose rows represent its own "applications"
+</p>
+</li>
+<li>
+<p>
+each application and each operation has its own optional description (configurable from app XML configuration file) that can be viewed from first screen tab "Services" with right push button
+</p>
+</li>
+<li>
+<p>
+from the first screen tab "Services" can also be view and modified, through "Edit" button, the XML configuration importing it from a configurable URL or from clipboard
+</p>
+</li>
+<li>
+<p>
+with the second screen tab, "Settings", can be modified a subset of configuration info related to current selected application, such as:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+application URL
+</p>
+</li>
+<li>
+<p>
+HTTP method (GET or POST)
+</p>
+</li>
+<li>
+<p>
+application level mailing list
+</p>
+</li>
+<li>
+<p>
+seconds before timeout for HTTP request/reply
+</p>
+</li>
+<li>
+<p>
+switch to enable or disable logs (by default are disabled, set to ON the switch or set to "true" the "log" application attribute to enable)
+</p>
+</li>
+<li>
+<p>
+path of each operation
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+on the third screen tab, "Log", can be viewed and exported to a mailing list (common to all system, system level or application level) sent (request) and received (response) HTTP messages, related to a single or entire list request/reply message exchange, with log reset capability
+</p>
+</li>
+</ul></div>
+</div>
+<h2 id="UseCase">Use case</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>A typical use case of "Services" app is to access IT legacy systems developing web service provider as adapters, e.g. J2EE servlet/JSP or PHP script accessing data using JDBC or filesystem
+In order to test a web service on app user interface before its implementation on application server is sufficient to stub the web service provider using as operation path (by app XML configuration file or by app user interface) a path to a static .xml file on a web/application server using it as XML response.</p></div>
+</div>
+<h2 id="Examples">Examples</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The following is an example of app XML configuration file</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&lt;?xml version="1.0"?&gt;
+&lt;services&gt;
+&lt;system name="Example"&gt;
+  &lt;application name="Orders" url="http://www.mysvc.it/myapps/services/example"&gt;
+    &lt;description&gt;
+This is an example application
+    &lt;/description&gt;
+    &lt;service name="Registration"&gt;
+       &lt;operation name="Registration" path="/register.xml"&gt;
+         &lt;!--
+         Request (http GET): http://www.mysvc.it/myapps/services/example/register.xml?email=...&amp;password=...
+         Response (XML):
+         &lt;?xml version="1.0"?&gt;
+         &lt;register&gt;
+           &lt;response status="0" reason="registration successful"/&gt;
+         &lt;/register&gt;
+         --&gt;
+         &lt;description&gt;Register new user...&lt;/description&gt;
+          &lt;request name="Registration"&gt;
+            &lt;group name="Data"&gt;
+              &lt;field name="Email"/&gt;
+              &lt;field name="Password" subtype="password"/&gt;
+            &lt;/group&gt;
+          &lt;/request&gt;
+          &lt;response name="Registration Response"&gt;
+            &lt;group name="Response"&gt;
+              &lt;field name="Status" subtype="error" path="/register/response/@status"/&gt;
+              &lt;field name="Reason" required="false" path="/register/response/@reason"/&gt;
+            &lt;/group&gt;
+          &lt;/response&gt;
+       &lt;/operation&gt;
+    &lt;/service&gt;
+    &lt;service name="Session"&gt;
+       &lt;operation name="Login" path="/login.xml"&gt;
+       &lt;!--
+       Request (http GET): http://www.mysvc.it/myapps/services/example/login.xml?email=...&amp;password=...
+       Response (XML):
+       &lt;?xml version="1.0"?&gt;
+       &lt;login&gt;
+         &lt;response status="0" reason="login successful"/&gt;
+         &lt;session id="123456789" expires="2011-09-28 12:13:00"/&gt;
+       &lt;/login&gt;
+       --&gt;
+       &lt;description&gt;Description of
+Operation Login...
+       &lt;/description&gt;
+          &lt;request name="Login"&gt;
+            &lt;group name="Account"&gt;
+              &lt;field name="Email"/&gt;
+              &lt;field name="Password" subtype="password"/&gt;
+            &lt;/group&gt;
+          &lt;/request&gt;
+          &lt;response name="Login Response"&gt;
+            &lt;group name="Response"&gt;
+              &lt;field name="Status" subtype="error" path="/login/response/@status"/&gt;
+              &lt;field name="Reason" required="false" path="/login/response/@reason"/&gt;
+            &lt;/group&gt;
+            &lt;group name="Session"&gt;
+              &lt;field name="Id" path="/login/session/@id" http-name="sessionid" id="Session.Id" read-only="true"/&gt;
+              &lt;field name="Expires" path="/login/session/@expires"/&gt;
+            &lt;/group&gt;
+          &lt;/response&gt;
+       &lt;/operation&gt;
+       &lt;operation name="Logout" path="/logout.xml"&gt;
+         &lt;!--
+         Request (http GET): http://www.mysvc.it/myapps/services/example/logout.xml?sessionid=...
+         Response (XML):
+         &lt;?xml version="1.0"?&gt;
+         &lt;logout&gt;
+           &lt;response status="4" reason="invalid session"/&gt;
+         &lt;/logout&gt;
+         --&gt;
+         &lt;description&gt;Description of Operation Logout...&lt;/description&gt;
+          &lt;request name="Logout"&gt;
+            &lt;group name="Session"&gt;
+              &lt;field ref="Session.Id"/&gt;
+            &lt;/group&gt;
+          &lt;/request&gt;
+          &lt;response name="Logout Response"&gt;
+            &lt;group name="Response"&gt;
+              &lt;field name="Status" subtype="error" path="/logout/response/@status"/&gt;
+              &lt;field name="Reason" path="/logout/response/@reason"/&gt;
+            &lt;/group&gt;
+          &lt;/response&gt;
+       &lt;/operation&gt;
+    &lt;/service&gt;
+    &lt;service name="Order"&gt;
+       &lt;operation name="Product A" path="/order-a.xml" method="POST"&gt;
+         &lt;!--
+         Request (http POST): http://www.mysvc.it/myapps/services/example/order-a.xml
+         ...
+         quantity=...&amp;subtype=...&amp;addr=...&amp;note=...&amp;key=...
+         Response (XML):
+         &lt;?xml version="1.0"?&gt;
+         &lt;order_a&gt;
+           &lt;response&gt;
+             &lt;code&gt;0&lt;/code&gt;
+             &lt;description&gt;order of product A successful&lt;/description&gt;
+           &lt;/response&gt;
+         &lt;/order_a&gt;
+         --&gt;
+         &lt;description&gt;Order product A...&lt;/description&gt;
+          &lt;request name="Request"&gt;
+            &lt;group name="Data"&gt;
+              &lt;field name="Quantity" type="number"/&gt;
+              &lt;field name="Subtype" value="A1"&gt;
+                &lt;value&gt;A1&lt;/value&gt;
+                &lt;value&gt;A2&lt;/value&gt;
+                &lt;value&gt;A3&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field name="Address" type="string" http-name="addr"/&gt;
+              &lt;field name="Note" type="text" required="false"/&gt;
+              &lt;field name="Authorization key" value="xyz" read-only="true" http-name="key"/&gt;
+              &lt;field ref="Session.Id"/&gt;
+            &lt;/group&gt;
+          &lt;/request&gt;
+          &lt;response name="Response"&gt;
+            &lt;group name="Response"&gt;
+              &lt;field name="Status" subtype="error" path="/order_a/response/code"/&gt;
+              &lt;field name="Reason" required="false" path="/order_a/response/description"/&gt;
+            &lt;/group&gt;
+          &lt;/response&gt;
+       &lt;/operation&gt;
+       &lt;operation name="Product B" path="/order-b.xml"&gt;
+         &lt;!--
+         Request (http GET): http://www.mysvc.it/myapps/services/example/order-b.xml?quantity=...&amp;subtype=...&amp;addr=...&amp;note=...&amp;key=...
+         Response (XML):
+         &lt;?xml version="1.0"?&gt;
+         &lt;order_b&gt;
+           &lt;response status="5"&gt;product B not available&lt;/response&gt;
+         &lt;/order_b&gt;
+         --&gt;
+         &lt;description&gt;Order product B...&lt;/description&gt;
+          &lt;request name="Request"&gt;
+            &lt;group name="Data"&gt;
+              &lt;field name="Quantity" type="number"/&gt;
+              &lt;field name="Subtype" value="B1"&gt;
+                &lt;value&gt;B1&lt;/value&gt;
+                &lt;value&gt;B2&lt;/value&gt;
+                &lt;value&gt;B3&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field name="Address" type="string"/&gt;
+              &lt;field name="Note" type="text"/&gt;
+              &lt;field ref="Session.Id"/&gt;
+            &lt;/group&gt;
+          &lt;/request&gt;
+          &lt;response name="Response"&gt;
+            &lt;group name="Response"&gt;
+              &lt;field name="Status" subtype="error" path="/order_b/response/@status"/&gt;
+              &lt;field name="Reason" required="false" path="/order_b/response"/&gt;
+            &lt;/group&gt;
+          &lt;/response&gt;
+       &lt;/operation&gt;
+    &lt;/service&gt;
+    &lt;errors&gt;
+      &lt;error code="0" type="success"&gt;No error&lt;/error&gt;
+      &lt;error code="1"&gt;Invalid email or password&lt;/error&gt;
+      &lt;error code="2"&gt;Email already used&lt;/error&gt;
+      &lt;error code="3"&gt;Password too short&lt;/error&gt;
+      &lt;error code="4"&gt;Session id not valid&lt;/error&gt;
+      &lt;error code="5"&gt;Product B is not available&lt;/error&gt;
+    &lt;/errors&gt;
+    &lt;!-- mailing list for log export common to all application services --&gt;
+    &lt;emails&gt;
+      &lt;email type="cc"&gt;email_1@gmail.com&lt;/email&gt;
+      &lt;email&gt;email_2@gmail.com&lt;/email&gt;
+      &lt;email&gt;email_3@gmail.com&lt;/email&gt;
+    &lt;/emails&gt;
+  &lt;/application&gt;
+  &lt;!-- mailing list for log export common to all system applications --&gt;
+  &lt;emails&gt;
+    &lt;email&gt;email_10@gmail.com&lt;/email&gt;
+    &lt;email&gt;email_12@gmail.com&lt;/email&gt;
+  &lt;/emails&gt;
+&lt;/system&gt;
+&lt;system name="Geocoding"&gt;
+  &lt;application name="Google geocoding" url="http://maps.googleapis.com/maps/api/geocode/xml"&gt;
+    &lt;description&gt;
+Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkway, Mountain View, CA") into geographic coordinates (like latitude 37.423021 and longitude -122.083739), which you can use to place markers or position the map. The Google Geocoding API provides a direct way to access a geocoder via an HTTP request. Additionally, the service allows you to perform the converse operation (turning coordinates into addresses); this process is known as "reverse geocoding." (see http://code.google.com/apis/maps/documentation/geocoding/)
+    &lt;/description&gt;
+    &lt;service name="Geocoding"&gt;
+       &lt;operation name="Geocoding"&gt;
+         &lt;!--
+            Request (http GET): http://maps.googleapis.com/maps/api/geocode/xml?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&amp;sensor=false
+            Response (XML):
+            &lt;GeocodeResponse&gt;
+             &lt;status&gt;OK&lt;/status&gt;
+             &lt;result&gt;
+              &lt;type&gt;street_address&lt;/type&gt;
+              &lt;formatted_address&gt;1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA&lt;/formatted_address&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;1600&lt;/long_name&gt;
+               &lt;short_name&gt;1600&lt;/short_name&gt;
+               &lt;type&gt;street_number&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;Amphitheatre Pkwy&lt;/long_name&gt;
+               &lt;short_name&gt;Amphitheatre Pkwy&lt;/short_name&gt;
+               &lt;type&gt;route&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;Mountain View&lt;/long_name&gt;
+               &lt;short_name&gt;Mountain View&lt;/short_name&gt;
+               &lt;type&gt;locality&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;San Jose&lt;/long_name&gt;
+               &lt;short_name&gt;San Jose&lt;/short_name&gt;
+               &lt;type&gt;administrative_area_level_3&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;Santa Clara&lt;/long_name&gt;
+               &lt;short_name&gt;Santa Clara&lt;/short_name&gt;
+               &lt;type&gt;administrative_area_level_2&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;California&lt;/long_name&gt;
+               &lt;short_name&gt;CA&lt;/short_name&gt;
+               &lt;type&gt;administrative_area_level_1&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;United States&lt;/long_name&gt;
+               &lt;short_name&gt;US&lt;/short_name&gt;
+               &lt;type&gt;country&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;94043&lt;/long_name&gt;
+               &lt;short_name&gt;94043&lt;/short_name&gt;
+               &lt;type&gt;postal_code&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;geometry&gt;
+               &lt;location&gt;
+                &lt;lat&gt;37.4217550&lt;/lat&gt;
+                &lt;lng&gt;-122.0846330&lt;/lng&gt;
+               &lt;/location&gt;
+               &lt;location_type&gt;ROOFTOP&lt;/location_type&gt;
+               &lt;viewport&gt;
+                &lt;southwest&gt;
+                 &lt;lat&gt;37.4188514&lt;/lat&gt;
+                 &lt;lng&gt;-122.0874526&lt;/lng&gt;
+                &lt;/southwest&gt;
+                &lt;northeast&gt;
+                 &lt;lat&gt;37.4251466&lt;/lat&gt;
+                 &lt;lng&gt;-122.0811574&lt;/lng&gt;
+                &lt;/northeast&gt;
+               &lt;/viewport&gt;
+              &lt;/geometry&gt;
+             &lt;/result&gt;
+            &lt;/GeocodeResponse&gt;
+         --&gt;
+         &lt;description&gt;
+The Geocoding API requests an xml response for "1600 Amphitheatre Parkway, Mountain View, CA"
+         &lt;/description&gt;
+         &lt;request name="Request"&gt;
+           &lt;group name="Address"&gt;
+             &lt;field name="Address" value="1600 Amphitheatre Parkway, Mountain View, CA"/&gt;
+             &lt;field name="Sensor" value="false"&gt;
+               &lt;value&gt;true&lt;/value&gt;
+               &lt;value&gt;false&lt;/value&gt;
+             &lt;/field&gt;
+           &lt;/group&gt;
+         &lt;/request&gt;
+         &lt;response name="Response"&gt;
+           &lt;group name="Status"&gt;
+             &lt;field name="Status" subtype="error" path="/GeocodeResponse/status"/&gt;
+           &lt;/group&gt;
+           &lt;group name="Results"&gt;
+             &lt;field name="Results"&gt;
+               &lt;group name="Result" path="/GeocodeResponse/result"&gt;
+                 &lt;field name="Type" path="type"/&gt;
+                 &lt;field name="Formatted address" path="formatted_address"/&gt;
+                 &lt;field name="Address components"&gt;
+                   &lt;group name="Address component" path="address_component"&gt;
+                     &lt;field name="Long name" path="long_name"/&gt;
+                     &lt;field name="Short name" path="short_name"/&gt;
+                     &lt;field name="Type" path="type"/&gt;
+                   &lt;/group&gt;
+                 &lt;/field&gt;
+                 &lt;field name="Latitude" path="geometry/location/lat"/&gt;
+                 &lt;field name="Longitude" path="geometry/location/lng"/&gt;
+                 &lt;field name="Location type" path="geometry/location_type"/&gt;
+                 &lt;field name="Viewport southwest" path="geometry/viewport/southwest/lat"/&gt;
+                 &lt;field name="Viewport northeast" path="geometry/viewport/northeast/lng"/&gt;
+               &lt;/group&gt;
+             &lt;/field&gt;
+           &lt;/group&gt;
+         &lt;/response&gt;
+       &lt;/operation&gt;
+       &lt;operation name="Reverse geocoding"&gt;
+         &lt;!--
+            Request (http GET): http://maps.googleapis.com/maps/api/geocode/xml?latlng=40.714224,-73.961452&amp;sensor=false
+            Response (XML):
+            &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+            &lt;GeocodeResponse&gt;
+             &lt;status&gt;OK&lt;/status&gt;
+             &lt;result&gt;
+              &lt;type&gt;street_address&lt;/type&gt;
+              &lt;formatted_address&gt;285 Bedford Ave, Brooklyn, NY 11211, USA&lt;/formatted_address&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;285&lt;/long_name&gt;
+               &lt;short_name&gt;285&lt;/short_name&gt;
+               &lt;type&gt;street_number&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;Bedford Ave&lt;/long_name&gt;
+               &lt;short_name&gt;Bedford Ave&lt;/short_name&gt;
+               &lt;type&gt;route&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;Williamsburg&lt;/long_name&gt;
+               &lt;short_name&gt;Williamsburg&lt;/short_name&gt;
+               &lt;type&gt;neighborhood&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;Brooklyn&lt;/long_name&gt;
+               &lt;short_name&gt;Brooklyn&lt;/short_name&gt;
+               &lt;type&gt;sublocality&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;New York&lt;/long_name&gt;
+               &lt;short_name&gt;New York&lt;/short_name&gt;
+               &lt;type&gt;locality&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;Kings&lt;/long_name&gt;
+               &lt;short_name&gt;Kings&lt;/short_name&gt;
+               &lt;type&gt;administrative_area_level_2&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;New York&lt;/long_name&gt;
+               &lt;short_name&gt;NY&lt;/short_name&gt;
+               &lt;type&gt;administrative_area_level_1&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;United States&lt;/long_name&gt;
+               &lt;short_name&gt;US&lt;/short_name&gt;
+               &lt;type&gt;country&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;11211&lt;/long_name&gt;
+               &lt;short_name&gt;11211&lt;/short_name&gt;
+               &lt;type&gt;postal_code&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;geometry&gt;
+               &lt;location&gt;
+                &lt;lat&gt;40.7141289&lt;/lat&gt;
+                &lt;lng&gt;-73.9614074&lt;/lng&gt;
+               &lt;/location&gt;
+               &lt;location_type&gt;ROOFTOP&lt;/location_type&gt;
+               &lt;viewport&gt;
+                &lt;southwest&gt;
+                 &lt;lat&gt;40.7127799&lt;/lat&gt;
+                 &lt;lng&gt;-73.9627564&lt;/lng&gt;
+                &lt;/southwest&gt;
+                &lt;northeast&gt;
+                 &lt;lat&gt;40.7154779&lt;/lat&gt;
+                 &lt;lng&gt;-73.9600584&lt;/lng&gt;
+                &lt;/northeast&gt;
+               &lt;/viewport&gt;
+              &lt;/geometry&gt;
+             &lt;/result&gt;
+             &lt;result&gt;
+              &lt;type&gt;bus_station&lt;/type&gt;
+              &lt;type&gt;transit_station&lt;/type&gt;
+              &lt;formatted_address&gt;Grand St - Bedford Av, Brooklyn, NY 11211, USA&lt;/formatted_address&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;Grand St - Bedford Av&lt;/long_name&gt;
+               &lt;short_name&gt;Grand St - Bedford Av&lt;/short_name&gt;
+               &lt;type&gt;bus_station&lt;/type&gt;
+               &lt;type&gt;transit_station&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;Williamsburg&lt;/long_name&gt;
+               &lt;short_name&gt;Williamsburg&lt;/short_name&gt;
+               &lt;type&gt;neighborhood&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;Brooklyn&lt;/long_name&gt;
+               &lt;short_name&gt;Brooklyn&lt;/short_name&gt;
+               &lt;type&gt;sublocality&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;Kings&lt;/long_name&gt;
+               &lt;short_name&gt;Kings&lt;/short_name&gt;
+               &lt;type&gt;administrative_area_level_2&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;New York&lt;/long_name&gt;
+               &lt;short_name&gt;NY&lt;/short_name&gt;
+               &lt;type&gt;administrative_area_level_1&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;United States&lt;/long_name&gt;
+               &lt;short_name&gt;US&lt;/short_name&gt;
+               &lt;type&gt;country&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;11211&lt;/long_name&gt;
+               &lt;short_name&gt;11211&lt;/short_name&gt;
+               &lt;type&gt;postal_code&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;geometry&gt;
+               &lt;location&gt;
+                &lt;lat&gt;40.7143210&lt;/lat&gt;
+                &lt;lng&gt;-73.9611510&lt;/lng&gt;
+               &lt;/location&gt;
+               &lt;location_type&gt;APPROXIMATE&lt;/location_type&gt;
+               &lt;viewport&gt;
+                &lt;southwest&gt;
+                 &lt;lat&gt;40.7129720&lt;/lat&gt;
+                 &lt;lng&gt;-73.9625000&lt;/lng&gt;
+                &lt;/southwest&gt;
+                &lt;northeast&gt;
+                 &lt;lat&gt;40.7156700&lt;/lat&gt;
+                 &lt;lng&gt;-73.9598020&lt;/lng&gt;
+                &lt;/northeast&gt;
+               &lt;/viewport&gt;
+              &lt;/geometry&gt;
+             &lt;/result&gt;
+             &lt;result&gt;
+              &lt;type&gt;bus_station&lt;/type&gt;
+              &lt;type&gt;transit_station&lt;/type&gt;
+              &lt;formatted_address&gt;Grand St - Bedford Av, Brooklyn, NY 11211, USA&lt;/formatted_address&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;Grand St - Bedford Av&lt;/long_name&gt;
+               &lt;short_name&gt;Grand St - Bedford Av&lt;/short_name&gt;
+               &lt;type&gt;bus_station&lt;/type&gt;
+               &lt;type&gt;transit_station&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;Williamsburg&lt;/long_name&gt;
+               &lt;short_name&gt;Williamsburg&lt;/short_name&gt;
+               &lt;type&gt;neighborhood&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;Brooklyn&lt;/long_name&gt;
+               &lt;short_name&gt;Brooklyn&lt;/short_name&gt;
+               &lt;type&gt;sublocality&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;Kings&lt;/long_name&gt;
+               &lt;short_name&gt;Kings&lt;/short_name&gt;
+               &lt;type&gt;administrative_area_level_2&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;New York&lt;/long_name&gt;
+               &lt;short_name&gt;NY&lt;/short_name&gt;
+               &lt;type&gt;administrative_area_level_1&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;United States&lt;/long_name&gt;
+               &lt;short_name&gt;US&lt;/short_name&gt;
+               &lt;type&gt;country&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;11211&lt;/long_name&gt;
+               &lt;short_name&gt;11211&lt;/short_name&gt;
+               &lt;type&gt;postal_code&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;geometry&gt;
+               &lt;location&gt;
+                &lt;lat&gt;40.7146840&lt;/lat&gt;
+                &lt;lng&gt;-73.9615630&lt;/lng&gt;
+               &lt;/location&gt;
+               &lt;location_type&gt;APPROXIMATE&lt;/location_type&gt;
+               &lt;viewport&gt;
+                &lt;southwest&gt;
+                 &lt;lat&gt;40.7133350&lt;/lat&gt;
+                 &lt;lng&gt;-73.9629120&lt;/lng&gt;
+                &lt;/southwest&gt;
+                &lt;northeast&gt;
+                 &lt;lat&gt;40.7160330&lt;/lat&gt;
+                 &lt;lng&gt;-73.9602140&lt;/lng&gt;
+                &lt;/northeast&gt;
+               &lt;/viewport&gt;
+              &lt;/geometry&gt;
+             &lt;/result&gt;
+             &lt;result&gt;
+              &lt;type&gt;bus_station&lt;/type&gt;
+              &lt;type&gt;transit_station&lt;/type&gt;
+              &lt;formatted_address&gt;Bedford Av - Grand St, Brooklyn, NY 11211, USA&lt;/formatted_address&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;Bedford Av - Grand St&lt;/long_name&gt;
+               &lt;short_name&gt;Bedford Av - Grand St&lt;/short_name&gt;
+               &lt;type&gt;bus_station&lt;/type&gt;
+               &lt;type&gt;transit_station&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;Williamsburg&lt;/long_name&gt;
+               &lt;short_name&gt;Williamsburg&lt;/short_name&gt;
+               &lt;type&gt;neighborhood&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;Brooklyn&lt;/long_name&gt;
+               &lt;short_name&gt;Brooklyn&lt;/short_name&gt;
+               &lt;type&gt;sublocality&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;Kings&lt;/long_name&gt;
+               &lt;short_name&gt;Kings&lt;/short_name&gt;
+               &lt;type&gt;administrative_area_level_2&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;New York&lt;/long_name&gt;
+               &lt;short_name&gt;NY&lt;/short_name&gt;
+               &lt;type&gt;administrative_area_level_1&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;United States&lt;/long_name&gt;
+               &lt;short_name&gt;US&lt;/short_name&gt;
+               &lt;type&gt;country&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;11211&lt;/long_name&gt;
+               &lt;short_name&gt;11211&lt;/short_name&gt;
+               &lt;type&gt;postal_code&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;geometry&gt;
+               &lt;location&gt;
+                &lt;lat&gt;40.7147100&lt;/lat&gt;
+                &lt;lng&gt;-73.9609990&lt;/lng&gt;
+               &lt;/location&gt;
+               &lt;location_type&gt;APPROXIMATE&lt;/location_type&gt;
+               &lt;viewport&gt;
+                &lt;southwest&gt;
+                 &lt;lat&gt;40.7133610&lt;/lat&gt;
+                 &lt;lng&gt;-73.9623480&lt;/lng&gt;
+                &lt;/southwest&gt;
+                &lt;northeast&gt;
+                 &lt;lat&gt;40.7160590&lt;/lat&gt;
+                 &lt;lng&gt;-73.9596500&lt;/lng&gt;
+                &lt;/northeast&gt;
+               &lt;/viewport&gt;
+              &lt;/geometry&gt;
+             &lt;/result&gt;
+             &lt;result&gt;
+              &lt;type&gt;neighborhood&lt;/type&gt;
+              &lt;type&gt;political&lt;/type&gt;
+              &lt;formatted_address&gt;Williamsburg, Brooklyn, NY, USA&lt;/formatted_address&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;Williamsburg&lt;/long_name&gt;
+               &lt;short_name&gt;Williamsburg&lt;/short_name&gt;
+               &lt;type&gt;neighborhood&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;Brooklyn&lt;/long_name&gt;
+               &lt;short_name&gt;Brooklyn&lt;/short_name&gt;
+               &lt;type&gt;sublocality&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;New York&lt;/long_name&gt;
+               &lt;short_name&gt;New York&lt;/short_name&gt;
+               &lt;type&gt;locality&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;Kings&lt;/long_name&gt;
+               &lt;short_name&gt;Kings&lt;/short_name&gt;
+               &lt;type&gt;administrative_area_level_2&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;New York&lt;/long_name&gt;
+               &lt;short_name&gt;NY&lt;/short_name&gt;
+               &lt;type&gt;administrative_area_level_1&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;United States&lt;/long_name&gt;
+               &lt;short_name&gt;US&lt;/short_name&gt;
+               &lt;type&gt;country&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;geometry&gt;
+               &lt;location&gt;
+                &lt;lat&gt;40.7064461&lt;/lat&gt;
+                &lt;lng&gt;-73.9536163&lt;/lng&gt;
+               &lt;/location&gt;
+               &lt;location_type&gt;APPROXIMATE&lt;/location_type&gt;
+               &lt;viewport&gt;
+                &lt;southwest&gt;
+                 &lt;lat&gt;40.6979330&lt;/lat&gt;
+                 &lt;lng&gt;-73.9698451&lt;/lng&gt;
+                &lt;/southwest&gt;
+                &lt;northeast&gt;
+                 &lt;lat&gt;40.7182050&lt;/lat&gt;
+                 &lt;lng&gt;-73.9202810&lt;/lng&gt;
+                &lt;/northeast&gt;
+               &lt;/viewport&gt;
+               &lt;bounds&gt;
+                &lt;southwest&gt;
+                 &lt;lat&gt;40.6979330&lt;/lat&gt;
+                 &lt;lng&gt;-73.9698451&lt;/lng&gt;
+                &lt;/southwest&gt;
+                &lt;northeast&gt;
+                 &lt;lat&gt;40.7182050&lt;/lat&gt;
+                 &lt;lng&gt;-73.9202810&lt;/lng&gt;
+                &lt;/northeast&gt;
+               &lt;/bounds&gt;
+              &lt;/geometry&gt;
+             &lt;/result&gt;
+             &lt;result&gt;
+              &lt;type&gt;postal_code&lt;/type&gt;
+              &lt;formatted_address&gt;Brooklyn, NY 11211, USA&lt;/formatted_address&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;11211&lt;/long_name&gt;
+               &lt;short_name&gt;11211&lt;/short_name&gt;
+               &lt;type&gt;postal_code&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;Brooklyn&lt;/long_name&gt;
+               &lt;short_name&gt;Brooklyn&lt;/short_name&gt;
+               &lt;type&gt;sublocality&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;New York&lt;/long_name&gt;
+               &lt;short_name&gt;New York&lt;/short_name&gt;
+               &lt;type&gt;locality&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;New York&lt;/long_name&gt;
+               &lt;short_name&gt;NY&lt;/short_name&gt;
+               &lt;type&gt;administrative_area_level_1&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;United States&lt;/long_name&gt;
+               &lt;short_name&gt;US&lt;/short_name&gt;
+               &lt;type&gt;country&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;geometry&gt;
+               &lt;location&gt;
+                &lt;lat&gt;40.7180036&lt;/lat&gt;
+                &lt;lng&gt;-73.9653715&lt;/lng&gt;
+               &lt;/location&gt;
+               &lt;location_type&gt;APPROXIMATE&lt;/location_type&gt;
+               &lt;viewport&gt;
+                &lt;southwest&gt;
+                 &lt;lat&gt;40.6976359&lt;/lat&gt;
+                 &lt;lng&gt;-73.9761669&lt;/lng&gt;
+                &lt;/southwest&gt;
+                &lt;northeast&gt;
+                 &lt;lat&gt;40.7280090&lt;/lat&gt;
+                 &lt;lng&gt;-73.9207299&lt;/lng&gt;
+                &lt;/northeast&gt;
+               &lt;/viewport&gt;
+               &lt;bounds&gt;
+                &lt;southwest&gt;
+                 &lt;lat&gt;40.6976359&lt;/lat&gt;
+                 &lt;lng&gt;-73.9761669&lt;/lng&gt;
+                &lt;/southwest&gt;
+                &lt;northeast&gt;
+                 &lt;lat&gt;40.7280090&lt;/lat&gt;
+                 &lt;lng&gt;-73.9207299&lt;/lng&gt;
+                &lt;/northeast&gt;
+               &lt;/bounds&gt;
+              &lt;/geometry&gt;
+             &lt;/result&gt;
+             &lt;result&gt;
+              &lt;type&gt;sublocality&lt;/type&gt;
+              &lt;type&gt;political&lt;/type&gt;
+              &lt;formatted_address&gt;Brooklyn, NY, USA&lt;/formatted_address&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;Brooklyn&lt;/long_name&gt;
+               &lt;short_name&gt;Brooklyn&lt;/short_name&gt;
+               &lt;type&gt;sublocality&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;New York&lt;/long_name&gt;
+               &lt;short_name&gt;New York&lt;/short_name&gt;
+               &lt;type&gt;locality&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;Kings&lt;/long_name&gt;
+               &lt;short_name&gt;Kings&lt;/short_name&gt;
+               &lt;type&gt;administrative_area_level_2&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;New York&lt;/long_name&gt;
+               &lt;short_name&gt;NY&lt;/short_name&gt;
+               &lt;type&gt;administrative_area_level_1&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;United States&lt;/long_name&gt;
+               &lt;short_name&gt;US&lt;/short_name&gt;
+               &lt;type&gt;country&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;geometry&gt;
+               &lt;location&gt;
+                &lt;lat&gt;40.6500000&lt;/lat&gt;
+                &lt;lng&gt;-73.9500000&lt;/lng&gt;
+               &lt;/location&gt;
+               &lt;location_type&gt;APPROXIMATE&lt;/location_type&gt;
+               &lt;viewport&gt;
+                &lt;southwest&gt;
+                 &lt;lat&gt;40.5510419&lt;/lat&gt;
+                 &lt;lng&gt;-74.0566300&lt;/lng&gt;
+                &lt;/southwest&gt;
+                &lt;northeast&gt;
+                 &lt;lat&gt;40.7394460&lt;/lat&gt;
+                 &lt;lng&gt;-73.8333650&lt;/lng&gt;
+                &lt;/northeast&gt;
+               &lt;/viewport&gt;
+               &lt;bounds&gt;
+                &lt;southwest&gt;
+                 &lt;lat&gt;40.5510419&lt;/lat&gt;
+                 &lt;lng&gt;-74.0566300&lt;/lng&gt;
+                &lt;/southwest&gt;
+                &lt;northeast&gt;
+                 &lt;lat&gt;40.7394460&lt;/lat&gt;
+                 &lt;lng&gt;-73.8333650&lt;/lng&gt;
+                &lt;/northeast&gt;
+               &lt;/bounds&gt;
+              &lt;/geometry&gt;
+             &lt;/result&gt;
+             &lt;result&gt;
+              &lt;type&gt;administrative_area_level_2&lt;/type&gt;
+              &lt;type&gt;political&lt;/type&gt;
+              &lt;formatted_address&gt;Kings, New York, USA&lt;/formatted_address&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;Kings&lt;/long_name&gt;
+               &lt;short_name&gt;Kings&lt;/short_name&gt;
+               &lt;type&gt;administrative_area_level_2&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;New York&lt;/long_name&gt;
+               &lt;short_name&gt;NY&lt;/short_name&gt;
+               &lt;type&gt;administrative_area_level_1&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;United States&lt;/long_name&gt;
+               &lt;short_name&gt;US&lt;/short_name&gt;
+               &lt;type&gt;country&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;geometry&gt;
+               &lt;location&gt;
+                &lt;lat&gt;40.6528762&lt;/lat&gt;
+                &lt;lng&gt;-73.9594940&lt;/lng&gt;
+               &lt;/location&gt;
+               &lt;location_type&gt;APPROXIMATE&lt;/location_type&gt;
+               &lt;viewport&gt;
+                &lt;southwest&gt;
+                 &lt;lat&gt;40.5510419&lt;/lat&gt;
+                 &lt;lng&gt;-74.0566300&lt;/lng&gt;
+                &lt;/southwest&gt;
+                &lt;northeast&gt;
+                 &lt;lat&gt;40.7394460&lt;/lat&gt;
+                 &lt;lng&gt;-73.8333650&lt;/lng&gt;
+                &lt;/northeast&gt;
+               &lt;/viewport&gt;
+               &lt;bounds&gt;
+                &lt;southwest&gt;
+                 &lt;lat&gt;40.5510419&lt;/lat&gt;
+                 &lt;lng&gt;-74.0566300&lt;/lng&gt;
+                &lt;/southwest&gt;
+                &lt;northeast&gt;
+                 &lt;lat&gt;40.7394460&lt;/lat&gt;
+                 &lt;lng&gt;-73.8333650&lt;/lng&gt;
+                &lt;/northeast&gt;
+               &lt;/bounds&gt;
+              &lt;/geometry&gt;
+             &lt;/result&gt;
+             &lt;result&gt;
+              &lt;type&gt;locality&lt;/type&gt;
+              &lt;type&gt;political&lt;/type&gt;
+              &lt;formatted_address&gt;New York, NY, USA&lt;/formatted_address&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;New York&lt;/long_name&gt;
+               &lt;short_name&gt;New York&lt;/short_name&gt;
+               &lt;type&gt;locality&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;New York&lt;/long_name&gt;
+               &lt;short_name&gt;New York&lt;/short_name&gt;
+               &lt;type&gt;administrative_area_level_2&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;New York&lt;/long_name&gt;
+               &lt;short_name&gt;NY&lt;/short_name&gt;
+               &lt;type&gt;administrative_area_level_1&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;United States&lt;/long_name&gt;
+               &lt;short_name&gt;US&lt;/short_name&gt;
+               &lt;type&gt;country&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;geometry&gt;
+               &lt;location&gt;
+                &lt;lat&gt;40.7143528&lt;/lat&gt;
+                &lt;lng&gt;-74.0059731&lt;/lng&gt;
+               &lt;/location&gt;
+               &lt;location_type&gt;APPROXIMATE&lt;/location_type&gt;
+               &lt;viewport&gt;
+                &lt;southwest&gt;
+                 &lt;lat&gt;40.4773990&lt;/lat&gt;
+                 &lt;lng&gt;-74.2590900&lt;/lng&gt;
+                &lt;/southwest&gt;
+                &lt;northeast&gt;
+                 &lt;lat&gt;40.9175770&lt;/lat&gt;
+                 &lt;lng&gt;-73.7002720&lt;/lng&gt;
+                &lt;/northeast&gt;
+               &lt;/viewport&gt;
+               &lt;bounds&gt;
+                &lt;southwest&gt;
+                 &lt;lat&gt;40.4773990&lt;/lat&gt;
+                 &lt;lng&gt;-74.2590900&lt;/lng&gt;
+                &lt;/southwest&gt;
+                &lt;northeast&gt;
+                 &lt;lat&gt;40.9175770&lt;/lat&gt;
+                 &lt;lng&gt;-73.7002720&lt;/lng&gt;
+                &lt;/northeast&gt;
+               &lt;/bounds&gt;
+              &lt;/geometry&gt;
+             &lt;/result&gt;
+             &lt;result&gt;
+              &lt;type&gt;administrative_area_level_1&lt;/type&gt;
+              &lt;type&gt;political&lt;/type&gt;
+              &lt;formatted_address&gt;New York, USA&lt;/formatted_address&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;New York&lt;/long_name&gt;
+               &lt;short_name&gt;NY&lt;/short_name&gt;
+               &lt;type&gt;administrative_area_level_1&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;United States&lt;/long_name&gt;
+               &lt;short_name&gt;US&lt;/short_name&gt;
+               &lt;type&gt;country&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;geometry&gt;
+               &lt;location&gt;
+                &lt;lat&gt;43.2994285&lt;/lat&gt;
+                &lt;lng&gt;-74.2179326&lt;/lng&gt;
+               &lt;/location&gt;
+               &lt;location_type&gt;APPROXIMATE&lt;/location_type&gt;
+               &lt;viewport&gt;
+                &lt;southwest&gt;
+                 &lt;lat&gt;40.4773990&lt;/lat&gt;
+                 &lt;lng&gt;-79.7625900&lt;/lng&gt;
+                &lt;/southwest&gt;
+                &lt;northeast&gt;
+                 &lt;lat&gt;45.0158650&lt;/lat&gt;
+                 &lt;lng&gt;-71.7774910&lt;/lng&gt;
+                &lt;/northeast&gt;
+               &lt;/viewport&gt;
+               &lt;bounds&gt;
+                &lt;southwest&gt;
+                 &lt;lat&gt;40.4773990&lt;/lat&gt;
+                 &lt;lng&gt;-79.7625900&lt;/lng&gt;
+                &lt;/southwest&gt;
+                &lt;northeast&gt;
+                 &lt;lat&gt;45.0158650&lt;/lat&gt;
+                 &lt;lng&gt;-71.7774910&lt;/lng&gt;
+                &lt;/northeast&gt;
+               &lt;/bounds&gt;
+              &lt;/geometry&gt;
+             &lt;/result&gt;
+             &lt;result&gt;
+              &lt;type&gt;country&lt;/type&gt;
+              &lt;type&gt;political&lt;/type&gt;
+              &lt;formatted_address&gt;United States&lt;/formatted_address&gt;
+              &lt;address_component&gt;
+               &lt;long_name&gt;United States&lt;/long_name&gt;
+               &lt;short_name&gt;US&lt;/short_name&gt;
+               &lt;type&gt;country&lt;/type&gt;
+               &lt;type&gt;political&lt;/type&gt;
+              &lt;/address_component&gt;
+              &lt;geometry&gt;
+               &lt;location&gt;
+                &lt;lat&gt;37.0902400&lt;/lat&gt;
+                &lt;lng&gt;-95.7128910&lt;/lng&gt;
+               &lt;/location&gt;
+               &lt;location_type&gt;APPROXIMATE&lt;/location_type&gt;
+               &lt;viewport&gt;
+                &lt;southwest&gt;
+                 &lt;lat&gt;18.7763000&lt;/lat&gt;
+                 &lt;lng&gt;170.5957000&lt;/lng&gt;
+                &lt;/southwest&gt;
+                &lt;northeast&gt;
+                 &lt;lat&gt;71.5388000&lt;/lat&gt;
+                 &lt;lng&gt;-66.8854170&lt;/lng&gt;
+                &lt;/northeast&gt;
+               &lt;/viewport&gt;
+               &lt;bounds&gt;
+                &lt;southwest&gt;
+                 &lt;lat&gt;18.7763000&lt;/lat&gt;
+                 &lt;lng&gt;170.5957000&lt;/lng&gt;
+                &lt;/southwest&gt;
+                &lt;northeast&gt;
+                 &lt;lat&gt;71.5388000&lt;/lat&gt;
+                 &lt;lng&gt;-66.8854170&lt;/lng&gt;
+                &lt;/northeast&gt;
+               &lt;/bounds&gt;
+              &lt;/geometry&gt;
+             &lt;/result&gt;
+            &lt;/GeocodeResponse&gt;
+         --&gt;
+         &lt;description&gt;
+The term geocoding generally refers to translating a human-readable address into a location on a map. The process of doing the converse, translating a location on the map into a human-readable address, is known as reverse geocoding.
+         &lt;/description&gt;
+         &lt;request name="Request"&gt;
+           &lt;group name="Latitude and longitude"&gt;
+             &lt;field name="Latitude and longitude" http-name="latlng" value="40.714224,-73.961452"/&gt;
+             &lt;field name="Sensor" value="false"&gt;
+               &lt;value&gt;true&lt;/value&gt;
+               &lt;value&gt;false&lt;/value&gt;
+             &lt;/field&gt;
+           &lt;/group&gt;
+         &lt;/request&gt;
+         &lt;response name="Response"&gt;
+           &lt;group name="Status"&gt;
+             &lt;field name="Status" subtype="error" path="/GeocodeResponse/status"/&gt;
+           &lt;/group&gt;
+           &lt;group name="Results"&gt;
+             &lt;field name="Results"&gt;
+               &lt;group name="Result" path="/GeocodeResponse/result"&gt;
+                 &lt;field name="Type 1" path="type[1]"/&gt;
+                 &lt;field name="Type 2" path="type[2]"/&gt;
+                 &lt;field name="Formatted address" path="formatted_address"/&gt;
+                 &lt;field name="Address components"&gt;
+                   &lt;group name="Address component" path="address_component"&gt;
+                     &lt;field name="Long name" path="long_name"/&gt;
+                     &lt;field name="Short name" path="short_name"/&gt;
+                     &lt;field name="Type 1" path="type[1]"/&gt;
+                     &lt;field name="Type 2" path="type[2]"/&gt;
+                   &lt;/group&gt;
+                 &lt;/field&gt;
+                 &lt;field name="Latitude" path="geometry/location/lat"/&gt;
+                 &lt;field name="Longitude" path="geometry/location/lng"/&gt;
+                 &lt;field name="Location type" path="geometry/location_type"/&gt;
+                 &lt;field name="Viewport southwest" path="geometry/viewport/southwest/lat"/&gt;
+                 &lt;field name="Viewport northeast" path="geometry/viewport/northeast/lng"/&gt;
+               &lt;/group&gt;
+             &lt;/field&gt;
+           &lt;/group&gt;
+         &lt;/response&gt;
+       &lt;/operation&gt;
+    &lt;/service&gt;
+    &lt;errors&gt;
+      &lt;error code="OK" type="success"&gt;No errors occurred&lt;/error&gt;
+      &lt;error code="ZERO_RESULTS"&gt;The geocode was successful but returned no results&lt;/error&gt;
+      &lt;error code="OVER_QUERY_LIMIT"&gt;Over quota&lt;/error&gt;
+      &lt;error code="REQUEST_DENIED"&gt;Request denied&lt;/error&gt;
+      &lt;error code="INVALID_REQUEST"&gt;Invalid request&lt;/error&gt;
+    &lt;/errors&gt;
+  &lt;/application&gt;
+  &lt;application name="Yahoo! PlaceFinder" url="http://where.yahooapis.com/geocode" method="get" timeout="5"&gt;
+    &lt;description&gt;
+Yahoo! PlaceFinder is a REST Web service that supports world-wide geocoding of street addresses, points of interest, airports, and place names. Points of interest are locations such as schools, shopping malls, museums, and transit stations. Place names supported include counties, states, countries, and continents (see http://developer.yahoo.com/geo/placefinder/guide/).
+    &lt;/description&gt;
+    &lt;service name="Geocoding"&gt;
+       &lt;operation name="Single line input"&gt;
+          &lt;!--
+            Request (http GET): http://where.yahooapis.com/geocode?location=701+First+Ave,+Sunnyvale,+CA
+            Response (XML):
+            &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+            &lt;ResultSet version="1.0"&gt;
+              &lt;Error&gt;0&lt;/Error&gt;
+              &lt;ErrorMessage&gt;No error&lt;/ErrorMessage&gt;
+              &lt;Locale&gt;us_US&lt;/Locale&gt;
+              &lt;Quality&gt;87&lt;/Quality&gt;
+              &lt;Found&gt;1&lt;/Found&gt;
+              &lt;Result&gt;
+                &lt;quality&gt;87&lt;/quality&gt;
+                &lt;latitude&gt;37.416275&lt;/latitude&gt;
+                &lt;longitude&gt;-122.025092&lt;/longitude&gt;
+                &lt;offsetlat&gt;37.416397&lt;/offsetlat&gt;
+                &lt;offsetlon&gt;-122.025055&lt;/offsetlon&gt;
+                &lt;radius&gt;500&lt;/radius&gt;
+                &lt;name&gt;
+            &lt;/name&gt;
+                &lt;line1&gt;701 1st Ave&lt;/line1&gt;
+                &lt;line2&gt;Sunnyvale, CA  94089-1019&lt;/line2&gt;
+                &lt;line3&gt;
+            &lt;/line3&gt;
+                &lt;line4&gt;United States&lt;/line4&gt;
+                &lt;house&gt;701&lt;/house&gt;
+                &lt;street&gt;1st Ave&lt;/street&gt;
+                &lt;xstreet&gt;
+            &lt;/xstreet&gt;
+                &lt;unittype&gt;
+            &lt;/unittype&gt;
+           --&gt;
+          &lt;description&gt;
+With free-form format, the entire address is specified in a single parameter. In this example, the address is "170 South Market St., San Jose, CA".
+          &lt;/description&gt;
+          &lt;request name="Request"&gt;
+            &lt;group name="Location"&gt;
+              &lt;field name="Location" value="701 First Ave, Sunnyvale, CA"/&gt;
+            &lt;/group&gt;
+          &lt;/request&gt;
+          &lt;response name="Response"&gt;
+            &lt;group name="Status"&gt;
+              &lt;field name="Error Code" subtype="error" path="/ResultSet/Error"/&gt;
+              &lt;field name="Error Message" path="/ResultSet/ErrorMessage"/&gt;
+              &lt;field name="Locale" path="/ResultSet/Locale"/&gt;
+              &lt;field name="Quality" path="/ResultSet/Quality"/&gt;
+              &lt;field name="Found" path="/ResultSet/Found"/&gt;
+            &lt;/group&gt;
+            &lt;group name="Results"&gt;
+              &lt;field name="Results"&gt;
+                &lt;group name="Result" path="/ResultSet/Result"&gt;
+                  &lt;field name="Latitude" path="latitude"/&gt;
+                  &lt;field name="Longitude" path="longitude"/&gt;
+                  &lt;field name="Offset Latitude" path="offsetlat"/&gt;
+                  &lt;field name="Offset Longitude" path="offsetlon"/&gt;
+                  &lt;field name="Radius" path="radius"/&gt;
+                  &lt;field name="Name" path="name"/&gt;
+                  &lt;field name="Line 1" path="line1"/&gt;
+                  &lt;field name="Line 2" path="line2"/&gt;
+                  &lt;field name="Line 3" path="line3"/&gt;
+                  &lt;field name="Line 4" path="line4"/&gt;
+                  &lt;field name="House" path="house"/&gt;
+                  &lt;field name="Street" path="street"/&gt;
+                  &lt;field name="Postal code" path="postal"/&gt;
+                  &lt;field name="Neighborhood" path="neighborhood"/&gt;
+                  &lt;field name="City" path="city"/&gt;
+                  &lt;field name="County" path="county"/&gt;
+                  &lt;field name="State" path="state"/&gt;
+                  &lt;field name="Country" path="country"/&gt;
+                  &lt;field name="Country code" path="countrycode"/&gt;
+                  &lt;field name="State code" path="statecode"/&gt;
+                  &lt;field name="Uzip" path="uzip"/&gt;
+                  &lt;field name="Hash" path="hash"/&gt;
+                  &lt;field name="WOE id" path="woeid"/&gt;
+                  &lt;field name="WOE type" path="woetype"/&gt;
+                &lt;/group&gt;
+              &lt;/field&gt;
+            &lt;/group&gt;
+          &lt;/response&gt;
+       &lt;/operation&gt;
+       &lt;operation name="Area of interest"&gt;
+          &lt;!--
+            Request (http GET): http://where.yahooapis.com/geocode?name=Yosemite+National+Park
+            Response (XML):
+               &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+               &lt;ResultSet version="1.0"&gt;
+                 &lt;Error&gt;0&lt;/Error&gt;
+                 &lt;ErrorMessage&gt;No error&lt;/ErrorMessage&gt;
+                 &lt;Locale&gt;us_US&lt;/Locale&gt;
+                 &lt;Quality&gt;63&lt;/Quality&gt;
+                 &lt;Found&gt;1&lt;/Found&gt;
+                 &lt;Result&gt;
+                   &lt;quality&gt;63&lt;/quality&gt;
+                   &lt;latitude&gt;37.840120&lt;/latitude&gt;
+                   &lt;longitude&gt;-119.542854&lt;/longitude&gt;
+                   &lt;offsetlat&gt;37.667542&lt;/offsetlat&gt;
+                   &lt;offsetlon&gt;-119.805389&lt;/offsetlon&gt;
+                   &lt;radius&gt;48900&lt;/radius&gt;
+                   &lt;name&gt;Yosemite National Park&lt;/name&gt;
+                   &lt;line1&gt;Yosemite National Park&lt;/line1&gt;
+                   &lt;line2&gt;El Portal, CA  95318&lt;/line2&gt;
+                   &lt;line3/&gt;
+                   &lt;line4&gt;United States&lt;/line4&gt;
+                   &lt;house/&gt;
+                   &lt;street/&gt;
+                   &lt;xstreet/&gt;
+                   &lt;unittype/&gt;
+                   &lt;unit/&gt;
+                   &lt;postal&gt;95318&lt;/postal&gt;
+                   &lt;neighborhood/&gt;
+                   &lt;city&gt;El Portal&lt;/city&gt;
+                   &lt;county&gt;Mariposa County&lt;/county&gt;
+                   &lt;state&gt;California&lt;/state&gt;
+                   &lt;country&gt;United States&lt;/country&gt;
+                   &lt;countrycode&gt;US&lt;/countrycode&gt;
+                   &lt;statecode&gt;CA&lt;/statecode&gt;
+                   &lt;countycode/&gt;
+                   &lt;uzip&gt;95318&lt;/uzip&gt;
+                   &lt;hash/&gt;
+                   &lt;woeid&gt;55813396&lt;/woeid&gt;
+                   &lt;woetype&gt;16&lt;/woetype&gt;
+                 &lt;/Result&gt;
+               &lt;/ResultSet&gt;
+              --&gt;
+          &lt;description&gt;
+In this example, the area of interest is "Yosemite National Park".
+          &lt;/description&gt;
+          &lt;request name="Request"&gt;
+            &lt;group name="Name"&gt;
+              &lt;field name="Name" value="Yosemite National Park"/&gt;
+            &lt;/group&gt;
+          &lt;/request&gt;
+          &lt;response name="Response"&gt;
+            &lt;group name="Status"&gt;
+              &lt;field name="Error Code" subtype="error" path="/ResultSet/Error"/&gt;
+              &lt;field name="Error Message" path="/ResultSet/ErrorMessage"/&gt;
+              &lt;field name="Locale" path="/ResultSet/Locale"/&gt;
+              &lt;field name="Quality" path="/ResultSet/Quality"/&gt;
+              &lt;field name="Found" path="/ResultSet/Found"/&gt;
+            &lt;/group&gt;
+            &lt;group name="Results"&gt;
+              &lt;field name="Results"&gt;
+                &lt;group name="Result" path="/ResultSet/Result"&gt;
+                  &lt;field name="Latitude" path="latitude"/&gt;
+                  &lt;field name="Longitude" path="longitude"/&gt;
+                  &lt;field name="Offset Latitude" path="offsetlat"/&gt;
+                  &lt;field name="Offset Longitude" path="offsetlon"/&gt;
+                  &lt;field name="Radius" path="radius"/&gt;
+                  &lt;field name="Name" path="name"/&gt;
+                  &lt;field name="Line 1" path="line1"/&gt;
+                  &lt;field name="Line 2" path="line2"/&gt;
+                  &lt;field name="Line 3" path="line3"/&gt;
+                  &lt;field name="Line 4" path="line4"/&gt;
+                  &lt;field name="House" path="house"/&gt;
+                  &lt;field name="Street" path="street"/&gt;
+                  &lt;field name="XStreet" path="xstreet"/&gt;
+                  &lt;field name="Unit type" path="unittype"/&gt;
+                  &lt;field name="Unit" path="unit"/&gt;
+                  &lt;field name="Postal code" path="postal"/&gt;
+                  &lt;field name="Neighborhood" path="neighborhood"/&gt;
+                  &lt;field name="City" path="city"/&gt;
+                  &lt;field name="County" path="county"/&gt;
+                  &lt;field name="State" path="state"/&gt;
+                  &lt;field name="Country" path="country"/&gt;
+                  &lt;field name="Country code" path="countrycode"/&gt;
+                  &lt;field name="State code" path="statecode"/&gt;
+                  &lt;field name="Uzip" path="uzip"/&gt;
+                  &lt;field name="Hash" path="hash"/&gt;
+                  &lt;field name="WOE id" path="woeid"/&gt;
+                  &lt;field name="WOE type" path="woetype"/&gt;
+                &lt;/group&gt;
+              &lt;/field&gt;
+            &lt;/group&gt;
+          &lt;/response&gt;
+       &lt;/operation&gt;
+       &lt;operation name="Multiple line input"&gt;
+          &lt;!--
+            Request (http GET): http://where.yahooapis.com/geocode?line1=100+Market+St.&amp;line2=San+Francisco,+CA
+            Response (XML):
+            &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+            &lt;ResultSet version="1.0"&gt;
+              &lt;Error&gt;0&lt;/Error&gt;
+              &lt;ErrorMessage&gt;No error&lt;/ErrorMessage&gt;
+              &lt;Locale&gt;us_US&lt;/Locale&gt;
+              &lt;Quality&gt;87&lt;/Quality&gt;
+              &lt;Found&gt;1&lt;/Found&gt;
+              &lt;Result&gt;
+                &lt;quality&gt;87&lt;/quality&gt;
+                &lt;latitude&gt;37.793704&lt;/latitude&gt;
+                &lt;longitude&gt;-122.395804&lt;/longitude&gt;
+                &lt;offsetlat&gt;37.793738&lt;/offsetlat&gt;
+                &lt;offsetlon&gt;-122.395851&lt;/offsetlon&gt;
+                &lt;radius&gt;500&lt;/radius&gt;
+                &lt;name/&gt;
+                &lt;line1&gt;100 Market St&lt;/line1&gt;
+                &lt;line2&gt;San Francisco, CA  94111-4802&lt;/line2&gt;
+                &lt;line3/&gt;
+                &lt;line4&gt;United States&lt;/line4&gt;
+                &lt;house&gt;100&lt;/house&gt;
+                &lt;street&gt;Market St&lt;/street&gt;
+                &lt;xstreet/&gt;
+                &lt;unittype/&gt;
+                &lt;unit/&gt;
+                &lt;postal&gt;94111-4802&lt;/postal&gt;
+                &lt;neighborhood/&gt;
+                &lt;city&gt;San Francisco&lt;/city&gt;
+                &lt;county&gt;San Francisco County&lt;/county&gt;
+                &lt;state&gt;California&lt;/state&gt;
+                &lt;country&gt;United States&lt;/country&gt;
+                &lt;countrycode&gt;US&lt;/countrycode&gt;
+                &lt;statecode&gt;CA&lt;/statecode&gt;
+                &lt;countycode/&gt;
+                &lt;uzip&gt;94111&lt;/uzip&gt;
+                &lt;hash&gt;E827D6E012051EB9&lt;/hash&gt;
+                &lt;woeid&gt;12797162&lt;/woeid&gt;
+                &lt;woetype&gt;11&lt;/woetype&gt;
+              &lt;/Result&gt;
+            &lt;/ResultSet&gt;
+           --&gt;
+          &lt;description&gt;
+In this example, the house number and street (100 Market St.) are in line1. The city and state (San Francisco, CA) are in line2.
+          &lt;/description&gt;
+          &lt;request name="Request"&gt;
+            &lt;group name="Location"&gt;
+              &lt;field name="Line1" value="100 Market St."/&gt;
+              &lt;field name="Line2" value="San Francisco, CA"/&gt;
+            &lt;/group&gt;
+          &lt;/request&gt;
+          &lt;response name="Response"&gt;
+            &lt;group name="Status"&gt;
+              &lt;field name="Error Code" subtype="error" path="/ResultSet/Error"/&gt;
+              &lt;field name="Error Message" path="/ResultSet/ErrorMessage"/&gt;
+              &lt;field name="Locale" path="/ResultSet/Locale"/&gt;
+              &lt;field name="Quality" path="/ResultSet/Quality"/&gt;
+              &lt;field name="Found" path="/ResultSet/Found"/&gt;
+            &lt;/group&gt;
+            &lt;group name="Results"&gt;
+              &lt;field name="Results"&gt;
+                &lt;group name="Result" path="/ResultSet/Result"&gt;
+                  &lt;field name="Latitude" path="latitude"/&gt;
+                  &lt;field name="Longitude" path="longitude"/&gt;
+                  &lt;field name="Offset Latitude" path="offsetlat"/&gt;
+                  &lt;field name="Offset Longitude" path="offsetlon"/&gt;
+                  &lt;field name="Radius" path="radius"/&gt;
+                  &lt;field name="Name" path="name"/&gt;
+                  &lt;field name="Line 1" path="line1"/&gt;
+                  &lt;field name="Line 2" path="line2"/&gt;
+                  &lt;field name="Line 3" path="line3"/&gt;
+                  &lt;field name="Line 4" path="line4"/&gt;
+                  &lt;field name="House" path="house"/&gt;
+                  &lt;field name="Street" path="street"/&gt;
+                  &lt;field name="XStreet" path="xstreet"/&gt;
+                  &lt;field name="Unit type" path="unittype"/&gt;
+                  &lt;field name="Unit" path="unit"/&gt;
+                  &lt;field name="Postal code" path="postal"/&gt;
+                  &lt;field name="Neighborhood" path="neighborhood"/&gt;
+                  &lt;field name="City" path="city"/&gt;
+                  &lt;field name="County" path="county"/&gt;
+                  &lt;field name="State" path="state"/&gt;
+                  &lt;field name="Country" path="country"/&gt;
+                  &lt;field name="Country code" path="countrycode"/&gt;
+                  &lt;field name="State code" path="statecode"/&gt;
+                  &lt;field name="Uzip" path="uzip"/&gt;
+                  &lt;field name="Hash" path="hash"/&gt;
+                  &lt;field name="WOE id" path="woeid"/&gt;
+                  &lt;field name="WOE type" path="woetype"/&gt;
+                &lt;/group&gt;
+              &lt;/field&gt;
+            &lt;/group&gt;
+          &lt;/response&gt;
+       &lt;/operation&gt;
+       &lt;operation name="Fully parsed input"&gt;
+          &lt;!--
+            Request (http GET): http://where.yahooapis.com/geocode?house=151&amp;street=3rd+St&amp;postal=94103&amp;city=San+Francisco&amp;state=CA&amp;country=US
+            Response (XML):
+            &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+            &lt;ResultSet version="1.0"&gt;
+              &lt;Error&gt;0&lt;/Error&gt;
+              &lt;ErrorMessage&gt;No error&lt;/ErrorMessage&gt;
+              &lt;Locale&gt;us_US&lt;/Locale&gt;
+              &lt;Quality&gt;60&lt;/Quality&gt;
+              &lt;Found&gt;1&lt;/Found&gt;
+              &lt;Result&gt;
+                &lt;quality&gt;87&lt;/quality&gt;
+                &lt;latitude&gt;37.785483&lt;/latitude&gt;
+                &lt;longitude&gt;-122.401028&lt;/longitude&gt;
+                &lt;offsetlat&gt;37.785549&lt;/offsetlat&gt;
+                &lt;offsetlon&gt;-122.400939&lt;/offsetlon&gt;
+                &lt;radius&gt;500&lt;/radius&gt;
+                &lt;name/&gt;
+                &lt;line1&gt;151 3rd St&lt;/line1&gt;
+                &lt;line2&gt;San Francisco, CA  94103-3107&lt;/line2&gt;
+                &lt;line3/&gt;
+                &lt;line4&gt;United States&lt;/line4&gt;
+                &lt;house&gt;151&lt;/house&gt;
+                &lt;street&gt;3rd St&lt;/street&gt;
+                &lt;xstreet/&gt;
+                &lt;unittype/&gt;
+                &lt;unit/&gt;
+                &lt;postal&gt;94103-3107&lt;/postal&gt;
+                &lt;neighborhood/&gt;
+                &lt;city&gt;San Francisco&lt;/city&gt;
+                &lt;county&gt;San Francisco County&lt;/county&gt;
+                &lt;state&gt;California&lt;/state&gt;
+                &lt;country&gt;United States&lt;/country&gt;
+                &lt;countrycode&gt;US&lt;/countrycode&gt;
+                &lt;statecode&gt;CA&lt;/statecode&gt;
+                &lt;countycode/&gt;
+                &lt;uzip&gt;94103&lt;/uzip&gt;
+                &lt;hash&gt;05B44B427D1BEC8F&lt;/hash&gt;
+                &lt;woeid&gt;12797154&lt;/woeid&gt;
+                &lt;woetype&gt;11&lt;/woetype&gt;
+              &lt;/Result&gt;
+            &lt;/ResultSet&gt;
+           --&gt;
+          &lt;description&gt;
+With a fully-parsed address, each address component is in a separate parameter, so delimiters are not needed. This example returns information for the following input address: "151 3rd St San Francisco CA 94103".
+          &lt;/description&gt;
+          &lt;request name="Request"&gt;
+            &lt;group name="Address"&gt;
+              &lt;field name="House" value="151"/&gt;
+              &lt;field name="Street" value="3rd St"/&gt;
+              &lt;field name="Postal" value="94103"/&gt;
+              &lt;field name="City" value="San Francisco"/&gt;
+              &lt;field name="State" value="CA"/&gt;
+              &lt;field name="Country" value="US"/&gt;
+            &lt;/group&gt;
+          &lt;/request&gt;
+          &lt;response name="Response"&gt;
+            &lt;group name="Status"&gt;
+              &lt;field name="Error Code" subtype="error" path="/ResultSet/Error"/&gt;
+              &lt;field name="Error Message" path="/ResultSet/ErrorMessage"/&gt;
+              &lt;field name="Locale" path="/ResultSet/Locale"/&gt;
+              &lt;field name="Quality" path="/ResultSet/Quality"/&gt;
+              &lt;field name="Found" path="/ResultSet/Found"/&gt;
+            &lt;/group&gt;
+            &lt;group name="Results"&gt;
+              &lt;field name="Results"&gt;
+                &lt;group name="Result" path="/ResultSet/Result"&gt;
+                  &lt;field name="Latitude" path="latitude"/&gt;
+                  &lt;field name="Longitude" path="longitude"/&gt;
+                  &lt;field name="Offset Latitude" path="offsetlat"/&gt;
+                  &lt;field name="Offset Longitude" path="offsetlon"/&gt;
+                  &lt;field name="Radius" path="radius"/&gt;
+                  &lt;field name="Name" path="name"/&gt;
+                  &lt;field name="Line 1" path="line1"/&gt;
+                  &lt;field name="Line 2" path="line2"/&gt;
+                  &lt;field name="Line 3" path="line3"/&gt;
+                  &lt;field name="Line 4" path="line4"/&gt;
+                  &lt;field name="House" path="house"/&gt;
+                  &lt;field name="Street" path="street"/&gt;
+                  &lt;field name="XStreet" path="xstreet"/&gt;
+                  &lt;field name="Unit type" path="unittype"/&gt;
+                  &lt;field name="Unit" path="unit"/&gt;
+                  &lt;field name="Postal code" path="postal"/&gt;
+                  &lt;field name="Neighborhood" path="neighborhood"/&gt;
+                  &lt;field name="City" path="city"/&gt;
+                  &lt;field name="County" path="county"/&gt;
+                  &lt;field name="State" path="state"/&gt;
+                  &lt;field name="Country" path="country"/&gt;
+                  &lt;field name="Country code" path="countrycode"/&gt;
+                  &lt;field name="State code" path="statecode"/&gt;
+                  &lt;field name="Uzip" path="uzip"/&gt;
+                  &lt;field name="Hash" path="hash"/&gt;
+                  &lt;field name="WOE id" path="woeid"/&gt;
+                  &lt;field name="WOE type" path="woetype"/&gt;
+                &lt;/group&gt;
+              &lt;/field&gt;
+            &lt;/group&gt;
+          &lt;/response&gt;
+       &lt;/operation&gt;
+    &lt;/service&gt;
+    &lt;service name="Reverse geocoding"&gt;
+       &lt;operation name="Reverse geocoding"&gt;
+          &lt;!--
+            Request (http GET): http://where.yahooapis.com/geocode?location=37.787082+-122.400929&amp;gflags=R
+            Response (XML):
+            &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+            &lt;ResultSet version="1.0"&gt;
+              &lt;Error&gt;0&lt;/Error&gt;
+              &lt;ErrorMessage&gt;No error&lt;/ErrorMessage&gt;
+              &lt;Locale&gt;us_US&lt;/Locale&gt;
+              &lt;Quality&gt;99&lt;/Quality&gt;
+              &lt;Found&gt;1&lt;/Found&gt;
+              &lt;Result&gt;
+                &lt;quality&gt;99&lt;/quality&gt;
+                &lt;latitude&gt;37.787082&lt;/latitude&gt;
+                &lt;longitude&gt;-122.400929&lt;/longitude&gt;
+                &lt;offsetlat&gt;37.787082&lt;/offsetlat&gt;
+                &lt;offsetlon&gt;-122.400929&lt;/offsetlon&gt;
+                &lt;radius&gt;500&lt;/radius&gt;
+                &lt;name&gt;37.787082 -122.400929&lt;/name&gt;
+                &lt;line1&gt;655 Mission St&lt;/line1&gt;
+                &lt;line2&gt;San Francisco, CA  94105-4126&lt;/line2&gt;
+                &lt;line3/&gt;
+                &lt;line4&gt;United States&lt;/line4&gt;
+                &lt;house&gt;655&lt;/house&gt;
+                &lt;street&gt;Mission St&lt;/street&gt;
+                &lt;xstreet/&gt;
+                &lt;unittype/&gt;
+                &lt;unit/&gt;
+                &lt;postal&gt;94105-4126&lt;/postal&gt;
+                &lt;neighborhood/&gt;
+                &lt;city&gt;San Francisco&lt;/city&gt;
+                &lt;county&gt;San Francisco County&lt;/county&gt;
+                &lt;state&gt;California&lt;/state&gt;
+                &lt;country&gt;United States&lt;/country&gt;
+                &lt;countrycode&gt;US&lt;/countrycode&gt;
+                &lt;statecode&gt;CA&lt;/statecode&gt;
+                &lt;countycode/&gt;
+                &lt;hash/&gt;
+                &lt;woeid&gt;12797156&lt;/woeid&gt;
+                &lt;woetype&gt;11&lt;/woetype&gt;
+                &lt;uzip&gt;94105&lt;/uzip&gt;
+              &lt;/Result&gt;
+            &lt;/ResultSet&gt;
+           --&gt;
+          &lt;description&gt;
+To perform reverse geocoding, specify the latitude and longitude for the location parameter, and include "R" in the gflags parameter. In this example, the latitude is 37.787082 and the longitude is -122.400929. The plus sign in the location is a URL-encoded space.
+          &lt;/description&gt;
+          &lt;request name="Request"&gt;
+            &lt;group name="Location"&gt;
+              &lt;field name="Location" value="37.787082 -122.400929"/&gt;
+              &lt;field name="GFlags" value="R"/&gt;
+            &lt;/group&gt;
+          &lt;/request&gt;
+          &lt;response name="Response"&gt;
+            &lt;group name="Status"&gt;
+              &lt;field name="Error Code" subtype="error" path="/ResultSet/Error"/&gt;
+              &lt;field name="Error Message" path="/ResultSet/ErrorMessage"/&gt;
+              &lt;field name="Locale" path="/ResultSet/Locale"/&gt;
+              &lt;field name="Quality" path="/ResultSet/Quality"/&gt;
+              &lt;field name="Found" path="/ResultSet/Found"/&gt;
+            &lt;/group&gt;
+            &lt;group name="Results"&gt;
+              &lt;field name="Results"&gt;
+                &lt;group name="Result" path="/ResultSet/Result"&gt;
+                  &lt;field name="Quality" path="quality"/&gt;
+                  &lt;field name="Latitude" path="latitude"/&gt;
+                  &lt;field name="Latitude" path="latitude"/&gt;
+                  &lt;field name="Longitude" path="longitude"/&gt;
+                  &lt;field name="Offset Latitude" path="offsetlat"/&gt;
+                  &lt;field name="Offset Longitude" path="offsetlon"/&gt;
+                  &lt;field name="Radius" path="radius"/&gt;
+                  &lt;field name="Name" path="name"/&gt;
+                  &lt;field name="Line 1" path="line1"/&gt;
+                  &lt;field name="Line 2" path="line2"/&gt;
+                  &lt;field name="Line 3" path="line3"/&gt;
+                  &lt;field name="Line 4" path="line4"/&gt;
+                  &lt;field name="House" path="house"/&gt;
+                  &lt;field name="Street" path="street"/&gt;
+                  &lt;field name="XStreet" path="xstreet"/&gt;
+                  &lt;field name="Unit type" path="unittype"/&gt;
+                  &lt;field name="Unit" path="unit"/&gt;
+                  &lt;field name="Postal code" path="postal"/&gt;
+                  &lt;field name="Neighborhood" path="neighborhood"/&gt;
+                  &lt;field name="City" path="city"/&gt;
+                  &lt;field name="County" path="county"/&gt;
+                  &lt;field name="State" path="state"/&gt;
+                  &lt;field name="Country" path="country"/&gt;
+                  &lt;field name="Country code" path="countrycode"/&gt;
+                  &lt;field name="State code" path="statecode"/&gt;
+                  &lt;field name="County code" path="countycode"/&gt;
+                  &lt;field name="Uzip" path="uzip"/&gt;
+                  &lt;field name="Hash" path="hash"/&gt;
+                  &lt;field name="WOE id" path="woeid"/&gt;
+                  &lt;field name="WOE type" path="woetype"/&gt;
+                &lt;/group&gt;
+              &lt;/field&gt;
+            &lt;/group&gt;
+          &lt;/response&gt;
+       &lt;/operation&gt;
+    &lt;/service&gt;
+  &lt;/application&gt;
+&lt;/system&gt;
+&lt;!-- mailing list for log export common to all systems --&gt;
+&lt;emails&gt;
+  &lt;email&gt;email_4@gmail.com&lt;/email&gt;
+  &lt;email type="cc"&gt;email_5@gmail.com&lt;/email&gt;
+  &lt;email&gt;email_6@gmail.com&lt;/email&gt;
+&lt;/emails&gt;
+&lt;/services&gt;</tt></pre>
+</div></div>
+</div>
+<h2 id="Support">Support</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>For support contact <a href="mailto:davide6169@gmail.com">davide6169@gmail.com</a></p></div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 0.400<br />
+Last updated 2011-09-25 14:09:20 CEST
+</div>
+<div id="footer-badges">
+<img style="border:none; width:88px; height:31px;"
+     src="../../images/gplv3-127x51.png"
+     alt="GPL Version 3" />
+<!-- Histats.com  START  -->
+<a href="http://www.histats.com" target="_blank" title="simple hit counter" >
+<script  type="text/javascript" language="javascript">
+var s_sid = 675659;var st_dominio = 4;
+var cimg = 0;var cwi =112;var che =48;
+</script></a><script  type="text/javascript" language="javascript" src="http://s10.histats.com/js9.js"></script>
+<noscript><a href="http://www.histats.com" target="_blank">
+<img  src="http://s4.histats.com/stats/0.gif?675659&1" alt="simple hit counter" border="0"></a>
+</noscript>
+<!-- Histats.com  END  -->
+</div>
+</div>
+</div>
+</td>
+</tr>
+</table>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-11334618-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>

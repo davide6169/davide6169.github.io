@@ -1,0 +1,3 @@
+John comes to party if and only if there is Paul or there is not Mary
+.
+John iff not Mary or Paul

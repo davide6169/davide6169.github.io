@@ -1,0 +1,3131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.5.2" />
+<meta name="description" content="an open source UNIX framework for shell script based web service provider" />
+<meta name="keywords" content="mysvc, shell script, web service, provider, service, soa, template, engine, myste, mysde, mysvcd" />
+<link rel="stylesheet" href="../xhtml11.css" type="text/css" />
+<link rel="stylesheet" href="../xhtml11-quirks.css" type="text/css" />
+<link rel="stylesheet" href="../layout1.css" type="text/css" />
+<title>MySVC</title>
+</head>
+<body>
+<div id="layout-banner">
+  <div id="layout-title">MySVC</div>
+  <div id="layout-description">an open source UNIX framework for shell script based web services provider</div>
+</div>
+<table>
+<tr valign="top">
+<td id="layout-menu">
+  <div>&#187;<a href="../index.html">Home</a></div>
+  <div>&#187;<a href="../tools.html">Tools</a></div>
+  <div>&#187;<a href="../manpage.html">Man&nbsp;Page</a></div>
+  <div>&#187;<a href="../userguide.html">User&nbsp;Guide</a></div>
+  <div>&#187;<a href="../changelog.html">ChangeLog</a></div>
+  <div>&#187;<a href="../install.html">Installation</a></div>
+  <div>&#187;<a href="../sourcecode.html">Source Code</a></div>
+  <div>&#187;<a href="../downloads.html">Downloads</a></div>
+  <div>&#187;<a href="../faq.html">FAQ</a></div>
+  <div>&#187;<a href="../support.html">Support</a></div>
+  <div>&#187;<a href="../license.html">License</a></div>
+  <hr/>
+  <div>&#187;<a href="../myapps/index.html">My Apps</a></div>
+  <div>
+  <hr/>
+  <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+  <input type="hidden" name="cmd" value="_s-xclick">
+  <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----MIIHPwYJKoZIhvcNAQcEoIIHMDCCBywCAQExggEwMIIBLAIBADCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwDQYJKoZIhvcNAQEBBQAEgYAWiqN5fcvDviZYNLmeRPAOeH+059PTyUtOFN8++Bx9+RhWYfjY/XwEwfKVwaEeK0+pLj9TDs/FW9ChZZF3FNPjR1Xlg0E3S37taxsarZ2NM6iBhXjSapQPgVGtrCqibd0Diq48ouQTcXPMxKON1Anv/fDoHjjaFPTRVI+KMQX0JTELMAkGBSsOAwIaBQAwgbwGCSqGSIb3DQEHATAUBggqhkiG9w0DBwQInBnxX7TxZ3mAgZhXvGov9cuq17ycIBz4CjE/MwjHddefpVXoPyyh89d/ieP1b6rehpp1R/aW8QBbnS1Fl/INzPU38Y3NTqX7oMhFYsLN1D6YSPjAeoFqIXp1rrTEIDLZRSSIwo8OXuEsPHqK/P+l7S4awyCyWJxdMkqSDK2hPoKXSUHIGA8jf6Rq4DV0CsJzljLJSW8WJMfdpXvKuff4HiEZPaCCA4cwggODMIIC7KADAgECAgEAMA0GCSqGSIb3DQEBBQUAMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbTAeFw0wNDAyMTMxMDEzMTVaFw0zNTAyMTMxMDEzMTVaMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbTCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAwUdO3fxEzEtcnI7ZKZL412XvZPugoni7i7D7prCe0AtaHTc97CYgm7NsAtJyxNLixmhLV8pyIEaiHXWAh8fPKW+R017+EmXrr9EaquPmsVvTywAAE1PMNOKqo2kl4Gxiz9zZqIajOm1fZGWcGS0f5JQ2kBqNbvbg2/Za+GJ/qwUCAwEAAaOB7jCB6zAdBgNVHQ4EFgQUlp98u8ZvF71ZP1LXChvsENZklGswgbsGA1UdIwSBszCBsIAUlp98u8ZvF71ZP1LXChvsENZklGuhgZSkgZEwgY4xCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDQTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLUGF5UGFsIEluYy4xEzARBgNVBAsUCmxpdmVfY2VydHMxETAPBgNVBAMUCGxpdmVfYXBpMRwwGgYJKoZIhvcNAQkBFg1yZUBwYXlwYWwuY29tggEAMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEFBQADgYEAgV86VpqAWuXvX6Oro4qJ1tYVIT5DgWpE692Ag422H7yRIr/9j/iKG4Thia/Oflx4TdL+IFJBAyPK9v6zZNZtBgPBynXb048hsP16l2vi0k5Q2JKiPDsEfBhGI+HnxLXEaUWAcVfCsQFvd2A1sxRr67ip5y2wwBelUecP3AjJ+YcxggGaMIIBlgIBATCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwCQYFKw4DAhoFAKBdMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA4MTAyNTE1NTQzMlowIwYJKoZIhvcNAQkEMRYEFMsXBheWWoPdxAigpR2+KpSpl3NXMA0GCSqGSIb3DQEBAQUABIGAMwKAzwiLVvhRLUQBUUgK5IJQOq4Ci0W9bVWiiCIF3g/DOWMzoJvlQRyxelM5jg2wChbtvg1sj5AoyXaqCdbuEI/7rP0/RhrfFxDqkSbWTOqkcgkMPgNeKvXAC9oD2Dflep/uDlUC2E0w9XEPtps7a5jCiJX5//huQ/usU3f5wmI=-----END PKCS7-----
+  ">
+  <input type="image" src="https://www.paypal.com/en_US/IT/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="">
+  <img alt="" border="0" src="https://www.paypal.com/it_IT/i/scr/pixel.gif" width="1" height="1">
+  </form>
+  </div>
+</td>
+<td>
+<div id="layout-content">
+<div id="header">
+<h1>MySVCD Source Code</h1>
+</div>
+<h2 id="_mysvcd">mysvcd</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre><tt>#!/bin/sh
+#\
+exec expect "$0" -- ${1+"$@"}
+
+#  $Id$
+
+#  mysvcd - My Service Daemon - Version 1.0 (www.mysvc.it)
+#  Copyright (C) 2009 Davide Cucciniello &lt;davide6169@gmail.com&gt;
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+
+# #######################################################################
+#
+#  ###   ##        ### ##  ##  ####
+#   ##  ##        #  #  #  ## ##  #
+#   ### ##  ##  # ###   #  #  #
+#   # ## #   # ##   ##   # #  #
+#   # #  #   # #  #  #   ##   ##
+#  ###  ###   ##  ###     #    ####
+#             #
+#            #
+#
+#  My Service
+#
+# #######################################################################
+#
+#  ###   ##        ### ##  ##  #### #####
+#   ##  ##        #  #  #  ## ##  #  #   #
+#   ### ##  ##  # ###   #  #  #      #   #
+#   # ## #   # ##   ##   # #  #      #   #
+#   # #  #   # #  #  #   ##   ##     #   #
+#  ###  ###   ##  ###     #    #### #####
+#             #
+#            #
+#
+#  My Service Daemon
+#
+#  Usage:
+#
+#      Test Server:
+#        mysvcd [-l] [-p &lt;port&gt;]
+#          (put on stdout requests from client and get from stdin responses for client)
+#
+#      Generic Server (default if /path/to/server is specified):
+#        mysvcd [-1] [-l|-d [-l -o &lt;logfile&gt; [-L &lt;loglevels&gt;]]] [-p &lt;port&gt;] /path/to/server
+#          (put on server stdin requests from client
+#           get from server stdout response for client
+#           where server is any executable application)
+#
+#      Simple Server:
+#        mysvcd -s [-1] [-l|-d [-l -o &lt;logfile&gt; [-L &lt;loglevels&gt;]]] [-p &lt;port&gt;] /path/to/server
+#          (put on server stdin each line read from client as request
+#           get from server stdout response for client)
+#
+#      Web Server:
+#        mysvcd -w [-1] [-l|-d [-l -o &lt;logfile&gt;] [-L &lt;loglevels&gt;]] [-p &lt;port&gt;] /path/to/(server|root)
+#          (if server is specified put on server stdin HTTP GET or POST requests from client
+#           get from server stdout HTTP responses for client,
+#           if root is specified return to clients server files corresponding to HTTP requests)
+#
+#      Proxy Server:
+#        mysvcd -x [-l|-d [-l -o &lt;logfile&gt;] [-L &lt;loglevels&gt;]] [-p &lt;port&gt;] &lt;host&gt;[:&lt;port&gt;]
+#          (run as proxy server from clients and remote server &lt;host&gt;:&lt;port&gt;,
+#           if &lt;port&gt; is not specified then default port is used)
+#
+#      Expect Server (internal):
+#        mysvcd -e [-l|-d [-l -o &lt;logfile&gt;] [-L &lt;loglevels&gt;]] [-p &lt;port&gt;] [-q "&lt;queues&gt;"] [-u "&lt;users&gt;"] -f &lt;configfile&gt; -c &lt;configproc&gt;
+#          (expect based server where client requests are calling to expect procedures
+#           configured on expect script &lt;configfile&gt; with &lt;configproc&gt; being an expect procedure
+#           inside &lt;configfile&gt; returing a list of &lt;name,value&gt; configuration parameters
+#           where expect procedure output is returned to client and by default
+#           using "kill -9 SIGUSR1 &lt;pid&gt;" the configuration file is reloaded and
+#           using "kill -9 SIGUSR2 &lt;pid&gt;" the server status is swapped from ON to OFF)
+#
+#      Expect Server (external):
+#        mysvcd -r [-l|-d [-l -o &lt;logfile&gt;] [-L &lt;loglevels&gt;]] [-p &lt;port&gt;] [-q "&lt;queues&gt;"] [-u "&lt;users&gt;"] -f &lt;configfile&gt; -c &lt;configproc&gt;
+#          (expect based server where client requests are calling to expect procedures
+#           configured on expect script &lt;configfile&gt; with &lt;configproc&gt; being an expect procedure
+#           inside &lt;configfile&gt; returing a list of &lt;name,value&gt; configuration parameters
+#           where the expect procedures return the path of an external command to execute
+#           whose standard output is returned to client and by default
+#           using "kill -9 SIGUSR1 &lt;pid&gt;" the configuration file is reloaded and
+#           using "kill -9 SIGUSR2 &lt;pid&gt;" the server status is swapped from ON to OFF)
+#
+#      Generic Client:
+#        mysvcd [-l|-d [-l -o &lt;logfile&gt;] [-L &lt;loglevels&gt;]] [-p &lt;port&gt;] &lt;host&gt;[:&lt;port&gt;]
+#          (run as client for remote server &lt;host&gt;:&lt;port&gt;)
+#
+#        -h =&gt; help
+#        -l =&gt; enable log
+#        -d =&gt; run in background as daemon
+#        -1 =&gt; for generic server share a single instance of server for all clients
+#              for simple server keep opened the connection with clients after server exit
+#              for web server accept one client connection a time
+#
+#  Description:
+#    My Service Generic Configurabile TCP/IP Client/Server
+#
+#     &lt;*&gt; Test server (default if /path/to/server is not specified):
+#         - the client request is write on standard output (one or more lines)
+#         - the server response is read from standard input (one or more lines)
+#         Example:
+#           ./mysvcd
+#     &lt;*&gt; Generic Server (default if /path/to/server is specified):
+#         The server is an external application that:
+#         - read the client requests from standard input
+#         - process the client requests
+#         - write the server responses to standard output
+#         If &lt;-1&gt; option is not specified,
+#         a connection with external server is
+#         opened once, when the client open connection,
+#         and closed when the server exits
+#           - The client requests are sent to stdin of server
+#           - The server responses are read from stdout of server
+#         If &lt;-1&gt; option is specified a single instance of server is shared by all clients
+#         Example:
+#           ./mysvcd /path/to/my/external/application/handler
+#     &lt;*&gt; Simple Server:
+#         The server is external application that:
+#         - read the client request from standard input (a single line)
+#         - process the client request
+#         - write the server response to standard output (one or more lines)
+#         For each request is:
+#           - executed the external application
+#           - sent to stdin of application the client request
+#           - read response from stdout of application
+#           - sent to client the response
+#           - closed the client connection
+#         If &lt;-1&gt; option is specified the connection with client is opened when the client
+#         open connection and keeped opened even when the server exits
+#         Example:
+#           ./mysvcd -s /path/to/my/external/application/server
+#     &lt;*&gt; Web Server:
+#         - two ways of usage:
+#             (1) if /path/to/server is specified
+#                 a single application handling as CGI all HTTP client requests
+#                 if it related to an external executable application
+#             (2) if /path/to/root is specified
+#                 the resources related to HTTP client requests are retrieved
+#                 on filesystem under this root directory
+#                 or obtained as output of resource
+#                 if it is related to an external executable application
+#                 else obtained as output of internal expect procedure with same resource name
+#         - only GET and POST method supported
+#         - CGI supported, but only variables:
+#             REQUEST_METHOD (set as GET or POST)
+#             QUERY_STRING (only for GET)
+#             CONTENT_LENGTH (only for POST)
+#             REQUEST_URI (for GET and POST)
+#             PATH_INFO (for GET and POST)
+#             REMOTE_ADDR (for GET and POST)
+#             SOAP_ACTION (for POST)
+#           are set by the server
+#         - .html files are returned to client
+#           with MIME type "text/html"
+#         - .gif files are returned to client
+#           with MIME type "image/gif" and are
+#           encoded using base64
+#         - .jpeg files are returned to client
+#           with MIME type "image/jpeg" and are
+#           encoded using base64
+#         - .txt files are returned to client
+#           with MIME type "text/plain"
+#         - .xml files are returned to client
+#           with MIME type "text/xml"
+#         - other files are return to client
+#           with MIME type "application/octet-stream"
+#           (useful to download a file from server)
+#         - you can specify a different resource
+#           handler (used for "GET &lt;resource&gt;")
+#           with the configuration parameter
+#             "resourcehandler"
+#           (the default resource handler handle only
+#            .html,.gif,.jpeg and .txt files)
+#         - if the CGI program is not found on server
+#           then is executed an expect procedure with the same
+#           name of CGI, using as input argument
+#           a list of pair key-value:
+#             {{key1 {value1}} ... {keyN {valueN}}}
+#           with each key and value already decoded
+#           (the procedure must be in &lt;configfile&gt;)
+#           The return value of that procedure
+#           (an HTML page) is returned back to the client
+#         Example:
+#           ./mysvcd -w /path/to/document/root/dir
+#             or
+#           ./mysvcd -w /path/to/cgi/http/handling
+#     &lt;*&gt; Expect Server:
+#         - The protocol used is the Expect language
+#         - With the "internal" server (option -e) is returned to client the output of Expect procedures
+#         - With the "external" server (option -r) is returned to client the output of external commands
+#           whose path must be returned by Expect procedures
+#         - The configuration file, specified with option
+#             &lt;configfile&gt;
+#           is itself an Expect script executed by the server
+#             (*) on startup
+#               and
+#             (*) on demand, when it receive the signal SIGUSR1
+#         - The configuration handler, specified with option
+#             &lt;configproc&gt;
+#           is the name of an Expect procedure
+#           (inside &lt;configfile&gt;)
+#           that must return a list of key-value pairs
+#           (the order is not relevant)
+#           e.g.:
+#             ...
+#             proc myConfigHandler {} {
+#               return {
+#                 key1 value1
+#                 key2 value2
+#                 ...
+#                 keyN valueN
+#               }
+#             }
+#             ...
+#           Each key is a configuration parameter
+#           (with its value)
+#         - The main predefined configuration parameters are
+#           the following:
+#             enabledcommands
+#             users
+#             userenabledcommands
+#         - Others configuration parameters:
+#             clienthandlers
+#             serverhandlers
+#             starthandler
+#             stophandler
+#             signalhandler
+#             resourcehandler
+#             log
+#             logenabler
+#             logfile
+#             loglevels
+#             eof
+#             serial
+#             server
+#             queues
+#             status
+#         - "enabledcommands":
+#           its value is the list of enabled commands
+#           Each command is an Expect procedure
+#           (inside &lt;configfile&gt;)
+#           that each client can execute
+#           If the value is "*" then all commands are enabled
+#           (is used a safe interpreter which for default
+#            has a minimal set of enabled commands)
+#           e.g.:
+#             ...
+#             proc myCommand1 {args1} {
+#               ...
+#             }
+#             ...
+#             proc myCommand2 {args2} {
+#               ...
+#             }
+#             ...
+#             proc myConfigHandler {} {
+#               return {
+#               ...
+#                 enabledcommands {
+#                   ...
+#                   myCommand1
+#                   myCommand2
+#                   ...
+#                 }
+#               ...
+#               }
+#             }
+#             ...
+#         - "clienthandlers":
+#           its value is a list of three procedures,
+#           the handler for open, read, close and error
+#           (the last is optional, the order is relevant)
+#             ...
+#             proc myClientOpenHandler {in out client} {
+#               ...
+#               ;# called when a client open the connection
+#               ;# (client is &lt;clientaddr&gt;:&lt;clientport&gt;)
+#               ;# to read from client use in
+#               ;# to write to client use out
+#               ;# must return:
+#               ;#   (*) 1 if the connection can be accepted
+#               ;#   (*) 0 elsewhere
+#               ;# useful to handle client authentication
+#               ...
+#             }
+#             ...
+#             proc myClientReadHandler {in out client request} {
+#               ...
+#               ;# called each time a client send a
+#               ;# request (a single line);
+#               ;# the predefined read handler
+#               ;# (handleClientRead)
+#               ;# wait for a complete command and
+#               ;# execute it as Expect procedure (if exists)
+#               ;# or as input for external command mysvc
+#               ...
+#             }
+#             ...
+#             proc myClientCloseHandler {in out client} {
+#             ...
+#               ;# executed when a client close
+#               ;# the connection
+#               ;# the default (handleClientClose)
+#               ;# is empty
+#             ...
+#             }
+#             ...
+#             proc myClientExecHandler {in out client command} {
+#             ...
+#               ;# to handle expect procedure execution
+#               ;# the default (handleClientExec)
+#               ;#   (*) return procedure output to client if serial option is set
+#               ;#   (*) execute the external command specified by procedure output
+#               ;#       elsewhere, sending:
+#               ;#         (*) partial external procedure output to client if flush option is set
+#               ;#         (*) complete external procedure output to client elsewhere
+#               ;# the predefined mysvc procedure execute the $MYSVC_HOME/bin/mysvc external command
+#             ...
+#             }
+#             ...
+#             proc myConfigHandler {} {
+#               return {
+#               ...
+#                 clienthandlers {
+#                   myClientOpenHandler
+#                   myClientReadHandler
+#                   myClientCloseHandler
+#                   myClientExecHandler
+#                 }
+#               ...
+#               }
+#             }
+#             ...
+#         - "serverhandlers":
+#           its value is a list of three procedures,
+#           the handler for open, read and close
+#             ...
+#             proc myServerOpenHandler {inout server} {
+#               ...
+#               ;# called when connect is called
+#               ;# (server is &lt;serveraddr&gt;:&lt;serverport&gt;)
+#               ;# to read from or write to server
+#               ;# use inout
+#               ;# must return:
+#               ;#   (*) 1 if the connection can be accepted
+#               ;#   (*) 0 elsewhere
+#               ...
+#             }
+#             ...
+#             proc myServerReadHandler {inout response server} {
+#               ...
+#               ;# called each time a server send a
+#               ;# response (a single line);
+#               ;# the predefined read handler
+#               ;# (handleServerRead) handle mysvcd
+#               ;# as a client instead of as a server
+#               ...
+#             }
+#             ...
+#             proc myServerCloseHandler {inout server} {
+#             ...
+#               ;# executed when a server close
+#               ;# the connection
+#               ;# the default (handleServerClose)
+#               ;# is empty
+#             ...
+#             }
+#             ...
+#             proc myConfigHandler {} {
+#               return {
+#               ...
+#                 serverhandlers {
+#                   myServerOpenHandler
+#                   myServerReadHandler
+#                   myServerCloseHandler
+#                 }
+#               ...
+#               }
+#             }
+#             ...
+#         - "starthandler":
+#           its value is the name of a procedure
+#           called when the server is started
+#           ...
+#           proc myStartHandler {} {
+#             ;# ...
+#             ;# handle server start
+#             ;# ...
+#           }
+#           ...
+#           proc myConfigHandler {} {
+#             return {
+#             ...
+#               starthandler myStartHandler
+#             ...
+#             }
+#           }
+#           ...
+#         - "stophandler":
+#           its value is the name of a procedure
+#           called when the server is stopped
+#           ...
+#           proc myStopHandler {} {
+#             ;# ...
+#             ;# handle server stop
+#             ;# ...
+#           }
+#           ...
+#           proc myConfigHandler {} {
+#             return {
+#             ...
+#               stophandler myStopHandler
+#             ...
+#             }
+#           }
+#           ...
+#         - "signalhandler":
+#           its value is the name of a procedure
+#           that handle the USR2 signal
+#             ...
+#             proc mySignalHandler {} {
+#               ...
+#               ;# the predefined signal handler
+#               ;# (handleSignal) call switchStatus
+#               ;# that switch the server status
+#               ;# between on and off
+#               ;# (if status is off the server
+#               ;#  don't accept any new client
+#               ;#  connection)
+#               ...
+#             }
+#             ...
+#             proc myConfigHandler {} {
+#               return {
+#               ...
+#                 signalhandler mySignalHandler
+#               ...
+#               }
+#             }
+#             ...
+#         - "resourcehandler":
+#           its value is the name of a procedure
+#           that handle the resource when mysvcd
+#           is used as HTTP server and a "GET &lt;resource&gt;"
+#           request is received by a client
+#             ...
+#             proc myResourceHandler {in out client resource} {
+#               ;# ...
+#               ;# return (filtered) resource to client
+#               ;# ...
+#             }
+#             ...
+#             proc myConfigHandler {} {
+#               return {
+#               ...
+#                 resourcehandler myResourceHandler
+#               ...
+#               }
+#             }
+#             ...
+#         - "queues":
+#           its value is a list containing
+#           a pair of directory:
+#           the queue input directory and
+#           the queue output directory
+#           (default values are $MYSVC_HOME/in and $MYSVC_HOME/out)
+#             ...
+#             proc myConfigHandler {} {
+#               return {
+#               ...
+#                 queues {
+#                   "/my/path/to/queue/inputdir"
+#                   "/my/path/to/queue/outputdir"
+#                 }
+#               ...
+#               }
+#             }
+#             ...
+#         - "users":
+#           its value is a list of username/password pairs:
+#             ...
+#             proc myConfigHandler {} {
+#               return {
+#               ...
+#                 users {
+#                   username1/password1
+#                   username2/password2
+#                   ...
+#                   usernameN/passwordN
+#                 }
+#               ...
+#               }
+#             }
+#             ...
+#         - "userenabledcommands":
+#           its value is a list of pairs;
+#           each pair is a username followed
+#           by a list ef enabled commands
+#           for that user
+#           Note: regular expressions can be
+#           used as enabled commands
+#             ...
+#             proc myConfigHandler {} {
+#               return {
+#               ...
+#                 userenabledcommands {
+#                   username1 {
+#                     enabledcommand11
+#                     enabledcommand12
+#                     ...
+#                     enabledcommand1N
+#                   }
+#                   username2 {
+#                     enabledcommand21
+#                     enabledcommand22
+#                     ...
+#                     enabledcommand2N
+#                   }
+#                   ...
+#                   usernameM {
+#                     enabledcommandM1
+#                     enabledcommandM2
+#                     ...
+#                     enabledcommandMN
+#                   }
+#                 }
+#               ...
+#               }
+#             }
+#             ...
+#         - "server":
+#           its value is the id of server
+#           when mysvcd is used as client
+#             ...
+#             proc myConfigHandler {} {
+#               return {
+#               ...
+#                 server &lt;serveraddr&gt;[:&lt;serverport&gt;]
+#               ...
+#               }
+#             }
+#             ...
+#         - "log":
+#           its value can be:
+#             1 if log is enabled
+#             0 elsewhere
+#             (the predefined value is 0)
+#           to change its value you can use the command
+#             log [1|0]
+#           (with no argument the actual value is returned)
+#             ...
+#             proc myConfigHandler {} {
+#               return {
+#               ...
+#                 log 1
+#               ...
+#               }
+#             }
+#             ...
+#         - "logenabler":
+#           its value is the name of a procedure
+#           that must enable a log
+#           the default procedure (logEnabler)
+#           enable a log iff its level
+#           is into one of &lt;loglevels&gt; parameter
+#             ...
+#             proc myLogEnabler {level type text} {
+#               ...
+#               # must return:
+#               #   1 if log is enabled
+#               #   0 elsewhere
+#               ...
+#             }
+#             ...
+#             proc myConfigHandler {} {
+#               ...
+#                 logenabler myLogEnabler
+#               ...
+#             }
+#             ...
+#         - "logfile":
+#           its value is the name of log file
+#           (same as &lt;logfile&gt; command line option)
+#             ...
+#             proc myConfigHandler {} {
+#               return {
+#               ...
+#                 logfile "/my/path/to/logfile"
+#               ...
+#               }
+#             }
+#             ...
+#         - "loglevels":
+#           its value is a list of (comma separated)
+#           log items, where each log item is a
+#           single log level or a range of log levels
+#           (same as &lt;loglevels&gt; command line option)
+#              &lt;loglevels&gt; ::= &lt;logitem&gt;","...","&lt;logitem&gt;
+#              &lt;logitem&gt; ::= &lt;loglevel&gt; | &lt;logrange&gt;
+#              &lt;logrange&gt; ::= &lt;loglevel&gt;"-"{loglevel}
+#              &lt;loglevel&gt; ::= 0...999
+#             ...
+#             proc myConfigHandler {} {
+#               return {
+#               ...
+#                 loglevels "0-8,12,24-32,128-134,138"
+#               ...
+#               }
+#             }
+#             ...
+#         - "eof":
+#           its value is a regular expression;
+#           used into "test" mode (-t flag specified);
+#           if input (read from stdin) match this regular
+#           expression, then the connection with client
+#           is closed default value is {^\.$}
+#             ...
+#             proc myConfigHandler {} {
+#               return {
+#               ...
+#                 eof {^EOF$}
+#               ...
+#               }
+#             }
+#             ...
+#         - "serial":
+#           its value can be:
+#             1 if the server is serial
+#             0 elsewhere
+#             (the predefined value is 0)
+#             (same as -1 command line option)
+#           if server is not serial can handle
+#           more client together
+#             ...
+#             proc myConfigHandler {} {
+#               return {
+#               ...
+#                 serial 1
+#               ...
+#               }
+#             }
+#             ...
+#         - "status":
+#           its value can be:
+#             1 if the server accept client connections
+#             0 elsewhere
+#             (the predefined value is 1)
+#           to change its value you can use the command
+#             status [1|0]
+#           (with no argument the actual value is returned)
+#             ...
+#             proc myConfigHandler {} {
+#               return {
+#               ...
+#                 status 0
+#               ...
+#               }
+#             }
+#             ...
+#         - All configuration parameter are stored
+#           into the global array parameter
+#             parameter(key) &lt;- value
+#         - For log use the command:
+#             log &lt;level&gt; &lt;type=T|D|I|W|E|F&gt; "&lt;text&gt;"
+#           when:
+#           - &lt;level&gt; is the log level
+#             T = text
+#             D = debug
+#             I = informational
+#             W = warning
+#             E = error
+#             F = fatal
+#           - "T" logs are sent on standard output,
+#             the others on standard error
+#           - "E" and "F" logs are sent also if
+#             logs are disabled
+#         - Default server port is 1036
+#         - In order to connect to another server
+#           use the command:
+#             connect &lt;serveraddr&gt;[:&lt;serverport&gt;]
+#           (return the server socket)
+#         Example:
+#           ./mysvcd -e /path/to/configfile -c myConfigHandler
+#
+# #################################################################
+
+proc usage {} {
+  send_error "mysvcd - My Service Daemon - Ver 1.0\n"
+  send_error "\n"
+  send_error "usage:\n"
+  send_error "\n"
+  send_error "Test Server:\n"
+  send_error "  mysvcd \[-l] \[-p &lt;port&gt;]\n"
+  send_error "    (put on stdout requests from client and get from stdin responses for client)\n"
+  send_error "\n"
+  send_error "Generic Server (default if /path/to/server is specified):\n"
+  send_error "  mysvcd \[-1] \[-l|-d \[-l -o &lt;logfile&gt; \[-L &lt;loglevels&gt;]]] \[-p &lt;port&gt;] /path/to/server\n"
+  send_error "    (put on server stdin requests from client\n"
+  send_error "     get from server stdout response for client\n"
+  send_error "     where server is any executable application)\n"
+  send_error "\n"
+  send_error "Simple Server:\n"
+  send_error "  mysvcd -s \[-1] \[-l|-d \[-l -o &lt;logfile&gt; \[-L &lt;loglevels&gt;]]] \[-p &lt;port&gt;] /path/to/server\n"
+  send_error "    (put on server stdin each line read from client as request\n"
+  send_error "     get from server stdout response for client)\n"
+  send_error "\n"
+  send_error "Web Server:\n"
+  send_error "  mysvcd -w \[-1] \[-l|-d \[-l -o &lt;logfile&gt;] \[-L &lt;loglevels&gt;]] \[-p &lt;port&gt;] /path/to/(server|root)\n"
+  send_error "    (if server is specified put on server stdin HTTP GET or POST requests from client\n"
+  send_error "     get from server stdout HTTP responses for client,\n"
+  send_error "     if root is specified return to clients server files corresponding to HTTP requests)\n"
+  send_error "\n"
+  send_error "Proxy Server:\n"
+  send_error "  mysvcd -x \[-l|-d \[-l -o &lt;logfile&gt;] \[-L &lt;loglevels&gt;]] \[-p &lt;port&gt;] &lt;host&gt;\[:&lt;port&gt;]\n"
+  send_error "    (run as proxy server from clients and remote server &lt;host&gt;:&lt;port&gt;,\n"
+  send_error "     if &lt;port&gt; is not specified then default port is used)\n"
+  send_error "\n"
+  send_error "Expect Server (internal):\n"
+  send_error "  mysvcd -e \[-l|-d \[-l -o &lt;logfile&gt;] \[-L &lt;loglevels&gt;]] \[-p &lt;port&gt;] \[-q \"&lt;queues&gt;\"] \[-u \"&lt;users&gt;\"] -f &lt;configfile&gt; -c &lt;configproc&gt;\n"
+  send_error "    (expect based server where client requests are calling to expect procedures\n"
+  send_error "     configured on expect script &lt;configfile&gt; with &lt;configproc&gt; being an expect procedure\n"
+  send_error "     inside &lt;configfile&gt; returing a list of &lt;name,value&gt; configuration parameters\n"
+  send_error "     where expect procedure output is returned to client and by default\n"
+  send_error "     using \"kill -9 SIGUSR1 &lt;pid&gt;\" the configuration file is reloaded and\n"
+  send_error "     using \"kill -9 SIGUSR2 &lt;pid&gt;\" the server status is swapped from ON to OFF)\n"
+  send_error "\n"
+  send_error "Expect Server (external):\n"
+  send_error "  mysvcd -r \[-l|-d \[-l -o &lt;logfile&gt;] \[-L &lt;loglevels&gt;]] \[-p &lt;port&gt;] \[-q \"&lt;queues&gt;\"] \[-u \"&lt;users&gt;\"] -f &lt;configfile&gt; -c &lt;configproc&gt;\n"
+  send_error "    (expect based server where client requests are calling to expect procedures\n"
+  send_error "     configured on expect script &lt;configfile&gt; with &lt;configproc&gt; being an expect procedure\n"
+  send_error "     inside &lt;configfile&gt; returing a list of &lt;name,value&gt; configuration parameters\n"
+  send_error "     where the expect procedures return the path of an external command to execute\n"
+  send_error "     whose standard output is returned to client and by default\n"
+  send_error "     using \"kill -9 SIGUSR1 &lt;pid&gt;\" the configuration file is reloaded and\n"
+  send_error "     using \"kill -9 SIGUSR2 &lt;pid&gt;\" the server status is swapped from ON to OFF)\n"
+  send_error "\n"
+  send_error "Generic Client:\n"
+  send_error "  mysvcd \[-l|-d \[-l -o &lt;logfile&gt;] \[-L &lt;loglevels&gt;]] \[-p &lt;port&gt;] &lt;host&gt;\[:&lt;port&gt;]\n"
+  send_error "    (run as client for remote server &lt;host&gt;:&lt;port&gt;)\n"
+  send_error "\n"
+  send_error "  -h =&gt; help\n"
+  send_error "  -l =&gt; enable log\n"
+  send_error "  -d =&gt; run in background as daemon\n"
+  send_error "  -1 =&gt; for generic server share a single instance of server for all clients\n"
+  send_error "        for simple server keep opened the connection with clients after server exit\n"
+  send_error "        for web server accept one client connection a time\n"
+
+  exit 1
+}
+
+proc initParameters {} {
+  global parameter env
+
+  set parameter(port) 1036
+  set parameter(daemon) 0
+  set parameter(log) 0
+  set parameter(status) 1
+  set parameter(expect) 0
+  set parameter(flush) 0
+  set parameter(cgi) 0
+  set parameter(exclusive) 0
+  set parameter(decode) 0
+
+  set parameter(configparameters) {
+    enabledcommands
+    clienthandlers
+    serverhandlers
+    logfile
+    starthandler
+    stophandler
+    signalhandler
+    resourcehandler
+    documentroot
+    queues
+    users
+    userenabledcommands
+    server
+    log
+    logenabler
+    loglevels
+    eof
+    serial
+    flush
+    cgi
+    decode
+    status
+  }
+
+  set parameter(confighandler) getConfigHandler
+  set parameter(directoryindex) index.html
+  set parameter(interp) mysvcinterp
+
+  set parameter(requestcount) 0
+  set parameter(requestday) {}
+
+  set parameter(serial) 0
+
+  set parameter(cgi) 0
+
+  set parameter(decode) 0
+
+  set parameter(external) 0
+
+  set parameter(eof) {^\.$}
+
+  if [info exists env(MYSVC_HOME)] {
+    set parameter(mysvc,home) "$env(MYSVC_HOME)"
+  } else {
+    set parameter(mysvc,home) "$env(HOME)/mysvc"
+  }
+
+  set parameter(queues) "
+    $parameter(mysvc,home)/in
+    $parameter(mysvc,home)/out
+  "
+
+  set parameter(logenabler) logEnabler
+  set parameter(loglevels) "0-999"
+
+  set parameter(keyword,login) login
+  set parameter(keyword,logout) logout
+  set parameter(keyword,begin) begin
+  set parameter(keyword,end) end
+  set parameter(keyword,get) get
+  set parameter(keyword,clear) .
+
+  set parameter(default,port) $parameter(port)
+
+  base64Init
+}
+
+proc parseArguments {} {
+  global argv parameter
+
+  set state flag
+
+  set argc 0
+  set args {}
+
+  set proxyserver 0
+  set simpleserver 0
+  set genericserver 1
+
+  foreach arg $argv {
+    incr argc
+
+    switch -- $state {
+      flag {
+        switch -regexp -- $arg {
+          {-x.*} {set proxyserver 1}
+          {-p.*} {set state port}
+          {-m.*} {set state documentroot}
+          {-f.*} {set state configfile}
+          {-c.*} {set state confighandler}
+          {-q.*} {set state queues}
+          {-u.*} {set state users}
+          {-o.*} {set state logfile}
+          {-L.*} {set state loglevels}
+          {-i.*} {set parameter(interpreter) 1}
+          {-e.*} {set parameter(expect) 1}
+          {-r.*} {
+            set parameter(expect) 1
+            set parameter(external) 1
+          }
+          {-d.*} {set parameter(daemon) 1}
+          {-l.*} {set parameter(log) 1}
+          {-F.*} {set parameter(flush) 1}
+          {-g.*} {set parameter(cgi) 1}
+          {-D.*} {set parameter(decode) 1}
+          {-X.*} {set parameter(exclusive) 1}
+          {-1} {set parameter(serial) 1}
+          {-w.*} {set webserver 1}
+          {-s.*} {set simpleserver 1}
+          {-h.*} {usage}
+          {^--$} {
+            set args [lreplace $argv 0 [expr $argc -1]]
+            break
+          }
+          {^[^-].*} {
+            set args [lreplace $argv 0 [expr $argc -2]]
+            break
+          }
+        }
+      }
+      server {
+        set parameter(server) $arg
+        set state flag
+      }
+      port {
+        set parameter(port) $arg
+        set state flag
+      }
+      documentroot {
+        set parameter(documentroot) $arg
+        set state flag
+      }
+      configfile {
+        set parameter(configfile) $arg
+        set state flag
+      }
+      confighandler {
+        set parameter(confighandler) $arg
+        set state flag
+      }
+      queues {
+        set parameter(queues) $arg
+        set state flag
+      }
+      users {
+        set parameter(users) $arg
+        set state flag
+      }
+      logfile {
+        set parameter(logfile) $arg
+        set state flag
+      }
+      loglevels {
+        set parameter(loglevels) $arg
+        set state flag
+      }
+    }
+  }
+
+  if [llength $args] {
+    if {[string first "/" $args] != -1} {
+      # TCP/IP server
+
+      if {$simpleserver == 1} {
+        # Simple Server
+        set parameter(simpleserver) $args
+      } elseif [info exists webserver] {
+        # Web Server
+        set parameter(webserver) $args
+        set parameter(documentroot) $args
+        set parameter(flush) 1
+
+        if [file isfile $args] {
+          set parameter(cgi) 1
+          set parameter(exclusive) 1
+        }
+      } elseif {$parameter(expect) == 0} {
+        # Generic Server
+        set parameter(genericserver) $args
+      } else {
+        set parameter(expectserver) $args
+      }
+    } else {
+      # TCP/IP client
+
+      set parameter(server) $args
+
+      if {$proxyserver == 0} {
+        set parameter(interpreter) 1
+      }
+    }
+  } else {
+     if {$parameter(expect) == 1} {
+        set parameter(expectserver) $args
+     } else {
+       # TCP/IP server
+       # Test Server
+
+       set parameter(testserver) 1
+       set parameter(test) 1
+     }
+  }
+}
+
+proc checkParameters {} {
+  global parameter
+
+  if {[info exists parameter(configfile)] &amp;&amp;
+     ![file exists $parameter(configfile)]} {
+    usage
+  }
+}
+
+proc logEnabler {level type text} {
+  global parameter
+
+  foreach loglevelrange [split $parameter(loglevels) ","] {
+    if {[string first "-" $loglevelrange] == -1} {
+      if {$level == $loglevelrange} {
+        return 1
+      }
+    } else {
+      set rangelist [split $loglevelrange "-"]
+
+      if {($level &gt;= [lindex $rangelist 0]) &amp;&amp;
+          ($level &lt;= [lindex $rangelist 1])} {
+        return 1
+      }
+    }
+  }
+
+  return 0
+}
+
+proc log {{level {}} {type {}} {text {}}} {
+  global parameter
+
+  # type:
+  #   T =&gt; text
+  #   D =&gt; debug
+  #   I =&gt; informational
+  #   W =&gt; warning
+  #   E =&gt; error
+  #   F =&gt; fatal
+
+  #   1 =&gt; enable log
+  #   0 =&gt; disable log
+
+  if {![string compare $level {}] &amp;&amp; ![string compare $type {}]} {
+    return $parameter(log)
+  } elseif {![string compare $level "1"] &amp;&amp; ![string compare $type {}]} {
+    set parameter(log) 1
+
+    log 0 I "log is enabled"
+
+    return
+  } elseif {![string compare $level "0"] &amp;&amp; ![string compare $type {}]} {
+
+    log 0 I "log is disabled"
+
+    set parameter(log) 0
+
+    return
+  }
+
+  if [uplevel #0 $parameter(logenabler) [list $level $type $text]] {
+    set timestamp [clock format \
+      [clock seconds] -format "%Y-%m-%d %H:%M:%S"]
+
+    set level [format "%-3s" $level]
+
+    if ![string compare $type "T"] {
+      if $parameter(log) {
+        catch {
+          send_user "$text\n"
+        }
+      }
+    } elseif [string compare $type "I"] {
+      if {$parameter(log) || [string compare $type "W"]} {
+        catch {
+          send_error "$timestamp $level $type $text\n"
+        }
+      }
+    } else {
+      if $parameter(log) {
+        catch {
+          send_user "$timestamp $level $type $text\n"
+        }
+      }
+    }
+  }
+}
+
+proc setEnabledCommands {enabledcommands} {
+  global parameter
+
+  foreach command $enabledcommands {
+    interp alias $parameter(interp) $command {} $command
+  }
+}
+
+proc setLogFile {logfile} {
+  if [string compare "$logfile" {}] {
+    log_file
+    log_file "$logfile"
+  }
+}
+
+proc uniqkey {} {
+  set key [expr {pow(2,31) + [clock clicks]}]
+  set key [string range $key end-8 end-3]
+  set key [clock seconds]$key
+  return $key
+}
+
+proc sleep {ms} {
+  set uniq [uniqkey]
+  set ::__sleep__tmp__$uniq 0
+  after $ms set ::__sleep__tmp__$uniq 1
+  vwait ::__sleep__tmp__$uniq
+  unset ::__sleep__tmp__$uniq
+}
+
+proc lpush {_list what} {
+  upvar $_list L
+  if ![info exists L] {set L {}}
+  set L [concat [list $what] $L]
+}
+
+proc lpop {_list} {
+  upvar $_list L
+  if ![info exists L] {return ""}
+  set t [lindex $L 0]
+  set L [lrange $L 1 end]
+  return $t
+}
+
+proc quote_html {s} {
+  regsub -all {&amp;} $s {\&amp;amp} s
+  regsub -all {"} $s {\&amp;quot} s
+  regsub -all {&lt;} $s {\&amp;lt} s
+  regsub -all {&gt;} $s {\&amp;gt} s
+
+  return $s
+}
+
+proc unquote_input {buf} {
+  regsub -all {\+} $buf {\ } buf
+  regsub -all {\$} $buf {\$} buf
+  regsub -all {\[} $buf {\[} buf
+  regsub -all \" $buf \\\" buf
+  regsub -all "%0D%0A" $buf "\n" buf
+  regsub -all {%([A-F0-9][A-F0-9])} $buf {[format %c 0x\1]} buf
+  regsub -all {%([A-F0-9][A-F0-9])} $buf {[format %c 0x\1]} buf
+  eval return \"$buf\"
+}
+
+proc myaddr {} {
+  set me [socket -server xxx -myaddr [info hostname] 0]
+  set ip [lindex [fconfigure $me -sockname] 0]
+  close $me
+  return $ip
+}
+
+proc intgen {{seed 0}} {
+  proc intgen "{seed [incr seed]}" [info body intgen]
+  set seed
+}
+
+proc getNextRequestNum {requestday} {
+  global parameter
+
+  if ![string compare $parameter(requestday) $requestday] {
+    return [format "%.8d" [expr [intgen] % 1000000]]
+  } else {
+    set parameter(requestday) $requestday
+
+    return [format "%.8d" [expr [intgen 0] % 1000000]]
+  }
+}
+
+proc getClientOpen {} {
+  global parameter
+
+  if [info exists parameter(test)] {
+    return handleTestOpen
+  } elseif [info exists parameter(documentroot)] {
+    return handleHttpOpen
+  } elseif [info exists parameter(genericserver)] {
+    return handleProtocolOpen
+  } else {
+    return handleClientOpen
+  }
+}
+
+proc getClientRead {} {
+  global parameter
+
+  if [info exists parameter(server)] {
+    return handleClientSend
+  } elseif [info exists parameter(test)] {
+    return handleTestRead
+  } elseif [info exists parameter(simpleserver)] {
+    return handleExternExec
+  } elseif [info exists parameter(genericserver)] {
+    return handleProtocolRead
+  } else {
+    return handleClientRead
+  }
+}
+
+proc getClientClose {} {
+  global parameter
+
+  if [info exists parameter(server)] {
+    return handleClientBreak
+  } elseif [info exists parameter(test)] {
+    return handleTestClose
+  } elseif [info exists parameter(genericserver)] {
+    return handleProtocolClose
+  } else {
+    return handleClientClose
+  }
+}
+
+proc getClientError {} {
+  return handleClientError
+}
+
+proc getClientExec {} {
+  return handleClientExec
+}
+
+proc getServerOpen {} {
+  return handleServerOpen
+}
+
+proc getServerRead {} {
+  return handleServerRead
+}
+
+proc getServerClose {} {
+  return handleServerClose
+}
+
+proc getSignalHandler {} {
+  return handleSignal
+}
+
+proc getResourceHandler {} {
+  return handleHttpResource
+}
+
+proc getLogFile {} {
+  global parameter
+
+  if [info exists parameter(logfile)] {
+    return $parameter(logfile)
+  } else {
+    return {}
+  }
+}
+
+proc getConfigHandler {} {
+  global parameter
+
+  return {
+    enabledcommands {
+    }
+    clienthandlers {
+      [getClientOpen]
+      [getClientRead]
+      [getClientClose]
+      [getClientError]
+      [getClientExec]
+    }
+    serverhandlers {
+      [getServerOpen]
+      [getServerRead]
+      [getServerClose]
+    }
+    signalhandler \
+      [getSignalHandler]
+    resourcehandler \
+      [getResourceHandler]
+  }
+}
+
+proc setConfigHandler {confighandler} {
+  global parameter
+
+  array set config [uplevel #0 $confighandler]
+
+  foreach key $parameter(configparameters) {
+    if [info exists config($key)] {
+      set parameter($key) $config($key)
+    }
+  }
+}
+
+# client functions
+
+proc connect {addr {port {}}} {
+  global mysvcd
+  global parameter
+
+  if ![string compare $port {}] {
+    set port $parameter(default,port)
+  }
+
+  set sock [socket $addr $port]
+  set server "$addr:$port"
+  set mysvcd(server,$sock) $server
+
+  log 0 I "opening connection to server $mysvcd(server,$sock)"
+
+  fconfigure $sock -buffering line
+  fconfigure $sock -blocking 1
+
+  if [info exists parameter(serverhandlers)] {
+    set serveropenhandler \
+      [lindex $parameter(serverhandlers) 0]
+    if [string compare "$serveropenhandler" ""] {
+      if ![eval $serveropenhandler \
+           [list "$sock" "$mysvcd(server,$sock)"]] {
+        catch {close $sock}
+        return {}
+      }
+    }
+  }
+
+  fileevent $sock readable [list handleServer $sock]
+
+  return $sock
+}
+
+proc handleServerOpen {inout server} {
+  return 1
+}
+
+proc handleServerRead {inout response server} {
+  global mysvcd
+
+  log 0 I "sending response to client $mysvcd(server,$server)"
+
+  puts $mysvcd(client,$server) "$response"
+}
+
+proc handleServerClose {inout server} {
+  global mysvcd
+
+  log 0 I "closing connection to client $mysvcd(server,$server)"
+
+  catch {close $mysvcd(client,$server)}
+
+  set clientinfo [split "$mysvcd(server,$server)" ":"]
+
+  set clientaddr [lindex $clientinfo 0]
+  set clientport [lindex $clientinfo 1]
+
+  if {![string compare "$clientaddr" "0"] &amp;&amp;
+      ![string compare "$clientport" "0"]} {
+    stop
+  }
+}
+
+proc handleServer {sock} {
+  global mysvcd
+  global parameter
+
+  if {[eof $sock] || [catch {gets $sock line}]} {
+    log 0 I "closing connection to server $mysvcd(server,$sock)"
+
+    if [info exists parameter(serverhandlers)] {
+      set serverclosehandler \
+        [lindex $parameter(serverhandlers) 2]
+      if [string compare "$serverclosehandler" ""] {
+        eval $serverclosehandler \
+          [list "$sock" "$mysvcd(server,$sock)"]
+      }
+    }
+
+    catch {close $sock}
+
+    unset mysvcd(server,$sock)
+  } else {
+    log 0 I "received response from server $mysvcd(server,$sock)"
+    log 0 T "$line"
+
+    if [info exists parameter(serverhandlers)] {
+      set serverreadhandler \
+        [lindex $parameter(serverhandlers) 1]
+      if [string compare "$serverreadhandler" ""] {
+        eval $serverreadhandler \
+          [list "$sock" "$line" "$mysvcd(server,$sock)"]
+      }
+    }
+  }
+}
+
+# interpreter function
+
+proc interpreter {} {
+  global mysvcd
+
+  set mysvcd(server) stdin
+
+  accept stdin 0 0
+
+  return $mysvcd(server)
+}
+
+# server functions
+
+proc server {port} {
+  global mysvcd
+
+  set mysvcd(server) [socket -server accept $port]
+
+  return $mysvcd(server)
+}
+
+proc accept {sock addr port} {
+  global mysvcd
+  global parameter
+
+  set mysvcd(client,$sock) "$addr:$port"
+
+  if !$parameter(status) {
+    log 0 I "connection refused to client $mysvcd(client,$sock)"
+
+    catch {close $sock}
+
+    unset mysvcd(client,$sock)
+
+    return
+  }
+
+  log 0 I "opening connection to client $mysvcd(client,$sock)"
+
+  fconfigure $sock -buffering line
+  fconfigure $sock -blocking 1
+
+  set mysvcd(request,$mysvcd(client,$sock)) {}
+  set mysvcd(response,$mysvcd(client,$sock)) {}
+  set mysvcd(interp,$mysvcd(client,$sock)) $parameter(interp)
+
+  if {![string compare "$addr" 0] &amp;&amp;
+      ![string compare "$port" 0]} {
+    set out stdout
+  } else {
+    set out $sock
+  }
+
+  set clientopenhandler \
+    [lindex $parameter(clienthandlers) 0]
+  if [string compare "$clientopenhandler" ""] {
+    if ![eval $clientopenhandler \
+      [list "$sock" "$out" "$mysvcd(client,$sock)"]] {
+      catch {close $sock}
+
+      unset mysvcd(client,$sock)
+
+      return
+    }
+  }
+
+  set mysvcd(firstrequest,$mysvcd(client,$sock)) 1
+
+  if [info exists parameter(server)] {
+    set serverinfo [split "$parameter(server)" ":"]
+
+    if {[llength $serverinfo] == 1} {
+      set serveraddr [lindex $serverinfo 0]
+      set serverport $parameter(default,port)
+    } else {
+      set serveraddr [lindex $serverinfo 0]
+      set serverport [lindex $serverinfo 1]
+    }
+
+    if [catch {connect $serveraddr $serverport} mysvcd(server,$mysvcd(client,$sock))] {
+      log 0 F "cannot open connection with server $parameter(server)"
+
+      catch {close $sock}
+
+      unset mysvcd(client,$sock)
+
+      stop
+    } else {
+      set mysvcd(client,$mysvcd(server,$mysvcd(server,$mysvcd(client,$sock)))) $out
+      set mysvcd(server,$mysvcd(server,$mysvcd(server,$mysvcd(client,$sock)))) $mysvcd(client,$sock)
+    }
+  }
+
+  log 0 I "waiting for request from client $mysvcd(client,$sock)"
+
+  fileevent $sock readable [list handleClient $sock $out]
+}
+
+proc mysvc {service {config {}} {input {}} {username {}} {password {}}} {
+  global parameter
+
+  if ![string compare $config ""] {
+    if ![string compare $username ""] {
+      return "echo \"$input\" | $parameter(mysvc,home)/bin/mysvc $service"
+    } else {
+      if ![string compare $password ""] {
+        return "echo \"$input\" | $parameter(mysvc,home)/bin/mysvc $username@$service"
+      } else {
+        return "echo \"$input\" | $parameter(mysvc,home)/bin/mysvc $username:$password@$service"
+      }
+    }
+  } else {
+    if ![string compare $username ""] {
+      return "echo \"$input\" | $parameter(mysvc,home)/bin/mysvc $service:$config"
+    } else {
+      if ![string compare $password ""] {
+        return "echo \"$input\" | $parameter(mysvc,home)/bin/mysvc $username@$service:$config"
+      } else {
+        return "echo \"$input\" | $parameter(mysvc,home)/bin/mysvc $username:$password@$service:$config"
+      }
+    }
+  }
+}
+
+proc handleClientExec {in out client command} {
+  global mysvcd
+  global parameter
+  global env
+
+  if $parameter(serial) {
+    if [catch {exec $command} mysvcd(response,$client)] {
+      log 0 E "error executing command $command"
+
+      if {[llength $parameter(clienthandlers)] &gt; 3} {
+        set errorhandler [lindex $parameter(clienthandlers) 3]
+      } else {
+        set errorhandler [getClientError]
+      }
+      uplevel #0 [eval "$errorhandler" \
+        [list "$in" "$out" "$client" "$mysvcd(response,$client)"]]
+    } else {
+      if [string compare "$mysvcd(response,$client)" ""] {
+        log 0 I "sending response to client $client"
+        log 0 T "$mysvcd(response,$client)"
+
+        puts $out "$mysvcd(response,$client)\n."
+      } else {
+        puts $out "."
+      }
+    }
+  } else {
+    if [catch {open "|$command" r} mysvcd(command,$client)] {
+      log 0 E "error executing command $command"
+
+      if {[llength $parameter(clienthandlers)] &gt; 3} {
+        set errorhandler [lindex $parameter(clienthandlers) 3]
+      } else {
+        set errorhandler [getClientError]
+      }
+      uplevel #0 [eval "$errorhandler" \
+        [list "$in" "$out" "$client" "$mysvcd(response,$client)"]]
+
+      return
+    }
+
+    set mysvcd(response,$client) {}
+
+    fconfigure $mysvcd(command,$client) -buffering line
+
+    fileevent $mysvcd(command,$client) readable \
+      [list handleCommandRead $in $out $client]
+  }
+}
+
+proc handleClientSend {in out client request} {
+  global mysvcd
+  global parameter
+
+  log 0 I "sending request to server $parameter(server)"
+
+  puts $mysvcd(server,$client) "$request"
+}
+
+proc handleClientBreak {in out client} {
+  global mysvcd
+  global parameter
+
+  log 0 I "closing connection to server $parameter(server)"
+
+  catch {close $mysvcd(server,$client)}
+
+  stop
+}
+
+proc handleClientOpen {in out client} {
+  return 1
+}
+
+proc handleClientRead {in out client request} {
+  global mysvcd
+  global parameter
+  global env
+
+  set command [lindex [split $request] 0]
+
+  if $mysvcd(firstrequest,$client) {
+    set mysvcd(firstrequest,$client) 0
+
+    if [info exists parameter(users)] {
+      if ![string compare "$command" "$parameter(keyword,login)"] {
+        log 0 I "login request received"
+
+        set accepted 0
+
+        set clientinfo [split [lindex $request 1] "/"]
+
+        set parameter(username,$client) [lindex $clientinfo 0]
+        set parameter(password,$client) [lindex $clientinfo 1]
+
+        foreach user $parameter(users) {
+          set userinfo [split $user "/"]
+
+          set username [lindex $userinfo 0]
+          set password [lindex $userinfo 1]
+
+          if {![string compare $username $parameter(username,$client)] &amp;&amp;
+              ![string compare $password $parameter(password,$client)]} {
+            set accepted 1
+
+            log 0 I "login $parameter(username,$client)/$parameter(password,$client) accepted"
+            log 0 I "sending ACK to client $client"
+
+            puts $out "0"
+
+            return
+          }
+        }
+
+        if !$accepted {
+          log 0 W "login $parameter(username,$client)/$parameter(password,$client) refused"
+          log 0 W "invalid username or password $parameter(username,$client)/$parameter(password,$client)"
+          log 0 I "sending NACK to client $client"
+
+          puts $out "1"
+
+          log 0 I "closing connection to client $client"
+
+          catch {close $in}
+
+          return
+        }
+      } else {
+        log 0 W "login command expected"
+        log 0 I "sending NACK to client $client"
+
+        puts $out "1"
+
+        log 0 I "closing connection to client $client"
+
+        catch {close $in}
+
+        return
+      }
+    }
+  }
+
+  if {[llength $parameter(queues)] == 1} {
+    set queuein [lindex $parameter(queues) 0]
+    set queueout $queuein
+  } else {
+    set queuein [lindex $parameter(queues) 0]
+    set queueout [lindex $parameter(queues) 1]
+  }
+
+  if [file isdirectory $queuein] {
+    append queuein "/mysvc"
+  }
+
+  if [file isdirectory $queueout] {
+    append queueout "/mysvc"
+  }
+
+  set parameter(queuein) $queuein
+  set parameter(queueout) $queueout
+
+  if [info exists mysvcd(queues,$client)] {
+    if ![string compare "$command" "$parameter(keyword,end)"] {
+      log 0 I "closing queue to client $client"
+
+      unset mysvcd(queues,$client)
+
+      if [catch {
+        log 0 I "closing file $mysvcd(queuetmp,$client)"
+
+        catch {close $mysvcd(queuetmpfile,$client)}
+
+        log 0 I "renaming file $mysvcd(queuetmp,$client) to $mysvcd(queuein,$client)"
+
+        file rename -force "$mysvcd(queuetmp,$client)" "$mysvcd(queuein,$client)"
+      }] {
+        log 0 E "error closing queue to client $client"
+        log 0 I "sending NACK to client $client"
+
+        puts $out "1"
+      } else {
+        log 0 I "sending ACK to client $client"
+
+        puts $out "0"
+      }
+
+      set mysvcd(request,$client) {}
+    } else {
+      if ![string compare $mysvcd(request,$client) {}] {
+        set mysvcd(request,$client) "$request"
+        set mysvcd(queuecommand,$client) "$request"
+      } else {
+        append mysvcd(request,$client) "\n$request"
+        append mysvcd(queuecommand,$client) "\n$request"
+      }
+
+      if [info complete $mysvcd(request,$client)] {
+        set mysvcd(endofrequest,$client) 1
+      } else {
+        set mysvcd(endofrequest,$client) 0
+      }
+
+      if $mysvcd(endofrequest,$client) {
+        set parameter(usercommand,$client) [lindex $mysvcd(request,$client) 0]
+
+        set mysvcd(request,$client) {}
+
+        if [info exists parameter(userenabledcommands)] {
+          set enabled 0
+
+          set usercommandspair [list $parameter(userenabledcommands)]
+
+          foreach {username enabledcommands} $parameter(userenabledcommands) {
+            if ![string compare $username $parameter(username,$client)] {
+              foreach enabledcommand $enabledcommands {
+                if [regexp $enabledcommand $parameter(usercommand,$client)] {
+                  set enabled 1
+                }
+              }
+            }
+          }
+
+          if $enabled {
+            log 0 I "command $parameter(usercommand,$client) enabled to user $parameter(username,$client)"
+          } else {
+            log 0 W "command $parameter(usercommand,$client) not enabled to user $parameter(username,$client)"
+            log 0 I "sending NACK to client $client"
+
+            puts $out "1"
+
+            return
+          }
+        }
+
+        log 0 I "writing request to file $mysvcd(queuetmp,$client)"
+
+        if ![catch {puts $mysvcd(queuetmpfile,$client) "$mysvcd(queuecommand,$client)"}] {
+          flush $mysvcd(queuetmpfile,$client)
+
+          log 0 I "sending ACK to client $client"
+
+          puts $out "0"
+        } else {
+          log 0 I "sending NACK to client $client"
+
+          puts $out "1"
+        }
+      } else {
+        log 0 I "waiting for a complete command from client $client"
+      }
+    }
+  } elseif ![string compare "$command" "$parameter(keyword,begin)"] {
+    log 0 I "opening queue to client $client"
+
+    set timestamp [clock format \
+      [clock seconds] -format "%Y%m%d%H%M%S"]
+
+    set requestday [string range $timestamp 7 8]
+
+    set requestid "${timestamp}[getNextRequestNum $requestday]"
+
+    set mysvcd(queuetmp,$client) \
+      "${queuein}-${requestid}.tmp"
+    set mysvcd(queuein,$client) \
+      "${queuein}-${requestid}.in"
+
+    log 0 I "opening file $mysvcd(queuetmp,$client)"
+
+    if [catch "open $mysvcd(queuetmp,$client) {CREAT WRONLY}" \
+          mysvcd(queuetmpfile,$client)] {
+      log 0 E "cannot open file $mysvcd(queuetmp,$client)"
+
+      catch {close $sock}
+
+      unset mysvcd(client,$sock)
+
+      log 0 E "sending NACK to client $client"
+
+      puts $out "1"
+    } else {
+      set mysvcd(queues,$client) 1
+
+      log 0 I "sending ACK to client $client"
+
+      puts $out "0"
+
+      log 0 I "sending requestid $requestid to client $client"
+
+      puts $out "$requestid"
+    }
+  } elseif ![string compare "$command" "$parameter(keyword,get)"] {
+    set requestid [lindex $request 1]
+
+    set queueout $parameter(queueout)
+
+    append queueout "-${requestid}.out"
+
+    if [file exists $queueout] {
+      log 0 I "reading response from file $queueout"
+
+      set fileout [open $queueout]
+
+      log 0 I "sending ACK to client $client"
+
+      puts $out "0"
+
+      log 0 I "sending response to client $client"
+
+      puts -nonewline $out [read $fileout]
+      puts $out "."
+    } else {
+      log 0 I "file $queueout not found"
+
+      log 0 I "sending NACK to client $client"
+
+      puts $out "1"
+    }
+  } elseif ![string compare "$command" "$parameter(keyword,logout)"] {
+    log 0 I "logout request received"
+    log 0 I "sending ACK to client $client"
+
+    puts $out "0"
+
+    log 0 I "closing connection to client $client"
+
+    catch {close $in}
+
+    return
+  } elseif ![string compare "$request" "$parameter(keyword,clear)"] {
+    log 0 I "clearing request of client $client"
+
+    set mysvcd(request,$client) {}
+  } else {
+    if ![string compare $mysvcd(request,$client) {}] {
+      set mysvcd(request,$client) "$request"
+    } else {
+      append mysvcd(request,$client) "\n$request"
+    }
+
+    if [info complete $mysvcd(request,$client)] {
+      set mysvcd(endofrequest,$client) 1
+    } else {
+      set mysvcd(endofrequest,$client) 0
+    }
+
+    if $mysvcd(endofrequest,$client) {
+      set parameter(usercommand,$client) [lindex $mysvcd(request,$client) 0]
+
+      if [info exists parameter(userenabledcommands)] {
+        set enabled 0
+
+        set usercommandspair [list $parameter(userenabledcommands)]
+
+        foreach {username enabledcommands} $parameter(userenabledcommands) {
+          if ![string compare $username $parameter(username,$client)] {
+            foreach enabledcommand $enabledcommands {
+              if [regexp $enabledcommand $parameter(usercommand,$client)] {
+                set enabled 1
+              }
+            }
+          }
+        }
+
+        if $enabled {
+          log 0 I "command $parameter(usercommand,$client) enabled to user $parameter(username,$client)"
+          log 0 I "sending ACK to client $client"
+
+          puts $out "0"
+        } else {
+          log 0 W "command $parameter(usercommand,$client) not enabled to user $parameter(username,$client)"
+          log 0 I "sending NACK to client $client"
+
+          puts $out "1"
+
+          set mysvcd(request,$client) {}
+
+          return
+        }
+      } else {
+        log 0 I "sending ACK to client $client"
+
+        puts $out "0"
+      }
+
+      log 0 T "$mysvcd(request,$client)"
+
+      if [catch {interp eval $mysvcd(interp,$client) \
+        [list uplevel #0 "$mysvcd(request,$client)"]} \
+          mysvcd(response,$client)] {
+        if {[llength $parameter(clienthandlers)] &gt; 3} {
+          set errorhandler [lindex $parameter(clienthandlers) 3]
+        } else {
+          set errorhandler [getClientError]
+        }
+        uplevel #0 [eval "$errorhandler" \
+          [list "$in" "$out" "$client" "$mysvcd(response,$client)"]]
+      } else {
+        if [string compare "$mysvcd(response,$client)" ""] {
+          if {$parameter(expect) &amp;&amp; $parameter(external) == 0} {
+            log 0 I "sending response to client $client"
+            log 0 T "$mysvcd(response,$client)"
+
+            puts $out "$mysvcd(response,$client)\n."
+          } else {
+            if {[llength $parameter(clienthandlers)] &gt; 4} {
+              set exechandler [lindex $parameter(clienthandlers) 4]
+            } else {
+              set exechandler [getClientExec]
+            }
+
+            set command "$mysvcd(response,$client)"
+
+            log 0 I "executing external command for client $client"
+            log 0 T "$command"
+
+            if [catch {uplevel #0 [eval "$exechandler" "$in" "$out" "$client" {$command}]} mysvcd(response,$client)] {
+              if {[llength $parameter(clienthandlers)] &gt; 3} {
+                set errorhandler [lindex $parameter(clienthandlers) 3]
+              } else {
+                set errorhandler [getClientError]
+              }
+              uplevel #0 [eval "$errorhandler" \
+                [list "$in" "$out" "$client" "$mysvcd(response,$client)"]]
+            }
+          }
+        } else {
+          puts $out "."
+        }
+      }
+
+      set mysvcd(request,$client) {}
+    } else {
+      log 0 I "waiting for a complete command from client $client"
+    }
+  }
+}
+
+proc handleClientClose {in out client} {
+  global mysvcd
+
+  if [info exists mysvcd(queues,$client)] {
+    unset mysvcd(queues,$client)
+
+    log 0 I "closing file $mysvcd(queuetmp,$client)"
+
+    catch {close $mysvcd(queuetmpfile,$client)}
+
+    log 0 I "renaming file $mysvcd(queuetmp,$client) to $mysvcd(queuein,$client)"
+
+    file rename -force "$mysvcd(queuetmp,$client)" "$mysvcd(queuein,$client)"
+  }
+}
+
+proc handleClientError {in out client response} {
+  log 0 E "error executing request of client $client"
+
+  if [string compare "$response" ""] {
+    log 0 I "sending response to client $client"
+    log 0 T "$response"
+
+    puts $out "$response"
+  }
+}
+
+proc handleClient {in out} {
+  global mysvcd
+  global parameter
+
+  if {[eof $in] || ([gets $in line] &lt; 0)} {
+    if [eof $in] {
+      log 0 I "detected EOF from client $mysvcd(client,$in)"
+    } else {
+      log 0 E "error reading request from client $mysvcd(client,$in)"
+    }
+
+    log 0 I "closing connection to client $mysvcd(client,$in)"
+
+    unset mysvcd(request,$mysvcd(client,$in))
+    unset mysvcd(response,$mysvcd(client,$in))
+    unset mysvcd(interp,$mysvcd(client,$in))
+
+    set clientclosehandler \
+      [lindex $parameter(clienthandlers) 2]
+    if [string compare "$clientclosehandler" ""] {
+      eval $clientclosehandler \
+        [list "$in" "$out" "$mysvcd(client,$in)"]
+    }
+
+    catch {close $in}
+
+    unset mysvcd(client,$in)
+  } else {
+    log 0 I "received request from client $mysvcd(client,$in)"
+    log 0 T "$line"
+
+    set clientreadhandler \
+      [lindex $parameter(clienthandlers) 1]
+    if [string compare "$clientreadhandler" ""] {
+      eval $clientreadhandler \
+        [list "$in" "$out" "$mysvcd(client,$in)" "$line"]
+    }
+  }
+}
+
+proc handleCommandRead {in out client} {
+  global mysvcd
+  global parameter
+
+  if {[eof $mysvcd(command,$client)] || ([gets $mysvcd(command,$client) line] &lt; 0)} {
+    if [eof $mysvcd(command,$client)] {
+      log 0 I "detected EOF from command $parameter(usercommand,$client) for client $client"
+      log 1 I "sending response to client $client"
+
+      if !$parameter(flush) {
+        if [string compare "$mysvcd(response,$client)" ""] {
+          puts $out "$mysvcd(response,$client)\n."
+        } else {
+          puts $out "."
+        }
+      } else {
+        puts $out "."
+      }
+    } else {
+      log 0 E "error reading response from command $parameter(usercommand,$client) for client $client"
+    }
+
+    set mysvcd(request,$client) {}
+
+    log 0 I "closing command $parameter(usercommand,$client) for client $client"
+    catch {close $mysvcd(command,$client)}
+
+    fileevent $in readable [list handleClient $in $out]
+  } else {
+    log 1 I "received response from command $parameter(usercommand,$client) for client $client"
+    log 1 T "$line"
+
+    if [string compare "$mysvcd(response,$client)" ""] {
+      append mysvcd(response,$client) "\n$line"
+
+      if $parameter(flush) {
+        log 1 I "sending response to client $client"
+
+        puts $out "$line"
+      }
+    } else {
+      if [string compare "$line" ""] {
+        append mysvcd(response,$client) "$line"
+
+        if $parameter(flush) {
+          log 1 I "sending response to client $client"
+
+          puts $out "$line"
+        }
+      }
+    }
+  }
+}
+
+proc handleExternRead {in out client} {
+  global mysvcd
+  global parameter
+
+  if {[eof $mysvcd(extern,$client)] || ([gets $mysvcd(extern,$client) line] &lt; 0)} {
+    if [eof $mysvcd(extern,$client)] {
+      log 0 I "detected EOF from external application $parameter(simpleserver) for client $client"
+    } else {
+      log 0 E "error reading response from external application $parameter(simpleserver) for client $client"
+    }
+
+    log 0 I "closing external application $parameter(simpleserver) for client $client"
+
+    catch {close $mysvcd(extern,$client)}
+
+    log 0 I "closing connection to client $mysvcd(client,$in)"
+
+    unset mysvcd(request,$client)
+    unset mysvcd(response,$client)
+    unset mysvcd(interp,$client)
+
+    set clientclosehandler \
+      [lindex $parameter(clienthandlers) 2]
+    if [string compare "$clientclosehandler" ""] {
+      eval $clientclosehandler \
+        [list "$in" "$out" "$mysvcd(client,$in)"]
+    }
+
+    catch {close $in}
+
+    unset mysvcd(client,$in)
+  } else {
+    log 1 I "received response from external application $parameter(simpleserver) for client $client"
+    log 1 T "$line"
+    log 1 I "sending response to client $client"
+
+    puts $out "$line"
+  }
+}
+
+proc handleExternExec {in out client request} {
+  global mysvcd
+  global parameter
+
+  log 0 I "executing external application $parameter(simpleserver)"
+
+  set mysvcd(request,$client) $request
+
+  if $parameter(serial) {
+    if [catch {
+          exec $parameter(simpleserver) &lt;&lt; "$mysvcd(request,$client)"
+        } mysvcd(response,$client)] {
+      log 0 E "error executing external application $parameter(simpleserver)"
+    } else {
+      if [string compare "$mysvcd(response,$client)" ""] {
+        log 0 I "sending response to client $client"
+        log 0 T "$mysvcd(response,$client)"
+
+        puts $out "$mysvcd(response,$client)"
+      }
+    }
+
+    log 0 I "closing connection to client $mysvcd(client,$in)"
+
+    catch {close $sock}
+  } else {
+    if [catch {open "|echo \"$request\" | $parameter(simpleserver)" r} mysvcd(extern,$client)] {
+      log 0 E "error executing external application $parameter(simpleserver)"
+
+      catch {close $sock}
+
+      return
+    }
+
+    fconfigure $mysvcd(extern,$client) -buffering line
+
+    fileevent $mysvcd(extern,$client) readable \
+      [list handleExternRead $in $out $client]
+  }
+}
+
+proc handleTestOpen {in out client} {
+  global mysvcd
+
+  if [info exists mysvcd(test)] {
+    log 0 W "refused connection to client $client"
+
+    return 0
+  } else {
+    fileevent stdin readable \
+      [list handleTestWrite $in $out $client]
+
+    set mysvcd(test) "$client"
+
+    return 1
+  }
+}
+
+proc handleTestWrite {in out client} {
+  global mysvcd
+  global parameter
+
+  if {[gets stdin mysvcd(response,$client)] &lt; 0} {
+    log 0 I "closing connection to client $client"
+
+    unset mysvcd(test)
+
+    catch {close $out}
+
+    fileevent stdin readable {}
+  } else {
+    if [regexp $parameter(eof) "$mysvcd(response,$client)"] {
+      log 0 I "closing connection to client $client"
+
+      unset mysvcd(test)
+
+      catch {close $out}
+
+      fileevent stdin readable {}
+    } else {
+      log 0 I "sending response to client $client"
+      log 0 T "$mysvcd(response,$client)"
+
+      puts $out "$mysvcd(response,$client)"
+    }
+  }
+}
+
+proc handleTestRead {in out client request} {
+  global mysvcd
+
+  set mysvcd(request,$client) "$request"
+
+  puts stdout "$request"
+}
+
+proc handleTestClose {in out client} {
+  global mysvcd
+
+  unset mysvcd(test)
+  fileevent stdin readable {}
+}
+
+proc handleProtocolOpen {in out client} {
+  global mysvcd
+  global parameter
+
+  if {$parameter(serial) &amp;&amp; [info exists mysvcd(genericserver)]} {
+    log 0 W "refused connection to client $client"
+
+    return 0
+  } else {
+    if {![info exists parameter(genericserver,id)] || !$parameter(serial)} {
+      log 0 I "executing server $parameter(genericserver)"
+
+      if $parameter(serial) {
+        log 0 I "unique instance of server shared by clients"
+      }
+
+      if [catch {open "|$parameter(genericserver)" r+} parameter(genericserver,id)] {
+        log 0 E "error executing server $parameter(genericserver)"
+
+        return 0
+      }
+
+      fconfigure $parameter(genericserver,id) -buffering line
+
+      fileevent $parameter(genericserver,id) readable \
+        [list handleProtocolWrite $in $out $client]
+    }
+
+    set mysvcd(genericserver) $client
+
+    set mysvcd(genericserver,$client) $parameter(genericserver,id)
+
+    return 1
+  }
+}
+
+proc handleProtocolWrite {in out client} {
+  global mysvcd
+  global parameter
+
+  if {[eof $mysvcd(genericserver,$client)] || ([gets $mysvcd(genericserver,$client) line] &lt; 0)} {
+    if [eof $mysvcd(genericserver,$client)] {
+      log 0 I "detected EOF from server for client $client"
+    } else {
+      log 0 E "error reading response from server for client $client"
+    }
+
+    log 0 I "closing server for client $client"
+
+    catch {close $mysvcd(genericserver,$client)}
+
+    log 0 I "closing connection to client $mysvcd(client,$in)"
+
+    if [info exists mysvcd(genericserver)] {
+      unset mysvcd(genericserver)
+    }
+
+    unset mysvcd(request,$client)
+    unset mysvcd(response,$client)
+    unset mysvcd(interp,$client)
+
+    set clientclosehandler \
+      [lindex $parameter(clienthandlers) 2]
+    if [string compare "$clientclosehandler" ""] {
+      eval $clientclosehandler \
+        [list "$in" "$out" "$mysvcd(client,$in)"]
+    }
+
+    catch {close $in}
+
+    unset mysvcd(client,$in)
+  } else {
+    log 1 I "received response from server for client $client"
+    log 1 T "$line"
+
+    log 1 I "sending response to client $client"
+
+    puts $out "$line"
+  }
+}
+
+proc handleProtocolRead {in out client request} {
+  global mysvcd
+
+  set mysvcd(request,$client) "$request"
+
+  puts $mysvcd(genericserver,$client) "$request"
+}
+
+proc handleProtocolClose {in out client} {
+  global mysvcd
+  global parameter
+
+  if [info exists mysvcd(genericserver)] {
+    unset mysvcd(genericserver)
+  }
+
+  if !$parameter(serial) {
+    catch {close $mysvcd(genericserver,$client)}
+  }
+}
+
+proc urlDecode {url} {
+  # decode inputs to a CGI program: name1=value1&amp;name2=value2 ...
+
+  regsub -all {\+} $url { } url
+  regsub -all {%([0-9a-fA-F][0-9a-fA-F])} $url \
+    {[format %c 0x\1]} url
+
+  return [subst $url]
+}
+
+proc base64Init {} {
+  global base64
+
+  binary scan "A" c ascii(A)
+  binary scan "a" c ascii(a)
+  binary scan "0" c ascii(0)
+
+  for {set i 0} {$i&lt;26} {incr i} {
+    set base64($i) [binary format c [expr $ascii(A)+$i]]
+  }
+
+  for {set i 26} {$i&lt;52} {incr i} {
+    set base64($i) [binary format c [expr $ascii(a)+$i-26]]
+  }
+
+  for {set i 52} {$i&lt;62} {incr i} {
+    set base64($i) [binary format c [expr $ascii(0)+$i-52]]
+  }
+
+  set base64(62) "+"
+  set base64(63) "/"
+}
+
+proc base64Encode {value} {
+  global base64
+
+  set encodedvalue ""
+
+  set n [string length $value]
+
+  set j [expr $n/3]
+  set k [expr $n%3]
+
+  set m 0
+
+  for {set i 0} {$i &lt; $j} {incr i} {
+    set q1 [expr $i*3]
+    set q2 [expr $q1+2]
+
+    binary scan [string range $value $q1 $q2] B24 b1b2b3
+
+    set w1 [string range $b1b2b3 0 5]
+    set w2 [string range $b1b2b3 6 11]
+    set w3 [string range $b1b2b3 12 17]
+    set w4 [string range $b1b2b3 18 23]
+
+    binary scan [binary format B8 00$w1] c code(w1)
+    append encodedvalue $base64($code(w1))
+    binary scan [binary format B8 00$w2] c code(w2)
+    append encodedvalue $base64($code(w2))
+    binary scan [binary format B8 00$w3] c code(w3)
+    append encodedvalue $base64($code(w3))
+    binary scan [binary format B8 00$w4] c code(w4)
+    append encodedvalue $base64($code(w4))
+
+    incr m
+
+    if {$m == 18} {
+      set m 0
+      append encodedvalue "\n"
+    }
+  }
+
+  if {$k == 1} {
+    set q1 [expr $j*3]
+
+    binary scan "[string range $value $q1 $q1]0000" B12 b1
+
+    set w1 [string range $b1 0 5]
+    set w2 [string range $b1 6 11]
+
+    binary scan [binary format B8 00$w1] c code(w1)
+    append encodedvalue $base64($code(w1))
+    binary scan [binary format B8 00$w2] c code(w2)
+    append encodedvalue $base64($code(w2))
+
+    append encodedvalue "=="
+  } elseif {$k == 2} {
+    set q1 [expr $j*3]
+    set q2 [expr $q1+1]
+
+    binary scan "[string range $value $q1 $q2]00" B18 b1b2
+
+    set w1 [string range $b1b2 0 5]
+    set w2 [string range $b1b2 6 11]
+    set w3 [string range $b1b2 12 17]
+
+    binary scan [binary format B8 00$w1] c code(w1)
+    append encodedvalue $base64($code(w1))
+    binary scan [binary format B8 00$w2] c code(w2)
+    append encodedvalue $base64($code(w2))
+    binary scan [binary format B8 00$w3] c code(w3)
+    append encodedvalue $base64($code(w3))
+
+    append encodedvalue "="
+  }
+
+  return $encodedvalue
+}
+
+proc handleHttpResource {in out client resource} {
+  # return filtered resource to client
+
+  set extension [file extension $resource]
+
+  if ![string compare $extension ".html"] {
+    puts $out "Content-Type: text/html"
+    puts $out ""
+
+    set file [open $resource]
+    puts $out [read $file]
+    close $file
+  } elseif ![string compare $extension ".txt"] {
+    puts $out "Content-Type: text/plain"
+    puts $out ""
+
+    set file [open $resource]
+    puts $out [read $file]
+    close $file
+  } elseif ![string compare $extension ".xml"] {
+    puts $out "Content-Type: text/xml"
+    puts $out ""
+
+    set file [open $resource]
+    puts $out [read $file]
+    close $file
+  } elseif {![string compare $extension ".gif"] ||
+            ![string compare $extension ".jpeg"]} {
+    # return resource base64 encoded
+    if ![string compare $extension ".gif"] {
+      puts $out "Content-Type: image/gif"
+    } else {
+      puts $out "Content-Type: image/jpeg"
+    }
+    puts $out "Content-Encoding: base64"
+
+    set file [open $resource]
+    set value [read $file]
+    set encodedvalue [base64Encode $value]
+
+    puts $out "Content-Length: [string length $encodedvalue]"
+    puts $out ""
+    puts $out "$encodedvalue"
+    close $file
+  } else {
+    puts $out "Content-Type: application/octet-stream"
+    puts $out ""
+
+    set file [open $resource]
+    puts $out [read $file]
+    close $file
+  }
+}
+
+proc handleHttpOpen {in out client} {
+  global mysvcd
+  global parameter
+  global env
+
+  gets $in line
+
+  log 0 I "received request from client $client"
+  log 0 T "$line"
+
+  set mysvcd(request,$in) [split $line]
+
+  set requestmethod \
+    [lindex $mysvcd(request,$in) 0]
+
+  set env(REQUEST_URI) \
+    [lindex $mysvcd(request,$in) 1]
+
+  set env(PATH_INFO) [lindex [split $env(REQUEST_URI) "?"] 0]
+
+  set env(REMOTE_ADDR) "$mysvcd(client,$in)"
+
+  switch -- "$requestmethod" {
+    GET {
+      if [file isdirectory $parameter(documentroot)] {
+        set resource "$parameter(documentroot)[lindex $mysvcd(request,$in) 1]"
+      } elseif [file isfile $parameter(documentroot)] {
+        set cgifile $parameter(documentroot)
+
+        if $parameter(exclusive) {
+          set resource [lindex $mysvcd(request,$in) 1]
+        } else {
+          set resource "[file dirname \
+            $parameter(documentroot)][lindex $mysvcd(request,$in) 1]"
+
+          if ![string compare [lindex $mysvcd(request,$in) 1] "/"] {
+            append resource [file tail $parameter(documentroot)]
+          }
+        }
+      } else {
+        log 0 E "document root $parameter(documentroot) not found"
+
+        puts $sock "HTTP/1.0 500 INTERNAL ERROR"
+
+        log 0 I "closing connection to client $mysvcd(client,$in)"
+
+        return 0
+      }
+
+      gets $in line
+      while {[string length "$line"] != 0} {
+        log 0 T "$line"
+
+        append mysvcd(request,$in) "\n"
+        append mysvcd(request,$in) $line
+
+        gets $in line
+      }
+
+      if $parameter(cgi) {
+        if ![regexp {([^\?]+)\?(.*)} "$resource"] {
+          append resource "?"
+        }
+      }
+
+      if [regexp {([^\?]+)\?(.*)} "$resource" match cgifile cgiargs] {
+        if $parameter(cgi) {
+          if $parameter(exclusive) {
+            set cgifile $parameter(documentroot)
+          }
+        }
+        if {![file isdirectory $parameter(documentroot)] &amp;&amp; [file exists $cgifile]} {
+          log 0 I "executing server $cgifile"
+
+          set env(REQUEST_METHOD) GET
+
+          log 0 I "GET request method"
+
+          set decodedcgiargs ""
+
+          foreach {name value} [split $cgiargs &amp;=] {
+            if {[string length "$decodedcgiargs"] == 0} {
+              set decodedcgiargs [urlDecode $name]
+              append decodedcgiargs "="
+              append decodedcgiargs [urlDecode $value]
+            } else {
+              append decodedcgiargs "&amp;"
+              append decodedcgiargs [urlDecode $name]
+              append decodedcgiargs "="
+              append decodedcgiargs [urlDecode $value]
+            }
+          }
+
+          set cgiargs "$decodedcgiargs"
+
+          set env(QUERY_STRING) "$cgiargs"
+
+          log 0 T "$cgiargs"
+
+          log 0 I "sending response to client $client"
+
+          puts $out "HTTP/1.0 200 OK"
+
+          if $parameter(serial) {
+            if [catch {exec $cgifile &lt;&lt; "$mysvcd(request,$in)\n"} response] {
+              log 0 E "error executing server $cgifile"
+            }
+
+            puts $out "$response"
+          } else {
+            if [catch {open "|echo \"$mysvcd(request,$in)\" | $cgifile" r} mysvcd(cgi,$client)] {
+              log 0 E "error executing server $cgifile"
+
+              return 0
+            }
+
+            fconfigure $mysvcd(cgi,$client) -buffering line
+
+            fileevent $mysvcd(cgi,$client) readable \
+              [list handleHttpRead $in $out $client]
+
+            return 1
+          }
+        } else {
+          foreach {name value} [split $cgiargs &amp;=] {
+            lappend cgi([urlDecode $name]) [urlDecode $value]
+          }
+
+          set mysvcd(request,$client) "[file tail $cgifile] $in [array get cgi]"
+
+          log 0 I "sending response to client $client"
+
+          puts $out "HTTP/1.0 200 OK"
+
+          if [catch {interp eval $mysvcd(interp,$client) \
+               [list uplevel #0 "$mysvcd(request,$client)"]} \
+                 mysvcd(response,$client)] {
+            puts $out "$mysvcd(response,$client)"
+          }
+        }
+      } else {
+        if [file exists $resource] {
+          log 0 I "sending response to client $client"
+
+          puts $out "HTTP/1.0 200 OK"
+
+          uplevel #0 $parameter(resourcehandler) \
+                       $in $out $client "$resource"
+        } else {
+          log 0 W "resource $resource not found"
+
+          puts $out "HTTP/1.0 404 NOT FOUND"
+        }
+      }
+    }
+    POST {
+      if [file isdirectory $parameter(documentroot)] {
+        set resource "$parameter(documentroot)[lindex $mysvcd(request,$in) 1]"
+      } elseif [file isfile $parameter(documentroot)] {
+        if $parameter(exclusive) {
+          set resource $parameter(documentroot)
+        } else {
+          set resource "[file dirname \
+            $parameter(documentroot)][lindex $mysvcd(request,$in) 1]"
+
+          if ![string compare [lindex $mysvcd(request,$in) 1] "/"] {
+            append resource [file tail $parameter(documentroot)]
+          }
+        }
+      } else {
+        log 0 E "document root $parameter(documentroot) not found"
+
+        puts $sock "HTTP/1.0 500 INTERNAL ERROR"
+
+        log 0 I "closing connection to client $mysvcd(client,$in)"
+
+        return 0
+      }
+
+      set contentlength 0
+
+      gets $in line
+      while {[string length "$line"] != 0} {
+        log 0 T "$line"
+
+        append mysvcd(request,$in) "\n"
+        append mysvcd(request,$in) $line
+
+        if {![string compare [lindex [split $line :] 0] Content-length] ||
+            ![string compare [lindex [split $line :] 0] Content-Length]} {
+          set contentlength [string trim [lindex [split $line :] 1]]
+        }
+
+        if {![string compare [lindex [split $line :] 0] SOAPAction]} {
+          set soapaction [string trim [lindex [split $line :] 1]]
+
+          set env(SOAP_ACTION) $soapaction
+        }
+
+        gets $in line
+      }
+
+      set cgifile $resource
+
+      if {$contentlength} {
+        log 0 I "reading $contentlength bytes of data"
+
+        fconfigure $in -buffering none
+
+        set cgiargs [read $in $contentlength]
+
+        fconfigure $in -buffering line
+      } else {
+        gets $in cgiargs
+      }
+
+      if [file exists $cgifile] {
+        log 0 I "executing cgi $cgifile"
+
+        set env(REQUEST_METHOD) POST
+
+        log 0 I "POST request method"
+
+        if {$contentlength} {
+          set env(CONTENT_LENGTH) $contentlength
+        }
+
+        set decodedcgiargs ""
+
+        foreach {name value} [split $cgiargs &amp;=] {
+          if {[string length "$decodedcgiargs"] == 0} {
+            set decodedcgiargs [urlDecode $name]
+            append decodedcgiargs "="
+            append decodedcgiargs [urlDecode $value]
+          } else {
+            append decodedcgiargs "&amp;"
+            append decodedcgiargs [urlDecode $name]
+            append decodedcgiargs "="
+            append decodedcgiargs [urlDecode $value]
+          }
+        }
+
+        set cgiargs "$decodedcgiargs"
+
+        set env(QUERY_STRING) "$cgiargs"
+
+        log 0 T "$cgiargs"
+
+        puts $out "HTTP/1.0 200 OK"
+
+        if $parameter(serial) {
+          if [catch {exec $cgifile &lt;&lt; "$mysvcd(request,$in)\n\n$cgiargs\n"} response] {
+            log 0 E "error executing server $cgifile"
+          }
+
+          puts $out "$response"
+        } else {
+          if [catch {open "|echo \"$mysvcd(request,$in)\n\n$cgiargs\" | $cgifile" r} mysvcd(cgi,$client)] {
+            log 0 E "error executing server $cgifile"
+
+            return 0
+          }
+
+          fconfigure $mysvcd(cgi,$client) -buffering line
+
+          fileevent $mysvcd(cgi,$client) readable \
+            [list handleHttpRead $in $out $client]
+
+          return 1
+        }
+      } else {
+        foreach {name value} [split $cgiargs &amp;=] {
+          lappend cgi([urlDecode $name]) [urlDecode $value]
+        }
+
+        set mysvcd(request,$client) "[file tail $cgifile] $out [array get cgi]"
+
+        log 0 I "sending response to client $client"
+
+        puts $out "HTTP/1.0 200 OK"
+
+        if [catch {interp eval $mysvcd(interp,$client) \
+             [list uplevel #0 "$mysvcd(request,$client)"]} \
+               mysvcd(response,$client)] {
+          puts $out "$mysvcd(response,$client)"
+        }
+      }
+    }
+  }
+
+  log 0 I "closing connection to client $mysvcd(client,$in)"
+
+  return 0
+}
+
+proc handleHttpRead {in out client} {
+  global mysvcd
+  global parameter
+
+  if {[eof $mysvcd(cgi,$client)] || ([gets $mysvcd(cgi,$client) line] &lt; 0)} {
+    if [eof $mysvcd(cgi,$client)] {
+      log 0 I "detected EOF from server for client $client"
+    } else {
+      log 0 E "error reading response from server for client $client"
+    }
+
+    log 0 I "closing server for client $client"
+
+    catch {close $mysvcd(cgi,$client)}
+
+    log 0 I "closing connection to client $mysvcd(client,$in)"
+
+    unset mysvcd(request,$client)
+    unset mysvcd(response,$client)
+    unset mysvcd(interp,$client)
+
+    set clientclosehandler \
+      [lindex $parameter(clienthandlers) 2]
+    if [string compare "$clientclosehandler" ""] {
+      eval $clientclosehandler \
+        [list "$in" "$out" "$mysvcd(client,$in)"]
+    }
+
+    catch {close $in}
+
+    unset mysvcd(client,$in)
+  } else {
+    log 1 I "received response from server for client $client"
+    log 1 T "$line"
+    log 1 I "sending response to client $client"
+
+    puts $out "$line"
+  }
+}
+
+proc view {proc} {
+  set info ""
+
+  if {[lsearch -exact [info procs] $proc] != -1} {
+    set space ""
+    append info "proc $proc {"
+    foreach arg [info args $proc] {
+      if [info default $proc $arg value] {
+        append info "$space{$arg $value}"
+      } else {
+        append info $space$arg
+      }
+    }
+    append info "} {"
+    append info [info body $proc]
+    append info "}"
+  }
+
+  return $info
+}
+
+proc daemon {} {
+  if [fork] {
+    exit
+  }
+  disconnect
+}
+
+proc reloadConfig {} {
+  global parameter
+
+  if [info exists parameter(configfile)] {
+    log 0 I "reloading configuration file $parameter(configfile)"
+
+    interp delete $parameter(interp)
+    interp create -safe $parameter(interp)
+
+    setEnabledCommands {}
+
+    uplevel #0 {source "$parameter(configfile)"}
+
+    setConfigHandler $parameter(confighandler)
+
+    if ![string compare "$parameter(enabledcommands)" "*"] {
+      setEnabledCommands [info commands]
+    } else {
+      setEnabledCommands $parameter(enabledcommands)
+    }
+
+    if [info exists parameter(logfile)] {
+      setLogFile $parameter(logfile)
+    }
+  }
+}
+
+proc status {{ison {}}} {
+  global parameter
+
+  if ![string compare $ison {}] {
+    return $parameter(status)
+  } else {
+    if $ison {
+      set parameter(status) 1
+
+      log 0 I "status is ON"
+    } else {
+      set parameter(status) 0
+
+      log 0 I "status is OFF"
+    }
+  }
+}
+
+proc switchLog {} {
+  global parameter
+
+  if $parameter(log) {
+    log 0 I "log is disabled"
+
+    set parameter(log) 0
+  } else {
+    set parameter(log) 1
+
+    log 0 I "log is enabled"
+  }
+}
+
+proc switchStatus {} {
+  global parameter
+
+  if $parameter(status) {
+    set parameter(status) 0
+
+    log 0 I "status is OFF"
+  } else {
+    set parameter(status) 1
+
+    log 0 I "status is ON"
+  }
+}
+
+proc handleSignal {} {
+  switchStatus
+}
+
+proc setSignalHandlers {} {
+  trap {
+    log 0 I "received signal SIGINT"
+
+    stop
+  } SIGINT
+
+  trap {
+    log 0 I "received signal SIGTERM"
+
+    stop
+  } SIGTERM
+
+  trap {
+    log 0 I "received signal SIGUSR1"
+
+    reloadConfig
+  } SIGUSR1
+
+  trap {
+    log 0 I "received signal SIGUSR2"
+
+    uplevel #0 $parameter(signalhandler)
+  } SIGUSR2
+}
+
+proc init {} {
+  global parameter
+
+  set initfile "~/.mysvcdrc"
+
+  if [file exists $initfile] {
+    uplevel #0 source $initfile
+  }
+
+  initParameters
+  parseArguments
+  checkParameters
+
+  setConfigHandler getConfigHandler
+
+  if [info exists parameter(configfile)] {
+    uplevel #0 {source "$parameter(configfile)"}
+  }
+
+  setConfigHandler $parameter(confighandler)
+
+  setLogFile [getLogFile]
+
+  interp create -safe $parameter(interp)
+
+  if ![string compare "$parameter(enabledcommands)" "*"] {
+    setEnabledCommands [info commands]
+  } else {
+    setEnabledCommands $parameter(enabledcommands)
+  }
+
+  setSignalHandlers
+
+  if $parameter(daemon) {
+    daemon
+  }
+}
+
+proc start {} {
+  global parameter
+
+  log 0 I "start \[[pid]]"
+
+  if [info exists parameter(starthandler)] {
+    uplevel #0 $parameter(starthandler)
+  }
+
+  if [info exists parameter(interpreter)] {
+    # interpreter interface
+
+    interpreter
+  } else {
+    # socket interface
+
+    if [catch {
+      server $parameter(port)
+    } error] {
+      log 0 F "port $parameter(port) already used"
+
+      exit 1
+    }
+  }
+
+  log 0 I "server [myaddr]:$parameter(port)"
+
+  vwait forever
+}
+
+proc stop {} {
+  global mysvcd
+  global parameter
+
+  log 0 I "stop \[[pid]]"
+
+  if [catch {close $mysvcd(server)}] {
+    set status 1
+  } else {
+    set status 0
+  }
+
+  if {$parameter(serial) &amp;&amp; [info exists parameter(genericserver,id)]} {
+    if [catch {close $parameter(genericserver,id)}] {
+      set status 1
+    } else {
+      set status 0
+    }
+  }
+
+  if [info exists parameter(stophandler)] {
+    uplevel #0 $parameter(stophandler)
+  }
+
+  exit $status
+}
+
+# main
+
+proc main {} {
+  init
+  start
+}
+
+main
+
+# end of script</tt></pre>
+</div></div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 0.400<br />
+Last updated 2014-06-28 16:24:04 CEST
+</div>
+<div id="footer-badges">
+<img style="border:none; width:88px; height:31px;"
+     src="../images/gplv3-127x51.png"
+     alt="GPL Version 3" />
+<!-- Histats.com  START  -->
+<a href="http://www.histats.com" target="_blank" title="simple hit counter" >
+<script  type="text/javascript" language="javascript">
+var s_sid = 675659;var st_dominio = 4;
+var cimg = 0;var cwi =112;var che =48;
+</script></a><script  type="text/javascript" language="javascript" src="http://s10.histats.com/js9.js"></script>
+<noscript><a href="http://www.histats.com" target="_blank">
+<img  src="http://s4.histats.com/stats/0.gif?675659&1" alt="simple hit counter" border="0"></a>
+</noscript>
+<!-- Histats.com  END  -->
+</div>
+</div>
+</div>
+</td>
+</tr>
+</table>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-11334618-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>

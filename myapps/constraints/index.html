@@ -1,0 +1,1426 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.5.2" />
+<meta name="description" content="an open source UNIX framework for shell script based web service provider" />
+<meta name="keywords" content="mysvc, shell script, web service, provider, service, soa, template, engine, myste, mysde, mysvcd" />
+<link rel="stylesheet" href="../../xhtml11.css" type="text/css" />
+<link rel="stylesheet" href="../../xhtml11-quirks.css" type="text/css" />
+<link rel="stylesheet" href="../../layout1.css" type="text/css" />
+<title>MySVC</title>
+</head>
+<body>
+<div id="layout-banner">
+  <div id="layout-title">MySVC</div>
+  <div id="layout-description">an open source UNIX framework for shell script based web services provider</div>
+</div>
+<table>
+<tr valign="top">
+<td id="layout-menu">
+  <div>&#187;<a href="../../index.html">Home</a></div>
+  <div>&#187;<a href="../../tools.html">Tools</a></div>
+  <div>&#187;<a href="../../manpage.html">Man&nbsp;Page</a></div>
+  <div>&#187;<a href="../../userguide.html">User&nbsp;Guide</a></div>
+  <div>&#187;<a href="../../changelog.html">ChangeLog</a></div>
+  <div>&#187;<a href="../../install.html">Installation</a></div>
+  <div>&#187;<a href="../../sourcecode.html">Source Code</a></div>
+  <div>&#187;<a href="../../downloads.html">Downloads</a></div>
+  <div>&#187;<a href="../../faq.html">FAQ</a></div>
+  <div>&#187;<a href="../../support.html">Support</a></div>
+  <div>&#187;<a href="../../license.html">License</a></div>
+  <hr/>
+  <div>&#187;<a href="../../myapps/index.html">My Apps</a></div>
+  <div>
+  <hr/>
+  <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+  <input type="hidden" name="cmd" value="_s-xclick">
+  <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+  ">
+  <input type="image" src="https://www.paypal.com/en_US/IT/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="">
+  <img alt="" border="0" src="https://www.paypal.com/it_IT/i/scr/pixel.gif" width="1" height="1">
+  </form>
+  </div>
+</td>
+<td>
+<div id="layout-content">
+<div id="header">
+<h1>Constraints</h1>
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="sidebarblock">
+<div class="sidebar-content">
+<div class="paragraph"><p>The <em>Constraints</em> iOS application is available on <a href="http://itunes.com/apps/constraints"><em>App Store</em></a> for <em>iPod touch</em>, <em>iPhone</em> and <em>iPad</em> with iOS version &gt;= 3.2</p></div>
+</div></div>
+<div class="imageblock">
+<div class="content">
+<img src="Icon.png" alt="Icon.png" />
+</div>
+</div>
+</div>
+</div>
+<h2 id="Features">Features</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The <em>Constraints</em> application is a <em>SAT</em> based <a href="#PropositionalLogic"><em>propositional (boolean) logic</em></a> engine defined by a list of <em>models</em>, where a <em>model</em> includes a list of <em>constraints</em> (a <em>Knowledge Base</em>) each defined by a <a href="#PropositionalFormula">propositional formula</a> (<em>x and (y or not z)</em>) including a set of <em>propositional</em> (boolean) <em>variables</em> (<em>x</em>,<em>y</em>,<em>z</em>) and <em>operators</em> (<em>and</em>,<em>or</em>,<em>not</em>).</p></div>
+<div class="paragraph"><p>To each <em>model</em> corresponds a <em>propositional formula</em> equal to the logical <em>and</em> of <em>propositional formulas</em> of currently enabled <em>constraints</em>, and based on a selected <em>model</em> from a list of <em>models</em> that you can add, modify or delete, the application <a href="#UserInterface">user interface</a> contains three main screen tabs (<em>constraints</em>,<em>variables</em>,<em>solutions</em>) to:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+add, modify, delete, enable or disable <em>constraints</em>
+</p>
+</li>
+<li>
+<p>
+assign values (<em>true</em>,<em>false</em>) to boolean <em>variables</em> (any alphanumeric string including <em>.</em> and <em>_</em> characters) used by the model <em>propositional formula</em>
+</p>
+</li>
+<li>
+<p>
+for <em>satisfiable models</em> (<a href="#SAT"><em>SAT</em></a>), find one by one all possible assignments to not assigned boolean <em>variables</em> as <em>solutions</em> of the <em>model</em>, such that the <em>model</em> (its corresponding <em>propositional formula</em>) is always <em>true</em> regardless remaining <em>variables</em> assignments.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Include advanced features such as:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+support of multiple syntax for <em>boolean</em> operators of <em>propositional formulas</em> (<a href="#not"><em>not</em></a>,<a href="#and"><em>and</em></a>,<a href="#or"><em>or</em></a>,<a href="#implies"><em>implies</em></a>,<a href="#equivalent"><em>equivalent</em></a>,<a href="#if"><em>if</em></a>,<a href="#unless"><em>unless</em></a>, <a href="#nor"><em>nor</em></a> and <a href="#nand"><em>nand</em></a>): (<em>x and (y or not z)</em> is equivalent to <em>x*(y+-z)</em>)
+</p>
+</li>
+<li>
+<p>
+real time evalution of constraints and models <em>status</em> (<em>undefined</em>,<em>unsatisfiable</em>,<em>satisfiable</em>,<em>valid</em>), where a propositional formula is <em>valid</em> when is <em>true</em> regardless assignments to its not assigned <em>variables</em>
+</p>
+</li>
+<li>
+<p>
+conversion to normal forms <a href="#NNF">NNF</a>, <a href="#CNF">CNF</a> and <a href="#DNF">DNF</a> of <em>propositional formulas</em> associated with each <em>model</em> or <em>constraint</em>; e.g. the <em>Disjunctive Normal Form</em> (<em>DNF</em>) of propositional formula <em>x&amp;(y|~z)</em> is <em>x&amp;y|x&amp;~z</em>
+</p>
+</li>
+<li>
+<p>
+evaluation of the <em>propositional formula</em> corresponding to all possible <em>SAT</em> solutions <em>variables</em> assignments to get <em>valid</em> (<em>true</em>) <em>propositional formulas</em> for <em>constraints</em> or <em>models</em> (<em>SAT</em>)
+</p>
+</li>
+<li>
+<p>
+export to email or clipboard of:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>models</em> and <em>constraints</em> definition
+</p>
+</li>
+<li>
+<p>
+<em>variable</em> assignments
+</p>
+</li>
+<li>
+<p>
+model <em>solutions</em>
+</p>
+</li>
+<li>
+<p>
+normal forms of <em>constraints</em> and <em>models</em>
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+<a href="#Settings">import from web</a> (from a configurable set of 'URL&#8217;s) of:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>models</em> definition (a simple text containing an optional model description and a list of constraint names)
+</p>
+</li>
+<li>
+<p>
+<em>constraints</em> definition (a simple text containing an optional constraint description and its propositional formula)
+</p>
+</li>
+<li>
+<p>
+mailing list for export to email (including a list of email address or http URL of text files containing mailing list)
+</p>
+</li>
+<li>
+<p>
+evaluation of (<em>true</em>,<em>false</em>) value of <em>variables</em>
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+percistence
+</p>
+</li>
+<li>
+<p>
+<a href="#FeatureModels"><em>Feature Models</em></a> (<em>FM</em>) and Propositional <em>Logic Truth Maintenance System</em> (<em>LTMS</em>) capabilities, such as find the smallest set of <em>requires</em> and <em>excludes</em> rules based on selected <em>features</em> (boolean <em>variables</em>, true iff the feature is selected) and <em>propositional formula</em> related to logical <em>constraints</em> of these <em>features</em>; e.g. if from model constraints you get four features <em>a</em>,<em>b</em>,<em>c</em>,<em>d</em> and four product lines <em>(a,c)</em>, <em>(d)</em>, <em>(b)</em> and <em>(a,b,d)</em> (from <em>DNF</em> normal form) with <em>Requires</em> functionality you get rules (represented as <em>propositional formulas</em>) such as <em>the selection of c feature requires feature a and excludes features b and d</em> (<em>c&#8594;a&amp;~b&amp;~d</em>) or <em>the selection of a and b features requires feature d</em> (<em>a&amp;b&#8594;d</em>)
+</p>
+</li>
+</ul></div>
+</div>
+<h2 id="UserInterface">User interface</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The user interface of <em>Constraints</em> application contains three tab screens, each containing on the first table row the name and status of the actual (selected) <em>model</em></p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+the first one (<em>X&amp;Y</em>) contains a table with the list of all <em>constraints</em>; you can add, modify or delete item.
+</p>
+</li>
+<li>
+<p>
+the second one (<em>T|F</em>) contains a table with the list of all boolean <em>variables</em> used into all enabled <em>constraints</em>
+</p>
+</li>
+<li>
+<p>
+the third one (<em>123</em>) contains a table with the actual <em>solution</em> based on the set of enabled <em>constraints</em> and the assigned <em>variables</em>
+</p>
+</li>
+</ul></div>
+<h3 id="_first_tab_x_amp_y">First Tab (X&amp;Y)</h3><div style="clear:left"></div>
+<div class="paragraph"><p>The first tab screen handle <em>models</em> and <em>constraints</em> definition:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+each <em>model</em> is defined by:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+a name
+</p>
+</li>
+<li>
+<p>
+an optional description
+</p>
+</li>
+<li>
+<p>
+a list of <em>constraints</em>
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+each <em>constraint</em> is defined by:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+a name
+</p>
+</li>
+<li>
+<p>
+an optional description
+</p>
+</li>
+<li>
+<p>
+a <a href="#PropositionalFormula">propositional formula</a>
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+each <em>constraint</em> can be enabled (if doesn&#8217;t contains syntax errors) or disabled
+</p>
+</li>
+<li>
+<p>
+each <em>model</em> and each <em>constraint</em> have a <em>status</em>:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+undefined
+</p>
+</li>
+<li>
+<p>
+<a href="#unsatisfiable">unsatisfiable</a>
+</p>
+</li>
+<li>
+<p>
+<a href="#satisfiable">satisfiable</a>
+</p>
+</li>
+<li>
+<p>
+<a href="#valid">valid</a>
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+if a <em>constraint</em> doesn&#8217;t contains syntax errors it&#8217;s enabled by default, else is <em>undefined</em>
+</p>
+</li>
+<li>
+<p>
+a <em>model</em> is <em>undefined</em> if it does not include any enabled <em>constraints</em>.
+</p>
+</li>
+<li>
+<p>
+a <em>constraint</em> is <em>undefined</em> if its <a href="#PropositionalFormula">propositional formula</a> is empty or with syntax errors.
+</p>
+</li>
+<li>
+<p>
+the propositional formula used to compute the status of a <em>model</em> is the logical <em>and</em> of all propositional formulas of its enabled <em>constraints</em>
+</p>
+</li>
+<li>
+<p>
+selecting the first row of each screen tabs can be selected another model, edited the model list (add, delete) or view a model description; with the right button on the first row of each screen tabs you get the <em>Model</em> screen for:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+view model status or edit the actual model properties (name, description)
+</p>
+</li>
+<li>
+<p>
+edit, import or export the model definition (optional description plus <em>.</em> plus list of <em>constraint</em> names) selecting the first row of <em>Model</em> screen; with the right button on this screen you get the <em>Requires</em> screen with <a href="#FeatureModels"><em>Feature Models</em></a> rules
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+pushing the top right button on the <em>Model</em> screen you get the <em>Normalize</em> screen to evaluate <a href="#NormalForms"><em>normal forms</em></a> and <em>SAT</em> solutions, with export capability.
+</p>
+</li>
+<li>
+<p>
+selecting a single <em>constraints</em> on the first main tab you get the screen <em>Constraint</em> like <em>Model</em> screen but applied to <em>propositional formula</em> of selected <em>constraint</em>.
+</p>
+</li>
+</ul></div>
+<h3 id="_second_tab_t_f">Second Tab (T|F)</h3><div style="clear:left"></div>
+<div class="paragraph"><p>The second tab screen handle model <em>variables assignment</em> depending on the set of enabled constraints:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+the top left button is used to select a circular mode between:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+True
+</p>
+</li>
+<li>
+<p>
+False
+</p>
+</li>
+<li>
+<p>
+Import
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+the actual mode is on tile of second table section
+</p>
+</li>
+<li>
+<p>
+with <em>True</em> and <em>False</em> you:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+select the default assigned value used with single tap on a <em>variable</em> row
+</p>
+</li>
+<li>
+<p>
+the double tap swap boolean value (from <em>true</em> to <em>false</em> and from <em>false</em> to <em>true</em>)
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+with <em>Import</em> the boolean value (<em>true</em>,<em>false</em>) assigned to variables is <a href="#Settings">imported</a> from web
+</p>
+</li>
+<li>
+<p>
+to each <em>variable</em> row is associated a status: <em>true</em>, <em>false</em> or (without checkmark) <em>undefined</em>
+</p>
+</li>
+<li>
+<p>
+the top right button is for:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+with <em>True</em> or <em>False</em> mode: <em>select</em> (with default assigned value) or <em>unselect</em> all not assigned (i.e. <em>undefined</em>) variables
+</p>
+</li>
+<li>
+<p>
+with <em>Import</em> mode all values of not assigned (<em>undefined</em>) variables are <a href="#Settings">imported</a> from web
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+pushing the right button on the first table row (related to model and its status) you get a propositional formula representing all assignments (e.g. <em>x&amp;~y</em> if x=T and y=F), with export capability
+</p>
+</li>
+</ul></div>
+<h3 id="_third_tab_123">Third Tab (123)</h3><div style="clear:left"></div>
+<div class="paragraph"><p>The third tab screen handle model <em>solutions</em> (one by one) depending on the set of enabled constraints:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+with the top right button you get the next solution (if any)
+</p>
+</li>
+<li>
+<p>
+with the top left button you return to the first solution (if any)
+</p>
+</li>
+<li>
+<p>
+variables already assigned don&#8217;t have checkmark (as opposite from second tab of variable assignments)
+</p>
+</li>
+<li>
+<p>
+pushing the right button on the first table row (related to model and its status) you get a propositional formula representing all value of current solution with export capability
+</p>
+</li>
+</ul></div>
+</div>
+<h2 id="PropositionalLogic">Propositional Logic</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Propositional logic deals with statements or <em>propositions</em> and the connections between them, where each proposition is represented by a <em>variable</em> with <em>true</em> (<em>T</em>) or <em>false</em> (<em>F</em>) value.</p></div>
+<div class="paragraph"><p>Besides variables representing propositions, propositional logic also includes boolean operators that represent logical relations such as <em>and</em>, <em>or</em>, <em>not</em>, <em>implies</em> (<em>if-then</em>) and <em>equivalent</em> (<em>if-and-only-if</em>), when <em>not</em> is the unique <em>unary</em> (boolean) operator and the others are all <em>binary</em> (boolean) operators.</p></div>
+<div class="paragraph"><p>Let <em>p</em> be the proposition <em>The sun is shining</em>, and let <em>q</em> be the proposition <em>It is raining</em>. The most commonly used operators in propositional logic correspond to the English words <em>and</em>, <em>or</em>, <em>not</em>, <em>if-then</em>, and <em>if-and-only-if</em>:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Conjunction (and). <em>p and q</em> represents the proposition <em>The sun is shining, and it is raining.</em>
+</p>
+</li>
+<li>
+<p>
+Disjunction (or). <em>p or q</em> represents <em>The sun is shining, or it is raining.</em>
+</p>
+</li>
+<li>
+<p>
+Negation (not). <em>not p</em> represents <em>The sun is not shining.</em>
+</p>
+</li>
+<li>
+<p>
+Implication (if-then). <em>p implies q</em> represents <em>If the sun is shining, then it is raining.</em>
+</p>
+</li>
+<li>
+<p>
+Equivalence (if-and-only-if). <em>p equivalent q</em> represents <em>The sun is shining if and only if it is raining.</em>
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>The rules used by propositional logic compute the truth value of a compound proposition (<em>propositional formula</em>) from the truth or falsity of the elementary propositions (<em>variables</em>) contained within it.</p></div>
+<div class="paragraph"><p>They are therefore called truth functions, whose inputs are the truth values <em>T</em> for <em>true</em> and <em>F</em> for <em>false</em>.</p></div>
+<div class="paragraph"><p>The following tables, called truth tables, shows the outputs generated by the five truth functions <em>and</em>, <em>or</em>, <em>not</em>, <em>implies</em>, and <em>equivalent</em> for all possible combinations of the two inputs p and q.</p></div>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<caption class="title">Table 1. and</caption>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+<thead>
+<tr>
+<th align="left" valign="top">p</th>
+<th align="left" valign="top">q</th>
+<th align="left" valign="top">p and q</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">T</p></td>
+<td align="left" valign="top"><p class="table">T</p></td>
+<td align="left" valign="top"><p class="table">T</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">T</p></td>
+<td align="left" valign="top"><p class="table">F</p></td>
+<td align="left" valign="top"><p class="table">F</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">F</p></td>
+<td align="left" valign="top"><p class="table">T</p></td>
+<td align="left" valign="top"><p class="table">F</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">F</p></td>
+<td align="left" valign="top"><p class="table">F</p></td>
+<td align="left" valign="top"><p class="table">F</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<caption class="title">Table 2. or</caption>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+<thead>
+<tr>
+<th align="left" valign="top">p</th>
+<th align="left" valign="top">q</th>
+<th align="left" valign="top">p or q</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">T</p></td>
+<td align="left" valign="top"><p class="table">T</p></td>
+<td align="left" valign="top"><p class="table">T</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">T</p></td>
+<td align="left" valign="top"><p class="table">F</p></td>
+<td align="left" valign="top"><p class="table">T</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">F</p></td>
+<td align="left" valign="top"><p class="table">T</p></td>
+<td align="left" valign="top"><p class="table">T</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">F</p></td>
+<td align="left" valign="top"><p class="table">F</p></td>
+<td align="left" valign="top"><p class="table">F</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<caption class="title">Table 3. not</caption>
+<col width="50%" />
+<col width="50%" />
+<thead>
+<tr>
+<th align="left" valign="top">p</th>
+<th align="left" valign="top">not p</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">T</p></td>
+<td align="left" valign="top"><p class="table">F</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">T</p></td>
+<td align="left" valign="top"><p class="table">F</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">F</p></td>
+<td align="left" valign="top"><p class="table">T</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">F</p></td>
+<td align="left" valign="top"><p class="table">T</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<caption class="title">Table 4. implies</caption>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+<thead>
+<tr>
+<th align="left" valign="top">p</th>
+<th align="left" valign="top">q</th>
+<th align="left" valign="top">p implies q</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">T</p></td>
+<td align="left" valign="top"><p class="table">T</p></td>
+<td align="left" valign="top"><p class="table">T</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">T</p></td>
+<td align="left" valign="top"><p class="table">F</p></td>
+<td align="left" valign="top"><p class="table">F</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">F</p></td>
+<td align="left" valign="top"><p class="table">T</p></td>
+<td align="left" valign="top"><p class="table">T</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">F</p></td>
+<td align="left" valign="top"><p class="table">F</p></td>
+<td align="left" valign="top"><p class="table">T</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<caption class="title">Table 5. equivalent</caption>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+<thead>
+<tr>
+<th align="left" valign="top">p</th>
+<th align="left" valign="top">q</th>
+<th align="left" valign="top">p equivalent q</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">T</p></td>
+<td align="left" valign="top"><p class="table">T</p></td>
+<td align="left" valign="top"><p class="table">T</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">T</p></td>
+<td align="left" valign="top"><p class="table">F</p></td>
+<td align="left" valign="top"><p class="table">F</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">F</p></td>
+<td align="left" valign="top"><p class="table">T</p></td>
+<td align="left" valign="top"><p class="table">F</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">F</p></td>
+<td align="left" valign="top"><p class="table">F</p></td>
+<td align="left" valign="top"><p class="table">T</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p>There are 16 possible truth functions of two arguments, but <em>and</em>, <em>or</em>, <em>not</em>, <em>implies</em> and <em>equivalent</em> are the most commonly used.</p></div>
+<div class="paragraph"><p>Other boolean operators are <em>xor</em>, <em>nand</em> and <em>nor</em>:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>p xor q</em> (<em>exclusive or</em>), equivalent to <em>(p or q) and not (p and q)</em> (<em>p or q, but not both</em>)
+</p>
+</li>
+<li>
+<p>
+<em>p nand q</em> equivalent to <em>not (p and q)</em>
+</p>
+</li>
+<li>
+<p>
+<em>p nor q</em> equivalent to <em>not (p or q)</em>
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Following are some common equivalences. When two formulas are equivalent, either one can be substituted for any occurrence of the other, either alone or as part of some larger formula:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Idempotency. <em>p and p</em> is equivalent to <em>p</em>, and <em>p or p</em> is also equivalent to <em>p</em>.
+</p>
+</li>
+<li>
+<p>
+Commutativity. <em>p and q</em> is equivalent to <em>q and p</em>, and <em>p or q</em> is equivalent to <em>q or p</em>.
+</p>
+</li>
+<li>
+<p>
+Associativity. <em>p and (q and r)</em> is equivalent to <em>(p and q) and r</em>, and <em>p or (q or r)</em> is equivalent to <em>(p or q) or r</em>.
+</p>
+</li>
+<li>
+<p>
+Distributivity. <em>p and (q or r)</em> is identical to <em>(p and q) or (p and r)</em>, and <em>p or (q and r)</em> is equivalent to <em>(p or q) and (p or r)</em>.
+</p>
+</li>
+<li>
+<p>
+Absorption. <em>p and (p or q)</em> is equivalent to <em>p</em>, and <em>p or (p and q)</em> is equivalent to <em>p</em>.
+</p>
+</li>
+<li>
+<p>
+Double negation. <em>p</em> is equivalent to <em>not not p</em>.
+</p>
+</li>
+<li>
+<p>
+De Morgan&#8217;s laws. <em>not (p and q)</em> is equivalent to <em>not p or not q</em>, and <em>not (p or q)</em> is equivalent to <em>not p and not q</em>.
+</p>
+</li>
+</ul></div>
+<div class="paragraph" id="unsatisfiable"><p>A propositional formula is said <em>unsatisfiable</em> when it is always <em>false</em> regardless from assignments of truth values to its variables.</p></div>
+<div class="paragraph" id="valid"><p>A propositional formula is said <em>valid</em> (or <em>tautology</em>) when it is always <em>true</em> regardless from assignments of truth values to its variables.</p></div>
+<div class="paragraph" id="satisfiable"><p>A propositional formula is said <em>satisfiable</em> when it can be <em>true</em> or <em>false</em> depending from assignments of truth values to its variables.</p></div>
+<div class="paragraph"><p>To prove that proposition <em>B</em> is a logical consequence of proposition <em>A</em> (i.e. <em>A&#8594;B</em>) you must prove that its negate <em>not (A&#8594;B)</em> is unsatisfiable:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>not (A&#8594;B)</em> = not (not A or B) = A and not B
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>So to prove that B is a logical consequence of <em>A</em> is equivalent to prove that <em>A and not B</em> is unsatisfiable.</p></div>
+</div>
+<h2 id="NormalForms">Normal forms</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The main normal forms of propositional logic are:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Negation Normal Form (NNF)
+</p>
+</li>
+<li>
+<p>
+Conjunctive Normal Form (CNF)
+</p>
+</li>
+<li>
+<p>
+Disjunctive Normal Form (DNF)
+</p>
+</li>
+</ul></div>
+<div class="paragraph" id="NNF"><p>A propositional formula is in <em>Negation Normal Form</em> (<em>NNF</em>) if negation occurs only immediately above elementary variables, and { <em>not</em>, <em>or</em>, <em>and</em> } are the only allowed boolean connectives.</p></div>
+<div class="paragraph"><p>Each formula can be brought into this form by replacing implications and equivalences by their definitions, using De Morgan&#8217;s laws to push negation inside, and eliminating double negations.</p></div>
+<div class="paragraph"><p>E.g.: the <em>NNF</em> of formula <em>not (a and not b)</em> is <em>not a or b</em></p></div>
+<div class="paragraph"><p>A propositional formula is in <em>Conjunctive Normal Form</em> (<em>CNF</em>) if it is a conjunction of clauses, where a clause is a disjunction of literals and a literal is a variable or its complement (negated variable), and where a literal and its complement cannot appear in the same clause.</p></div>
+<div class="paragraph" id="CNF"><p>The only propositional connectives a formula in CNF can contain are <em>and</em>, <em>or</em>, and <em>not</em>. The <em>not</em> operator can only be used as part of a literal, which means that it can only precede a propositional variable.</p></div>
+<div class="paragraph"><p>E.g.: <em>(a or b or not c) and (d or not e or f)</em></p></div>
+<div class="paragraph" id="DNF"><p>A propositional formula is in <em>Disjunctive Normal Form</em> (<em>DNF</em>) if it is a disjunction of clauses, where a clause is a conjunction of literals and a literal is a variable or its complement (negated variable), and where a literal and its complement cannot appear in the same clause.</p></div>
+<div class="paragraph"><p>The only propositional connectives a formula in DNF can contain are <em>and</em>, <em>or</em>, and <em>not</em>. The <em>not</em> operator can only be used as part of a literal, which means that it can only precede a propositional variable.</p></div>
+<div class="paragraph"><p>E.g.: <em>(a and b and not c) or (d and not e and f)</em></p></div>
+<div class="paragraph" id="SAT"><p>SAT</p></div>
+<div class="paragraph" id="SAT"><p><em>SAT</em> (from <em>satisfiability</em>) is the test to verify if a propositional formula is satisfiable.</p></div>
+<div class="paragraph"><p>When a propositional formula is <em>satisfiable</em>, the <em>SAT</em> solutions of a propositional formula represents the set of all assignments of truth values (<em>true</em> or <em>false</em>) such that the truth value of the propositional formula is <em>true</em></p></div>
+<div class="paragraph"><p>E.g.: the three SAT solutions of the propositional formula <em>a and (b or not c)</em> are:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+a=T, b=T, c=T (<em>a and b and c</em>)
+</p>
+</li>
+<li>
+<p>
+a=T, b=T, c=F (<em>a and b and not c</em>)
+</p>
+</li>
+<li>
+<p>
+a=T, b=F, c=F (<em>a and not b and not c</em>)
+</p>
+</li>
+</ul></div>
+</div>
+<h2 id="PropositionalFormula">Propositional formula</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Each <em>propositional formula</em> of the <em>Constraints</em> application is case sensitive and include:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+any string of alphanumeric characters (<em>A-Z</em>,<em>a-z</em>,<em>0-9</em>) (including <em>.</em> and  <em>_</em> characters) as boolean variables
+</p>
+</li>
+<li>
+<p>
+spaces and newlines (can be written on more text lines)
+</p>
+</li>
+<li>
+<p>
+the opened and closed parentheses:
+</p>
+</li>
+</ul></div>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="100%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">(</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="ulist"><ul>
+<li>
+<p>
+one of the following syntax for constants <em>true</em> and <em>false</em>:
+</p>
+</li>
+</ul></div>
+<div class="tableblock" id="true">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<caption class="title">Table 6. true</caption>
+<col width="100%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">true</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">TRUE</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">t</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">T</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tableblock" id="false">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<caption class="title">Table 7. false</caption>
+<col width="100%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">false</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">FALSE</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">f</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">F</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="ulist"><ul>
+<li>
+<p>
+one of the following syntax for <em>not</em> unary operator:
+</p>
+</li>
+</ul></div>
+<div class="tableblock" id="not">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<caption class="title">Table 8. not</caption>
+<col width="100%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">not</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">NOT</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">-</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">~</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">!</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="ulist"><ul>
+<li>
+<p>
+one of the following syntax for binary operators <em>and</em>, <em>or</em>, <em>implies</em>, <em>equivalent</em>, <em>if</em>, <em>unless</em> (<em>xor</em>), <em>nor</em>, <em>nand</em>:
+</p>
+</li>
+</ul></div>
+<div class="tableblock" id="and">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<caption class="title">Table 9. and</caption>
+<col width="100%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">and</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">AND</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">*</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">&amp;</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">&amp;&amp;</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">^</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">,</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tableblock" id="or">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<caption class="title">Table 10. or</caption>
+<col width="100%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">or</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">OR</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">+</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">|</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">||</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">v</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">V</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph" id="implies"><div class="title">implies</div><p><em>p implies q</em> = <em>not p or q</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="100%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">implies</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">IMPLIES</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">-></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">=></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph" id="equivalent"><div class="title">equivalent</div><p><em>p equivalent q</em> = <em>(p implies q) and (q implies p)</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="100%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">equivalent</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">EQUIVALENT</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">iff</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">IFF</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><-></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><=></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">=</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph" id="if"><div class="title">if</div><p><em>p if q</em> = <em>q implies p</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="100%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">if</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">IF</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><-</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><=</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">:-</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph" id="unless"><div class="title">unless</div><p><em>p unless q</em> = <em>(p or q) and not (p and q)</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="100%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">unless</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">UNLESS</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">xor</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">XOR</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">;</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph" id="nor"><div class="title">nor</div><p><em>p nor q</em> = <em>not (p or q)</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="100%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">nor</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">NOR</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph" id="nand"><div class="title">nand</div><p><em>p nand q</em> = <em>not (p and q)</em></p></div>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="100%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">nand</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">NAND</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph" id="PrecedenceOrder"><p>The precedence order of the binary operators (from higher) is: <em>and,or,implies,equivalent,if,xor,nor,nand</em></p></div>
+<div class="paragraph" id="Comments"><p>The formulas can include the following type of comments (ignored by parser):</p></div>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="100%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">p and q <em>// a comment from begin to end of line&#8230;</em></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">p <em>{an internal comment&#8230;}</em> and q</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">p <em>/* a comment&#8230;</em>
+ <em>on more lines&#8230; */</em></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<h2 id="Settings">Settings</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>On <em>Settings</em> there are:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+the <em>email</em> field, used for <em>export</em> to mail, must contains a list of email address (one for each text line) and can include commented lines if the email address starts with a <em>#</em> character (without spaces between <em>#</em> and the email address).
+</p>
+</li>
+<li>
+<p>
+the URL for <em>models</em>, where the related web resource (of Content-Type <em>text/plain</em>), e.g. a .txt file, must contains an optional <em>model description</em> followed by a line with a single <em>.</em> and a list of <em>constraints name</em>; you are including commented lines if the constraints name starts with the <em>#</em> character and you can use into URL special parameter <em>${m}</em> representing the name of <em>model</em> (then replaced with the current name of model)
+</p>
+</li>
+<li>
+<p>
+the  URL for <em>constraints</em>, where the related web resource (of Content-Type <em>text/plain</em>), e.g. a .txt file, must contains an optional <em>model description</em> followed by a line with a single <em>.</em> and its <em>propositional formula</em>;  you can use into URL special parameters <em>${m}</em> and <em>${c}</em> representing the name of <em>model</em> (then replaced with the current name of model) and the name of the <em>constraint</em> (then replaced with the current name of <em>constraint</em>)
+</p>
+</li>
+<li>
+<p>
+the URL for <em>variables</em>, where the related web resource (of Content-Type <em>text/plain</em>), e.g. a .txt file, must contains a single character:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>T</em>, <em>t</em> (or a string starting with <em>T</em> or <em>t</em> such as <em>True</em> or <em>true</em>) or <em>1</em> if the variable value is <em>true</em>
+</p>
+</li>
+<li>
+<p>
+<em>F</em>, <em>f</em> (or a string starting with <em>F</em> or <em>f</em> such as <em>False</em> or <em>false</em>) or <em>0</em> if the variable value is <em>false</em>
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="paragraph"><p></p></div>
+</div>
+<h2 id="FeatureModels">Feature Models</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><em>Feature Models</em> (<em>FM</em>) application capabilities permits, given a propositional formula related to a <em>constraint</em> or to a <em>model</em> and related to the logical relationship of a set of <em>features</em>, to find the smallest number of logica rules (propositional formulas) describing what features are <em>required</em> or <em>excluded</em> if a set of features is selected.</p></div>
+<div class="paragraph"><p>E.g.: if you have the following propositional formula describing four product lines on a set of four features <em>a</em>, <em>b</em>, <em>c</em> and <em>d</em>:</p></div>
+<div class="paragraph"><p><em>(a&amp;~b&amp;c&amp;~d)|
+(~a&amp;~b&amp;~c&amp;d)|
+(~a&amp;b&amp;~c&amp;~d)|
+(a&amp;b&amp;~c&amp;d)</em></p></div>
+<div class="paragraph"><p>you can get as output (from <em>Requires</em> screen) a <em>propositional formula</em> made of the logical <em>and</em> of the following rules:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>b&#8594;~c</em>
+</p>
+</li>
+<li>
+<p>
+<em>c&#8594;a&amp;~b&amp;~d</em> (<em>the selection of c feature requires feature a and excludes features b and d</em>)
+</p>
+</li>
+<li>
+<p>
+<em>d&#8594;~c</em>
+</p>
+</li>
+<li>
+<p>
+<em>a&amp;b&#8594;d</em> (<em>the selection of a and b features requires feature d</em>)
+</p>
+</li>
+<li>
+<p>
+<em>a&amp;d&#8594;b</em>
+</p>
+</li>
+<li>
+<p>
+<em>b&amp;d&#8594;a</em>
+</p>
+</li>
+</ul></div>
+</div>
+<h2 id="Examples">Examples</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>For model examples see models <em>Party</em> and <em>Expert</em> preloaded into <em>Constraints</em> application.</p></div>
+<div class="paragraph"><p>You can find these models on this web site too, under the following URLs (preconfigured on <em>Constraints</em>) in order to test <em>import from web</em> features.</p></div>
+<div class="paragraph"><p>Before you can import a model from web the model must exists on <em>Constraints</em> application, even if empty (without constraints), so to import the predefined <em>party</em> or <em>expert</em> from web you must create two new models with these names (lowercase, because the uppercase names are used for preloaded model versions on <em>Constraints</em> application).</p></div>
+<h3 id="_party">Party</h3><div style="clear:left"></div>
+<div class="paragraph"><p>A simple example where four friends give <em>constraints</em> to party organizer.</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Model:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://www.mysvc.it/myapps/constraints/party/party.txt">party.txt</a>
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Constraints:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://www.mysvc.it/myapps/constraints/party/Constraint_1.txt">Constraint_1.txt</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.mysvc.it/myapps/constraints/party/Constraint_2.txt">Constraint_2.txt</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.mysvc.it/myapps/constraints/party/Constraint_3.txt">Constraint_3.txt</a>
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Variables:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://www.mysvc.it/myapps/constraints/party/David.txt">David.txt</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.mysvc.it/myapps/constraints/party/John.txt">John.txt</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.mysvc.it/myapps/constraints/party/Mary.txt">Mary.txt</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.mysvc.it/myapps/constraints/party/Paul.txt">Paul.txt</a>
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<h3 id="_expert">Expert</h3><div style="clear:left"></div>
+<div class="paragraph"><p>A simple application of expert system for automobile diagnosis based on <em>Knowledge Representation</em>.</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Model:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://www.mysvc.it/myapps/constraints/expert/expert.txt">expert.txt</a>
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Constraints:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://www.mysvc.it/myapps/constraints/expert/Constraint_1.txt">Constraint_1.txt</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.mysvc.it/myapps/constraints/expert/Constraint_2.txt">Constraint_2.txt</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.mysvc.it/myapps/constraints/expert/Constraint_3.txt">Constraint_3.txt</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.mysvc.it/myapps/constraints/expert/Constraint_4.txt">Constraint_4.txt</a>
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Variables:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://www.mysvc.it/myapps/constraints/expert/BatteryCharged.txt">BatteryCharged.txt</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.mysvc.it/myapps/constraints/expert/CablesOK.txt">CablesOK.txt</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.mysvc.it/myapps/constraints/expert/EngineRuns.txt">EngineRuns.txt</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.mysvc.it/myapps/constraints/expert/FuelLineOK.txt">FuelLineOK.txt</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.mysvc.it/myapps/constraints/expert/GasInEngine.txt">GasInEngine.txt</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.mysvc.it/myapps/constraints/expert/GasInTank.txt">GasInTank.txt</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.mysvc.it/myapps/constraints/expert/GoodSpark.txt">GoodSpark.txt</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.mysvc.it/myapps/constraints/expert/PlugsClean.txt">PlugsClean.txt</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.mysvc.it/myapps/constraints/expert/PowerToPlugs.txt">PowerToPlugs.txt</a>
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="paragraph"><p>In order to prove that <em>either the line or the cable line is broken</em> add to the model the constraint representing the negate of that proposition: <em>not (not FuelLineOK or not CablesOK)</em>; iff the model is <em>unsatisfiable</em> the proposition is a logical consequence of the other model constraints, because to prove that proposition <em>B</em> is a logical consequence of proposition <em>A</em> (i.e. <em>A&#8594;B</em>) you must prove that its negate <em>not (A&#8594;B)</em> is unsatisfiable:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>not (A&#8594;B)</em> = not (not A or B) = A and not B
+</p>
+</li>
+</ul></div>
+</div>
+<h2 id="Support">Support</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>For support contact <a href="mailto:davide6169@gmail.com">davide6169@gmail.com</a></p></div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 0.400<br />
+Last updated 2014-06-28 16:24:12 CEST
+</div>
+<div id="footer-badges">
+<img style="border:none; width:88px; height:31px;"
+     src="../../images/gplv3-127x51.png"
+     alt="GPL Version 3" />
+<!-- Histats.com  START  -->
+<a href="http://www.histats.com" target="_blank" title="simple hit counter" >
+<script  type="text/javascript" language="javascript">
+var s_sid = 675659;var st_dominio = 4;
+var cimg = 0;var cwi =112;var che =48;
+</script></a><script  type="text/javascript" language="javascript" src="http://s10.histats.com/js9.js"></script>
+<noscript><a href="http://www.histats.com" target="_blank">
+<img  src="http://s4.histats.com/stats/0.gif?675659&1" alt="simple hit counter" border="0"></a>
+</noscript>
+<!-- Histats.com  END  -->
+</div>
+</div>
+</div>
+</td>
+</tr>
+</table>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-11334618-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>

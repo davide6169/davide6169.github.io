@@ -1,0 +1,22 @@
+Example
+
+Expert System of Automobile Diagnosis 
+
+Knowledge base: 
+1. if there is gas in the tank and the fuel line is ok then there is gas in the engine. 
+2. if there is gas in the engine and the sparks are ok
+then the engine runs. 
+3. if power reaches the plugs and the plugs are clean then the sparks are ok. 
+4. if the battery is charged and the cables are ok then the power reaches the plugs. 
+
+Observed: 
+1. the engine does not run. 
+2. there is gas in the tank, the plugs are clean and the battery is charged. 
+
+Prove: either the fuel line or the cable line are broken
+.
+Constraint_1
+Constraint_2
+Constraint_3
+Constraint_4
+#Constraint_5

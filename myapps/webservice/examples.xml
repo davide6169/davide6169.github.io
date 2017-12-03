@@ -1,0 +1,1707 @@
+<?xml version="1.0"?>
+<services>
+<!-- 
+This is the example XML configuration file related to IOS app named "WebService" (see http://www.mysvc.it/myapps/webservice).
+
+Summary:
+
+The "WebService" app is a generic client of REST web services based on a synchronous request/reply interface protocol using standard HTTP (GET or POST) and XML respectively as request and response message types accessing any application server as web service provider (e.g. a J2EE servlet as adapter to access IT legacy systems), where the app user interface and managed web services info are configurable from a single XML configuration file, with advanced features such as export to a (configurable) mailing list of sent/received HTTP messages or mapping from nodes of XML response tree and response fields on user interface through XPATH formulas in order to drill down to response details with custom user interface navigation.
+
+The app, driven by its XML configuration file (with a subset of parameters configurable from user interface too), manages a set of "applications" (logically grouped into "systems"), where each application, identified by an http URL (e.g. "http://www.myserver.com/myapp") provides a set of "operations" (logically grouped into "services"), where each operation, identified by a path (the ending part of operation URL, e.g. "/myservice/myoperation") corresponds to an HTTP GET or POST request to a web service (having application URL as prefix, e.g. "http://www.myserver.com/myapp/myservice/myoperation") returning an XML as response (or to a static xml file in order to stub the web service before its implementation).
+
+Selecting the current "application" the app user interface change itself in order to reflect its services and related operations, handling the entry of request fields, the HTTP (GET or POST) request message sending and the (custom) navigation to response fields corresponding to XML response tree nodes with mapping through XPATH formulas specified on XML configuration file.
+
+Each "operation" contains its own "request" and "response" message.
+Each "request" and "response" message contains the list of its "fields", logically grouped into field "groups".
+Each "request field" (including list of values as field type) corresponds to a <name>=<value> pair on HTTP request message.
+Each "response field" has a "path" attribute representing the XPATH formula to a node of XML response tree and can contains recursively (with any depth) a list of more field groups or a single field group identified by an XPATH formula to a node of XML response tree having more occurrences.
+Each field can be defined as reference to any another field.
+Each application or system can contains an optional list of error codes with related descriptions for error specific popup messages on user interface.
+
+Example of XML configuration: 
+
+<services>
+ <system name="mysystem">
+  <application name="myapp" url="http://www.myapp.com">
+   <service name="myservice">
+    <operation name="myoperation" path="/path/to/myoperation">
+     <request name="request">
+      <group name="mygroup1">
+       <field name="field1"/>
+       <field name="fieldN" value="mydefault"> 
+        <value>value_1<value>
+        <value>value_2<value>
+       </field>
+      </group>
+     </request>
+     <response name="response">
+      <group name="mygroup2">
+       <field name="field1" path="/xpath/to/xml/response/node/attribute/for/field/@value"/>
+       <field name="field2" path="/xpath/to/xml/response/node/for/field/value"/>
+       <field name="details">
+        <group name="orders">
+         <field name="product A" path="/data/product_A/orders_num"/>
+         <field name="product B" path="/data/product_B/orders_num"/>
+         <field name="payment method" path="/data/payment_method"/>
+        </group> 
+       </field>
+       <field name="contacts">
+        <group name="contact" path="/data/contact">
+         <field name="first name" path="first_name"/>
+         <field name="last name" path="last_name"/>
+         <field name="email" path="email"/>
+         <field name="telephone" path="telephone"/>
+        </group>
+       </field>
+      </group>
+     </response>
+   ...
+
+Details:
+
+From the app XML configuration file, imported from an http URL or from clipboard (or exported to email or clipboard):
+- can be specified a set of "applications" logically grouped into "systems" 
+    <?xml version="1.0"?>
+    <services>
+      <system name="mysystem_1">
+        <application name="myapplication_11" url="http://www.myapp_11">
+          <description>...</description>
+          ...
+        </application>
+        ...
+        <application name="myapplication_1N" url="http://www.myapp_1N">
+          <description>...</description>
+        ...
+        </application>
+      </system>
+      ...
+      <system name="mysystem_N">
+        <application name="myapplication_N1" url="http://www.myapp_N1">
+          <description>...</description>
+          ...
+        </application>
+        ...
+        <application name="myapplication_NN" url="http://www.myapp_NN">
+          <description>...</description>
+        ...
+        </application>
+      </system>
+    </services>
+- each application, identified by an http URL, provide a set of "operations" logically grouped into "services"
+        <application name="myapplication" url="http://www.myapplication">
+          <service name="myservice_1">
+            <operation name="myoperation_11" path="/path/to/myoperation_11">
+              <description>...</description>
+              ...
+            </operation> 
+            ...
+            <operation name="myoperation_1N" path="/path/to/myoperation_1N">
+              <description>...</description>
+              ...
+            </operation> 
+          </service>
+          ...
+          <service name="myservice_N">
+            <operation name="myoperation_N1" path="/path/to/myoperation_N1">
+              <description>...</description>
+              ...
+            </operation> 
+            ...
+            <operation name="myoperation_NN" path="/path/to/myoperation_NN">
+              <description>...</description>
+              ...
+            </operation> 
+          </service>
+        </application>
+- for each operation, identified by a path (e.g. "/myservice/myoperation"), the server, from the URL having the application URL as prefix (e.g. "http://www.myserver.com/myapp/myservice/myoperation") provide the XML response corresponding to its own specific HTTP GET or POST request
+- each "operation" contains its own "request" and "response" message
+- each "request" and "response" message contains the list of its "fields", logically grouped into field "groups" 
+            <operation name="myoperation" path="/path/to/myoperation">
+              <description>...</description>
+              <request name="request">
+                <group name="group_1">
+                  <field name="field_11"/>
+                  <field name="field_12" type="text"/>
+                  <field name="field_13" type="number" default="1"/>
+                  ...
+                  <field name="field_1N" value="value_1"> 
+                   <value>value_1<value>
+                   <value>value_2<value>
+                   ... 
+                   <value>value_K<value>
+                  </field>
+                </group>
+                 ...
+                <group name="group_M">
+                  <field name="field_M1"/> 
+                  <field name="field_M2"/> 
+                  ...
+                  <field name="field_MN"/> 
+                </group>
+              </request>
+              <response name="response">
+                <group name="group_L">
+                  <field name="field_L1" path="/xpath/to/xml/response/node/attribute/for/field/@value"/>
+                  <field name="field_L2" path="/xpath/to/xml/response/node/for/field/value"/>
+                  <field name="details">
+                    <group name="orders">
+                      <field name="product A" path="/data/product_A/orders_num"/>
+                      <field name="product B" path="/data/product_B/orders_num"/>
+                      <field name="payment method" path="/data/payment_method"/>
+                    </group> 
+                    <group name="trouble tickets">
+                      <field name="total" path="/data/trouble_tickets/number"/>
+                      <field name="opened" path="/data/@opened_trouble_tickets"/>
+                    </group> 
+                  </field>
+                  ...
+                  <field name="contacts">
+                    <group name="contact" path="/data/contact">
+                      <field name="first name" path="first_name"/>
+                      <field name="last name" path="last_name"/>
+                      <field name="email" path="email"/>
+                      <field name="telephone" path="telephone"/>
+                    </group>
+                  </field>
+                </group>
+                 ...
+                <group name="group_P">
+                  <field name="field_P1"/> 
+                  <field name="field_P2"/> 
+                  ...
+                  <field name="field_PN"/> 
+                </group>
+              </response>
+            </operation> 
+- each request field (corresponding to a <name>=<value> pair on HTTP request message):
+  - has a "name" attribute used by user interface label
+  - has an optional "http-name" attribute used to set name of corresponding HTTP parameter (default as "name")
+  - has its own "type" attribute:
+    - "string" (default)
+    - "text" (can contains more lines of text, to be used with POST HTTP method)
+    - "number"
+    - "password" 
+    - list of values (if contains one or more "value" child node)
+    - "ref" (to use if the field is a reference to another field, identified by the "id" attribute)
+  - has an optional "required" attribute (default to "false") used to require (if set to "true") a not empty value 
+  - has an optional "value" attribute as default value of field (also used as default for list of value fields)
+  - has an optional "read-only" attribute (default to "false") set to "true" if the field value cannot be modified 
+- each response field:
+  - has a "path" attribute representing the xpath formula of a node of XML response tree
+  - can contains recursively a list of more field groups or a single field group identified by an xpath formula of a node of XML response tree having more occurrences 
+  - has an optional "subtype" attribute: if set to "error" then is used for system level and application level mapping from error codes and popup error description on user interface, else if set to "password" show an hidden input field
+- each field can be a reference to any another field (if type is "ref")
+- each "application" and "system" can contains an optional list of error codes with related descriptions for popup messages on user interface
+    <errors>
+      <error code="1">Invalid email or password</error>
+      <error code="2">Email already used</error>
+      <error code="3">Password too short</error>
+    </errors>
+- can be defined at system or application level a mailing list for log export by email
+    <emails>
+      <email type="cc">email_1@gmail.com</email>
+      <email>email_2@gmail.com</email>
+      <email>email_3@gmail.com</email>
+    </emails>
+
+Starting from root to leafs of the tree related to the XML configuration file, we have "system->application->service->operation->request/response->group->field" entities, where:
+- "services", "systems" and "groups" are only logical entities to group respectly "operations", "applications" and "fields": each "system" is a list of "applications", each "service" is a list of "operations" and each "group" is a list of "fields"
+- "operations" and "applications" are the physical entities: each "application", identified by the URL prefix common to all its own "operations", provides a set of "operations", each identified by the ending path of the complete URL (e.g. the path of a PHP script or the path to a J2EE servlet or JSP page)and corresponding to an HTTP GET or POST REST request/reply web service returning an XML as response
+
+Regarding to the app user interface:
+- there are three main screen tabs: "Services", "Settings" and "Log"
+- each "service", a logical group of "operations", is represented on the app as a separated table section of the first screen tab "Services" 
+- each "operation" related to a "service" is represented as a row on the table section related to that "service"
+- each list of "services" on the first screen tab "Services" is related to an "application" corresponding to the current selected "application"
+- the current "application" is selected with the first table section and row of each of the three ta b screens, where you get a screen with the list of "applications", grouped into "systems" where each system is represented as a separate table section whose rows represent its own "applications"
+- each application and each operation has its own optional description (configurable from app XML configuration file) that can be viewed from first screen tab "Services" with right push button
+- from the first screen tab "Services" can also be view and modified, through "Edit" button, the XML configuration importing it from a configurable URL or from clipboard
+- with the second screen tab, "Settings", can be modified a subset of configuration info related to current selected application, such as:
+  - application URL
+  - HTTP method (GET or POST)
+  - application level mailing list
+  - seconds before timeout for HTTP request/reply
+  - switch to enable or disable logs (by default are disabled, set to ON the switch or set to "true" the "log" application attribute to enable)
+  - path of each operation
+- on the third screen tab, "Log", can be viewed and exported to a mailing list (common to all system, system level or application level) sent (request) and received (response) HTTP messages, related to a single or entire list request/reply message exchange, with log reset capability
+
+A typical use case of "WebService" app is to access IT legacy systems developing web service provider as adapters, e.g. J2EE servlet/JSP or PHP script accessing data using JDBC or filesystem.
+
+In order to test a web service on app user interface before its implementation on application server is sufficient to stub the web service provider using as operation path (by app XML configuration file or by app user interface) a path to a static .xml file on a web/application server using it as XML response.
+
+-->
+<system name="Example">
+  <application name="Orders" url="http://www.mysvc.it/myapps/webservice/example">
+    <description>
+This is an example application
+    </description>
+    <service name="Registration">
+       <operation name="Registration" path="/register.xml">
+         <!--
+         Request (http GET): http://www.mysvc.it/myapps/webservice/example/register.xml?email=...&password=...
+         Response (XML):
+         <?xml version="1.0"?>
+         <register>
+           <response status="0" reason="registration successful"/>
+         </register>
+         -->
+         <description>Register new user...</description>
+          <request name="Registration">
+            <group name="Data">
+              <field name="Email"/>
+              <field name="Password" subtype="password"/>
+            </group>
+          </request>
+          <response name="Registration Response">
+            <group name="Response">
+              <field name="Status" subtype="error" path="/register/response/@status"/>
+              <field name="Reason" required="false" path="/register/response/@reason"/>
+            </group>
+          </response>
+       </operation>
+    </service>
+    <service name="Session">
+       <operation name="Login" path="/login.xml">
+       <!--
+       Request (http GET): http://www.mysvc.it/myapps/webservice/example/login.xml?email=...&password=...
+       Response (XML):
+       <?xml version="1.0"?>
+       <login>
+         <response status="0" reason="login successful"/>
+         <session id="123456789" expires="2011-09-28 12:13:00"/>
+       </login>
+       -->
+       <description>Description of
+Operation Login...
+       </description>
+          <request name="Login">
+            <group name="Account">
+              <field name="Email"/>
+              <field name="Password" subtype="password"/>
+            </group>
+          </request>
+          <response name="Login Response">
+            <group name="Response">
+              <field name="Status" subtype="error" path="/login/response/@status"/>
+              <field name="Reason" required="false" path="/login/response/@reason"/>
+            </group>
+            <group name="Session">
+              <field name="Id" path="/login/session/@id" http-name="sessionid" id="Session.Id" read-only="true"/>
+              <field name="Expires" path="/login/session/@expires"/>
+            </group>
+          </response>
+       </operation>
+       <operation name="Logout" path="/logout.xml">
+         <!--
+         Request (http GET): http://www.mysvc.it/myapps/webservice/example/logout.xml?sessionid=...
+         Response (XML):
+         <?xml version="1.0"?>
+         <logout>
+           <response status="4" reason="invalid session"/>
+         </logout>
+         -->
+         <description>Description of Operation Logout...</description>
+          <request name="Logout">
+            <group name="Session">
+              <field ref="Session.Id"/>
+            </group>
+          </request>
+          <response name="Logout Response">
+            <group name="Response">
+              <field name="Status" subtype="error" path="/logout/response/@status"/>
+              <field name="Reason" path="/logout/response/@reason"/>
+            </group>
+          </response>
+       </operation>
+    </service>
+    <service name="Order">
+       <operation name="Product A" path="/order-a.xml" method="POST">
+         <!--
+         Request (http POST): http://www.mysvc.it/myapps/webservice/example/order-a.xml
+         ...
+         quantity=...&subtype=...&addr=...&note=...&key=...
+         Response (XML):
+         <?xml version="1.0"?>
+         <order_a>
+           <response>
+             <code>0</code>
+             <description>order of product A successful</description>
+           </response>
+         </order_a>
+         -->
+         <description>Order product A...</description>
+          <request name="Request">
+            <group name="Data">
+              <field name="Quantity" type="number"/>
+              <field name="Subtype" value="A1">
+                <value>A1</value>
+                <value>A2</value>
+                <value>A3</value>
+              </field>
+              <field name="Address" type="string" http-name="addr"/>
+              <field name="Note" type="text" required="false"/>
+              <field name="Authorization key" value="xyz" read-only="true" http-name="key"/>
+              <field ref="Session.Id"/>
+            </group>
+          </request>
+          <response name="Response">
+            <group name="Response">
+              <field name="Status" subtype="error" path="/order_a/response/code"/>
+              <field name="Reason" required="false" path="/order_a/response/description"/>
+            </group>
+          </response>
+       </operation>
+       <operation name="Product B" path="/order-b.xml">
+         <!--
+         Request (http GET): http://www.mysvc.it/myapps/webservice/example/order-b.xml?quantity=...&subtype=...&addr=...&note=...&key=...
+         Response (XML):
+         <?xml version="1.0"?>
+         <order_b>
+           <response status="5">product B not available</response>
+         </order_b>
+         -->
+         <description>Order product B...</description>
+          <request name="Request">
+            <group name="Data">
+              <field name="Quantity" type="number"/>
+              <field name="Subtype" value="B1">
+                <value>B1</value>
+                <value>B2</value>
+                <value>B3</value>
+              </field>
+              <field name="Address" type="string"/>
+              <field name="Note" type="text"/>
+              <field ref="Session.Id"/>
+            </group>
+          </request>
+          <response name="Response">
+            <group name="Response">
+              <field name="Status" subtype="error" path="/order_b/response/@status"/>
+              <field name="Reason" required="false" path="/order_b/response"/>
+            </group>
+          </response>
+       </operation>
+    </service>
+    <errors>
+      <error code="0" type="success">No error</error>
+      <error code="1">Invalid email or password</error>
+      <error code="2">Email already used</error>
+      <error code="3">Password too short</error>
+      <error code="4">Session id not valid</error>
+      <error code="5">Product B is not available</error>
+    </errors>
+    <!-- mailing list for log export common to all application services -->
+    <emails>
+      <email type="cc">email_1@gmail.com</email>
+      <email>email_2@gmail.com</email>
+      <email>email_3@gmail.com</email>
+    </emails>
+  </application>
+  <!-- mailing list for log export common to all system applications -->
+  <emails>
+    <email>email_10@gmail.com</email>
+    <email>email_12@gmail.com</email>
+  </emails>
+</system> 
+<system name="Geocoding">
+  <application name="Google geocoding" url="http://maps.googleapis.com/maps/api/geocode/xml">
+    <description>
+Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkway, Mountain View, CA") into geographic coordinates (like latitude 37.423021 and longitude -122.083739), which you can use to place markers or position the map. The Google Geocoding API provides a direct way to access a geocoder via an HTTP request. Additionally, the service allows you to perform the converse operation (turning coordinates into addresses); this process is known as "reverse geocoding." (see http://code.google.com/apis/maps/documentation/geocoding/)
+    </description>
+    <service name="Geocoding">
+       <operation name="Geocoding">
+         <!--
+            Request (http GET): http://maps.googleapis.com/maps/api/geocode/xml?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&sensor=false
+            Response (XML):
+            <GeocodeResponse> 
+             <status>OK</status> 
+             <result> 
+              <type>street_address</type> 
+              <formatted_address>1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA</formatted_address> 
+              <address_component> 
+               <long_name>1600</long_name> 
+               <short_name>1600</short_name> 
+               <type>street_number</type> 
+              </address_component> 
+              <address_component> 
+               <long_name>Amphitheatre Pkwy</long_name> 
+               <short_name>Amphitheatre Pkwy</short_name> 
+               <type>route</type> 
+              </address_component> 
+              <address_component> 
+               <long_name>Mountain View</long_name> 
+               <short_name>Mountain View</short_name> 
+               <type>locality</type> 
+               <type>political</type> 
+              </address_component> 
+              <address_component> 
+               <long_name>San Jose</long_name> 
+               <short_name>San Jose</short_name> 
+               <type>administrative_area_level_3</type> 
+               <type>political</type> 
+              </address_component> 
+              <address_component> 
+               <long_name>Santa Clara</long_name> 
+               <short_name>Santa Clara</short_name> 
+               <type>administrative_area_level_2</type> 
+               <type>political</type> 
+              </address_component> 
+              <address_component> 
+               <long_name>California</long_name> 
+               <short_name>CA</short_name> 
+               <type>administrative_area_level_1</type> 
+               <type>political</type> 
+              </address_component> 
+              <address_component> 
+               <long_name>United States</long_name> 
+               <short_name>US</short_name> 
+               <type>country</type> 
+               <type>political</type> 
+              </address_component> 
+              <address_component> 
+               <long_name>94043</long_name> 
+               <short_name>94043</short_name> 
+               <type>postal_code</type> 
+              </address_component> 
+              <geometry> 
+               <location> 
+                <lat>37.4217550</lat> 
+                <lng>-122.0846330</lng> 
+               </location> 
+               <location_type>ROOFTOP</location_type> 
+               <viewport> 
+                <southwest> 
+                 <lat>37.4188514</lat> 
+                 <lng>-122.0874526</lng> 
+                </southwest> 
+                <northeast> 
+                 <lat>37.4251466</lat> 
+                 <lng>-122.0811574</lng> 
+                </northeast> 
+               </viewport> 
+              </geometry> 
+             </result> 
+            </GeocodeResponse> 
+         -->
+         <description>
+The Geocoding API requests an xml response for "1600 Amphitheatre Parkway, Mountain View, CA"
+         </description>
+         <request name="Request">
+           <group name="Address">
+             <field name="Address" value="1600 Amphitheatre Parkway, Mountain View, CA"/>
+             <field name="Sensor" value="false">
+               <value>true</value>
+               <value>false</value>
+             </field>
+           </group>
+         </request>
+         <response name="Response">
+           <group name="Status">
+             <field name="Status" subtype="error" path="/GeocodeResponse/status"/>
+           </group>
+           <group name="Results">
+             <field name="Results">
+               <group name="Result" path="/GeocodeResponse/result">
+                 <field name="Type" path="type"/>
+                 <field name="Formatted address" path="formatted_address"/>
+                 <field name="Address components">
+                   <group name="Address component" path="address_component">
+                     <field name="Long name" path="long_name"/>
+                     <field name="Short name" path="short_name"/>
+                     <field name="Type" path="type"/>
+                   </group>
+                 </field>
+                 <field name="Latitude" path="geometry/location/lat"/>
+                 <field name="Longitude" path="geometry/location/lng"/>
+                 <field name="Location type" path="geometry/location_type"/>
+                 <field name="Viewport southwest" path="geometry/viewport/southwest/lat"/>
+                 <field name="Viewport northeast" path="geometry/viewport/northeast/lng"/>
+               </group>
+             </field>
+           </group>
+         </response> 
+       </operation> 
+       <operation name="Reverse geocoding">
+         <!--
+            Request (http GET): http://maps.googleapis.com/maps/api/geocode/xml?latlng=40.714224,-73.961452&sensor=false 
+            Response (XML):
+            <?xml version="1.0" encoding="UTF-8"?>
+            <GeocodeResponse>
+             <status>OK</status>
+             <result>
+              <type>street_address</type>
+              <formatted_address>285 Bedford Ave, Brooklyn, NY 11211, USA</formatted_address>
+              <address_component>
+               <long_name>285</long_name>
+               <short_name>285</short_name>
+               <type>street_number</type>
+              </address_component>
+              <address_component>
+               <long_name>Bedford Ave</long_name>
+               <short_name>Bedford Ave</short_name>
+               <type>route</type>
+              </address_component>
+              <address_component>
+               <long_name>Williamsburg</long_name>
+               <short_name>Williamsburg</short_name>
+               <type>neighborhood</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>Brooklyn</long_name>
+               <short_name>Brooklyn</short_name>
+               <type>sublocality</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>New York</long_name>
+               <short_name>New York</short_name>
+               <type>locality</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>Kings</long_name>
+               <short_name>Kings</short_name>
+               <type>administrative_area_level_2</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>New York</long_name>
+               <short_name>NY</short_name>
+               <type>administrative_area_level_1</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>United States</long_name>
+               <short_name>US</short_name>
+               <type>country</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>11211</long_name>
+               <short_name>11211</short_name>
+               <type>postal_code</type>
+              </address_component>
+              <geometry>
+               <location>
+                <lat>40.7141289</lat>
+                <lng>-73.9614074</lng>
+               </location>
+               <location_type>ROOFTOP</location_type>
+               <viewport>
+                <southwest>
+                 <lat>40.7127799</lat>
+                 <lng>-73.9627564</lng>
+                </southwest>
+                <northeast>
+                 <lat>40.7154779</lat>
+                 <lng>-73.9600584</lng>
+                </northeast>
+               </viewport>
+              </geometry>
+             </result>
+             <result>
+              <type>bus_station</type>
+              <type>transit_station</type>
+              <formatted_address>Grand St - Bedford Av, Brooklyn, NY 11211, USA</formatted_address>
+              <address_component>
+               <long_name>Grand St - Bedford Av</long_name>
+               <short_name>Grand St - Bedford Av</short_name>
+               <type>bus_station</type>
+               <type>transit_station</type>
+              </address_component>
+              <address_component>
+               <long_name>Williamsburg</long_name>
+               <short_name>Williamsburg</short_name>
+               <type>neighborhood</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>Brooklyn</long_name>
+               <short_name>Brooklyn</short_name>
+               <type>sublocality</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>Kings</long_name>
+               <short_name>Kings</short_name>
+               <type>administrative_area_level_2</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>New York</long_name>
+               <short_name>NY</short_name>
+               <type>administrative_area_level_1</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>United States</long_name>
+               <short_name>US</short_name>
+               <type>country</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>11211</long_name>
+               <short_name>11211</short_name>
+               <type>postal_code</type>
+              </address_component>
+              <geometry>
+               <location>
+                <lat>40.7143210</lat>
+                <lng>-73.9611510</lng>
+               </location>
+               <location_type>APPROXIMATE</location_type>
+               <viewport>
+                <southwest>
+                 <lat>40.7129720</lat>
+                 <lng>-73.9625000</lng>
+                </southwest>
+                <northeast>
+                 <lat>40.7156700</lat>
+                 <lng>-73.9598020</lng>
+                </northeast>
+               </viewport>
+              </geometry>
+             </result>
+             <result>
+              <type>bus_station</type>
+              <type>transit_station</type>
+              <formatted_address>Grand St - Bedford Av, Brooklyn, NY 11211, USA</formatted_address>
+              <address_component>
+               <long_name>Grand St - Bedford Av</long_name>
+               <short_name>Grand St - Bedford Av</short_name>
+               <type>bus_station</type>
+               <type>transit_station</type>
+              </address_component>
+              <address_component>
+               <long_name>Williamsburg</long_name>
+               <short_name>Williamsburg</short_name>
+               <type>neighborhood</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>Brooklyn</long_name>
+               <short_name>Brooklyn</short_name>
+               <type>sublocality</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>Kings</long_name>
+               <short_name>Kings</short_name>
+               <type>administrative_area_level_2</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>New York</long_name>
+               <short_name>NY</short_name>
+               <type>administrative_area_level_1</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>United States</long_name>
+               <short_name>US</short_name>
+               <type>country</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>11211</long_name>
+               <short_name>11211</short_name>
+               <type>postal_code</type>
+              </address_component>
+              <geometry>
+               <location>
+                <lat>40.7146840</lat>
+                <lng>-73.9615630</lng>
+               </location>
+               <location_type>APPROXIMATE</location_type>
+               <viewport>
+                <southwest>
+                 <lat>40.7133350</lat>
+                 <lng>-73.9629120</lng>
+                </southwest>
+                <northeast>
+                 <lat>40.7160330</lat>
+                 <lng>-73.9602140</lng>
+                </northeast>
+               </viewport>
+              </geometry>
+             </result>
+             <result>
+              <type>bus_station</type>
+              <type>transit_station</type>
+              <formatted_address>Bedford Av - Grand St, Brooklyn, NY 11211, USA</formatted_address>
+              <address_component>
+               <long_name>Bedford Av - Grand St</long_name>
+               <short_name>Bedford Av - Grand St</short_name>
+               <type>bus_station</type>
+               <type>transit_station</type>
+              </address_component>
+              <address_component>
+               <long_name>Williamsburg</long_name>
+               <short_name>Williamsburg</short_name>
+               <type>neighborhood</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>Brooklyn</long_name>
+               <short_name>Brooklyn</short_name>
+               <type>sublocality</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>Kings</long_name>
+               <short_name>Kings</short_name>
+               <type>administrative_area_level_2</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>New York</long_name>
+               <short_name>NY</short_name>
+               <type>administrative_area_level_1</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>United States</long_name>
+               <short_name>US</short_name>
+               <type>country</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>11211</long_name>
+               <short_name>11211</short_name>
+               <type>postal_code</type>
+              </address_component>
+              <geometry>
+               <location>
+                <lat>40.7147100</lat>
+                <lng>-73.9609990</lng>
+               </location>
+               <location_type>APPROXIMATE</location_type>
+               <viewport>
+                <southwest>
+                 <lat>40.7133610</lat>
+                 <lng>-73.9623480</lng>
+                </southwest>
+                <northeast>
+                 <lat>40.7160590</lat>
+                 <lng>-73.9596500</lng>
+                </northeast>
+               </viewport>
+              </geometry>
+             </result>
+             <result>
+              <type>neighborhood</type>
+              <type>political</type>
+              <formatted_address>Williamsburg, Brooklyn, NY, USA</formatted_address>
+              <address_component>
+               <long_name>Williamsburg</long_name>
+               <short_name>Williamsburg</short_name>
+               <type>neighborhood</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>Brooklyn</long_name>
+               <short_name>Brooklyn</short_name>
+               <type>sublocality</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>New York</long_name>
+               <short_name>New York</short_name>
+               <type>locality</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>Kings</long_name>
+               <short_name>Kings</short_name>
+               <type>administrative_area_level_2</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>New York</long_name>
+               <short_name>NY</short_name>
+               <type>administrative_area_level_1</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>United States</long_name>
+               <short_name>US</short_name>
+               <type>country</type>
+               <type>political</type>
+              </address_component>
+              <geometry>
+               <location>
+                <lat>40.7064461</lat>
+                <lng>-73.9536163</lng>
+               </location>
+               <location_type>APPROXIMATE</location_type>
+               <viewport>
+                <southwest>
+                 <lat>40.6979330</lat>
+                 <lng>-73.9698451</lng>
+                </southwest>
+                <northeast>
+                 <lat>40.7182050</lat>
+                 <lng>-73.9202810</lng>
+                </northeast>
+               </viewport>
+               <bounds>
+                <southwest>
+                 <lat>40.6979330</lat>
+                 <lng>-73.9698451</lng>
+                </southwest>
+                <northeast>
+                 <lat>40.7182050</lat>
+                 <lng>-73.9202810</lng>
+                </northeast>
+               </bounds>
+              </geometry>
+             </result>
+             <result>
+              <type>postal_code</type>
+              <formatted_address>Brooklyn, NY 11211, USA</formatted_address>
+              <address_component>
+               <long_name>11211</long_name>
+               <short_name>11211</short_name>
+               <type>postal_code</type>
+              </address_component>
+              <address_component>
+               <long_name>Brooklyn</long_name>
+               <short_name>Brooklyn</short_name>
+               <type>sublocality</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>New York</long_name>
+               <short_name>New York</short_name>
+               <type>locality</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>New York</long_name>
+               <short_name>NY</short_name>
+               <type>administrative_area_level_1</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>United States</long_name>
+               <short_name>US</short_name>
+               <type>country</type>
+               <type>political</type>
+              </address_component>
+              <geometry>
+               <location>
+                <lat>40.7180036</lat>
+                <lng>-73.9653715</lng>
+               </location>
+               <location_type>APPROXIMATE</location_type>
+               <viewport>
+                <southwest>
+                 <lat>40.6976359</lat>
+                 <lng>-73.9761669</lng>
+                </southwest>
+                <northeast>
+                 <lat>40.7280090</lat>
+                 <lng>-73.9207299</lng>
+                </northeast>
+               </viewport>
+               <bounds>
+                <southwest>
+                 <lat>40.6976359</lat>
+                 <lng>-73.9761669</lng>
+                </southwest>
+                <northeast>
+                 <lat>40.7280090</lat>
+                 <lng>-73.9207299</lng>
+                </northeast>
+               </bounds>
+              </geometry>
+             </result>
+             <result>
+              <type>sublocality</type>
+              <type>political</type>
+              <formatted_address>Brooklyn, NY, USA</formatted_address>
+              <address_component>
+               <long_name>Brooklyn</long_name>
+               <short_name>Brooklyn</short_name>
+               <type>sublocality</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>New York</long_name>
+               <short_name>New York</short_name>
+               <type>locality</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>Kings</long_name>
+               <short_name>Kings</short_name>
+               <type>administrative_area_level_2</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>New York</long_name>
+               <short_name>NY</short_name>
+               <type>administrative_area_level_1</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>United States</long_name>
+               <short_name>US</short_name>
+               <type>country</type>
+               <type>political</type>
+              </address_component>
+              <geometry>
+               <location>
+                <lat>40.6500000</lat>
+                <lng>-73.9500000</lng>
+               </location>
+               <location_type>APPROXIMATE</location_type>
+               <viewport>
+                <southwest>
+                 <lat>40.5510419</lat>
+                 <lng>-74.0566300</lng>
+                </southwest>
+                <northeast>
+                 <lat>40.7394460</lat>
+                 <lng>-73.8333650</lng>
+                </northeast>
+               </viewport>
+               <bounds>
+                <southwest>
+                 <lat>40.5510419</lat>
+                 <lng>-74.0566300</lng>
+                </southwest>
+                <northeast>
+                 <lat>40.7394460</lat>
+                 <lng>-73.8333650</lng>
+                </northeast>
+               </bounds>
+              </geometry>
+             </result>
+             <result>
+              <type>administrative_area_level_2</type>
+              <type>political</type>
+              <formatted_address>Kings, New York, USA</formatted_address>
+              <address_component>
+               <long_name>Kings</long_name>
+               <short_name>Kings</short_name>
+               <type>administrative_area_level_2</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>New York</long_name>
+               <short_name>NY</short_name>
+               <type>administrative_area_level_1</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>United States</long_name>
+               <short_name>US</short_name>
+               <type>country</type>
+               <type>political</type>
+              </address_component>
+              <geometry>
+               <location>
+                <lat>40.6528762</lat>
+                <lng>-73.9594940</lng>
+               </location>
+               <location_type>APPROXIMATE</location_type>
+               <viewport>
+                <southwest>
+                 <lat>40.5510419</lat>
+                 <lng>-74.0566300</lng>
+                </southwest>
+                <northeast>
+                 <lat>40.7394460</lat>
+                 <lng>-73.8333650</lng>
+                </northeast>
+               </viewport>
+               <bounds>
+                <southwest>
+                 <lat>40.5510419</lat>
+                 <lng>-74.0566300</lng>
+                </southwest>
+                <northeast>
+                 <lat>40.7394460</lat>
+                 <lng>-73.8333650</lng>
+                </northeast>
+               </bounds>
+              </geometry>
+             </result>
+             <result>
+              <type>locality</type>
+              <type>political</type>
+              <formatted_address>New York, NY, USA</formatted_address>
+              <address_component>
+               <long_name>New York</long_name>
+               <short_name>New York</short_name>
+               <type>locality</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>New York</long_name>
+               <short_name>New York</short_name>
+               <type>administrative_area_level_2</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>New York</long_name>
+               <short_name>NY</short_name>
+               <type>administrative_area_level_1</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>United States</long_name>
+               <short_name>US</short_name>
+               <type>country</type>
+               <type>political</type>
+              </address_component>
+              <geometry>
+               <location>
+                <lat>40.7143528</lat>
+                <lng>-74.0059731</lng>
+               </location>
+               <location_type>APPROXIMATE</location_type>
+               <viewport>
+                <southwest>
+                 <lat>40.4773990</lat>
+                 <lng>-74.2590900</lng>
+                </southwest>
+                <northeast>
+                 <lat>40.9175770</lat>
+                 <lng>-73.7002720</lng>
+                </northeast>
+               </viewport>
+               <bounds>
+                <southwest>
+                 <lat>40.4773990</lat>
+                 <lng>-74.2590900</lng>
+                </southwest>
+                <northeast>
+                 <lat>40.9175770</lat>
+                 <lng>-73.7002720</lng>
+                </northeast>
+               </bounds>
+              </geometry>
+             </result>
+             <result>
+              <type>administrative_area_level_1</type>
+              <type>political</type>
+              <formatted_address>New York, USA</formatted_address>
+              <address_component>
+               <long_name>New York</long_name>
+               <short_name>NY</short_name>
+               <type>administrative_area_level_1</type>
+               <type>political</type>
+              </address_component>
+              <address_component>
+               <long_name>United States</long_name>
+               <short_name>US</short_name>
+               <type>country</type>
+               <type>political</type>
+              </address_component>
+              <geometry>
+               <location>
+                <lat>43.2994285</lat>
+                <lng>-74.2179326</lng>
+               </location>
+               <location_type>APPROXIMATE</location_type>
+               <viewport>
+                <southwest>
+                 <lat>40.4773990</lat>
+                 <lng>-79.7625900</lng>
+                </southwest>
+                <northeast>
+                 <lat>45.0158650</lat>
+                 <lng>-71.7774910</lng>
+                </northeast>
+               </viewport>
+               <bounds>
+                <southwest>
+                 <lat>40.4773990</lat>
+                 <lng>-79.7625900</lng>
+                </southwest>
+                <northeast>
+                 <lat>45.0158650</lat>
+                 <lng>-71.7774910</lng>
+                </northeast>
+               </bounds>
+              </geometry>
+             </result>
+             <result>
+              <type>country</type>
+              <type>political</type>
+              <formatted_address>United States</formatted_address>
+              <address_component>
+               <long_name>United States</long_name>
+               <short_name>US</short_name>
+               <type>country</type>
+               <type>political</type>
+              </address_component>
+              <geometry>
+               <location>
+                <lat>37.0902400</lat>
+                <lng>-95.7128910</lng>
+               </location>
+               <location_type>APPROXIMATE</location_type>
+               <viewport>
+                <southwest>
+                 <lat>18.7763000</lat>
+                 <lng>170.5957000</lng>
+                </southwest>
+                <northeast>
+                 <lat>71.5388000</lat>
+                 <lng>-66.8854170</lng>
+                </northeast>
+               </viewport>
+               <bounds>
+                <southwest>
+                 <lat>18.7763000</lat>
+                 <lng>170.5957000</lng>
+                </southwest>
+                <northeast>
+                 <lat>71.5388000</lat>
+                 <lng>-66.8854170</lng>
+                </northeast>
+               </bounds>
+              </geometry>
+             </result>
+            </GeocodeResponse>
+         -->
+         <description>
+The term geocoding generally refers to translating a human-readable address into a location on a map. The process of doing the converse, translating a location on the map into a human-readable address, is known as reverse geocoding.
+         </description>
+         <request name="Request">
+           <group name="Latitude and longitude">
+             <field name="Latitude and longitude" http-name="latlng" value="40.714224,-73.961452"/>
+             <field name="Sensor" value="false">
+               <value>true</value>
+               <value>false</value>
+             </field>
+           </group>
+         </request>
+         <response name="Response">
+           <group name="Status">
+             <field name="Status" subtype="error" path="/GeocodeResponse/status"/>
+           </group>
+           <group name="Results">
+             <field name="Results">
+               <group name="Result" path="/GeocodeResponse/result">
+                 <field name="Type 1" path="type[1]"/>
+                 <field name="Type 2" path="type[2]"/>
+                 <field name="Formatted address" path="formatted_address"/>
+                 <field name="Address components">
+                   <group name="Address component" path="address_component">
+                     <field name="Long name" path="long_name"/>
+                     <field name="Short name" path="short_name"/>
+                     <field name="Type 1" path="type[1]"/>
+                     <field name="Type 2" path="type[2]"/>
+                   </group>
+                 </field>
+                 <field name="Latitude" path="geometry/location/lat"/>
+                 <field name="Longitude" path="geometry/location/lng"/>
+                 <field name="Location type" path="geometry/location_type"/>
+                 <field name="Viewport southwest" path="geometry/viewport/southwest/lat"/>
+                 <field name="Viewport northeast" path="geometry/viewport/northeast/lng"/>
+               </group>
+             </field>
+           </group>
+         </response> 
+       </operation> 
+    </service>
+    <errors>
+      <error code="OK" type="success">No errors occurred</error>
+      <error code="ZERO_RESULTS">The geocode was successful but returned no results</error>
+      <error code="OVER_QUERY_LIMIT">Over quota</error>
+      <error code="REQUEST_DENIED">Request denied</error>
+      <error code="INVALID_REQUEST">Invalid request</error>
+    </errors>
+  </application> 
+  <application name="Yahoo! PlaceFinder" url="http://where.yahooapis.com/geocode" method="get" timeout="5">
+    <description>
+Yahoo! PlaceFinder is a REST Web service that supports world-wide geocoding of street addresses, points of interest, airports, and place names. Points of interest are locations such as schools, shopping malls, museums, and transit stations. Place names supported include counties, states, countries, and continents (see http://developer.yahoo.com/geo/placefinder/guide/).
+    </description>
+    <service name="Geocoding">
+       <operation name="Single line input">
+          <!-- 
+            Request (http GET): http://where.yahooapis.com/geocode?location=701+First+Ave,+Sunnyvale,+CA
+            Response (XML):
+            <?xml version="1.0" encoding="UTF-8"?>
+            <ResultSet version="1.0">
+              <Error>0</Error>
+              <ErrorMessage>No error</ErrorMessage>
+              <Locale>us_US</Locale>
+              <Quality>87</Quality>
+              <Found>1</Found>
+              <Result>
+                <quality>87</quality>
+                <latitude>37.416275</latitude>
+                <longitude>-122.025092</longitude>
+                <offsetlat>37.416397</offsetlat>
+                <offsetlon>-122.025055</offsetlon>
+                <radius>500</radius>
+                <name>
+            </name>
+                <line1>701 1st Ave</line1>
+                <line2>Sunnyvale, CA  94089-1019</line2>
+                <line3>
+            </line3>
+                <line4>United States</line4>
+                <house>701</house>
+                <street>1st Ave</street>
+                <xstreet>
+            </xstreet>
+                <unittype>
+            </unittype>
+           -->
+          <description>
+With free-form format, the entire address is specified in a single parameter. In this example, the address is "170 South Market St., San Jose, CA".
+          </description>
+          <request name="Request">
+            <group name="Location">
+              <field name="Location" value="701 First Ave, Sunnyvale, CA"/>
+            </group>
+          </request>
+          <response name="Response">
+            <group name="Status">
+              <field name="Error Code" subtype="error" path="/ResultSet/Error"/>
+              <field name="Error Message" path="/ResultSet/ErrorMessage"/>
+              <field name="Locale" path="/ResultSet/Locale"/>
+              <field name="Quality" path="/ResultSet/Quality"/>
+              <field name="Found" path="/ResultSet/Found"/>
+            </group>
+            <group name="Results">
+              <field name="Results">
+                <group name="Result" path="/ResultSet/Result">
+                  <field name="Latitude" path="latitude"/>
+                  <field name="Longitude" path="longitude"/>
+                  <field name="Offset Latitude" path="offsetlat"/>
+                  <field name="Offset Longitude" path="offsetlon"/>
+                  <field name="Radius" path="radius"/>
+                  <field name="Name" path="name"/>
+                  <field name="Line 1" path="line1"/>
+                  <field name="Line 2" path="line2"/>
+                  <field name="Line 3" path="line3"/>
+                  <field name="Line 4" path="line4"/>
+                  <field name="House" path="house"/>
+                  <field name="Street" path="street"/>
+                  <field name="Postal code" path="postal"/>
+                  <field name="Neighborhood" path="neighborhood"/>
+                  <field name="City" path="city"/>
+                  <field name="County" path="county"/>
+                  <field name="State" path="state"/>
+                  <field name="Country" path="country"/>
+                  <field name="Country code" path="countrycode"/>
+                  <field name="State code" path="statecode"/>
+                  <field name="Uzip" path="uzip"/>
+                  <field name="Hash" path="hash"/>
+                  <field name="WOE id" path="woeid"/>
+                  <field name="WOE type" path="woetype"/>
+                </group>
+              </field>
+            </group>
+          </response>
+       </operation>
+       <operation name="Area of interest">
+          <!-- 
+            Request (http GET): http://where.yahooapis.com/geocode?name=Yosemite+National+Park 
+            Response (XML):
+               <?xml version="1.0" encoding="UTF-8"?>  
+               <ResultSet version="1.0">  
+                 <Error>0</Error>  
+                 <ErrorMessage>No error</ErrorMessage>  
+                 <Locale>us_US</Locale>  
+                 <Quality>63</Quality>  
+                 <Found>1</Found>  
+                 <Result>  
+                   <quality>63</quality>  
+                   <latitude>37.840120</latitude>  
+                   <longitude>-119.542854</longitude>  
+                   <offsetlat>37.667542</offsetlat>  
+                   <offsetlon>-119.805389</offsetlon>  
+                   <radius>48900</radius>  
+                   <name>Yosemite National Park</name>  
+                   <line1>Yosemite National Park</line1>  
+                   <line2>El Portal, CA  95318</line2>  
+                   <line3/>  
+                   <line4>United States</line4>  
+                   <house/>  
+                   <street/>  
+                   <xstreet/>  
+                   <unittype/>  
+                   <unit/>  
+                   <postal>95318</postal>  
+                   <neighborhood/>  
+                   <city>El Portal</city>  
+                   <county>Mariposa County</county>  
+                   <state>California</state>  
+                   <country>United States</country>  
+                   <countrycode>US</countrycode>  
+                   <statecode>CA</statecode>  
+                   <countycode/>  
+                   <uzip>95318</uzip>  
+                   <hash/>  
+                   <woeid>55813396</woeid>  
+                   <woetype>16</woetype>  
+                 </Result>  
+               </ResultSet>  
+              -->
+          <description>
+In this example, the area of interest is "Yosemite National Park".
+          </description>
+          <request name="Request">
+            <group name="Name">
+              <field name="Name" value="Yosemite National Park"/>
+            </group>
+          </request>
+          <response name="Response">
+            <group name="Status">
+              <field name="Error Code" subtype="error" path="/ResultSet/Error"/>
+              <field name="Error Message" path="/ResultSet/ErrorMessage"/>
+              <field name="Locale" path="/ResultSet/Locale"/>
+              <field name="Quality" path="/ResultSet/Quality"/>
+              <field name="Found" path="/ResultSet/Found"/>
+            </group>
+            <group name="Results">
+              <field name="Results">
+                <group name="Result" path="/ResultSet/Result">
+                  <field name="Latitude" path="latitude"/>
+                  <field name="Longitude" path="longitude"/>
+                  <field name="Offset Latitude" path="offsetlat"/>
+                  <field name="Offset Longitude" path="offsetlon"/>
+                  <field name="Radius" path="radius"/>
+                  <field name="Name" path="name"/>
+                  <field name="Line 1" path="line1"/>
+                  <field name="Line 2" path="line2"/>
+                  <field name="Line 3" path="line3"/>
+                  <field name="Line 4" path="line4"/>
+                  <field name="House" path="house"/>
+                  <field name="Street" path="street"/>
+                  <field name="XStreet" path="xstreet"/>
+                  <field name="Unit type" path="unittype"/>
+                  <field name="Unit" path="unit"/>
+                  <field name="Postal code" path="postal"/>
+                  <field name="Neighborhood" path="neighborhood"/>
+                  <field name="City" path="city"/>
+                  <field name="County" path="county"/>
+                  <field name="State" path="state"/>
+                  <field name="Country" path="country"/>
+                  <field name="Country code" path="countrycode"/>
+                  <field name="State code" path="statecode"/>
+                  <field name="Uzip" path="uzip"/>
+                  <field name="Hash" path="hash"/>
+                  <field name="WOE id" path="woeid"/>
+                  <field name="WOE type" path="woetype"/>
+                </group>
+              </field>
+            </group>
+          </response>
+       </operation>
+       <operation name="Multiple line input">
+          <!-- 
+            Request (http GET): http://where.yahooapis.com/geocode?line1=100+Market+St.&line2=San+Francisco,+CA
+            Response (XML):
+            <?xml version="1.0" encoding="UTF-8"?>
+            <ResultSet version="1.0">
+              <Error>0</Error>
+              <ErrorMessage>No error</ErrorMessage>
+              <Locale>us_US</Locale>
+              <Quality>87</Quality>
+              <Found>1</Found>
+              <Result>
+                <quality>87</quality>
+                <latitude>37.793704</latitude>
+                <longitude>-122.395804</longitude>
+                <offsetlat>37.793738</offsetlat>
+                <offsetlon>-122.395851</offsetlon>
+                <radius>500</radius>
+                <name/>
+                <line1>100 Market St</line1>
+                <line2>San Francisco, CA  94111-4802</line2>
+                <line3/>
+                <line4>United States</line4>
+                <house>100</house>
+                <street>Market St</street>
+                <xstreet/>
+                <unittype/>
+                <unit/>
+                <postal>94111-4802</postal>
+                <neighborhood/>
+                <city>San Francisco</city>
+                <county>San Francisco County</county>
+                <state>California</state>
+                <country>United States</country>
+                <countrycode>US</countrycode>
+                <statecode>CA</statecode>
+                <countycode/>
+                <uzip>94111</uzip>
+                <hash>E827D6E012051EB9</hash>
+                <woeid>12797162</woeid>
+                <woetype>11</woetype>
+              </Result>
+            </ResultSet>
+           -->
+          <description>
+In this example, the house number and street (100 Market St.) are in line1. The city and state (San Francisco, CA) are in line2.
+          </description>
+          <request name="Request">
+            <group name="Location">
+              <field name="Line1" value="100 Market St."/>
+              <field name="Line2" value="San Francisco, CA"/>
+            </group>
+          </request>
+          <response name="Response">
+            <group name="Status">
+              <field name="Error Code" subtype="error" path="/ResultSet/Error"/>
+              <field name="Error Message" path="/ResultSet/ErrorMessage"/>
+              <field name="Locale" path="/ResultSet/Locale"/>
+              <field name="Quality" path="/ResultSet/Quality"/>
+              <field name="Found" path="/ResultSet/Found"/>
+            </group>
+            <group name="Results">
+              <field name="Results">
+                <group name="Result" path="/ResultSet/Result">
+                  <field name="Latitude" path="latitude"/>
+                  <field name="Longitude" path="longitude"/>
+                  <field name="Offset Latitude" path="offsetlat"/>
+                  <field name="Offset Longitude" path="offsetlon"/>
+                  <field name="Radius" path="radius"/>
+                  <field name="Name" path="name"/>
+                  <field name="Line 1" path="line1"/>
+                  <field name="Line 2" path="line2"/>
+                  <field name="Line 3" path="line3"/>
+                  <field name="Line 4" path="line4"/>
+                  <field name="House" path="house"/>
+                  <field name="Street" path="street"/>
+                  <field name="XStreet" path="xstreet"/>
+                  <field name="Unit type" path="unittype"/>
+                  <field name="Unit" path="unit"/>
+                  <field name="Postal code" path="postal"/>
+                  <field name="Neighborhood" path="neighborhood"/>
+                  <field name="City" path="city"/>
+                  <field name="County" path="county"/>
+                  <field name="State" path="state"/>
+                  <field name="Country" path="country"/>
+                  <field name="Country code" path="countrycode"/>
+                  <field name="State code" path="statecode"/>
+                  <field name="Uzip" path="uzip"/>
+                  <field name="Hash" path="hash"/>
+                  <field name="WOE id" path="woeid"/>
+                  <field name="WOE type" path="woetype"/>
+                </group>
+              </field>
+            </group>
+          </response>
+       </operation>
+       <operation name="Fully parsed input">
+          <!-- 
+            Request (http GET): http://where.yahooapis.com/geocode?house=151&street=3rd+St&postal=94103&city=San+Francisco&state=CA&country=US 
+            Response (XML):
+            <?xml version="1.0" encoding="UTF-8"?>
+            <ResultSet version="1.0">
+              <Error>0</Error>
+              <ErrorMessage>No error</ErrorMessage>
+              <Locale>us_US</Locale>
+              <Quality>60</Quality>
+              <Found>1</Found>
+              <Result>
+                <quality>87</quality>
+                <latitude>37.785483</latitude>
+                <longitude>-122.401028</longitude>
+                <offsetlat>37.785549</offsetlat>
+                <offsetlon>-122.400939</offsetlon>
+                <radius>500</radius>
+                <name/>
+                <line1>151 3rd St</line1>
+                <line2>San Francisco, CA  94103-3107</line2>
+                <line3/>
+                <line4>United States</line4>
+                <house>151</house>
+                <street>3rd St</street>
+                <xstreet/>
+                <unittype/>
+                <unit/>
+                <postal>94103-3107</postal>
+                <neighborhood/>
+                <city>San Francisco</city>
+                <county>San Francisco County</county>
+                <state>California</state>
+                <country>United States</country>
+                <countrycode>US</countrycode>
+                <statecode>CA</statecode>
+                <countycode/>
+                <uzip>94103</uzip>
+                <hash>05B44B427D1BEC8F</hash>
+                <woeid>12797154</woeid>
+                <woetype>11</woetype>
+              </Result>
+            </ResultSet>
+           -->
+          <description>
+With a fully-parsed address, each address component is in a separate parameter, so delimiters are not needed. This example returns information for the following input address: "151 3rd St San Francisco CA 94103".
+          </description>
+          <request name="Request">
+            <group name="Address">
+              <field name="House" value="151"/>
+              <field name="Street" value="3rd St"/>
+              <field name="Postal" value="94103"/>
+              <field name="City" value="San Francisco"/>
+              <field name="State" value="CA"/>
+              <field name="Country" value="US"/>
+            </group>
+          </request>
+          <response name="Response">
+            <group name="Status">
+              <field name="Error Code" subtype="error" path="/ResultSet/Error"/>
+              <field name="Error Message" path="/ResultSet/ErrorMessage"/>
+              <field name="Locale" path="/ResultSet/Locale"/>
+              <field name="Quality" path="/ResultSet/Quality"/>
+              <field name="Found" path="/ResultSet/Found"/>
+            </group>
+            <group name="Results">
+              <field name="Results">
+                <group name="Result" path="/ResultSet/Result">
+                  <field name="Latitude" path="latitude"/>
+                  <field name="Longitude" path="longitude"/>
+                  <field name="Offset Latitude" path="offsetlat"/>
+                  <field name="Offset Longitude" path="offsetlon"/>
+                  <field name="Radius" path="radius"/>
+                  <field name="Name" path="name"/>
+                  <field name="Line 1" path="line1"/>
+                  <field name="Line 2" path="line2"/>
+                  <field name="Line 3" path="line3"/>
+                  <field name="Line 4" path="line4"/>
+                  <field name="House" path="house"/>
+                  <field name="Street" path="street"/>
+                  <field name="XStreet" path="xstreet"/>
+                  <field name="Unit type" path="unittype"/>
+                  <field name="Unit" path="unit"/>
+                  <field name="Postal code" path="postal"/>
+                  <field name="Neighborhood" path="neighborhood"/>
+                  <field name="City" path="city"/>
+                  <field name="County" path="county"/>
+                  <field name="State" path="state"/>
+                  <field name="Country" path="country"/>
+                  <field name="Country code" path="countrycode"/>
+                  <field name="State code" path="statecode"/>
+                  <field name="Uzip" path="uzip"/>
+                  <field name="Hash" path="hash"/>
+                  <field name="WOE id" path="woeid"/>
+                  <field name="WOE type" path="woetype"/>
+                </group>
+              </field>
+            </group>
+          </response>
+       </operation>
+    </service>
+    <service name="Reverse geocoding">
+       <operation name="Reverse geocoding">
+          <!-- 
+            Request (http GET): http://where.yahooapis.com/geocode?location=37.787082+-122.400929&gflags=R 
+            Response (XML):
+            <?xml version="1.0" encoding="UTF-8"?>
+            <ResultSet version="1.0">
+              <Error>0</Error>
+              <ErrorMessage>No error</ErrorMessage>
+              <Locale>us_US</Locale>
+              <Quality>99</Quality>
+              <Found>1</Found>
+              <Result>
+                <quality>99</quality>
+                <latitude>37.787082</latitude>
+                <longitude>-122.400929</longitude>
+                <offsetlat>37.787082</offsetlat>
+                <offsetlon>-122.400929</offsetlon>
+                <radius>500</radius>
+                <name>37.787082 -122.400929</name>
+                <line1>655 Mission St</line1>
+                <line2>San Francisco, CA  94105-4126</line2>
+                <line3/>
+                <line4>United States</line4>
+                <house>655</house>
+                <street>Mission St</street>
+                <xstreet/>
+                <unittype/>
+                <unit/>
+                <postal>94105-4126</postal>
+                <neighborhood/>
+                <city>San Francisco</city>
+                <county>San Francisco County</county>
+                <state>California</state>
+                <country>United States</country>
+                <countrycode>US</countrycode>
+                <statecode>CA</statecode>
+                <countycode/>
+                <hash/>
+                <woeid>12797156</woeid>
+                <woetype>11</woetype>
+                <uzip>94105</uzip>
+              </Result>
+            </ResultSet>
+           -->
+          <description>
+To perform reverse geocoding, specify the latitude and longitude for the location parameter, and include "R" in the gflags parameter. In this example, the latitude is 37.787082 and the longitude is -122.400929. The plus sign in the location is a URL-encoded space.
+          </description>
+          <request name="Request">
+            <group name="Location">
+              <field name="Location" value="37.787082 -122.400929"/>
+              <field name="GFlags" value="R"/>
+            </group>
+          </request>
+          <response name="Response">
+            <group name="Status">
+              <field name="Error Code" subtype="error" path="/ResultSet/Error"/>
+              <field name="Error Message" path="/ResultSet/ErrorMessage"/>
+              <field name="Locale" path="/ResultSet/Locale"/>
+              <field name="Quality" path="/ResultSet/Quality"/>
+              <field name="Found" path="/ResultSet/Found"/>
+            </group>
+            <group name="Results">
+              <field name="Results">
+                <group name="Result" path="/ResultSet/Result">
+                  <field name="Quality" path="quality"/>
+                  <field name="Latitude" path="latitude"/>
+                  <field name="Latitude" path="latitude"/>
+                  <field name="Longitude" path="longitude"/>
+                  <field name="Offset Latitude" path="offsetlat"/>
+                  <field name="Offset Longitude" path="offsetlon"/>
+                  <field name="Radius" path="radius"/>
+                  <field name="Name" path="name"/>
+                  <field name="Line 1" path="line1"/>
+                  <field name="Line 2" path="line2"/>
+                  <field name="Line 3" path="line3"/>
+                  <field name="Line 4" path="line4"/>
+                  <field name="House" path="house"/>
+                  <field name="Street" path="street"/>
+                  <field name="XStreet" path="xstreet"/>
+                  <field name="Unit type" path="unittype"/>
+                  <field name="Unit" path="unit"/>
+                  <field name="Postal code" path="postal"/>
+                  <field name="Neighborhood" path="neighborhood"/>
+                  <field name="City" path="city"/>
+                  <field name="County" path="county"/>
+                  <field name="State" path="state"/>
+                  <field name="Country" path="country"/>
+                  <field name="Country code" path="countrycode"/>
+                  <field name="State code" path="statecode"/>
+                  <field name="County code" path="countycode"/>
+                  <field name="Uzip" path="uzip"/>
+                  <field name="Hash" path="hash"/>
+                  <field name="WOE id" path="woeid"/>
+                  <field name="WOE type" path="woetype"/>
+                </group>
+              </field>
+            </group>
+          </response>
+       </operation>
+    </service>
+  </application>
+</system>
+<!-- mailing list for log export common to all systems -->
+<emails>
+  <email>email_4@gmail.com</email>
+  <email type="cc">email_5@gmail.com</email>
+  <email>email_6@gmail.com</email>
+</emails>
+</services>

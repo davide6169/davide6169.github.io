@@ -1,0 +1,2735 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.5.2" />
+<meta name="description" content="an open source UNIX framework for shell script based web service provider" />
+<meta name="keywords" content="mysvc, shell script, web service, provider, service, soa, template, engine, myste, mysde, mysvcd" />
+<link rel="stylesheet" href="../xhtml11.css" type="text/css" />
+<link rel="stylesheet" href="../xhtml11-quirks.css" type="text/css" />
+<link rel="stylesheet" href="../layout1.css" type="text/css" />
+<title>MySVC</title>
+</head>
+<body>
+<div id="layout-banner">
+  <div id="layout-title">MySVC</div>
+  <div id="layout-description">an open source UNIX framework for shell script based web services provider</div>
+</div>
+<table>
+<tr valign="top">
+<td id="layout-menu">
+  <div>&#187;<a href="../index.html">Home</a></div>
+  <div>&#187;<a href="../tools.html">Tools</a></div>
+  <div>&#187;<a href="../manpage.html">Man&nbsp;Page</a></div>
+  <div>&#187;<a href="../userguide.html">User&nbsp;Guide</a></div>
+  <div>&#187;<a href="../changelog.html">ChangeLog</a></div>
+  <div>&#187;<a href="../install.html">Installation</a></div>
+  <div>&#187;<a href="../sourcecode.html">Source Code</a></div>
+  <div>&#187;<a href="../downloads.html">Downloads</a></div>
+  <div>&#187;<a href="../faq.html">FAQ</a></div>
+  <div>&#187;<a href="../support.html">Support</a></div>
+  <div>&#187;<a href="../license.html">License</a></div>
+  <hr/>
+  <div>&#187;<a href="../myapps/index.html">My Apps</a></div>
+  <div>
+  <hr/>
+  <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+  <input type="hidden" name="cmd" value="_s-xclick">
+  <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----MIIHPwYJKoZIhvcNAQcEoIIHMDCCBywCAQExggEwMIIBLAIBADCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwDQYJKoZIhvcNAQEBBQAEgYAWiqN5fcvDviZYNLmeRPAOeH+059PTyUtOFN8++Bx9+RhWYfjY/XwEwfKVwaEeK0+pLj9TDs/FW9ChZZF3FNPjR1Xlg0E3S37taxsarZ2NM6iBhXjSapQPgVGtrCqibd0Diq48ouQTcXPMxKON1Anv/fDoHjjaFPTRVI+KMQX0JTELMAkGBSsOAwIaBQAwgbwGCSqGSIb3DQEHATAUBggqhkiG9w0DBwQInBnxX7TxZ3mAgZhXvGov9cuq17ycIBz4CjE/MwjHddefpVXoPyyh89d/ieP1b6rehpp1R/aW8QBbnS1Fl/INzPU38Y3NTqX7oMhFYsLN1D6YSPjAeoFqIXp1rrTEIDLZRSSIwo8OXuEsPHqK/P+l7S4awyCyWJxdMkqSDK2hPoKXSUHIGA8jf6Rq4DV0CsJzljLJSW8WJMfdpXvKuff4HiEZPaCCA4cwggODMIIC7KADAgECAgEAMA0GCSqGSIb3DQEBBQUAMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbTAeFw0wNDAyMTMxMDEzMTVaFw0zNTAyMTMxMDEzMTVaMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbTCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAwUdO3fxEzEtcnI7ZKZL412XvZPugoni7i7D7prCe0AtaHTc97CYgm7NsAtJyxNLixmhLV8pyIEaiHXWAh8fPKW+R017+EmXrr9EaquPmsVvTywAAE1PMNOKqo2kl4Gxiz9zZqIajOm1fZGWcGS0f5JQ2kBqNbvbg2/Za+GJ/qwUCAwEAAaOB7jCB6zAdBgNVHQ4EFgQUlp98u8ZvF71ZP1LXChvsENZklGswgbsGA1UdIwSBszCBsIAUlp98u8ZvF71ZP1LXChvsENZklGuhgZSkgZEwgY4xCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDQTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLUGF5UGFsIEluYy4xEzARBgNVBAsUCmxpdmVfY2VydHMxETAPBgNVBAMUCGxpdmVfYXBpMRwwGgYJKoZIhvcNAQkBFg1yZUBwYXlwYWwuY29tggEAMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEFBQADgYEAgV86VpqAWuXvX6Oro4qJ1tYVIT5DgWpE692Ag422H7yRIr/9j/iKG4Thia/Oflx4TdL+IFJBAyPK9v6zZNZtBgPBynXb048hsP16l2vi0k5Q2JKiPDsEfBhGI+HnxLXEaUWAcVfCsQFvd2A1sxRr67ip5y2wwBelUecP3AjJ+YcxggGaMIIBlgIBATCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwCQYFKw4DAhoFAKBdMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA4MTAyNTE1NTQzMlowIwYJKoZIhvcNAQkEMRYEFMsXBheWWoPdxAigpR2+KpSpl3NXMA0GCSqGSIb3DQEBAQUABIGAMwKAzwiLVvhRLUQBUUgK5IJQOq4Ci0W9bVWiiCIF3g/DOWMzoJvlQRyxelM5jg2wChbtvg1sj5AoyXaqCdbuEI/7rP0/RhrfFxDqkSbWTOqkcgkMPgNeKvXAC9oD2Dflep/uDlUC2E0w9XEPtps7a5jCiJX5//huQ/usU3f5wmI=-----END PKCS7-----
+  ">
+  <input type="image" src="https://www.paypal.com/en_US/IT/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="">
+  <img alt="" border="0" src="https://www.paypal.com/it_IT/i/scr/pixel.gif" width="1" height="1">
+  </form>
+  </div>
+</td>
+<td>
+<div id="layout-content">
+<div id="header">
+<h1>MySPL Source Code</h1>
+</div>
+<h2 id="_smi_hh">smi.hh</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre><tt>// $Id$
+
+//  myspl - My Service Protocol Library - Version 1.0 (www.mysvc.it)
+//  Copyright (C) 2009 Davide Cucciniello &lt;davide6169@gmail.com&gt;
+//
+//  This program is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+
+/* **********************************************************************
+ *
+ *  ***   **        *** **  **  ****
+ *   **  **        *  *  *  ** **  *
+ *   *** **  **  * ***   *  *  *
+ *   * ** *   * **   **   * *  *
+ *   * *  *   * *  *  *   **   **
+ *  ***  ***   **  ***     *    ****
+ *             *
+ *            *
+ *
+ *  My Service
+ *
+ * ***********************************************************************
+ *
+ *  ***   **        *** ****  ***
+ *   **  **        *  *  *  *  *
+ *   *** **  **  * ***   *  *  *
+ *   * ** *   * **   **  ***   *
+ *   * *  *   * *  *  *  *     *  *
+ *  ***  ***   **  ***  ***   *****
+ *             *
+ *            *
+ *
+ *  My Service Protocol Library Example Client
+ *  (Nortel Networks IN SMI Client)
+ *
+ *  File: smi.hh
+ *
+ *  Description:
+ *    Nortel Networks IN (Intelligent Network)
+ *    SMI (Service Management Interface) Client
+ *    as usage example for MySPL library
+ *    (realized for provisioning of VPN service on SCP
+ *     in BLU mobile telephone operator)
+ *
+ * ***********************************************************************
+ *
+ *  History:
+ *    1.0               first version
+ *
+ * *********************************************************************** */
+
+/*
+ * SMI Message format: SMIHeader [+ SMIData]
+ *
+ * SMI types:
+ *   SMI type name:    C/C++ type name:             Size (number of bytes):
+ *     SMIShort          short int                    2
+ *     SMIUShort         unsigned short int           2
+ *     SMILong           long int                     4
+ *     SMIULong          unsigned long int            4
+ *     SMIBoolean        char                         1
+ *     SMIOctet          char                         1
+ *     SMIString         unsigned long int, 0-n char  4 + (number of characters)
+ *     SMIAttribList     N/A                          &gt;= 8
+ *     SMIAttribVector   N/A                          &gt;= 10
+ *
+ * SMI composite types:
+ *   SMIString
+ *   SMIAttribList
+ *   SMIAttribVector
+ *
+ * SMIShort:
+ *   f e d c b a 9 8   7 6 5 4 3 2 1 0
+ *   &lt;--high order--&gt;  &lt;--low order--&gt;
+ *   address "A"       address "A+1"
+ *  e.g. (-23, one's complement =&gt; invert all bits and adds 1):
+ *   1 1 1 1 1 1 1 1   1 1 1 0 1 0 0 1: -23 (dec)
+ *       F   F             E     9
+ *   0 0 0 0 0 0 0 0   0 0 0 1 0 1 1 1: 23 (dec)
+ *   1 1 1 1 1 1 1 1   1 1 1 0 1 0 0 0: (invert all bits)
+ *   1 1 1 1 1 1 1 1   1 1 1 0 1 0 0 1: (add 1)
+ *
+ * SMIUShort:
+ *   f e d c b a 9 8   7 6 5 4 3 2 1 0
+ *   &lt;--high order--&gt;  &lt;--low order--&gt;
+ *   address "A"       address "A+1"
+ *  e.g. (23):
+ *   0 0 0 0 0 0 0 0   0 0 0 1 0 1 1 1
+ *       0   0             1     7
+ *
+ * SMILong:
+ *   1f 1e 1d 1c 1b 1a 19 18   17 16 15 14 13 12 11 10
+ *   &lt;--high order--&gt;
+ *   address "A"       address "A+1"
+ *   f e d c b a 9 8   7 6 5 4 3 2 1 0
+ *                     &lt;--low order--&gt;
+ *   address "A+2"     address "A+3"
+ * e.g.: -676 (one's complement): FFFFFD5C (hex)
+ *   1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1  1 1 1 1 1 1 0 1  0 1 0 1 1 1 0 0
+ *       F     F          F     F          F     D          5     C
+ *
+ * SMIULong:
+ *   1f 1e 1d 1c 1b 1a 19 18   17 16 15 14 13 12 11 10
+ *   &lt;--high order--&gt;
+ *   address "A"       address "A+1"
+ *   f e d c b a 9 8   7 6 5 4 3 2 1 0
+ *                     &lt;--low order--&gt;
+ *   address "A+2"     address "A+3"
+ * e.g.: 676: 000002A4 (hex)
+ *   0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0  0 0 0 0 0 0 1 0  1 0 1 0 0 1 0 0
+ *       0     0          0     0          0     2          A     4
+ *
+ * SMIBoolean:
+ *   7 6 5 4 3 2 1
+ *   0 0 0 0 0 0 0 0 =&gt; false (0)
+ *   0 0 0 0 0 0 0 1 =&gt; true  (1)
+ *
+ * SMIOctet:
+ *   7 6 5 4 3 2 1 0
+ * e.g.:
+ *   1 0 1 0 1 0 0 1
+ *       A   9
+ *
+ * SMIString:
+ *   &lt;SMIString&gt; ::= &lt;SMIString length&gt; &lt;SMIString value&gt;
+ *   &lt;SMIString length&gt; ::= SMIULong
+ *   &lt;SMIString value&gt; ::= {SMIOctet}[SMIString length]
+ *
+ * SMIAttribList:
+ *   store a list of attributes of different types
+ *   &lt;SMIAttribList&gt; ::= &lt;SMIAttribList size&gt; &lt;SMIAttribList len&gt;
+ *                       {&lt;SMIAttribute&gt;}[number of attributes]
+ *   &lt;SMIAttribList size&gt; ::= SMIULong
+ *   &lt;SMIAttribList len&gt; ::= SMIULong
+ *   &lt;SMIAttribute&gt; ::= &lt;SMIAttribI ID&gt; &lt;SMIAttrib type&gt; &lt;SMIAttrib value&gt;
+ *   &lt;SMIAttrib ID&gt; ::= SMIUShort
+ *   &lt;SMIAttrib type&gt; ::= SMIUShort
+ *
+ * SMIAttribVector:
+ *   store a list of attributes of same type
+ *   &lt;SMIAttribVector&gt; ::= &lt;SMIAttribVector size&gt;
+ *                         &lt;SMIAttribVector type&gt;
+ *                         &lt;SMIAttrib type&gt;
+ *                         &lt;SMIAttribVector len&gt;
+ *                         {&lt;SMIAttrib value&gt;}[number of attributes]
+ *   &lt;SMIAttribVector size&gt; ::= SMIULong
+ *   &lt;SMIAttribVector len&gt; ::= SMIULong
+ *
+ * &lt;SMIAttrib type&gt;:
+ *           Null-value identifier Name               Type of &lt;SMIAttrib value&gt;
+ *   1       32769                 SMI_AT_SMISTRING         SMIString
+ *   2       32770                 SMI_AT_SMISHORT          SMIShort
+ *   3       32771                 SMI_AT_SMIUSHORT         SMIUShort
+ *   4       32772                 SMI_AT_SMILONG           SMILong
+ *   5       32773                 SMI_AT_SMIULONG          SMIULong
+ *   6       32774                 SMI_AT_SMIOCTET          SMIOctet
+ *   7       32775                 SMI_AT_SMIBOOLEAN        SMIBoolean
+ *   10      32778                 SMI_AT_SMIATTRIB_LIST    SMIAttribList
+ *   20      32788                 SMI_AT_SMIATTRIB_VECTOR  SMIAttribVector
+ * Notes:
+ *   if the attribute does not have a null value, the most significant
+ *   bit of SMIAttrib type is set to zero;
+ *   if the attribute does have a null value, the most significant
+ *   bit of SMIAttrib type is set to one
+ * e.g.:
+ *   0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 (5 =&gt; non-null SMIULong attribute)
+ *   1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 (32773 =&gt; null SMIULong attribute)
+ *
+ * &lt;SMIHeader&gt;:
+ *   &lt;SMI message start&gt; &lt;SMI message length&gt; &lt;Version&gt;
+ *   &lt;Message category&gt; &lt;Message type&gt; &lt;Priority&gt;
+ *   &lt;Global return code&gt; &lt;Conversation ID&gt;
+ *   &lt;Authentication key&gt;
+ */
+
+#include "protocol.hh"
+
+// SMIAttrib types
+
+#define SMI_AT_SMISTRING          1
+#define SMI_AT_SMISHORT           2
+#define SMI_AT_SMIUSHORT          3
+#define SMI_AT_SMILONG            4
+#define SMI_AT_SMIULONG           5
+#define SMI_AT_SMIOCTET           6
+#define SMI_AT_SMIBOOLEAN         7
+#define SMI_AT_SMIATTRIB_LIST     10
+#define SMI_AT_SMIATTRIB_VECTOR   20
+
+#define SMI_AT_SMISTRING_NULL          32769
+#define SMI_AT_SMISHORT_NULL           32770
+#define SMI_AT_SMIUSHORT_NULL          32771
+#define SMI_AT_SMILONG_NULL            32772
+#define SMI_AT_SMIULONG_NULL           32773
+#define SMI_AT_SMIOCTET_NULL           32774
+#define SMI_AT_SMIBOOLEAN_NULL         32775
+#define SMI_AT_SMIATTRIB_LIST_NULL     32778
+#define SMI_AT_SMIATTRIB_VECTOR_NULL   32788
+
+// Message categories
+
+#define MCID_SMI_ERROR    100
+#define MCID_SMI_ACCESS   101
+#define MCID_SMI_SMS_DB   102
+#define MCID_SMI_PROV     103
+#define MCID_SMI_SOP_QRH  107
+
+// Message types
+
+#define MID_SMI_ERROR               1000
+#define MID_SMI_LOGIN               2001
+#define MID_SMI_LOGIN_RESP          2002
+#define MID_SMI_LOGOUT              2003
+#define MID_SMI_LOGOUT_RESP         2004
+#define MID_SMI_FORCE_LOGOUT        2005
+#define MID_SMI_FORCE_LOGOUT_RESP   2006
+#define MID_SMI_DB_QUERY            3001
+#define MID_SMI_DB_QUERY_RESP       3002
+#define MID_SMI_DB_UDPATE           3003
+#define MID_SMI_DB_UDPATE_RESP      3004
+#define MID_SMI_PROV                4001
+#define MID_SMI_PROV_UPDATE         4002
+#define MID_SMI_PROV_RESP           4003
+#define MID_SMI_DEACTIVATE          4004
+#define MID_SMI_INCREMENT           4005
+
+// Attribute ID values:
+
+#define SMI_AT_ID_RECORD_ID                     1
+#define SMI_AT_ID_RESOURCE_ID                   201
+#define SMI_AT_ID_SERVICE_ORDER_KEY             202
+#define SMI_AT_ID_CUSTOMER_ID                   203
+#define SMI_AT_ID_SCHEDULED_TIME                204
+#define SMI_AT_ID_LAST_CHANGED_TIME             205
+#define SMI_AT_ID_SERVICE_ORDER_NAME            206
+#define SMI_AT_ID_SERVICE_ORDER_STATE           207
+#define SMI_AT_ID_SCP_OPERATION                 208
+#define SMI_AT_ID_PROVISIONING_OPERATION        209
+#define SMI_AT_ID_SCHEDULED_TYPE                210
+#define SMI_AT_ID_PRIORITY                      211
+#define SMI_AT_ID_DESTINATIONS                  212
+#define SMI_AT_ID_VALIDATED_FLAG                213
+#define SMI_AT_ID_PROVISIONER_USER_ID           214
+#define SMI_AT_ID_SO_DATA                       1004
+#define SMI_AT_ID_SERVICE_KEY                   5008
+#define SMI_AT_ID_LOGIC_GROUPS                  5009
+#define SMI_AT_ID_PARAMETER_NAME                5010
+#define SMI_AT_ID_PARAMETER_LOCATION            5011
+#define SMI_AT_ID_PARAMETER_ATTRIBUTE           5012
+#define SMI_AT_ID_PARAMETER_TYPE                5013
+#define SMI_AT_ID_PARAMETER_OPERAND             5014
+#define SMI_AT_ID_LOGIC_GROUP_NAME              5015
+#define SMI_AT_ID_LOGIC_GROUP_SPEC              5016
+#define SMI_AT_ID_LOGIC_GROUP_PARAM_SPECS       5017
+#define SMI_AT_ID_KEY_SPECS                     5018
+#define SMI_AT_ID_SL_PARAMS                     5019
+
+// FSL parameter types
+
+#define FSL_ARITHMETIC_OP       0
+#define FSL_BOOLEAN             1
+#define FSL_COMPARISON_OP       3
+#define FSL_DAYS_OF_WEEK        4
+#define FSL_DOY                 5
+#define FSL_FILE_ID             6
+#define FSL_FLAGS               7
+#define FSL_ALL_DATA_TYPE       8
+#define FSL_INT                 9
+#define FSL_LONG_INT            10
+#define FSL_MATCH_OP            11
+#define FSL_MINUTE_OF_DAY       12
+#define FSL_OP_REF              13
+#define FSL_STRING_OP           14
+#define FSL_CHAR_STRING         16
+#define FSL_DIGIT_STRING        17
+#define FSL_INT_STRING          18
+#define FSL_U_INT_STRING        19
+#define FSL_U_INT               20
+#define FSL_U_LONG_INT          21
+#define FSL_OCTET_STRING        22
+
+// types 2 and 15 are not used
+
+// SMI message constant values
+
+#define SMI_VERSION       200
+#define SMI_PRIORITY      5
+
+// SMI resource ID
+
+#define SMI_RESOURCEID_DPP_SUBSPIN     530
+#define SMI_RESOURCEID_DVPN_WHITELIST  451
+#define SMI_RESOURCEID_DDR_POSITIVE    671
+
+// basic SMI types
+
+class SMIShortField: public Int2Field
+{
+  public:
+    SMIShortField(short value = 0,string name = "SMIShort"):
+      Int2Field(name,value)
+    {
+    }
+};
+
+class SMIShort: public FieldMessage
+{
+  public:
+     SMIShort(short value = 0,string name = "SMIShort"):
+       FieldMessage(new SMIShortField(value,name),name)
+     {
+     }
+
+     short value()
+     {
+       return ((SMIShortField&amp;)(*this)[0]).value();
+     }
+
+     operator short()
+     {
+       return value();
+     }
+
+     SMIShort&amp; operator=(short value)
+     {
+       (Int2Field&amp;)(*this)[0] = value;
+       return *this;
+     }
+};
+
+class SMIUShortField: public Int2Field
+{
+  public:
+    SMIUShortField(unsigned short value = 0,string name = "SMIUShort"):
+      Int2Field(name,value)
+    {
+    }
+};
+
+class SMIUShort: public FieldMessage
+{
+  public:
+     SMIUShort(unsigned short value = 0,string name = "SMIUShort"):
+       FieldMessage(new SMIUShortField(value,name),name)
+     {
+     }
+
+     unsigned short value()
+     {
+       return ((SMIUShortField&amp;)(*this)[0]).value();
+     }
+
+     operator unsigned short()
+     {
+       return value();
+     }
+
+     SMIUShort&amp; operator=(unsigned short value)
+     {
+       (Int2Field&amp;)(*this)[0] = value;
+       return *this;
+     }
+};
+
+class SMILongField: public Int4Field
+{
+  public:
+    SMILongField(long value = 0,string name = "SMILong"):
+      Int4Field(name,value)
+    {
+    }
+};
+
+class SMILong: public FieldMessage
+{
+  public:
+     SMILong(long value = 0,string name = "SMILong"):
+       FieldMessage(new SMILongField(value,name),name)
+     {
+     }
+
+     long value()
+     {
+       return ((SMILongField&amp;)(*this)[0]).value();
+     }
+
+     operator long()
+     {
+       return value();
+     }
+
+     SMILong&amp; operator=(long value)
+     {
+       (Int4Field&amp;)(*this)[0] = value;
+       return *this;
+     }
+};
+
+class SMIULongField: public Int4Field
+{
+  public:
+    SMIULongField(unsigned long value = 0,string name = "SMIULong"):
+      Int4Field(name,value)
+    {
+    }
+};
+
+class SMIULong: public FieldMessage
+{
+  public:
+     SMIULong(unsigned long value = 0,string name = "SMILong"):
+       FieldMessage(new SMIULongField(value,name),name)
+     {
+     }
+
+     unsigned long value()
+     {
+       return ((SMIULongField&amp;)(*this)[0]).value();
+     }
+
+     operator unsigned long()
+     {
+       return value();
+     }
+
+     SMIULong&amp; operator=(unsigned long value)
+     {
+       (Int4Field&amp;)(*this)[0] = value;
+       return *this;
+     }
+};
+
+class SMIBooleanField: public BoolField
+{
+  public:
+    SMIBooleanField(bool value = false,string name = "SMIBoolean"):
+      BoolField(name,value,1,0)
+    {
+    }
+};
+
+class SMIBoolean: public FieldMessage
+{
+  public:
+    SMIBoolean(bool value = false,string name = "SMIBoolean"):
+      FieldMessage(new SMIBooleanField(value,name),name)
+    {
+    }
+
+    bool value()
+    {
+      return ((SMIBooleanField&amp;)(*this)[0]).value();
+    }
+
+     operator bool()
+     {
+       return value();
+     }
+
+     SMIBoolean&amp; operator=(bool value)
+     {
+       (BoolField&amp;)(*this)[0] = value;
+       return *this;
+     }
+};
+
+class SMIOctetField: public OctetField
+{
+  public:
+    SMIOctetField(char value = '\0',string name = "SMIOctet"):
+      OctetField(name,value)
+    {
+    }
+};
+
+class SMIOctet: public FieldMessage
+{
+  public:
+    SMIOctet(char value = '\0',string name = "SMIOctet"):
+      FieldMessage(new SMIOctetField(value,name),name)
+    {
+    }
+
+     char value()
+     {
+       return ((SMIOctetField&amp;)(*this)[0]).value();
+     }
+
+     operator char()
+     {
+       return value();
+     }
+
+     SMIOctet&amp; operator=(char value)
+     {
+       (OctetField&amp;)(*this)[0] = value;
+       return *this;
+     }
+};
+
+// composite SMI types
+
+class SMIString: public TreeMessage
+{
+  public:
+    SMIString(string value = "",string name = "SMIString"):
+      TreeMessage(1+value.length(),name)
+    {
+       (*this)(0) = new TreeMessage(
+         new SMIULong(size()-1,"SMIString length"));
+
+       for(int i=1;i&lt;size();i++)
+         (*this)(i) = new TreeMessage(
+           new SMIOctet(value[i-1]));
+    }
+
+    string value()
+    {
+      string s;
+
+      for(int i=1;i&lt;size();i++)
+        s += ((SMIOctet&amp;)(*this)[i]()).value();
+
+      return s;
+    }
+
+     operator string()
+     {
+       return value();
+     }
+
+     SMIString&amp; operator=(string value)
+     {
+       init(1+value.length());
+
+       (*this)(0) = new TreeMessage(
+         new SMIULong(size()-1,"SMIString length"));
+
+       for(int i=1;i&lt;size();i++)
+         (*this)(i) = new TreeMessage(
+           new SMIOctet(value[i-1]));
+
+       return *this;
+     }
+
+  protected:
+    TreeMessage* child(int i)
+    {
+      return new TreeMessage(
+        new SMIOctet());
+    }
+
+    int update(int size_)
+    {
+       int length = ((SMIULong*)(*this)[0].info())-&gt;value();
+
+       if((size_ == 1) &amp;&amp; (length &gt; 0))
+         return 1 + length;
+       else
+         return 0;
+    }
+};
+
+class SMIAttribute;
+
+class SMIAttribList: public TreeMessage
+{
+  public:
+    SMIAttribList(unsigned long listsize = 0,
+                  string name = "SMIAttribList"):
+      TreeMessage(2+listsize,name)
+    {
+      (*this)(0) = new TreeMessage(
+        new SMIULong(listsize,"SMIAttribList size"));
+
+      (*this)(1) = new TreeMessage(
+        new SMIULong(0,"SMIAttribList len"));
+    }
+
+    SMIULong&amp; lsize()
+    {
+      return (SMIULong&amp;)(*this)[0]();
+    }
+
+    SMIULong&amp; llen()
+    {
+      return (SMIULong&amp;)(*this)[1]();
+    }
+
+    virtual void update()
+    {
+      unsigned long n = 0;
+      for(int i=0;i&lt;lsize();i++)
+        if((*this)(2+i))
+        {
+          (*this)[2+i].update();
+          n += (*this)[2+i].bytes();
+        }
+
+      ((SMIULong&amp;)(*this)[1]()) = n;
+    }
+
+  protected:
+    TreeMessage* attribute(int i)
+    {
+      // overload this method into subclasses
+      return 0;
+    }
+
+    TreeMessage* child(int i)
+    {
+      return attribute(i-2);
+    }
+
+    int update(int size_)
+    {
+      unsigned long s = lsize();
+
+      if(size_ &lt; s)
+        return s;
+      else
+        return 0;
+    }
+};
+
+class SMIAttribVector: public TreeMessage
+{
+  public:
+    SMIAttribVector(unsigned long vectorsize = 0,
+                    unsigned short vectortype = 0,
+                    TreeMessage*  attribute = 0,
+                    string name = "SMIAttribVector"):
+      TreeMessage(3+vectorsize,name)
+    {
+      (*this)(0) = new TreeMessage(
+        new SMIULong(vectorsize,"SMIAttribVector size"));
+
+      (*this)(1) = new TreeMessage(
+        new SMIUShort(vectortype,"SMIAttribVector type"));
+
+      if(attribute)
+        (*this)(2) = new TreeMessage(
+          new SMIULong(vectorsize*(attribute-&gt;bytes()),"SMIAttribVector len"));
+      else
+        (*this)(2) = new TreeMessage(
+          new SMIULong(0,"SMIAttribVector len"));
+
+      for(int i=3;i&lt;vectorsize+3;i++)
+        if(attribute)
+          (*this)(i) = attribute-&gt;clone();
+    }
+
+    SMIULong&amp; vsize()
+    {
+      return (SMIULong&amp;)(*this)[0]();
+    }
+
+    SMIUShort&amp; vtype()
+    {
+      return (SMIUShort&amp;)(*this)[1]();
+    }
+
+    SMIULong&amp; vlen()
+    {
+      return (SMIULong&amp;)(*this)[2]();
+    }
+
+    virtual void update()
+    {
+      unsigned long n = 0;
+
+      for(int i=0;i&lt;vsize();i++)
+        if((*this)(3+i))
+          n += (*this)[3+i].bytes();
+
+      ((SMIULong&amp;)(*this)[2]()) = n;
+    }
+
+  protected:
+    TreeMessage* attribute(int i)
+    {
+      // overload this method into subclasses
+      return 0;
+    }
+
+    TreeMessage* child(int i)
+    {
+      return attribute(i-3);
+    }
+
+    int update(int size_)
+    {
+      if(size_ == 3)
+        return vsize();
+      else
+        return 0;
+    }
+};
+
+class SMIAttribute: public TreeMessage
+{
+  public:
+    SMIAttribute(string name = "SMIAttribute"):
+      TreeMessage(2,name)
+    {
+      (*this)(0) = new TreeMessage(
+        new SMIUShort(0,"SMIAttrib ID"));
+
+      (*this)(1) = new TreeMessage(
+        new SMIUShort(0,"SMIAttrib type"));
+    }
+
+    SMIAttribute(unsigned short attribid,
+                 unsigned short attribtype,
+                 TreeMessage* attribvalue = 0,
+                 string name = "SMIAttribute"):
+      TreeMessage(3,name)
+    {
+      (*this)(0) = new TreeMessage(
+        new SMIUShort(attribid,"SMIAttrib ID"));
+
+      (*this)(1) = new TreeMessage(
+        new SMIUShort(attribtype,"SMIAttrib type"));
+
+      (*this)(2) = attribvalue;
+    }
+
+    SMIUShort&amp; id()
+    {
+      return (SMIUShort&amp;)(*this)[0]();
+    }
+
+    SMIUShort&amp; type()
+    {
+      return (SMIUShort&amp;)(*this)[1]();
+    }
+
+    TreeMessage&amp; value()
+    {
+      return (*this)[2];
+    }
+
+    SMIAttribute&amp; operator=(TreeMessage* m)
+    {
+      assign(2,m);
+      return *this;
+    }
+
+    bool isNull()
+    {
+      return (type().value() &gt; 32768);
+    }
+
+  protected:
+    TreeMessage* child(int i)
+    {
+      switch(type())
+      {
+        case SMI_AT_SMISTRING:
+        case SMI_AT_SMISTRING_NULL:
+          return new SMIString;
+          break;
+        case SMI_AT_SMISHORT:
+        case SMI_AT_SMISHORT_NULL:
+          return new TreeMessage(new SMIShort);
+          break;
+        case SMI_AT_SMIUSHORT:
+        case SMI_AT_SMIUSHORT_NULL:
+          return new TreeMessage(new SMIUShort);
+          break;
+        case SMI_AT_SMILONG:
+        case SMI_AT_SMILONG_NULL:
+          return new TreeMessage(new SMILong);
+          break;
+        case SMI_AT_SMIULONG:
+        case SMI_AT_SMIULONG_NULL:
+          return new TreeMessage(new SMIULong);
+          break;
+        case SMI_AT_SMIOCTET:
+        case SMI_AT_SMIOCTET_NULL:
+          return new TreeMessage(new SMIOctet);
+          break;
+        case SMI_AT_SMIBOOLEAN:
+        case SMI_AT_SMIBOOLEAN_NULL:
+          return new TreeMessage(new SMIBoolean);
+          break;
+        case SMI_AT_SMIATTRIB_LIST:
+        case SMI_AT_SMIATTRIB_LIST_NULL:
+          return new SMIAttribList;
+          break;
+        case SMI_AT_SMIATTRIB_VECTOR:
+        case SMI_AT_SMIATTRIB_VECTOR_NULL:
+          return new SMIAttribVector;
+          break;
+        default:
+          return 0;
+      }
+    }
+
+    int update(int size_)
+    {
+      if((size_ == 2) &amp;&amp; !isNull())
+        return 3;
+      else
+        return 0;
+    }
+};
+
+// SMI Message
+
+class SMIAuthenticationKey: public TreeMessage
+{
+  public:
+    SMIAuthenticationKey(string name = "SMIAuthenticationKey"):
+      TreeMessage(10,name)
+    {
+      (*this)(0) = new TreeMessage(
+        new SMIOctet(0,"Authentication key"));
+      (*this)(1) = new TreeMessage(
+        new SMIOctet(0,"Authentication key"));
+      (*this)(2) = new TreeMessage(
+        new SMIOctet(0,"Authentication key"));
+      (*this)(3) = new TreeMessage(
+        new SMIOctet(0,"Authentication key"));
+      (*this)(4) = new TreeMessage(
+        new SMIOctet(0,"Authentication key"));
+      (*this)(5) = new TreeMessage(
+        new SMIOctet(0,"Authentication key"));
+      (*this)(6) = new TreeMessage(
+        new SMIOctet(0,"Authentication key"));
+      (*this)(7) = new TreeMessage(
+        new SMIOctet(0,"Authentication key"));
+      (*this)(8) = new TreeMessage(
+        new SMIOctet(0,"Authentication key"));
+      (*this)(9) = new TreeMessage(
+        new SMIOctet(0,"Authentication key"));
+    }
+};
+
+class SMIMessageStart: public TreeMessage
+{
+  public:
+    SMIMessageStart(string name = "SMIMessageStart"):
+      TreeMessage(4,name)
+    {
+      (*this)(0) = new TreeMessage(
+        new SMIOctet(0xA9,"SMI message start"));
+      (*this)(1) = new TreeMessage(
+        new SMIOctet(0x12,"SMI message start"));
+      (*this)(2) = new TreeMessage(
+        new SMIOctet(0x5F,"SMI message start"));
+      (*this)(3) = new TreeMessage(
+        new SMIOctet(0x49,"SMI message start"));
+    }
+};
+
+class SMIConversationID: public TreeMessage
+{
+  public:
+    SMIConversationID(unsigned long transactionid = 0,
+                      unsigned long sourcenodestateflag = 0,
+                      string name = "SMIConversationID"):
+      TreeMessage(4,name)
+    {
+      (*this)(0) = new TreeMessage(
+        new SMIULong(getLocalIPAddress(),"Source-node IP address"));
+
+      (*this)(1) = new TreeMessage(
+        new SMIULong(getpid(),"Source-node process ID"));
+
+      (*this)(2) = new TreeMessage(
+        new SMIULong(transactionid,"Transaction ID"));
+
+      (*this)(3) = new TreeMessage(
+        new SMIULong(sourcenodestateflag,"Source-node state flag"));
+    }
+};
+
+class SMIHeader: public TreeMessage
+{
+  public:
+    SMIHeader(unsigned short messagecategory = 0,
+              unsigned short messagetype = 0,
+              unsigned short priority = SMI_PRIORITY,
+              unsigned long version = SMI_VERSION,
+              unsigned long transactionid = 0,
+              unsigned long sourcenodestateflag = 0,
+              string name = "SMIHeader"):
+      TreeMessage(9,name)
+    {
+      (*this)(0) = new SMIMessageStart();
+
+      (*this)(1) = new TreeMessage(
+        new SMIULong(46,"SMI message length"));
+
+      (*this)(2) = new TreeMessage(
+        new SMIUShort(version,"Version"));
+
+      (*this)(3) = new TreeMessage(
+        new SMIUShort(messagecategory,"Message category"));
+
+      (*this)(4) = new TreeMessage(
+        new SMIUShort(messagetype,"Message type"));
+
+      (*this)(5) = new TreeMessage(
+        new SMIUShort(priority,"Priority"));
+
+      (*this)(6) = new TreeMessage(
+        new SMIULong(0,"Global return code"));
+
+      (*this)(7) = new SMIConversationID(transactionid,
+                                         sourcenodestateflag);
+
+      (*this)(8) = new SMIAuthenticationKey();
+    }
+
+    void setAuthenticationKey(SMIAuthenticationKey auth)
+    {
+      (SMIOctet&amp;)(*this)[8][0]() = (SMIOctet&amp;)(auth[0]());
+      (SMIOctet&amp;)(*this)[8][1]() = (SMIOctet&amp;)(auth[1]());
+      (SMIOctet&amp;)(*this)[8][2]() = (SMIOctet&amp;)(auth[2]());
+      (SMIOctet&amp;)(*this)[8][3]() = (SMIOctet&amp;)(auth[3]());
+      (SMIOctet&amp;)(*this)[8][4]() = (SMIOctet&amp;)(auth[4]());
+      (SMIOctet&amp;)(*this)[8][5]() = (SMIOctet&amp;)(auth[5]());
+      (SMIOctet&amp;)(*this)[8][6]() = (SMIOctet&amp;)(auth[6]());
+      (SMIOctet&amp;)(*this)[8][7]() = (SMIOctet&amp;)(auth[7]());
+      (SMIOctet&amp;)(*this)[8][8]() = (SMIOctet&amp;)(auth[8]());
+      (SMIOctet&amp;)(*this)[8][9]() = (SMIOctet&amp;)(auth[9]());
+    }
+
+    SMIAuthenticationKey getAuthenticationKey()
+    {
+      SMIAuthenticationKey auth;
+
+      (SMIOctet&amp;)(auth[0]()) = (SMIOctet&amp;)(*this)[8][0];
+      (SMIOctet&amp;)(auth[1]()) = (SMIOctet&amp;)(*this)[8][1];
+      (SMIOctet&amp;)(auth[2]()) = (SMIOctet&amp;)(*this)[8][2];
+      (SMIOctet&amp;)(auth[3]()) = (SMIOctet&amp;)(*this)[8][3];
+      (SMIOctet&amp;)(auth[4]()) = (SMIOctet&amp;)(*this)[8][4];
+      (SMIOctet&amp;)(auth[5]()) = (SMIOctet&amp;)(*this)[8][5];
+      (SMIOctet&amp;)(auth[6]()) = (SMIOctet&amp;)(*this)[8][6];
+      (SMIOctet&amp;)(auth[7]()) = (SMIOctet&amp;)(*this)[8][7];
+      (SMIOctet&amp;)(auth[8]()) = (SMIOctet&amp;)(*this)[8][8];
+      (SMIOctet&amp;)(auth[9]()) = (SMIOctet&amp;)(*this)[8][9];
+
+      return auth;
+    }
+
+    unsigned long getGlobalReturnCode()
+    {
+       return ((SMIULong&amp;)((*this)[6]())).value();
+    }
+};
+
+class SMIData: public TreeMessage
+{
+  public:
+    SMIData(int size = 1,
+            string name = "SMIData"):
+      TreeMessage(size,name)
+    {
+    }
+};
+
+class SMIMessage: public TreeMessage
+{
+  public:
+    SMIMessage(SMIHeader* smiheader,
+               SMIData* smidata = 0,
+               string name = "SMIMessage"):
+      TreeMessage(2,name)
+   {
+      (*this)(0) =  smiheader;
+      (*this)(1) =  smidata;
+   }
+
+   SMIHeader&amp; getHeader()
+   {
+     return (SMIHeader&amp;)(*this)[0];
+   }
+
+   SMIData&amp; getData()
+   {
+     return (SMIData&amp;)(*this)[1];
+   }
+
+   void setAuthenticationKey(SMIAuthenticationKey auth)
+   {
+      ((SMIHeader&amp;)(*this)[0]).setAuthenticationKey(auth);
+   }
+
+   SMIAuthenticationKey getAuthenticationKey()
+   {
+     return (((SMIHeader&amp;)(*this)[0])).getAuthenticationKey();
+   }
+
+   unsigned long getGlobalReturnCode()
+   {
+     return ((SMIHeader&amp;)((*this)[0])).getGlobalReturnCode();
+   }
+
+   void update()
+   {
+     if((*this)(1))
+     {
+       unsigned long headerlength = ((*this)[0]).bytes();
+       unsigned long datalength = ((*this)[1]).bytes();
+
+       (SMIULong&amp;)((*this)[0][1]()) = headerlength + datalength;
+     }
+   }
+};
+
+class SMIBuffer: public SMIData
+{
+  public:
+    SMIBuffer(unsigned long bytes = 0):
+      SMIData(bytes)
+    {
+        for(int i=0;i&lt;bytes;i++)
+          (*this)(i) = new TreeMessage(
+            new SMIOctet(0,"Byte"));
+    }
+};
+
+/* SMI messages */
+
+class SMIError: public SMIMessage
+{
+  public:
+    SMIError():
+      SMIMessage(new SMIHeader(MCID_SMI_ERROR,MID_SMI_ERROR))
+    {
+    }
+};
+
+class SMILogin: public SMIMessage
+{
+  public:
+    SMILogin(string userid = "",
+             string password = ""):
+      SMIMessage(new SMIHeader(MCID_SMI_ACCESS,MID_SMI_LOGIN),
+                 new SMIData(2),
+                 "SMILogin")
+    {
+      (*this)[1](0) = new SMIString(userid);
+      (*this)[1](1) = new SMIString(password);
+    }
+
+    string getUserID()
+    {
+      return ((SMIString&amp;)(*this)[1][0]).value();
+    }
+
+    string getPassword()
+    {
+      return ((SMIString&amp;)(*this)[1][1]).value();
+    }
+};
+
+class SMILoginResp: public SMIMessage
+{
+  public:
+    SMILoginResp():
+      SMIMessage(new SMIHeader(MCID_SMI_ACCESS,MID_SMI_LOGIN_RESP),
+                 new SMIData(3),
+                 "SMILoginResp")
+    {
+      (*this)[1](0) = new SMIAuthenticationKey();
+
+      (*this)[1](1) = new TreeMessage(
+        new SMIULong(0,"Time-out value"));
+
+      (*this)[1](2) = new SMIString("","User profile");
+    }
+
+    SMIAuthenticationKey getAuthenticationKey()
+    {
+      SMIAuthenticationKey auth;
+
+      (SMIOctet&amp;)(auth[0]()) = (SMIOctet&amp;)((*this)[1][0][0]());
+      (SMIOctet&amp;)(auth[1]()) = (SMIOctet&amp;)((*this)[1][0][1]());
+      (SMIOctet&amp;)(auth[2]()) = (SMIOctet&amp;)((*this)[1][0][2]());
+      (SMIOctet&amp;)(auth[3]()) = (SMIOctet&amp;)((*this)[1][0][3]());
+      (SMIOctet&amp;)(auth[4]()) = (SMIOctet&amp;)((*this)[1][0][4]());
+      (SMIOctet&amp;)(auth[5]()) = (SMIOctet&amp;)((*this)[1][0][5]());
+      (SMIOctet&amp;)(auth[6]()) = (SMIOctet&amp;)((*this)[1][0][6]());
+      (SMIOctet&amp;)(auth[7]()) = (SMIOctet&amp;)((*this)[1][0][7]());
+      (SMIOctet&amp;)(auth[8]()) = (SMIOctet&amp;)((*this)[1][0][8]());
+      (SMIOctet&amp;)(auth[9]()) = (SMIOctet&amp;)((*this)[1][0][9]());
+
+      return auth;
+    }
+};
+
+class SMILogout: public SMIMessage
+{
+  public:
+    SMILogout():
+      SMIMessage(new SMIHeader(MCID_SMI_ACCESS,MID_SMI_LOGOUT),0,
+                 "SMILogout")
+    {
+    }
+};
+
+class SMILogoutResp: public SMIMessage
+{
+  public:
+    SMILogoutResp():
+      SMIMessage(new SMIHeader(MCID_SMI_ACCESS,MID_SMI_LOGOUT_RESP),0,
+                 "SMILogoutResp")
+    {
+    }
+};
+
+class SMIForceLogout: public SMIMessage
+{
+  public:
+    SMIForceLogout(string userid,
+                   string password):
+      SMIMessage(new SMIHeader(MCID_SMI_ACCESS,MID_SMI_FORCE_LOGOUT),
+                 new SMIData(2),
+                 "SMIForceLogout")
+    {
+      (*this)[1](0) = new SMIString(userid);
+      (*this)[1](1) = new SMIString(password);
+    }
+};
+
+class SMIForceLogoutResp: public SMIMessage
+{
+  public:
+    SMIForceLogoutResp():
+      SMIMessage(new SMIHeader(MCID_SMI_ACCESS,MID_SMI_FORCE_LOGOUT_RESP),0,
+                 "SMIForceLogoutResp")
+    {
+    }
+};
+
+class SMIParameterSpec: public SMIAttribList
+{
+  public:
+    SMIParameterSpec(string parametername = "",
+                     unsigned short parameterlocation = 0,
+                     unsigned short parameterattribute = 0,
+                     unsigned short parametertype = 0,
+                     TreeMessage* parameteroperand = 0):
+      SMIAttribList(5,"Parameter spec")
+    {
+      (*this)(2) = new SMIAttribute(SMI_AT_ID_PARAMETER_NAME,
+                                    SMI_AT_SMISTRING,
+                                    new SMIString(parametername));
+      (*this)(3) = new SMIAttribute(SMI_AT_ID_PARAMETER_LOCATION,
+                                    SMI_AT_SMIUSHORT,
+                                    new TreeMessage(
+                                      new SMIUShort(parameterlocation)));
+      (*this)(4) = new SMIAttribute(SMI_AT_ID_PARAMETER_ATTRIBUTE,
+                                    SMI_AT_SMIUSHORT,
+                                    new TreeMessage(
+                                      new SMIUShort(parameterattribute)));
+      (*this)(5) = new SMIAttribute(SMI_AT_ID_PARAMETER_TYPE,
+                                    SMI_AT_SMIUSHORT,
+                                    new TreeMessage(
+                                      new SMIUShort(parametertype)));
+
+      (*this)(6) = new SMIAttribute(SMI_AT_ID_PARAMETER_OPERAND,
+                                    operandtype(),
+                                    parameteroperand);
+    }
+
+  protected:
+    TreeMessage* attribute(int i)
+    {
+      if(i == 4)
+      {
+        unsigned short parameterlocation =
+          (SMIUShort&amp;)((*this)[3][2]());
+        unsigned short parametertype =
+          (SMIUShort&amp;)((*this)[5][2]());
+
+        if(parameterlocation == 2)
+        {
+          // TCB
+          return new SMIAttribute(SMI_AT_ID_PARAMETER_OPERAND,
+                                  SMI_AT_SMISTRING,
+                                  new SMIString());
+        }
+        else if(parameterlocation == 4)
+        {
+          // Null
+          return new SMIAttribute(SMI_AT_ID_PARAMETER_OPERAND,
+                                  SMI_AT_SMIUSHORT,
+                                  new TreeMessage(new SMIUShort(0)));
+        }
+        else
+        {
+          switch(parametertype)
+          {
+            case FSL_ARITHMETIC_OP:
+            case FSL_COMPARISON_OP:
+            case FSL_DOY:
+            case FSL_FILE_ID:
+            case FSL_FLAGS:
+            case FSL_ALL_DATA_TYPE:
+            case FSL_MATCH_OP:
+            case FSL_MINUTE_OF_DAY:
+            case FSL_STRING_OP:
+            case FSL_U_INT:
+              return new SMIAttribute(SMI_AT_ID_PARAMETER_OPERAND,
+                                      SMI_AT_SMIUSHORT,
+                                      new TreeMessage(new SMIUShort(0)));
+            case FSL_DAYS_OF_WEEK:
+              return new SMIAttribute(SMI_AT_ID_PARAMETER_OPERAND,
+                                      SMI_AT_SMIOCTET,
+                                      new TreeMessage(new SMIOctet()));
+            case FSL_OP_REF:
+            case FSL_CHAR_STRING:
+            case FSL_DIGIT_STRING:
+              return new SMIAttribute(SMI_AT_ID_PARAMETER_OPERAND,
+                                      SMI_AT_SMISTRING,
+                                      new SMIString());
+            case FSL_U_INT_STRING:
+            case FSL_OCTET_STRING:
+            case FSL_INT_STRING:
+              return new SMIAttribute(SMI_AT_ID_PARAMETER_OPERAND,
+                                      SMI_AT_SMIATTRIB_VECTOR,
+                                      new SMIAttribVector());
+            case FSL_INT:
+              return new SMIAttribute(SMI_AT_ID_PARAMETER_OPERAND,
+                                      SMI_AT_SMISHORT,
+                                      new TreeMessage(new SMIShort(0)));
+            case FSL_BOOLEAN:
+              return new SMIAttribute(SMI_AT_ID_PARAMETER_OPERAND,
+                                      SMI_AT_SMIBOOLEAN,
+                                      new TreeMessage(new SMIBoolean()));
+            case FSL_LONG_INT:
+              return new SMIAttribute(SMI_AT_ID_PARAMETER_OPERAND,
+                                      SMI_AT_SMILONG,
+                                      new TreeMessage(new SMILong(0)));
+            case FSL_U_LONG_INT:
+              return new SMIAttribute(SMI_AT_ID_PARAMETER_OPERAND,
+                                      SMI_AT_SMIULONG,
+                                      new TreeMessage(new SMIULong(0)));
+            default:
+              // error
+              return 0;
+          }
+        }
+      }
+    }
+
+    unsigned short operandtype()
+    {
+      unsigned short parameterlocation =
+        (SMIUShort&amp;)((*this)[3][2]());
+      unsigned short parametertype =
+        (SMIUShort&amp;)((*this)[5][2]());
+
+      if(parameterlocation == 2)
+      {
+        // TCB
+        return SMI_AT_SMISTRING;
+      }
+      else if(parameterlocation == 4)
+      {
+        // Null
+        return SMI_AT_SMIUSHORT;
+      }
+      else
+      {
+        switch(parametertype)
+        {
+          case FSL_ARITHMETIC_OP:
+          case FSL_COMPARISON_OP:
+          case FSL_DOY:
+          case FSL_FILE_ID:
+          case FSL_FLAGS:
+          case FSL_ALL_DATA_TYPE:
+          case FSL_MATCH_OP:
+          case FSL_MINUTE_OF_DAY:
+          case FSL_STRING_OP:
+          case FSL_U_INT:
+            return SMI_AT_SMIUSHORT;
+          case FSL_DAYS_OF_WEEK:
+            return SMI_AT_SMIOCTET;
+          case FSL_OP_REF:
+          case FSL_CHAR_STRING:
+          case FSL_DIGIT_STRING:
+            return SMI_AT_SMISTRING;
+          case FSL_U_INT_STRING:
+          case FSL_OCTET_STRING:
+          case FSL_INT_STRING:
+            return SMI_AT_SMIATTRIB_VECTOR;
+          case FSL_INT:
+            return SMI_AT_SMISHORT;
+          case FSL_BOOLEAN:
+            return SMI_AT_SMIBOOLEAN;
+          case FSL_LONG_INT:
+            return SMI_AT_SMILONG;
+          case FSL_U_LONG_INT:
+            return SMI_AT_SMIULONG;
+          default:
+            // error
+            return 0;
+        }
+      }
+    }
+};
+
+class SMILogicGroup: public SMIAttribList
+{
+  public:
+    SMILogicGroup(string logicgroupname = "",
+                  string logicgroupspec = "",
+                  unsigned long parameterspecs = 0):
+      SMIAttribList(3,"Logic group")
+    {
+      (*this)(2) = new SMIAttribute(SMI_AT_ID_LOGIC_GROUP_NAME,
+                                    SMI_AT_SMISTRING,
+                                    new SMIString(logicgroupname));
+      (*this)(3) = new SMIAttribute(SMI_AT_ID_LOGIC_GROUP_SPEC,
+                                    SMI_AT_SMISTRING,
+                                    new SMIString(logicgroupspec));
+      (*this)(4) = new SMIAttribute(SMI_AT_ID_LOGIC_GROUP_PARAM_SPECS,
+                                    SMI_AT_SMIATTRIB_VECTOR,
+                                    new SMIAttribVector(parameterspecs));
+    }
+
+   SMIParameterSpec&amp; getParameterSpec(int i)
+   {
+     return (SMIParameterSpec&amp;)(*this)[4][3+i];
+   }
+
+   void setParameterSpec(int i,SMIParameterSpec* parameterspec)
+   {
+      (*this)[4](3+i) = parameterspec;
+   }
+};
+
+class SMISubscriberServiceOrder: public SMIAttribList
+{
+  public:
+    SMISubscriberServiceOrder(unsigned long resourceid = 0,
+                              unsigned long servicekeys = 0,
+                              unsigned long logicgroups = 0,
+                              string serviceorderkey = "",
+                              string serviceordername = "SP BLU",
+                              unsigned short scpoperation = 1,
+                              unsigned short provisioningoperation = 0,
+                              string destinations = "",
+                              string provisioneruserid = "Provisioner user ID"):
+      SMIAttribList(16,"Subscriber service order")
+    {
+      (*this)(2) = new SMIAttribute(SMI_AT_ID_RECORD_ID,
+                                    SMI_AT_SMIULONG,
+                                    new TreeMessage(
+                                      new SMIULong(0)),
+                                    "Record ID");
+      (*this)(3) = new SMIAttribute(SMI_AT_ID_RESOURCE_ID,
+                                    SMI_AT_SMIULONG,
+                                    new TreeMessage(
+                                      new SMIULong(resourceid)),
+                                    "Resource ID");
+      (*this)(4) = new SMIAttribute(SMI_AT_ID_SERVICE_ORDER_KEY,
+                                    SMI_AT_SMISTRING,
+                                    new SMIString(serviceorderkey),
+                                    "Service-order key");
+      (*this)(5) = new SMIAttribute(SMI_AT_ID_CUSTOMER_ID,
+                                    SMI_AT_SMIULONG,
+                                    new TreeMessage(
+                                      new SMIULong(0)),
+                                    "Customer ID");
+      (*this)(6) = new SMIAttribute(SMI_AT_ID_SCHEDULED_TIME,
+                                    SMI_AT_SMIULONG,
+                                    new TreeMessage(
+                                      new SMIULong(0)),
+                                    "Scheduled time");
+      (*this)(7) = new SMIAttribute(SMI_AT_ID_LAST_CHANGED_TIME,
+                                    SMI_AT_SMIULONG,
+                                    new TreeMessage(
+                                      new SMIULong(0)),
+                                    "Last-changed time");
+      (*this)(8) = new SMIAttribute(SMI_AT_ID_SERVICE_ORDER_NAME,
+                                    SMI_AT_SMISTRING,
+                                    new SMIString(serviceordername),
+                                    "Service-order name");
+      (*this)(9) = new SMIAttribute(SMI_AT_ID_SERVICE_ORDER_STATE,
+                                    SMI_AT_SMIUSHORT,
+                                    new TreeMessage(
+                                      new SMIUShort(0)),
+                                    "Service-order state"); // 1-6
+      (*this)(10) = new SMIAttribute(SMI_AT_ID_SCP_OPERATION,
+                                     SMI_AT_SMIUSHORT,
+                                     new TreeMessage(
+                                       new SMIUShort(scpoperation)),
+                                     "SCP operation");
+        // SCP operation:
+        //   1: add
+        //   2: modify
+        //   3: delete
+
+      (*this)(11) = new SMIAttribute(SMI_AT_ID_PROVISIONING_OPERATION,
+                                     SMI_AT_SMIUSHORT,
+                                     new TreeMessage(
+                                       new SMIUShort(provisioningoperation)),
+                                     "Provisioning operation");
+        // Provisioning operation:
+        //   0: activate
+        //   1: reschedule
+        //   2: suspend
+        //   3: deactivate
+
+      (*this)(12) = new SMIAttribute(SMI_AT_ID_SCHEDULED_TYPE,
+                                     SMI_AT_SMIUSHORT,
+                                     new TreeMessage(
+                                       new SMIUShort(2)),
+                                     "Scheduled type");
+        // Scheduled type :
+        //   1: emergency
+        //   2: immediate
+        //   3: scheduled
+
+      (*this)(13) = new SMIAttribute(SMI_AT_ID_PRIORITY,
+                                     SMI_AT_SMIUSHORT,
+                                     new TreeMessage(
+                                       new SMIUShort(0)),
+                                     "Priority");
+
+      (*this)(14) = new SMIAttribute(SMI_AT_ID_DESTINATIONS,
+                                     SMI_AT_SMISTRING,
+                                     new SMIString(destinations),
+                                     "Destinations");
+      (*this)(15) = new SMIAttribute(SMI_AT_ID_VALIDATED_FLAG,
+                                     SMI_AT_SMIBOOLEAN,
+                                     new TreeMessage(
+                                       new SMIBoolean(false)),
+                                     "Validated flag");
+      (*this)(16) = new SMIAttribute(SMI_AT_ID_PROVISIONER_USER_ID,
+                                     SMI_AT_SMISTRING,
+                                     new SMIString(provisioneruserid),
+                                     "Provisioner user ID");
+      (*this)(17) = new SMIAttribute(SMI_AT_ID_SO_DATA,
+                                     SMI_AT_SMIATTRIB_LIST,
+                                     new SMIAttribList(2),
+                                     "SO data");
+      (*this)[17][2](2) = new SMIAttribute(SMI_AT_ID_SERVICE_KEY,
+                                           SMI_AT_SMIATTRIB_VECTOR,
+                                           new SMIAttribVector(servicekeys,
+                                             SMI_AT_SMIATTRIB_LIST,
+                                             new SMIAttribute(0,0)
+                                             ),
+                                           "Service key");
+      (*this)[17][2](3) = new SMIAttribute(SMI_AT_ID_LOGIC_GROUPS,
+                                           SMI_AT_SMIATTRIB_VECTOR,
+                                           new SMIAttribVector(logicgroups,
+                                             SMI_AT_SMIATTRIB_LIST,
+                                             new SMIAttribute(0,0)
+                                             ),
+                                           "Logic groups");
+    }
+
+    void setServiceKey(int i,SMIParameterSpec* parameterspec)
+    {
+      (*this)[17][2][2][2](3+i) = parameterspec;
+    }
+
+    void setLogicGroup(int i,SMILogicGroup* logicgroup)
+    {
+      (*this)[17][2][3][2](3+i) = logicgroup;
+    }
+
+    SMIParameterSpec* getServiceKey(int i)
+    {
+      return (SMIParameterSpec*)((*this)[17][2][2][2](3+i));
+    }
+
+    SMILogicGroup* getLogicGroup(int i)
+    {
+      return (SMILogicGroup*)((*this)[17][2][3][2](3+i));
+    }
+};
+
+class SMISupportTableServiceOrder: public SMIAttribList
+{
+  public:
+    SMISupportTableServiceOrder(unsigned long resourceid = 0,
+                                unsigned long keyspecs = 0,
+                                unsigned long slparams = 0,
+                                string serviceorderkey = "",
+                                string serviceordername = "SP BLU",
+                                unsigned short scpoperation = 1,
+                                unsigned short provisioningoperation = 0,
+                                string destinations = "",
+                                string provisioneruserid = "Provisioner user ID"):
+      SMIAttribList(15,"Support table service order")
+    {
+      (*this)(2) = new SMIAttribute(SMI_AT_ID_RECORD_ID,
+                                    SMI_AT_SMIULONG,
+                                    new TreeMessage(
+                                      new SMIULong(0)),
+                                    "Record ID");
+      (*this)(3) = new SMIAttribute(SMI_AT_ID_RESOURCE_ID,
+                                    SMI_AT_SMIULONG,
+                                    new TreeMessage(
+                                      new SMIULong(resourceid)),
+                                    "Resource ID");
+      (*this)(4) = new SMIAttribute(SMI_AT_ID_SERVICE_ORDER_KEY,
+                                    SMI_AT_SMISTRING,
+                                    new SMIString(serviceorderkey),
+                                    "Service-order key");
+      (*this)(5) = new SMIAttribute(SMI_AT_ID_SCHEDULED_TIME,
+                                    SMI_AT_SMIULONG,
+                                    new TreeMessage(
+                                      new SMIULong(0)),
+                                    "Scheduled time");
+      (*this)(6) = new SMIAttribute(SMI_AT_ID_LAST_CHANGED_TIME,
+                                    SMI_AT_SMIULONG,
+                                    new TreeMessage(
+                                      new SMIULong(0)),
+                                    "Last-changed time");
+      (*this)(7) = new SMIAttribute(SMI_AT_ID_SERVICE_ORDER_NAME,
+                                    SMI_AT_SMISTRING,
+                                    new SMIString(serviceordername),
+                                    "Service-order name");
+      (*this)(8) = new SMIAttribute(SMI_AT_ID_SERVICE_ORDER_STATE,
+                                    SMI_AT_SMIUSHORT,
+                                    new TreeMessage(
+                                      new SMIUShort(0)),
+                                    "Service-order state"); // 1-6
+      (*this)(9) = new SMIAttribute(SMI_AT_ID_SCP_OPERATION,
+                                    SMI_AT_SMIUSHORT,
+                                    new TreeMessage(
+                                      new SMIUShort(scpoperation)),
+                                    "SCP operation");
+        // SCP operation:
+        //   1: add
+        //   2: modify
+        //   3: delete
+
+      (*this)(10) = new SMIAttribute(SMI_AT_ID_PROVISIONING_OPERATION,
+                                     SMI_AT_SMIUSHORT,
+                                     new TreeMessage(
+                                       new SMIUShort(provisioningoperation)),
+                                     "Provisioning operation");
+        // Provisioning operation:
+        //   0: activate
+        //   1: reschedule
+        //   2: suspend
+        //   3: deactivate
+
+      (*this)(11) = new SMIAttribute(SMI_AT_ID_SCHEDULED_TYPE,
+                                     SMI_AT_SMIUSHORT,
+                                     new TreeMessage(
+                                       new SMIUShort(2)),
+                                     "Scheduled type");
+        // Scheduled type :
+        //   1: emergency
+        //   2: immediate
+        //   3: scheduled
+
+      (*this)(12) = new SMIAttribute(SMI_AT_ID_PRIORITY,
+                                     SMI_AT_SMIUSHORT,
+                                     new TreeMessage(
+                                       new SMIUShort(0)),
+                                     "Priority");
+
+      (*this)(13) = new SMIAttribute(SMI_AT_ID_DESTINATIONS,
+                                     SMI_AT_SMISTRING,
+                                     new SMIString(destinations),
+                                     "Destinations");
+      (*this)(14) = new SMIAttribute(SMI_AT_ID_VALIDATED_FLAG,
+                                     SMI_AT_SMIBOOLEAN,
+                                     new TreeMessage(
+                                       new SMIBoolean(false)),
+                                     "Validated flag");
+      (*this)(15) = new SMIAttribute(SMI_AT_ID_PROVISIONER_USER_ID,
+                                     SMI_AT_SMISTRING,
+                                     new SMIString(provisioneruserid),
+                                     "Provisioner user ID");
+      (*this)(16) = new SMIAttribute(SMI_AT_ID_SO_DATA,
+                                     SMI_AT_SMIATTRIB_LIST,
+                                     new SMIAttribList(2),
+                                     "SO data");
+
+      (*this)[16][2](2) = new SMIAttribute(SMI_AT_ID_KEY_SPECS,
+                                           SMI_AT_SMIATTRIB_VECTOR,
+                                           new SMIAttribVector(keyspecs,
+                                             SMI_AT_SMIATTRIB_LIST,
+                                             new SMIAttribute(0,0)
+                                             ),
+                                           "Key specs");
+      (*this)[16][2](3) = new SMIAttribute(SMI_AT_ID_SL_PARAMS,
+                                           SMI_AT_SMIATTRIB_VECTOR,
+                                           new SMIAttribVector(slparams,
+                                             SMI_AT_SMIATTRIB_LIST,
+                                             new SMIAttribute(0,0)
+                                             ),
+                                           "SL params");
+    }
+
+    void setKeySpec(int i,SMIParameterSpec* parameterspec)
+    {
+      (*this)[16][2][2][2](3+i) = parameterspec;
+    }
+
+    void setSLParam(int i,SMIParameterSpec* parameterspec)
+    {
+      (*this)[16][2][3][2](3+i) = parameterspec;
+    }
+
+    SMIParameterSpec* getKeySpec(int i)
+    {
+      return (SMIParameterSpec*)((*this)[16][2][2][2](3+i));
+    }
+
+    SMIParameterSpec* getSLParam(int i)
+    {
+      return (SMIParameterSpec*)((*this)[16][2][3][2](3+i));
+    }
+};
+
+class SMIDBObject: public TreeMessage
+{
+  public:
+    SMIDBObject(unsigned short operation = 1,
+                unsigned long baseobject = 1,
+                unsigned long resourceid = 0,
+                unsigned long servicekeys_or_keyspecs = 0,
+                unsigned long logicgroups_or_slparams = 0,
+                string serviceorderkey = "",
+                string name = "SMIDBObject"):
+      TreeMessage(3,name)
+   {
+      (*this)(0) = new TreeMessage(
+        new SMIUShort(operation,"Operation"));
+
+      // operation values:
+      //   - 0: Null
+      //   - 1: Add
+      //   - 2: Modify
+      //   - 3: Delete
+      //   - 4: Validate
+      //   - 5: Add-validate
+      //   - 6: Modify-validate
+
+      (*this)(1) = new TreeMessage(
+        new SMIULong(baseobject,"Base object"));
+
+      // baseobject values:
+      //   - 0: subscriber service order
+      //   - 1: support-table service order
+      //   - 2: reserved for internal use
+      //   - 3: customer
+
+      if(baseobject == 0)
+        (*this)(2) = new SMISubscriberServiceOrder(resourceid,
+                                                   servicekeys_or_keyspecs,
+                                                   logicgroups_or_slparams,
+                                                   serviceorderkey);
+      else
+      {
+        // baseobject == 1
+        (*this)(2) = new SMISupportTableServiceOrder(resourceid,
+                                                     servicekeys_or_keyspecs,
+                                                     logicgroups_or_slparams,
+                                                     serviceorderkey);
+      }
+   }
+
+   SMISubscriberServiceOrder* getSubscriberServiceOrder()
+   {
+     return (SMISubscriberServiceOrder*)((*this)(2));
+   }
+
+   SMISupportTableServiceOrder* getSupportTableServiceOrder()
+   {
+     return (SMISupportTableServiceOrder*)((*this)(2));
+   }
+};
+
+class SMISubscriberDBObject: public SMIDBObject
+{
+  public:
+    SMISubscriberDBObject(unsigned long resourceid = 0,
+                          unsigned long servicekeys = 0,
+                          unsigned long logicgroups = 0,
+                          string serviceorderkey = "",
+                          unsigned short operation = 1):
+      SMIDBObject(operation,0,resourceid,servicekeys,logicgroups,
+                  serviceorderkey)
+   {
+   }
+
+   SMISubscriberServiceOrder* getServiceOrder()
+   {
+     return (SMISubscriberServiceOrder*)((*this)(2));
+   }
+};
+
+class SMISupportTableDBObject: public SMIDBObject
+{
+  public:
+    SMISupportTableDBObject(unsigned long resourceid = 0,
+                            unsigned long keyspecs = 0,
+                            unsigned long slparams = 0,
+                            string serviceorderkey = "",
+                            unsigned short operation = 1):
+      SMIDBObject(operation,1,resourceid,keyspecs,slparams,
+                  serviceorderkey)
+   {
+   }
+
+   SMISupportTableServiceOrder* getServiceOrder()
+   {
+     return (SMISupportTableServiceOrder*)((*this)(2));
+   }
+};
+
+class SMIProvUpdate: public SMIMessage
+{
+  public:
+    SMIProvUpdate(int numberofdbobjects = 0):
+      SMIMessage(new SMIHeader(MCID_SMI_PROV,MID_SMI_PROV_UPDATE),
+                 new SMIData(1+numberofdbobjects),
+                 "SMIProvUpdate")
+    {
+      (*this)[1](0) = new TreeMessage(new SMIULong(numberofdbobjects));
+    }
+
+    void setDBObject(int i,SMIDBObject* dbobject)
+    {
+      (*this)[1](i+1) = dbobject;
+    }
+
+    SMIDBObject* getDBObject(int i)
+    {
+      return (SMIDBObject*)((*this)[1](i+1));
+    }
+};
+
+class SMIProvItem: public TreeMessage
+{
+  public:
+    SMIProvItem(unsigned long baseobject = 0,
+                unsigned long recordid = 0,
+                unsigned long scheduledtime = 0,
+                unsigned short provoperation = 0,
+                unsigned short scheduledtype = 0,
+                string name = "SMIProvItem"):
+     TreeMessage(5,name)
+   {
+     (*this)(0) = new TreeMessage(new SMIULong(baseobject));
+       // 0 -&gt; subscriber service order
+       // 1 -&gt; support-table service order
+
+     (*this)(1) = new TreeMessage(new SMIULong(recordid));
+
+     (*this)(2) = new TreeMessage(new SMIULong(scheduledtime));
+
+     (*this)(3) = new TreeMessage(new SMIUShort(provoperation));
+       // 0 -&gt; activate
+       // 1 -&gt; reschedule
+       // 2 -&gt; suspend
+       // 3 -&gt; deactivate
+
+     (*this)(4) = new TreeMessage(new SMIUShort(scheduledtype));
+       // 0 -&gt; don't care
+       // 1 -&gt; emergency
+       // 2 -&gt; immediate
+       // 3 -&gt; scheduled
+   }
+};
+
+class SMIProvision: public SMIMessage
+{
+  public:
+    SMIProvision(int numberofsmiprovitems = 0):
+      SMIMessage(new SMIHeader(MCID_SMI_PROV,MID_SMI_PROV),
+                 new SMIData(1+numberofsmiprovitems),
+                 "SMIProvision")
+   {
+      (*this)[1](0) = new TreeMessage(new SMIULong(numberofsmiprovitems));
+   }
+
+    void setSMIProvItem(int i,SMIProvItem* smiprovitem)
+    {
+      (*this)[1](i+1) = smiprovitem;
+    }
+};
+
+class SMIDeactivationItem: public TreeMessage
+{
+  public:
+    SMIDeactivationItem(unsigned long baseobject = 0,
+                        unsigned long resourceid = 0,
+                        string serviceorderkey = "",
+                        unsigned short scheduledtype = 1,
+                        unsigned long scheduledtime = 0,
+                        string provisioneruserid = "Provisioner user ID",
+                        string name = "SMIDeactivationItem"):
+     TreeMessage(6,name)
+   {
+     (*this)(0) = new TreeMessage(new SMIULong(baseobject));
+       // 0 -&gt; subscriber service order
+       // 1 -&gt; support-table service order
+
+     (*this)(1) = new TreeMessage(new SMIULong(resourceid));
+
+     (*this)(2) = new SMIString(serviceorderkey);
+
+     (*this)(3) = new TreeMessage(new SMIUShort(scheduledtype));
+       // 0 -&gt; don't care
+       // 1 -&gt; emergency
+       // 2 -&gt; immediate
+       // 3 -&gt; scheduled
+
+     (*this)(4) = new TreeMessage(new SMIULong(scheduledtime));
+
+     (*this)(5) = new SMIString(provisioneruserid);
+   }
+};
+
+class SMIDeactivate: public SMIMessage
+{
+  public:
+    SMIDeactivate(unsigned short deactivationtype = 0,
+                  int numberofsmideactivationitems = 0):
+      SMIMessage(new SMIHeader(MCID_SMI_PROV,MID_SMI_DEACTIVATE),
+                 new SMIData(2+numberofsmideactivationitems),
+                 "SMIDeactivate")
+    {
+      (*this)[1](0) = new TreeMessage(new SMIUShort(deactivationtype));
+      // deactivation type:
+      //  0 =&gt; individual-key deactivation
+      //  1 =&gt; range deactivation
+
+      (*this)[1](1) = new TreeMessage(new SMIULong(numberofsmideactivationitems));
+    }
+
+    void setSMIDeactivationItem(int i,SMIDeactivationItem* smideactivationitem)
+    {
+      (*this)[1](i+2) = smideactivationitem;
+    }
+
+    SMIDeactivationItem* getSMIDeactivationItem(int i)
+    {
+      return (SMIDeactivationItem*)((*this)[1](i+2));
+    }
+};
+
+class SMIResult: public TreeMessage
+{
+  public:
+    SMIResult(unsigned long returncode = 0,
+              string errortext = "",
+              unsigned long recordid = 0,
+              string name = "SMIResult"):
+      TreeMessage(3,name)
+    {
+      (*this)(0) = new TreeMessage(new SMIULong(returncode));
+      (*this)(1) = new SMIString(errortext);
+      (*this)(2) = new TreeMessage(new SMIULong(recordid));
+    }
+
+    unsigned long getReturnCode()
+    {
+      return ((SMIULong&amp;)(*this)[0]());
+    }
+
+    string getErrorText()
+    {
+      return ((SMIString&amp;)(*this)[1]);
+    }
+};
+
+class SMIProvRespData: public SMIData
+{
+  public:
+    SMIProvRespData(int numberofresults):
+     SMIData(1+numberofresults,"SMIProvRespData")
+   {
+   }
+
+    unsigned long getNumberOfResults()
+    {
+      return (SMIULong&amp;)((*this)[0]());
+    }
+
+  protected:
+    TreeMessage* child(int i)
+    {
+      return new SMIResult();
+    }
+
+    int update(int size_)
+    {
+      int n = getNumberOfResults();
+
+      if(size() &lt; 1+n)
+        return (1+n);
+      else
+        return 0;
+    }
+};
+
+class SMIProvResp: public SMIMessage
+{
+  public:
+    SMIProvResp(int numberofresults = 0):
+      SMIMessage(new SMIHeader(MCID_SMI_PROV,MID_SMI_PROV_RESP),
+                 new SMIProvRespData(numberofresults),
+                 "SMIProvResp")
+    {
+      (*this)[1](0) = new TreeMessage(new SMIULong(numberofresults));
+    }
+
+    void setSMIResult(int i,SMIResult* smiresult)
+    {
+      (*this)[1](i+1) = smiresult;
+    }
+
+    unsigned long getReturnCode(int i)
+    {
+      return ((SMIResult&amp;)(*this)[1][i+1]).getReturnCode();
+    }
+
+    string getErrorText(int i)
+    {
+      return ((SMIResult&amp;)(*this)[1][i+1]).getErrorText();
+    }
+
+    unsigned long getNumberOfResults()
+    {
+      return (SMIULong&amp;)((*this)[1][0]());
+    }
+
+    void setNumberOfResults(unsigned long numberofresults)
+    {
+      (SMIULong&amp;)((*this)[1][0]()) = numberofresults;
+    }
+};
+
+// DDR Positive Table
+
+class SMIDVPNDDRPositiveC00D06ProvUpdate: public SMIProvUpdate
+{
+  public:
+    SMIDVPNDDRPositiveC00D06ProvUpdate(string vpnid):
+      SMIProvUpdate(1)
+    {
+      unsigned long resourceid = SMI_RESOURCEID_DDR_POSITIVE;
+
+      string key = vpnid + "C00D06";
+
+      SMISupportTableDBObject* smidbobject =
+        new SMISupportTableDBObject(resourceid,1,80,key);
+
+      SMISupportTableServiceOrder* so = smidbobject-&gt;getServiceOrder();
+
+        so-&gt;setKeySpec(0,new SMIParameterSpec(
+          "ScreeningIndex",1,1,FSL_DIGIT_STRING,new SMIString(key)));
+
+        so-&gt;setSLParam(0,new SMIParameterSpec(
+          "NoMatchFeatureValue",1,1,FSL_DIGIT_STRING,new SMIString("0")));
+
+        so-&gt;setSLParam(1,new SMIParameterSpec(
+          "NoMatchNextScreeningAction",1,1,FSL_U_INT,new TreeMessage(new SMIUShort(65535))));
+
+        so-&gt;setSLParam(2,new SMIParameterSpec(
+          "NoMatchNextScreeningValue",1,1,FSL_U_INT,new TreeMessage(new SMIUShort(65535))));
+        so-&gt;setSLParam(3,new SMIParameterSpec(
+          "NumberOfDNdigits",1,1,FSL_U_INT,new TreeMessage(new SMIUShort(19))));
+
+        so-&gt;setSLParam(4,new SMIParameterSpec(
+          "DNdigits",1,1,FSL_DIGIT_STRING,new SMIString("190")));
+        so-&gt;setSLParam(5,new SMIParameterSpec(
+          "FeatureValue",1,1,FSL_DIGIT_STRING,new SMIString("9")));
+        so-&gt;setSLParam(6,new SMIParameterSpec(
+          "NextScreeningAction",1,1,FSL_DIGIT_STRING,new TreeMessage(new SMIUShort(65535))));
+        so-&gt;setSLParam(7,new SMIParameterSpec(
+          "NextScreeningIndex",1,1,FSL_DIGIT_STRING,new SMIString("FF")));
+
+        so-&gt;setSLParam(8,new SMIParameterSpec(
+          "DNdigits",1,1,FSL_DIGIT_STRING,new SMIString("119")));
+        so-&gt;setSLParam(9,new SMIParameterSpec(
+          "FeatureValue",1,1,FSL_DIGIT_STRING,new SMIString("9")));
+        so-&gt;setSLParam(10,new SMIParameterSpec(
+          "NextScreeningAction",1,1,FSL_DIGIT_STRING,new TreeMessage(new SMIUShort(65535))));
+        so-&gt;setSLParam(11,new SMIParameterSpec(
+          "NextScreeningIndex",1,1,FSL_DIGIT_STRING,new SMIString("FF")));
+
+        so-&gt;setSLParam(12,new SMIParameterSpec(
+          "DNdigits",1,1,FSL_DIGIT_STRING,new SMIString("155")));
+        so-&gt;setSLParam(13,new SMIParameterSpec(
+          "FeatureValue",1,1,FSL_DIGIT_STRING,new SMIString("9")));
+        so-&gt;setSLParam(14,new SMIParameterSpec(
+          "NextScreeningAction",1,1,FSL_DIGIT_STRING,new TreeMessage(new SMIUShort(65535))));
+        so-&gt;setSLParam(15,new SMIParameterSpec(
+          "NextScreeningIndex",1,1,FSL_DIGIT_STRING,new SMIString("FF")));
+
+        so-&gt;setSLParam(16,new SMIParameterSpec(
+          "DNdigits",1,1,FSL_DIGIT_STRING,new SMIString("158")));
+        so-&gt;setSLParam(17,new SMIParameterSpec(
+          "FeatureValue",1,1,FSL_DIGIT_STRING,new SMIString("9")));
+        so-&gt;setSLParam(18,new SMIParameterSpec(
+          "NextScreeningAction",1,1,FSL_DIGIT_STRING,new TreeMessage(new SMIUShort(65535))));
+        so-&gt;setSLParam(19,new SMIParameterSpec(
+          "NextScreeningIndex",1,1,FSL_DIGIT_STRING,new SMIString("FF")));
+
+        so-&gt;setSLParam(20,new SMIParameterSpec(
+          "DNdigits",1,1,FSL_DIGIT_STRING,new SMIString("159")));
+        so-&gt;setSLParam(21,new SMIParameterSpec(
+          "FeatureValue",1,1,FSL_DIGIT_STRING,new SMIString("9")));
+        so-&gt;setSLParam(22,new SMIParameterSpec(
+          "NextScreeningAction",1,1,FSL_DIGIT_STRING,new TreeMessage(new SMIUShort(65535))));
+        so-&gt;setSLParam(23,new SMIParameterSpec(
+          "NextScreeningIndex",1,1,FSL_DIGIT_STRING,new SMIString("FF")));
+
+        so-&gt;setSLParam(24,new SMIParameterSpec(
+          "DNdigits",1,1,FSL_DIGIT_STRING,new SMIString("192192")));
+        so-&gt;setSLParam(25,new SMIParameterSpec(
+          "FeatureValue",1,1,FSL_DIGIT_STRING,new SMIString("9")));
+        so-&gt;setSLParam(26,new SMIParameterSpec(
+          "NextScreeningAction",1,1,FSL_DIGIT_STRING,new TreeMessage(new SMIUShort(65535))));
+        so-&gt;setSLParam(27,new SMIParameterSpec(
+          "NextScreeningIndex",1,1,FSL_DIGIT_STRING,new SMIString("FF")));
+
+        so-&gt;setSLParam(28,new SMIParameterSpec(
+          "DNdigits",1,1,FSL_DIGIT_STRING,new SMIString("192193")));
+        so-&gt;setSLParam(29,new SMIParameterSpec(
+          "FeatureValue",1,1,FSL_DIGIT_STRING,new SMIString("9")));
+        so-&gt;setSLParam(30,new SMIParameterSpec(
+          "NextScreeningAction",1,1,FSL_DIGIT_STRING,new TreeMessage(new SMIUShort(65535))));
+        so-&gt;setSLParam(31,new SMIParameterSpec(
+          "NextScreeningIndex",1,1,FSL_DIGIT_STRING,new SMIString("FF")));
+
+        so-&gt;setSLParam(32,new SMIParameterSpec(
+          "DNdigits",1,1,FSL_DIGIT_STRING,new SMIString("195")));
+        so-&gt;setSLParam(33,new SMIParameterSpec(
+          "FeatureValue",1,1,FSL_DIGIT_STRING,new SMIString("9")));
+        so-&gt;setSLParam(34,new SMIParameterSpec(
+          "NextScreeningAction",1,1,FSL_DIGIT_STRING,new TreeMessage(new SMIUShort(65535))));
+        so-&gt;setSLParam(35,new SMIParameterSpec(
+          "NextScreeningIndex",1,1,FSL_DIGIT_STRING,new SMIString("FF")));
+
+        so-&gt;setSLParam(36,new SMIParameterSpec(
+          "DNdigits",1,1,FSL_DIGIT_STRING,new SMIString("176")));
+        so-&gt;setSLParam(37,new SMIParameterSpec(
+          "FeatureValue",1,1,FSL_DIGIT_STRING,new SMIString("9")));
+        so-&gt;setSLParam(38,new SMIParameterSpec(
+          "NextScreeningAction",1,1,FSL_DIGIT_STRING,new TreeMessage(new SMIUShort(65535))));
+        so-&gt;setSLParam(39,new SMIParameterSpec(
+          "NextScreeningIndex",1,1,FSL_DIGIT_STRING,new SMIString("FF")));
+
+        so-&gt;setSLParam(40,new SMIParameterSpec(
+          "DNdigits",1,1,FSL_DIGIT_STRING,new SMIString("892176")));
+        so-&gt;setSLParam(41,new SMIParameterSpec(
+          "FeatureValue",1,1,FSL_DIGIT_STRING,new SMIString("9")));
+        so-&gt;setSLParam(42,new SMIParameterSpec(
+          "NextScreeningAction",1,1,FSL_DIGIT_STRING,new TreeMessage(new SMIUShort(65535))));
+        so-&gt;setSLParam(43,new SMIParameterSpec(
+          "NextScreeningIndex",1,1,FSL_DIGIT_STRING,new SMIString("FF")));
+
+        so-&gt;setSLParam(44,new SMIParameterSpec(
+          "DNdigits",1,1,FSL_DIGIT_STRING,new SMIString("1991")));
+        so-&gt;setSLParam(45,new SMIParameterSpec(
+          "FeatureValue",1,1,FSL_DIGIT_STRING,new SMIString("9")));
+        so-&gt;setSLParam(46,new SMIParameterSpec(
+          "NextScreeningAction",1,1,FSL_DIGIT_STRING,new TreeMessage(new SMIUShort(65535))));
+        so-&gt;setSLParam(47,new SMIParameterSpec(
+          "NextScreeningIndex",1,1,FSL_DIGIT_STRING,new SMIString("FF")));
+
+        so-&gt;setSLParam(48,new SMIParameterSpec(
+          "DNdigits",1,1,FSL_DIGIT_STRING,new SMIString("840")));
+        so-&gt;setSLParam(49,new SMIParameterSpec(
+          "FeatureValue",1,1,FSL_DIGIT_STRING,new SMIString("9")));
+        so-&gt;setSLParam(50,new SMIParameterSpec(
+          "NextScreeningAction",1,1,FSL_DIGIT_STRING,new TreeMessage(new SMIUShort(65535))));
+        so-&gt;setSLParam(51,new SMIParameterSpec(
+          "NextScreeningIndex",1,1,FSL_DIGIT_STRING,new SMIString("FF")));
+
+        so-&gt;setSLParam(52,new SMIParameterSpec(
+          "DNdigits",1,1,FSL_DIGIT_STRING,new SMIString("841")));
+        so-&gt;setSLParam(53,new SMIParameterSpec(
+          "FeatureValue",1,1,FSL_DIGIT_STRING,new SMIString("9")));
+        so-&gt;setSLParam(54,new SMIParameterSpec(
+          "NextScreeningAction",1,1,FSL_DIGIT_STRING,new TreeMessage(new SMIUShort(65535))));
+        so-&gt;setSLParam(55,new SMIParameterSpec(
+          "NextScreeningIndex",1,1,FSL_DIGIT_STRING,new SMIString("FF")));
+
+        so-&gt;setSLParam(56,new SMIParameterSpec(
+          "DNdigits",1,1,FSL_DIGIT_STRING,new SMIString("848")));
+        so-&gt;setSLParam(57,new SMIParameterSpec(
+          "FeatureValue",1,1,FSL_DIGIT_STRING,new SMIString("9")));
+        so-&gt;setSLParam(58,new SMIParameterSpec(
+          "NextScreeningAction",1,1,FSL_DIGIT_STRING,new TreeMessage(new SMIUShort(65535))));
+        so-&gt;setSLParam(59,new SMIParameterSpec(
+          "NextScreeningIndex",1,1,FSL_DIGIT_STRING,new SMIString("FF")));
+
+        so-&gt;setSLParam(60,new SMIParameterSpec(
+          "DNdigits",1,1,FSL_DIGIT_STRING,new SMIString("847")));
+        so-&gt;setSLParam(61,new SMIParameterSpec(
+          "FeatureValue",1,1,FSL_DIGIT_STRING,new SMIString("9")));
+        so-&gt;setSLParam(62,new SMIParameterSpec(
+          "NextScreeningAction",1,1,FSL_DIGIT_STRING,new TreeMessage(new SMIUShort(65535))));
+        so-&gt;setSLParam(63,new SMIParameterSpec(
+          "NextScreeningIndex",1,1,FSL_DIGIT_STRING,new SMIString("FF")));
+
+        so-&gt;setSLParam(64,new SMIParameterSpec(
+          "DNdigits",1,1,FSL_DIGIT_STRING,new SMIString("4400")));
+        so-&gt;setSLParam(65,new SMIParameterSpec(
+          "FeatureValue",1,1,FSL_DIGIT_STRING,new SMIString("9")));
+        so-&gt;setSLParam(66,new SMIParameterSpec(
+          "NextScreeningAction",1,1,FSL_DIGIT_STRING,new TreeMessage(new SMIUShort(65535))));
+        so-&gt;setSLParam(67,new SMIParameterSpec(
+          "NextScreeningIndex",1,1,FSL_DIGIT_STRING,new SMIString("FF")));
+
+        so-&gt;setSLParam(68,new SMIParameterSpec(
+          "DNdigits",1,1,FSL_DIGIT_STRING,new SMIString("4464")));
+        so-&gt;setSLParam(69,new SMIParameterSpec(
+          "FeatureValue",1,1,FSL_DIGIT_STRING,new SMIString("9")));
+        so-&gt;setSLParam(70,new SMIParameterSpec(
+          "NextScreeningAction",1,1,FSL_DIGIT_STRING,new TreeMessage(new SMIUShort(65535))));
+        so-&gt;setSLParam(71,new SMIParameterSpec(
+          "NextScreeningIndex",1,1,FSL_DIGIT_STRING,new SMIString("FF")));
+
+        so-&gt;setSLParam(72,new SMIParameterSpec(
+          "DNdigits",1,1,FSL_DIGIT_STRING,new SMIString("4448")));
+        so-&gt;setSLParam(73,new SMIParameterSpec(
+          "FeatureValue",1,1,FSL_DIGIT_STRING,new SMIString("9")));
+        so-&gt;setSLParam(74,new SMIParameterSpec(
+          "NextScreeningAction",1,1,FSL_DIGIT_STRING,new TreeMessage(new SMIUShort(65535))));
+        so-&gt;setSLParam(75,new SMIParameterSpec(
+          "NextScreeningIndex",1,1,FSL_DIGIT_STRING,new SMIString("FF")));
+
+        so-&gt;setSLParam(76,new SMIParameterSpec(
+          "DNdigits",1,1,FSL_DIGIT_STRING,new SMIString("4449")));
+        so-&gt;setSLParam(77,new SMIParameterSpec(
+          "FeatureValue",1,1,FSL_DIGIT_STRING,new SMIString("9")));
+        so-&gt;setSLParam(78,new SMIParameterSpec(
+          "NextScreeningAction",1,1,FSL_DIGIT_STRING,new TreeMessage(new SMIUShort(65535))));
+        so-&gt;setSLParam(79,new SMIParameterSpec(
+          "NextScreeningIndex",1,1,FSL_DIGIT_STRING,new SMIString("FF")));
+
+
+        setDBObject(0,smidbobject);
+    }
+};
+
+// Prepaid tables
+
+class SMIDPPSubsPINProvUpdate: public SMIProvUpdate
+{
+  public:
+    SMIDPPSubsPINProvUpdate(string msisdn,
+                            string pin = "0000"):
+      SMIProvUpdate(1)
+   {
+        unsigned long resourceid = SMI_RESOURCEID_DPP_SUBSPIN;
+
+        SMISupportTableDBObject* smidbobject =
+          new SMISupportTableDBObject(resourceid,1,1,msisdn);
+
+        SMISupportTableServiceOrder* so = smidbobject-&gt;getServiceOrder();
+
+        so-&gt;setKeySpec(0,new SMIParameterSpec(
+          "MSISDN",1,1,FSL_DIGIT_STRING,new SMIString(msisdn)));
+
+        so-&gt;setSLParam(0,new SMIParameterSpec(
+          "PIN",1,1,FSL_DIGIT_STRING,new SMIString(pin)));
+
+        setDBObject(0,smidbobject);
+   }
+};
+
+class SMIDPPSubsPINDeactivate: public SMIDeactivate
+{
+  public:
+    SMIDPPSubsPINDeactivate(string msisdn = ""):
+      SMIDeactivate(0,1)
+    {
+      setSMIDeactivationItem(0,
+        new SMIDeactivationItem(1,SMI_RESOURCEID_DPP_SUBSPIN,msisdn));
+    }
+};
+
+// SMIDBQuery
+
+class SMITuple: public TreeMessage
+{
+  public:
+    SMITuple(unsigned short attribid = 0,
+             unsigned short attribtype = 0,
+             TreeMessage* attribvalue = 0,
+             unsigned short operatorid = 0,
+             unsigned short linkoperator = 0):
+      TreeMessage(5)
+    {
+      (*this)(0) = new TreeMessage(new SMIUShort(attribid));
+      (*this)(1) = new TreeMessage(new SMIUShort(attribtype));
+      (*this)(2) = attribvalue;
+      (*this)(3) = new TreeMessage(new SMIUShort(operatorid));
+      (*this)(4) = new TreeMessage(new SMIUShort(linkoperator));
+    }
+};
+
+class SMIFilter: public TreeMessage
+{
+  public:
+    SMIFilter(unsigned short numberoftuples = 0,
+              string name = "SMIFilter"):
+      TreeMessage(1+numberoftuples,name)
+    {
+      (*this)(0) = new TreeMessage(new SMIUShort(numberoftuples));
+    }
+
+    void setTuple(int i,SMITuple* tuple)
+    {
+      (*this)(i+1) = tuple;
+    }
+
+    SMITuple* getTuple(int i)
+    {
+      return (SMITuple*)((*this)(i+1));
+    }
+};
+
+class SMIDBQuery: public SMIMessage
+{
+  public:
+    SMIDBQuery(unsigned long resourceid = 0,
+               string serviceorderkey = ""):
+      SMIMessage(new SMIHeader(MCID_SMI_SOP_QRH,MID_SMI_DB_QUERY),
+                 new SMIData(5),
+                 "SMIDBQuery")
+    {
+      // SMIData:
+      //   &lt;Base object&gt; &lt;Scope&gt; &lt;Filter&gt; &lt;Destination-node name&gt;
+      //   &lt;Max to retrieve&gt;
+
+      (*this)[1](0) = new TreeMessage(new SMIULong(1));
+      (*this)[1](1) = new TreeMessage(new SMIUShort(0));
+      (*this)[1](2) = new SMIFilter(2);
+
+      ((SMIFilter&amp;)((*this)[1][2])).setTuple(0,new SMITuple(
+        SMI_AT_ID_RESOURCE_ID,
+        SMI_AT_SMIULONG,
+          new TreeMessage(new SMIULong(resourceid)),2,1));
+
+      ((SMIFilter&amp;)((*this)[1][2])).setTuple(1,new SMITuple(
+        SMI_AT_ID_SERVICE_ORDER_KEY,
+        SMI_AT_SMISTRING,
+          new SMIString(serviceorderkey),2,0));
+
+      (*this)[1](3) = new SMIString("");
+      (*this)[1](4) = new TreeMessage(new SMIULong(1));
+    }
+};
+
+class SMIAttrList: public SMIAttribList
+{
+  public:
+    SMIAttrList(unsigned long keyspecs = 0,
+                unsigned long slparams = 0,
+                string name = "SMIAttrList"):
+      SMIAttribList(16,name)
+    {
+      (*this)(2) = new SMIAttribute("Record ID");
+      (*this)(3) = new SMIAttribute("Resource ID");
+      (*this)(4) = new SMIAttribute("Service-order key");
+      (*this)(5) = new SMIAttribute("Customer ID");
+      (*this)(6) = new SMIAttribute("Scheduled time");
+      (*this)(7) = new SMIAttribute("Last-changed time");
+      (*this)(8) = new SMIAttribute("Service-order name");
+      (*this)(9) = new SMIAttribute("Service-order state");
+      (*this)(10) = new SMIAttribute("SCP operation");
+      (*this)(11) = new SMIAttribute("Provisioning operation");
+      (*this)(12) = new SMIAttribute("Scheduled type");
+      (*this)(13) = new SMIAttribute("Priority");
+      (*this)(14) = new SMIAttribute("Destinations");
+      (*this)(15) = new SMIAttribute("Validated flag");
+      (*this)(16) = new SMIAttribute("Provisioner user ID");
+      (*this)(17) = new SMIAttribute(SMI_AT_ID_SO_DATA,
+                                     SMI_AT_SMIATTRIB_LIST,
+                                     new SMIAttribList(2),
+                                     "SO data");
+
+      (*this)[17][2](2) = new SMIAttribute(SMI_AT_ID_KEY_SPECS,
+                                           SMI_AT_SMIATTRIB_VECTOR,
+                                           new SMIAttribVector(keyspecs,
+                                             SMI_AT_SMIATTRIB_LIST,
+                                             new SMIAttribute(0,0)
+                                             ),
+                                           "Key specs");
+      (*this)[17][2](3) = new SMIAttribute(SMI_AT_ID_SL_PARAMS,
+                                           SMI_AT_SMIATTRIB_VECTOR,
+                                           new SMIAttribVector(slparams,
+                                             SMI_AT_SMIATTRIB_LIST,
+                                             new SMIAttribute(0,0)
+                                             ),
+                                           "SL params");
+    }
+
+    void setKeySpec(int i,SMIParameterSpec* parameterspec)
+    {
+      (*this)[17][2][2][2](3+i) = parameterspec;
+    }
+
+    void setSLParam(int i,SMIParameterSpec* parameterspec)
+    {
+      (*this)[17][2][3][2](3+i) = parameterspec;
+    }
+
+    SMIParameterSpec* getKeySpec(int i)
+    {
+      return (SMIParameterSpec*)((*this)[17][2][2][2](3+i));
+    }
+
+    SMIParameterSpec* getSLParam(int i)
+    {
+      return (SMIParameterSpec*)((*this)[17][2][3][2](3+i));
+    }
+};
+
+class SMIDBQueryRespDBObject: public TreeMessage
+{
+  public:
+    SMIDBQueryRespDBObject(unsigned long keyspecs = 0,
+                           unsigned long slparams = 0,
+                           string name = "SMIDBObject"):
+      TreeMessage(3,name)
+    {
+      (*this)(0) = new TreeMessage(
+        new SMIUShort(0,"Operation"));
+
+      (*this)(1) = new TreeMessage(
+        new SMIULong(0,"Base object"));
+      (*this)(2) = new SMIAttrList(keyspecs,slparams);
+    }
+};
+
+class SMIDBQueryRespData: public SMIData
+{
+  public:
+    SMIDBQueryRespData(unsigned long keyspecs_ = 0,
+                       unsigned long slparams_ = 0):
+      SMIData(5),keyspecs(keyspecs_),slparams(slparams_)
+    {
+      (*this)(0) = new TreeMessage(new SMIULong(0,"Return code"));
+      (*this)(1) = new SMIString("","Error text");
+      (*this)(2) = new TreeMessage(new SMIULong(0,"Number of matching records"));
+      (*this)(3) = new TreeMessage(new SMIULong(0,"Number of SMI DB objects"));
+      (*this)(4) = new SMIDBQueryRespDBObject(keyspecs,slparams);
+    }
+
+  protected:
+    bool isReadable(int i)
+    {
+      if(i &lt; 4)
+        return true;
+      else
+      {
+        int numberofmatchingrecords = ((SMIULong&amp;)((*this)[2]())).value();
+
+        if(numberofmatchingrecords)
+          return true;
+        else
+          return false;
+      }
+    }
+
+  private:
+    unsigned long keyspecs;
+    unsigned long slparams;
+};
+
+class SMIDBQueryResp: public SMIMessage
+{
+  public:
+    SMIDBQueryResp(unsigned long keyspecs = 0,
+                   unsigned long slparams = 0,
+                   string name = "SMIDBQueryResp"):
+      SMIMessage(new SMIHeader(MCID_SMI_SOP_QRH,MID_SMI_DB_QUERY_RESP),
+                 new SMIDBQueryRespData(keyspecs,slparams),
+                 name)
+    {
+    }
+
+    void setKeySpec(int i,SMIParameterSpec* parameterspec)
+    {
+      ((SMIAttrList&amp;)((*this)[1][4][2])).setKeySpec(i,parameterspec);
+    }
+
+    void setSLParam(int i,SMIParameterSpec* parameterspec)
+    {
+      ((SMIAttrList&amp;)((*this)[1][4][2])).setSLParam(i,parameterspec);
+    }
+
+    SMIParameterSpec* getKeySpec(int i)
+    {
+      return ((SMIAttrList&amp;)((*this)[1][4][2])).getKeySpec(i);
+    }
+
+    SMIParameterSpec* getSLParam(int i)
+    {
+      return ((SMIAttrList&amp;)((*this)[1][4][2])).getSLParam(i);
+    }
+
+    unsigned long getNumberOfMatchingRecords()
+    {
+      return ((SMIULong&amp;)((*this)[1][2]())).value();
+    }
+
+    string getSLParamName(int i)
+    {
+       return ((SMIString&amp;)(((*(getSLParam(i)))[2])[2])).value();
+    }
+
+    TreeMessage* getSLParamOperand(int i)
+    {
+       return ((*(getSLParam(i)))[6])(2);
+    }
+};
+
+// SMIDBQuery on table PublicNumber
+
+class SMIDVPNPublicNumDBQuery: public SMIDBQuery
+{
+  public:
+    SMIDVPNPublicNumDBQuery(string msisdn):
+      SMIDBQuery(665,msisdn)
+    {
+    }
+};
+
+class SMIDVPNPublicNumDBQueryResp: public SMIDBQueryResp
+{
+  public:
+    SMIDVPNPublicNumDBQueryResp():
+      SMIDBQueryResp(1,4)
+   {
+     setKeySpec(0,new SMIParameterSpec(
+       "CallingLineID",1,1,FSL_DIGIT_STRING,new SMIString("")));
+
+     setSLParam(0,new SMIParameterSpec(
+       "BusinessGroupID",1,1,FSL_DIGIT_STRING,new SMIString("")));
+     setSLParam(1,new SMIParameterSpec(
+       "PrivateNumber",1,1,FSL_DIGIT_STRING,new SMIString("")));
+     setSLParam(2,new SMIParameterSpec(
+       "OrigTemplateID",1,1,FSL_DIGIT_STRING,new SMIString("")));
+     setSLParam(3,new SMIParameterSpec(
+       "TermTemplateID",1,1,FSL_DIGIT_STRING,new SMIString("")));
+   }
+
+   string getBusinessGroupID()
+   {
+     return ((SMIString&amp;)(*getSLParamOperand(0))).value();
+   }
+
+   string getPrivateNumber()
+   {
+     return ((SMIString&amp;)(*getSLParamOperand(1))).value();
+   }
+
+   string getOrigTemplateID()
+   {
+     return ((SMIString&amp;)(*getSLParamOperand(2))).value();
+   }
+
+   string getTermTemplateID()
+   {
+     return ((SMIString&amp;)(*getSLParamOperand(3))).value();
+   }
+};
+
+// SMIDBQuery on table PrivateNumber
+
+class SMIDVPNPrivateNumDBQuery: public SMIDBQuery
+{
+  public:
+    SMIDVPNPrivateNumDBQuery(string vpnid,
+                             string privatenumber):
+      SMIDBQuery(664,vpnid+privatenumber)
+    {
+    }
+};
+
+class SMIDVPNPrivateNumDBQueryResp: public SMIDBQueryResp
+{
+  public:
+    SMIDVPNPrivateNumDBQueryResp():
+      SMIDBQueryResp(1,13)
+   {
+     setKeySpec(0,new SMIParameterSpec(
+       "BGidPrivNumKey",1,1,FSL_DIGIT_STRING,new SMIString("")));
+
+     setSLParam(0,new SMIParameterSpec(
+       "FeatureIndications",1,1,FSL_FLAGS,new TreeMessage(new SMIUShort(0))));
+     setSLParam(1,new SMIParameterSpec(
+       "HomeSiteID",1,1,FSL_DIGIT_STRING,new SMIString("")));
+     setSLParam(2,new SMIParameterSpec(
+       "PublicNumberCountryCode",1,1,FSL_DIGIT_STRING,new SMIString("")));
+     setSLParam(3,new SMIParameterSpec(
+       "PublicNumberNetworkDestCode",1,1,FSL_DIGIT_STRING,new SMIString("")));
+     setSLParam(4,new SMIParameterSpec(
+       "PublicNumberSubscriberNumber",1,1,FSL_DIGIT_STRING,new SMIString("")));
+     setSLParam(5,new SMIParameterSpec(
+       "ClassOfService",1,1,FSL_U_INT,new TreeMessage(new SMIUShort(0))));
+     setSLParam(6,new SMIParameterSpec(
+       "HomeCellGroup",1,1,FSL_DIGIT_STRING,new SMIString("")));
+     setSLParam(7,new SMIParameterSpec(
+       "OriginationAlternateBillingNumber",1,1,FSL_DIGIT_STRING,new SMIString("")));
+     setSLParam(8,new SMIParameterSpec(
+       "OriginationBillingAggregateGroup",1,1,FSL_DIGIT_STRING,new SMIString("")));
+     setSLParam(9,new SMIParameterSpec(
+       "OnNetAlternateBillingNumber",1,1,FSL_DIGIT_STRING,new SMIString("")));
+     setSLParam(10,new SMIParameterSpec(
+       "OnNetBillingAggregateGroup",1,1,FSL_DIGIT_STRING,new SMIString("")));
+     setSLParam(11,new SMIParameterSpec(
+       "OffNetAlternateBillingNumber",1,1,FSL_DIGIT_STRING,new SMIString("")));
+     setSLParam(12,new SMIParameterSpec(
+       "OffNetBillingAggregateGroup",1,1,FSL_DIGIT_STRING,new SMIString("")));
+   }
+
+   unsigned short getFeatureIndications()
+   {
+     return ((SMIUShort&amp;)((*getSLParamOperand(0))())).value();
+   }
+
+   string getHomeSiteID()
+   {
+     return ((SMIString&amp;)(*getSLParamOperand(1))).value();
+   }
+
+   string getPublicNumberCountryCode()
+   {
+     return ((SMIString&amp;)(*getSLParamOperand(2))).value();
+   }
+
+   string getPublicNumberNetworkDestCode()
+   {
+     return ((SMIString&amp;)(*getSLParamOperand(3))).value();
+   }
+
+   string getPublicNumberSubscriberNumber()
+   {
+     return ((SMIString&amp;)(*getSLParamOperand(4))).value();
+   }
+
+   unsigned short getClassOfService()
+   {
+     return ((SMIUShort&amp;)((*getSLParamOperand(5))())).value();
+   }
+
+   string getHomeCellGroup()
+   {
+     return ((SMIString&amp;)(*getSLParamOperand(6))).value();
+   }
+
+   string getOriginationAlternateBillingNumber()
+   {
+     return ((SMIString&amp;)(*getSLParamOperand(7))).value();
+   }
+
+   string getOriginationBillingAggregateGroup()
+   {
+     return ((SMIString&amp;)(*getSLParamOperand(8))).value();
+   }
+
+   string getOnNetAlternateBillingNumber()
+   {
+     return ((SMIString&amp;)(*getSLParamOperand(9))).value();
+   }
+
+   string getOnNetBillingAggregateGroup()
+   {
+     return ((SMIString&amp;)(*getSLParamOperand(10))).value();
+   }
+
+   string getOffNetAlternateBillingNumber()
+   {
+     return ((SMIString&amp;)(*getSLParamOperand(11))).value();
+   }
+
+   string getOffNetBillingAggregateGroup()
+   {
+     return ((SMIString&amp;)(*getSLParamOperand(12))).value();
+   }
+};
+
+// SMIProvUpdate for VPN WhiteList table
+
+class SMIDVPNWhiteListProvUpdate: public SMIProvUpdate
+{
+  public:
+    SMIDVPNWhiteListProvUpdate(string vpnid,
+                               string msisdn):
+      SMIProvUpdate(1)
+   {
+        unsigned long resourceid = SMI_RESOURCEID_DVPN_WHITELIST;
+
+        string primarykey = vpnid + msisdn;
+
+        SMISupportTableDBObject* smidbobject =
+          new SMISupportTableDBObject(resourceid,1,1,primarykey);
+
+        SMISupportTableServiceOrder* so = smidbobject-&gt;getServiceOrder();
+
+        so-&gt;setKeySpec(0,new SMIParameterSpec(
+          "Key",1,1,FSL_DIGIT_STRING,new SMIString(primarykey)));
+
+        so-&gt;setSLParam(0,new SMIParameterSpec(
+          "Future_Use",1,1,FSL_U_INT,new TreeMessage(new SMIUShort(0))));
+
+        setDBObject(0,smidbobject);
+   }
+};
+
+class SMIDVPNWhiteListDeactivate: public SMIDeactivate
+{
+  public:
+    SMIDVPNWhiteListDeactivate(string vpnid,
+                               string msisdn):
+      SMIDeactivate(0,1)
+    {
+      setSMIDeactivationItem(0,
+        new SMIDeactivationItem(1,SMI_RESOURCEID_DVPN_WHITELIST,vpnid+msisdn));
+    }
+};
+
+/*
+ * End of file
+ */</tt></pre>
+</div></div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 0.400<br />
+Last updated 2014-06-28 16:23:43 CEST
+</div>
+<div id="footer-badges">
+<img style="border:none; width:88px; height:31px;"
+     src="../images/gplv3-127x51.png"
+     alt="GPL Version 3" />
+<!-- Histats.com  START  -->
+<a href="http://www.histats.com" target="_blank" title="simple hit counter" >
+<script  type="text/javascript" language="javascript">
+var s_sid = 675659;var st_dominio = 4;
+var cimg = 0;var cwi =112;var che =48;
+</script></a><script  type="text/javascript" language="javascript" src="http://s10.histats.com/js9.js"></script>
+<noscript><a href="http://www.histats.com" target="_blank">
+<img  src="http://s4.histats.com/stats/0.gif?675659&1" alt="simple hit counter" border="0"></a>
+</noscript>
+<!-- Histats.com  END  -->
+</div>
+</div>
+</div>
+</td>
+</tr>
+</table>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-11334618-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>

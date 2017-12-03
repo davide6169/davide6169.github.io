@@ -1,0 +1,913 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.5.2" />
+<meta name="description" content="an open source UNIX framework for shell script based web service provider" />
+<meta name="keywords" content="mysvc, shell script, web service, provider, service, soa, template, engine, myste, mysde, mysvcd" />
+<link rel="stylesheet" href="../xhtml11.css" type="text/css" />
+<link rel="stylesheet" href="../xhtml11-quirks.css" type="text/css" />
+<link rel="stylesheet" href="../layout1.css" type="text/css" />
+<title>MySVC</title>
+</head>
+<body>
+<div id="layout-banner">
+  <div id="layout-title">MySVC</div>
+  <div id="layout-description">an open source UNIX framework for shell script based web services provider</div>
+</div>
+<table>
+<tr valign="top">
+<td id="layout-menu">
+  <div>&#187;<a href="../index.html">Home</a></div>
+  <div>&#187;<a href="../tools.html">Tools</a></div>
+  <div>&#187;<a href="../manpage.html">Man&nbsp;Page</a></div>
+  <div>&#187;<a href="../userguide.html">User&nbsp;Guide</a></div>
+  <div>&#187;<a href="../changelog.html">ChangeLog</a></div>
+  <div>&#187;<a href="../install.html">Installation</a></div>
+  <div>&#187;<a href="../sourcecode.html">Source Code</a></div>
+  <div>&#187;<a href="../downloads.html">Downloads</a></div>
+  <div>&#187;<a href="../faq.html">FAQ</a></div>
+  <div>&#187;<a href="../support.html">Support</a></div>
+  <div>&#187;<a href="../license.html">License</a></div>
+  <hr/>
+  <div>&#187;<a href="../myapps/index.html">My Apps</a></div>
+  <div>
+  <hr/>
+  <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+  <input type="hidden" name="cmd" value="_s-xclick">
+  <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+  ">
+  <input type="image" src="https://www.paypal.com/en_US/IT/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="">
+  <img alt="" border="0" src="https://www.paypal.com/it_IT/i/scr/pixel.gif" width="1" height="1">
+  </form>
+  </div>
+</td>
+<td>
+<div id="layout-content">
+<div id="header">
+<h1>MySPL Source Code</h1>
+</div>
+<h2 id="_scp_cc">scp.cc</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre><tt>// $Id$
+
+//  myspl - My Service Protocol Library - Version 1.0 (www.mysvc.it)
+//  Copyright (C) 2009 Davide Cucciniello &lt;davide6169@gmail.com&gt;
+//
+//  This program is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+
+/* **********************************************************************
+ *
+ *  ***   **        *** **  **  ****
+ *   **  **        *  *  *  ** **  *
+ *   *** **  **  * ***   *  *  *
+ *   * ** *   * **   **   * *  *
+ *   * *  *   * *  *  *   **   **
+ *  ***  ***   **  ***     *    ****
+ *             *
+ *            *
+ *
+ *  My Service
+ *
+ * ***********************************************************************
+ *
+ *  ***   **        *** ****  ***
+ *   **  **        *  *  *  *  *
+ *   *** **  **  * ***   *  *  *
+ *   * ** *   * **   **  ***   *
+ *   * *  *   * *  *  *  *     *  *
+ *  ***  ***   **  ***  ***   *****
+ *             *
+ *            *
+ *
+ *  My Service Protocol Library Example Client
+ *  (Nortel Networks IN SMI Client)
+ *
+ *  File: scp.cc
+ *
+ *  Description:
+ *    Nortel Networks IN (Intelligent Network)
+ *    SMI (Service Management Interface) Client
+ *    as usage example for MySPL library
+ *    (realized for provisioning of VPN service on SCP
+ *     in BLU mobile telephone operator)
+ *
+ * ***********************************************************************
+ *
+ *  History:
+ *    1.0               first version
+ *
+ * *********************************************************************** */
+
+#include "smi.hh"
+
+// Default parameter values
+
+#define SCP_ADDR       "10.133.11.1"
+#define SCP_PORT       5715
+#define SCP_USERNAME   "spvpn1"
+#define SCP_PASSWORD   "spvpn1"
+
+// Test  parameter values
+
+#define SCP_TEST_ADDR       "10.133.226.26"
+#define SCP_TEST_PORT       5715
+#define SCP_TEST_USERNAME   "spvpn1"
+#define SCP_TEST_PASSWORD   "spvpn1"
+
+// Process return codes
+
+#define SCP_SUCCESS          0
+#define SCP_INTERNAL_ERROR   1
+#define SCP_CONNECTION_ERROR 2
+#define SCP_LOGIN_ERROR      3
+#define SCP_COMMAND_ERROR    4
+#define SCP_LOGOUT_ERROR     5
+
+// Commands
+
+#define SCP_COMMAND_NULL                   0
+#define SCP_COMMAND_X_DPP_SUBSPIN_ADD      1
+#define SCP_COMMAND_X_DPP_SUBSPIN_DEL      2
+#define SCP_COMMAND_X_DVPN_PUBLICNUM_QUERY 3
+#define SCP_COMMAND_X_DVPN_WHITELIST_ADD   4
+#define SCP_COMMAND_X_DVPN_WHITELIST_DEL   5
+#define SCP_COMMAND_X_DVPN_DDRPOSITIVE_C00D06_ADD  6
+#define SCP_COMMAND_X_DVPN_PRIVATENUM_QUERY 7
+
+/*
+ * str2token(string s,char p);
+ *
+ * Return the number of tokens of
+ * string s, using p as separator
+ */
+
+int str2token(string s,char p)
+{
+  string::size_type i = (string::size_type)-1;
+  int n = 0;
+
+  while((i = s.find(p,i+1)) != string::npos)
+    n++;
+  n++;
+
+  return n;
+}
+
+/*
+ * str2token(string s,char p,int i);
+ *
+ * Return the token i of string s,
+ * using p as separator
+ *   i = 1,..,n
+ *   n = str2token(s,p)
+ */
+
+string str2token(string s,char p,int i)
+{
+  string token;
+
+  int k;
+
+  string::size_type i1 = (string::size_type)-1;
+  string::size_type j1;
+
+  bool hasMoreTokens = (s.find(p,0) != string::npos);
+
+  for(k=0;k&lt;i;k++)
+  {
+    if(hasMoreTokens)
+    {
+      j1 = i1 + 1;
+      i1 = s.find(p,j1);
+      token = s.substr(j1,i1-j1);
+    }
+    else
+      token = s;
+  }
+
+  return token;
+}
+
+void usage()
+{
+  cerr &lt;&lt; "usage: scp [-s &lt;sms=&lt;addr&gt;[:&lt;port&gt;]&gt;]" &lt;&lt; endl;
+  cerr &lt;&lt; "           [-U &lt;username&gt;]" &lt;&lt; endl;
+  cerr &lt;&lt; "           [-P &lt;password&gt;]" &lt;&lt; endl;
+  cerr &lt;&lt; "           [-c &lt;command&gt;]" &lt;&lt; endl;
+  cerr &lt;&lt; "           [-p &lt;arguments&gt;]" &lt;&lt; endl;
+  cerr &lt;&lt; "           [-t]" &lt;&lt; endl;
+  cerr &lt;&lt; "           [-T]" &lt;&lt; endl;
+  cerr &lt;&lt; "           [-l]" &lt;&lt; endl;
+  cerr &lt;&lt; endl;
+  cerr &lt;&lt; "  -t =&gt; test"  &lt;&lt; endl;
+  cerr &lt;&lt; "  -T =&gt; trace"  &lt;&lt; endl;
+  cerr &lt;&lt; "  -l =&gt; log"  &lt;&lt; endl;
+  cerr &lt;&lt; endl;
+  cerr &lt;&lt; "  &lt;command&gt;:" &lt;&lt; endl;
+  cerr &lt;&lt; "    x_dpp_subspin_add {msisdn}" &lt;&lt; endl;
+  cerr &lt;&lt; "    x_dpp_subspin_del {msisdn}" &lt;&lt; endl;
+  cerr &lt;&lt; "    x_dvpn_publicnum_query {msisdn}" &lt;&lt; endl;
+  cerr &lt;&lt; "    x_dvpn_privatenum_query {vpnid,privatenumber}" &lt;&lt; endl;
+  cerr &lt;&lt; "    x_dvpn_whitelist_add {vpnid,msisdn}" &lt;&lt; endl;
+  cerr &lt;&lt; "    x_dvpn_whitelist_del {vpnid,msisdn}" &lt;&lt; endl;
+  cerr &lt;&lt; "    x_dvpn_ddrpositive_c00d06_add {vpnid}" &lt;&lt; endl;
+  cerr &lt;&lt; endl;
+  cerr &lt;&lt; "  examples:" &lt;&lt; endl;
+  cerr &lt;&lt; "    scp -c x_dpp_subspin_add -p 800123456" &lt;&lt; endl;
+  cerr &lt;&lt; "    scp -c x_dpp_subspin_del -p 800123456" &lt;&lt; endl;
+  cerr &lt;&lt; "    scp -c x_dvpn_publicnum_query -p 393801234567" &lt;&lt; endl;
+  cerr &lt;&lt; "    scp -c x_dvpn_whitelist_add -p 10012345,393801234567" &lt;&lt; endl;
+  cerr &lt;&lt; "    scp -c x_dvpn_whitelist_del -p 10012345,393801234567" &lt;&lt; endl;
+  cerr &lt;&lt; "    scp -c x_dvpn_ddrpositive_C00D06_add -p 10012345" &lt;&lt; endl;
+  cerr &lt;&lt; "    scp -c x_dvpn_privatenum_query -p 10012345,123" &lt;&lt; endl;
+
+  exit(1);
+}
+
+// Main
+
+int main(int argc,char* argv[])
+{
+  // Set default parameter values
+
+  string scp_addr = SCP_ADDR;
+  int scp_port = SCP_PORT;
+
+  string scp_sms;
+
+  string scp_username = SCP_USERNAME;
+  string scp_password = SCP_PASSWORD;
+
+  int command = SCP_COMMAND_NULL;
+
+  bool scp_log = false;
+  bool scp_trace = false;
+
+  string cmd;
+
+  string cmdargs;
+
+  // Parsing command line options
+
+  int option;
+
+  while((option = getopt(argc,argv,":hs:U:P:c:p:tlT")) != EOF)
+  {
+    switch(option)
+    {
+      case 'h':
+        usage();
+        break;
+      case 's':
+        scp_sms = optarg;
+        if(str2token(scp_sms,':') == 1)
+          scp_addr = scp_sms;
+        else
+        {
+          scp_addr = str2token(scp_sms,':',1);
+          scp_port = atoi(str2token(scp_sms,':',2).c_str());
+        }
+
+        break;
+      case 'U':
+        scp_username = optarg;
+        break;
+      case 'P':
+        scp_password = optarg;
+        break;
+      case 'p':
+        cmdargs = optarg;
+        break;
+      case 'c':
+        cmd = optarg;
+
+        if(cmd == "x_dpp_subspin_add")
+          command = SCP_COMMAND_X_DPP_SUBSPIN_ADD;
+        else if(cmd == "x_dpp_subspin_del")
+          command = SCP_COMMAND_X_DPP_SUBSPIN_DEL;
+        else if(cmd == "x_dvpn_publicnum_query")
+          command = SCP_COMMAND_X_DVPN_PUBLICNUM_QUERY;
+        else if(cmd == "x_dvpn_whitelist_add")
+          command = SCP_COMMAND_X_DVPN_WHITELIST_ADD;
+        else if(cmd == "x_dvpn_whitelist_del")
+          command = SCP_COMMAND_X_DVPN_WHITELIST_DEL;
+        else if(cmd == "x_dvpn_ddrpositive_C00D06_add")
+          command = SCP_COMMAND_X_DVPN_DDRPOSITIVE_C00D06_ADD;
+        else if(cmd == "x_dvpn_privatenum_query")
+          command = SCP_COMMAND_X_DVPN_PRIVATENUM_QUERY;
+        else
+          usage();
+
+        break;
+      case 't':
+        scp_addr = SCP_TEST_ADDR;
+        scp_port = SCP_TEST_PORT;
+
+        scp_username = SCP_TEST_USERNAME;
+        scp_password = SCP_TEST_PASSWORD;
+
+        break;
+      case 'T':
+        scp_trace = true;
+        break;
+      case 'l':
+        scp_log = true;
+        break;
+    }
+  }
+
+  try
+  {
+    SocketClient client(scp_addr,scp_port);
+
+    if(scp_log)
+      cerr &lt;&lt; "Connecting to SCP ..." &lt;&lt; endl;
+
+    try
+    {
+      client.connect();
+    }
+    catch(Exception&amp; e)
+    {
+      if(scp_log)
+        cerr &lt;&lt; "Error connecting to SCP ..." &lt;&lt; endl;
+
+      return SCP_CONNECTION_ERROR;
+    }
+
+    // Login
+
+    SMILogin login(scp_username,scp_password);
+
+    if(scp_log)
+      cerr &lt;&lt; "Sending login message ..." &lt;&lt; endl;
+
+    if(scp_trace)
+    {
+      login.updateTree();
+
+      cerr &lt;&lt; "&lt;smi&gt;" &lt;&lt; endl;
+
+      cerr &lt;&lt; login &lt;&lt; endl;
+    }
+
+    client &lt;&lt; login;
+
+    SMILoginResp loginresp;
+
+    client &gt;&gt; loginresp;
+
+    if(scp_log)
+      cerr &lt;&lt; "Received loginresp message ..." &lt;&lt; endl;
+
+    if(scp_trace)
+      cerr &lt;&lt; loginresp &lt;&lt; endl;
+
+    if(scp_log)
+      cerr &lt;&lt; "Error code: &lt;" &lt;&lt; loginresp.getGlobalReturnCode() &lt;&lt; "&gt;" &lt;&lt; endl;
+
+    if(loginresp.getGlobalReturnCode())
+      return SCP_LOGIN_ERROR;
+
+    SMIAuthenticationKey auth = loginresp.getAuthenticationKey();
+
+    // Execute command
+
+    switch(command)
+    {
+      case SCP_COMMAND_X_DPP_SUBSPIN_ADD:
+      {
+        // Send request ...
+
+        string msisdn = cmdargs;
+        string pin = "0000";
+
+        SMIDPPSubsPINProvUpdate smiprovupdate(msisdn,pin);
+
+        smiprovupdate.setAuthenticationKey(auth);
+
+        if(scp_log)
+          cerr &lt;&lt; "Sending provupdate(x_dpp_subspin) message {"
+               &lt;&lt; msisdn &lt;&lt; "} ..."
+               &lt;&lt; endl;
+
+        if(scp_trace)
+        {
+          smiprovupdate.updateTree();
+
+          cerr &lt;&lt; smiprovupdate &lt;&lt; endl;
+        }
+
+        client &lt;&lt; smiprovupdate;
+
+        // Receive response ...
+
+        if(scp_log)
+          cerr &lt;&lt; "Waiting for response message ..." &lt;&lt; endl;
+
+        SMIProvResp smiprovresp;
+
+        client &gt;&gt; smiprovresp;
+
+        if(scp_log)
+          cerr &lt;&lt; "Received response message ..." &lt;&lt; endl;
+
+        if(scp_trace)
+          cerr &lt;&lt; smiprovresp &lt;&lt; endl;
+
+        if(scp_log)
+          cerr &lt;&lt; "Error code: &lt;" &lt;&lt; smiprovresp.getReturnCode(0) &lt;&lt; "&gt;" &lt;&lt; endl;
+
+        cout &lt;&lt; smiprovresp.getReturnCode(0) &lt;&lt; ","
+             &lt;&lt; smiprovresp.getErrorText(0) &lt;&lt; endl;
+
+        if(smiprovresp.getReturnCode(0))
+        {
+          if(scp_log)
+            cerr &lt;&lt; "Error text: &lt;" &lt;&lt; smiprovresp.getErrorText(0) &lt;&lt; "&gt;" &lt;&lt; endl;
+          return SCP_COMMAND_ERROR;
+        }
+
+        break;
+      }
+      case SCP_COMMAND_X_DPP_SUBSPIN_DEL:
+      {
+        // Send request ...
+
+        string msisdn = cmdargs;
+
+        SMIDPPSubsPINDeactivate smideactivate(msisdn);
+
+        smideactivate.setAuthenticationKey(auth);
+
+        if(scp_log)
+          cerr &lt;&lt; "Sending deactivate(x_dpp_subspin) message {"
+               &lt;&lt; msisdn &lt;&lt; "} ..."
+               &lt;&lt; endl;
+
+        if(scp_trace)
+        {
+          smideactivate.updateTree();
+
+          cerr &lt;&lt; smideactivate &lt;&lt; endl;
+        }
+
+        client &lt;&lt; smideactivate;
+
+        // Receive response ...
+
+        if(scp_log)
+          cerr &lt;&lt; "Waiting for response message ..." &lt;&lt; endl;
+
+        SMIProvResp smiprovresp;
+
+        client &gt;&gt; smiprovresp;
+
+        if(scp_log)
+          cerr &lt;&lt; "Received response message ..." &lt;&lt; endl;
+
+        if(scp_trace)
+          cerr &lt;&lt; smiprovresp &lt;&lt; endl;
+
+        if(scp_log)
+          cerr &lt;&lt; "Error code: &lt;" &lt;&lt; smiprovresp.getReturnCode(0) &lt;&lt; "&gt;" &lt;&lt; endl;
+
+        cout &lt;&lt; smiprovresp.getReturnCode(0) &lt;&lt; ","
+             &lt;&lt; smiprovresp.getErrorText(0) &lt;&lt; endl;
+
+        if(smiprovresp.getReturnCode(0))
+        {
+          if(scp_log)
+            cerr &lt;&lt; "Error text: &lt;" &lt;&lt; smiprovresp.getErrorText(0) &lt;&lt; "&gt;" &lt;&lt; endl;
+          return SCP_COMMAND_ERROR;
+        }
+
+        break;
+      }
+      case SCP_COMMAND_X_DVPN_PUBLICNUM_QUERY:
+      {
+        // Send request ...
+
+        string msisdn = cmdargs;
+
+        SMIDVPNPublicNumDBQuery smidbquery(msisdn);
+
+        smidbquery.setAuthenticationKey(auth);
+
+        if(scp_log)
+          cerr &lt;&lt; "Sending dbquery(x_dvpn_publicnum) message {"
+               &lt;&lt; msisdn &lt;&lt; "} ..."
+               &lt;&lt; endl;
+
+        if(scp_trace)
+        {
+          smidbquery.updateTree();
+
+          cerr &lt;&lt; smidbquery &lt;&lt; endl;
+        }
+
+        client &lt;&lt; smidbquery;
+
+        // Receive response ...
+
+        if(scp_log)
+          cerr &lt;&lt; "Waiting for response message ..." &lt;&lt; endl;
+
+        SMIDVPNPublicNumDBQueryResp smidbqueryresp;
+
+        client &gt;&gt; smidbqueryresp;
+
+        if(scp_log)
+          cerr &lt;&lt; "Received response message ..." &lt;&lt; endl;
+
+        if(scp_trace)
+          cerr &lt;&lt; smidbqueryresp &lt;&lt; endl;
+
+        if(scp_log)
+          cerr &lt;&lt; "Error code: &lt;" &lt;&lt; smidbqueryresp.getGlobalReturnCode() &lt;&lt; "&gt;" &lt;&lt; endl;
+
+        if(smidbqueryresp.getGlobalReturnCode())
+        {
+          cout &lt;&lt; smidbqueryresp.getGlobalReturnCode() &lt;&lt; ","
+               &lt;&lt; msisdn &lt;&lt; endl;
+
+          return SCP_COMMAND_ERROR;
+        }
+        else
+        {
+          unsigned long int numberofmatchingrecords =
+            smidbqueryresp.getNumberOfMatchingRecords();
+
+          if(scp_log)
+            cerr &lt;&lt; "Number of matching records: &lt;" &lt;&lt; numberofmatchingrecords &lt;&lt; "&gt;" &lt;&lt; endl;
+
+          if(numberofmatchingrecords)
+            cout &lt;&lt; "0,"
+                 &lt;&lt; msisdn &lt;&lt; ","
+                 &lt;&lt; smidbqueryresp.getBusinessGroupID() &lt;&lt; ","
+                 &lt;&lt; smidbqueryresp.getPrivateNumber() &lt;&lt; ","
+                 &lt;&lt; smidbqueryresp.getOrigTemplateID() &lt;&lt; ","
+                 &lt;&lt; smidbqueryresp.getTermTemplateID() &lt;&lt; endl;
+        }
+
+        break;
+      }
+      case SCP_COMMAND_X_DVPN_PRIVATENUM_QUERY:
+      {
+        // Send request ...
+
+        string vpnid = str2token(cmdargs,',',1);
+        string privatenumber = str2token(cmdargs,',',2);
+
+        SMIDVPNPrivateNumDBQuery smidbquery(vpnid,privatenumber);
+
+        smidbquery.setAuthenticationKey(auth);
+
+        if(scp_log)
+          cerr &lt;&lt; "Sending dbquery(x_dvpn_privatenum) message {"
+               &lt;&lt; vpnid &lt;&lt; "," &lt;&lt; privatenumber &lt;&lt; "} ..."
+               &lt;&lt; endl;
+
+        if(scp_trace)
+        {
+          smidbquery.updateTree();
+
+          cerr &lt;&lt; smidbquery &lt;&lt; endl;
+        }
+
+        client &lt;&lt; smidbquery;
+
+        // Receive response ...
+
+        if(scp_log)
+          cerr &lt;&lt; "Waiting for response message ..." &lt;&lt; endl;
+
+        SMIDVPNPrivateNumDBQueryResp smidbqueryresp;
+
+        client &gt;&gt; smidbqueryresp;
+
+        if(scp_log)
+          cerr &lt;&lt; "Received response message ..." &lt;&lt; endl;
+
+        if(scp_trace)
+          cerr &lt;&lt; smidbqueryresp &lt;&lt; endl;
+
+        if(scp_log)
+          cerr &lt;&lt; "Error code: &lt;" &lt;&lt; smidbqueryresp.getGlobalReturnCode() &lt;&lt; "&gt;" &lt;&lt; endl;
+
+        if(smidbqueryresp.getGlobalReturnCode())
+        {
+          cout &lt;&lt; smidbqueryresp.getGlobalReturnCode() &lt;&lt; ","
+               &lt;&lt; vpnid &lt;&lt; ","
+               &lt;&lt; privatenumber &lt;&lt; endl;
+
+          return SCP_COMMAND_ERROR;
+        }
+        else
+        {
+          unsigned long int numberofmatchingrecords =
+            smidbqueryresp.getNumberOfMatchingRecords();
+
+          if(scp_log)
+            cerr &lt;&lt; "Number of matching records: &lt;" &lt;&lt; numberofmatchingrecords &lt;&lt; "&gt;" &lt;&lt; endl;
+
+          if(numberofmatchingrecords)
+            cout &lt;&lt; "0,"
+                 &lt;&lt; vpnid &lt;&lt; ","
+                 &lt;&lt; privatenumber &lt;&lt; ","
+                 &lt;&lt; smidbqueryresp.getFeatureIndications() &lt;&lt; ","
+                 &lt;&lt; smidbqueryresp.getHomeSiteID() &lt;&lt; ","
+                 &lt;&lt; smidbqueryresp.getPublicNumberCountryCode() &lt;&lt; ","
+                 &lt;&lt; smidbqueryresp.getPublicNumberNetworkDestCode() &lt;&lt; ","
+                 &lt;&lt; smidbqueryresp.getPublicNumberSubscriberNumber() &lt;&lt; ","
+                 &lt;&lt; smidbqueryresp.getClassOfService() &lt;&lt; ","
+                 &lt;&lt; smidbqueryresp.getHomeCellGroup() &lt;&lt; ","
+                 &lt;&lt; smidbqueryresp.getOriginationAlternateBillingNumber() &lt;&lt; ","
+                 &lt;&lt; smidbqueryresp.getOriginationBillingAggregateGroup() &lt;&lt; ","
+                 &lt;&lt; smidbqueryresp.getOnNetAlternateBillingNumber() &lt;&lt; ","
+                 &lt;&lt; smidbqueryresp.getOnNetBillingAggregateGroup() &lt;&lt; ","
+                 &lt;&lt; smidbqueryresp.getOffNetAlternateBillingNumber() &lt;&lt; ","
+                 &lt;&lt; smidbqueryresp.getOffNetBillingAggregateGroup() &lt;&lt; endl;
+        }
+
+        break;
+      }
+      case SCP_COMMAND_X_DVPN_WHITELIST_ADD:
+      {
+        // Send request ...
+
+        string vpnid = str2token(cmdargs,',',1);
+        string msisdn = str2token(cmdargs,',',2);
+
+        SMIDVPNWhiteListProvUpdate smiprovupdate(vpnid,msisdn);
+
+        smiprovupdate.setAuthenticationKey(auth);
+
+        if(scp_log)
+          cerr &lt;&lt; "Sending provupdate(x_dvpn_whitelist) message {"
+               &lt;&lt; vpnid &lt;&lt; "," &lt;&lt; msisdn &lt;&lt; "} ..."
+               &lt;&lt; endl;
+
+        if(scp_trace)
+        {
+          smiprovupdate.updateTree();
+
+          cerr &lt;&lt; smiprovupdate &lt;&lt; endl;
+        }
+
+        client &lt;&lt; smiprovupdate;
+
+        // Receive response ...
+
+        if(scp_log)
+          cerr &lt;&lt; "Waiting for response message ..." &lt;&lt; endl;
+
+        SMIProvResp smiprovresp;
+
+        client &gt;&gt; smiprovresp;
+
+        if(scp_log)
+          cerr &lt;&lt; "Received response message ..." &lt;&lt; endl;
+
+        if(scp_trace)
+          cerr &lt;&lt; smiprovresp &lt;&lt; endl;
+
+        if(scp_log)
+          cerr &lt;&lt; "Global error code: &lt;" &lt;&lt; smiprovresp.getGlobalReturnCode() &lt;&lt; "&gt;" &lt;&lt; endl;
+
+        if(smiprovresp.getGlobalReturnCode())
+          return SCP_COMMAND_ERROR;
+
+        if(scp_log)
+          cerr &lt;&lt; "Error code: &lt;" &lt;&lt; smiprovresp.getReturnCode(0) &lt;&lt; "&gt;" &lt;&lt; endl;
+
+        cout &lt;&lt; smiprovresp.getReturnCode(0) &lt;&lt; ","
+             &lt;&lt; smiprovresp.getErrorText(0) &lt;&lt; endl;
+
+        if(smiprovresp.getReturnCode(0))
+        {
+          if(scp_log)
+            cerr &lt;&lt; "Error text: &lt;" &lt;&lt; smiprovresp.getErrorText(0) &lt;&lt; "&gt;" &lt;&lt; endl;
+          return SCP_COMMAND_ERROR;
+        }
+
+        break;
+      }
+      case SCP_COMMAND_X_DVPN_WHITELIST_DEL:
+      {
+        // Send request ...
+
+        string vpnid = str2token(cmdargs,',',1);
+        string msisdn = str2token(cmdargs,',',2);
+
+        SMIDVPNWhiteListDeactivate smideactivate(vpnid,msisdn);
+
+        smideactivate.setAuthenticationKey(auth);
+
+        if(scp_log)
+          cerr &lt;&lt; "Sending deactivate(x_dvpn_whitelist) message {"
+               &lt;&lt; vpnid &lt;&lt; "," &lt;&lt; msisdn &lt;&lt; "} ..."
+               &lt;&lt; endl;
+
+        if(scp_trace)
+        {
+          smideactivate.updateTree();
+
+          cerr &lt;&lt; smideactivate &lt;&lt; endl;
+        }
+
+        client &lt;&lt; smideactivate;
+
+        // Receive response ...
+
+        if(scp_log)
+          cerr &lt;&lt; "Waiting for response message ..." &lt;&lt; endl;
+
+        SMIProvResp smiprovresp;
+
+        client &gt;&gt; smiprovresp;
+
+        if(scp_log)
+          cerr &lt;&lt; "Received response message ..." &lt;&lt; endl;
+
+        if(scp_trace)
+          cerr &lt;&lt; smiprovresp &lt;&lt; endl;
+
+        if(scp_log)
+          cerr &lt;&lt; "Error code: &lt;" &lt;&lt; smiprovresp.getReturnCode(0) &lt;&lt; "&gt;" &lt;&lt; endl;
+
+        cout &lt;&lt; smiprovresp.getReturnCode(0) &lt;&lt; ","
+             &lt;&lt; smiprovresp.getErrorText(0) &lt;&lt; endl;
+
+        if(smiprovresp.getReturnCode(0))
+        {
+          if(scp_log)
+            cerr &lt;&lt; "Error text: &lt;" &lt;&lt; smiprovresp.getErrorText(0) &lt;&lt; "&gt;" &lt;&lt; endl;
+          return SCP_COMMAND_ERROR;
+        }
+
+        break;
+      }
+      case SCP_COMMAND_X_DVPN_DDRPOSITIVE_C00D06_ADD:
+      {
+        // Send request ...
+
+        string vpnid = cmdargs;
+
+        SMIDVPNDDRPositiveC00D06ProvUpdate smiprovupdate(vpnid);
+
+        smiprovupdate.setAuthenticationKey(auth);
+
+        if(scp_log)
+          cerr &lt;&lt; "Sending provupdate(x_dvpn_ddrpositive_C00D06) message {"
+               &lt;&lt; vpnid &lt;&lt; "} ..."
+               &lt;&lt; endl;
+
+        if(scp_trace)
+        {
+          smiprovupdate.updateTree();
+
+          cerr &lt;&lt; smiprovupdate &lt;&lt; endl;
+        }
+
+        client &lt;&lt; smiprovupdate;
+
+        // Receive response ...
+
+        if(scp_log)
+          cerr &lt;&lt; "Waiting for response message ..." &lt;&lt; endl;
+
+        SMIProvResp smiprovresp(1);
+
+        client &gt;&gt; smiprovresp;
+
+        if(scp_log)
+          cerr &lt;&lt; "Received response message ..." &lt;&lt; endl;
+
+        if(scp_log)
+          cerr &lt;&lt; "Global error code: &lt;" &lt;&lt; smiprovresp.getGlobalReturnCode() &lt;&lt; "&gt;" &lt;&lt; endl;
+
+        if(scp_trace)
+          cerr &lt;&lt; smiprovresp &lt;&lt; endl;
+
+        if(scp_log)
+          cerr &lt;&lt; "Error code: &lt;" &lt;&lt; smiprovresp.getReturnCode(0) &lt;&lt; "&gt;" &lt;&lt; endl;
+
+        cout &lt;&lt; smiprovresp.getReturnCode(0) &lt;&lt; ","
+             &lt;&lt; smiprovresp.getErrorText(0) &lt;&lt; endl;
+
+        if(smiprovresp.getReturnCode(0))
+        {
+          if(scp_log)
+            cerr &lt;&lt; "Error text: &lt;" &lt;&lt; smiprovresp.getErrorText(0) &lt;&lt; "&gt;" &lt;&lt; endl;
+          return SCP_COMMAND_ERROR;
+        }
+
+        break;
+      }
+    }
+
+    // Logout
+
+    SMILogout logout;
+
+    logout.setAuthenticationKey(auth);
+
+    if(scp_log)
+      cerr &lt;&lt; "Sending logout message ..." &lt;&lt; endl;
+
+    if(scp_trace)
+    {
+      logout.updateTree();
+
+      cerr &lt;&lt; logout &lt;&lt; endl;
+    }
+
+    client &lt;&lt; logout;
+
+    SMILogoutResp logoutresp;
+
+    if(scp_log)
+      cerr &lt;&lt; "Receiving logoutresp message ..." &lt;&lt; endl;
+
+    client &gt;&gt; logoutresp;
+
+    if(scp_trace)
+    {
+      cerr &lt;&lt; logoutresp;
+
+      cerr &lt;&lt; "&lt;/smi&gt;" &lt;&lt; endl;
+    }
+
+    if(scp_log)
+      cerr &lt;&lt; "Error code: &lt;" &lt;&lt; logoutresp.getGlobalReturnCode() &lt;&lt; "&gt;" &lt;&lt; endl;
+
+    if(logoutresp.getGlobalReturnCode())
+      return SCP_LOGOUT_ERROR;
+  }
+  catch(Exception&amp; e)
+  {
+     cerr &lt;&lt; e &lt;&lt; endl;
+
+     return 1;
+  }
+
+  return 0;
+}
+
+/*
+ * End of file
+ */</tt></pre>
+</div></div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 0.400<br />
+Last updated 2014-06-28 16:23:43 CEST
+</div>
+<div id="footer-badges">
+<img style="border:none; width:88px; height:31px;"
+     src="../images/gplv3-127x51.png"
+     alt="GPL Version 3" />
+<!-- Histats.com  START  -->
+<a href="http://www.histats.com" target="_blank" title="simple hit counter" >
+<script  type="text/javascript" language="javascript">
+var s_sid = 675659;var st_dominio = 4;
+var cimg = 0;var cwi =112;var che =48;
+</script></a><script  type="text/javascript" language="javascript" src="http://s10.histats.com/js9.js"></script>
+<noscript><a href="http://www.histats.com" target="_blank">
+<img  src="http://s4.histats.com/stats/0.gif?675659&1" alt="simple hit counter" border="0"></a>
+</noscript>
+<!-- Histats.com  END  -->
+</div>
+</div>
+</div>
+</td>
+</tr>
+</table>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-11334618-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>

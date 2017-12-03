@@ -1,0 +1,440 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.5.2" />
+<meta name="description" content="an open source UNIX framework for shell script based web service provider" />
+<meta name="keywords" content="mysvc, shell script, web service, provider, service, soa, template, engine, myste, mysde, mysvcd" />
+<link rel="stylesheet" href="../xhtml11.css" type="text/css" />
+<link rel="stylesheet" href="../xhtml11-quirks.css" type="text/css" />
+<link rel="stylesheet" href="../layout1.css" type="text/css" />
+<title>MySVC</title>
+</head>
+<body>
+<div id="layout-banner">
+  <div id="layout-title">MySVC</div>
+  <div id="layout-description">an open source UNIX framework for shell script based web services provider</div>
+</div>
+<table>
+<tr valign="top">
+<td id="layout-menu">
+  <div>&#187;<a href="../index.html">Home</a></div>
+  <div>&#187;<a href="../tools.html">Tools</a></div>
+  <div>&#187;<a href="../manpage.html">Man&nbsp;Page</a></div>
+  <div>&#187;<a href="../userguide.html">User&nbsp;Guide</a></div>
+  <div>&#187;<a href="../changelog.html">ChangeLog</a></div>
+  <div>&#187;<a href="../install.html">Installation</a></div>
+  <div>&#187;<a href="../sourcecode.html">Source Code</a></div>
+  <div>&#187;<a href="../downloads.html">Downloads</a></div>
+  <div>&#187;<a href="../faq.html">FAQ</a></div>
+  <div>&#187;<a href="../support.html">Support</a></div>
+  <div>&#187;<a href="../license.html">License</a></div>
+  <hr/>
+  <div>&#187;<a href="../myapps/index.html">My Apps</a></div>
+  <div>
+  <hr/>
+  <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+  <input type="hidden" name="cmd" value="_s-xclick">
+  <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+  ">
+  <input type="image" src="https://www.paypal.com/en_US/IT/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="">
+  <img alt="" border="0" src="https://www.paypal.com/it_IT/i/scr/pixel.gif" width="1" height="1">
+  </form>
+  </div>
+</td>
+<td>
+<div id="layout-content">
+<div id="header">
+<h1>MySVCD Source Code</h1>
+</div>
+<h2 id="_nth">nth</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre><tt>#!/bin/sh
+#\
+exec expect "$0" -- ${1+"$@"}
+
+# #######################################################################
+#
+#  ###   ##        ### ##  ##  ####
+#   ##  ##        #  #  #  ## ##  #
+#   ### ##  ##  # ###   #  #  #
+#   # ## #   # ##   ##   # #  #
+#   # #  #   # #  #  #   ##   ##
+#  ###  ###   ##  ###     #    ####
+#             #
+#            #
+#
+#  My Service
+#
+# #######################################################################
+#
+#  Client Example used in BLU as generic telnet based
+#  Network Element Protocols
+#
+# #######################################################################
+#
+#   Script: nth - Network element Telnet protocol Handler
+#
+#   Version: 1.0
+#
+#   Date: 13/12/2002
+#
+#   Author: Davide Cucciniello
+#
+#   Usage:
+#     nth [-s &lt;server&gt;=&lt;addr&gt;[:&lt;port&gt;]]
+#         [-f &lt;configfile&gt;]
+#         [-u "&lt;start&gt;"]
+#         [-d "&lt;stop&gt;"]
+#         [-l]
+#         [-t]
+#         [-i]
+#
+#     -l =&gt; log
+#     -t =&gt; trace
+#     -i =&gt; debug
+#
+#       default:
+#         &lt;server&gt;     = $NE_SERVER
+#         &lt;configfile&gt; = $NE_CONFIG
+#         &lt;start&gt; =      $NE_START
+#         &lt;stop&gt; =       $NE_STOP
+#
+#   Input:
+#     standard input
+#
+#   Output:
+#     standard output
+#
+#   Description:
+#     Handle Network element based on a telnet protocol
+#
+# #################################################################
+
+proc usage {} {
+  send_error "nth - Network element Telnet protocol Handler - Ver 2.0\n"
+  send_error "\n"
+  send_error "usage: nth \[-s &lt;server&gt;=&lt;addr&gt;\[:&lt;port&gt;]]\n"
+  send_error "           \[-f &lt;configfile&gt;]\n"
+  send_error "           \[-u &lt;start&gt;]\n"
+  send_error "           \[-d &lt;stop&gt;]\n"
+  send_error "           \[-l]\n"
+  send_error "           \[-t]\n"
+  send_error "           \[-i]\n"
+  send_error "\n"
+  send_error "  -l =&gt; log\n"
+  send_error "  -t =&gt; trace\n"
+  send_error "  -i =&gt; debug\n"
+  send_error "\n"
+  send_error "  default:\n"
+  send_error "    &lt;server&gt; =     \$NE_SERVER\n"
+  send_error "    &lt;configfile&gt; = \$NE_CONFIG\n"
+  send_error "    &lt;start&gt; =      \$NE_START\n"
+  send_error "    &lt;stop&gt; =       \$NE_STOP\n"
+
+  exit 1
+}
+
+proc log {level text} {
+  global parameter
+
+  # level:
+  #   I =&gt; informational
+  #   D =&gt; debug
+  #   W =&gt; warning
+  #   E =&gt; error
+
+  if $parameter(log) {
+    set timestamp [clock format \
+      [clock seconds] -format "%Y%m%d%H%M%S"]
+
+    send_error "$timestamp $level $text\n"
+  }
+}
+
+proc initParameters {} {
+  global parameter
+  global env
+
+  set parameter(port) "23"
+  set parameter(log) 0
+
+  if [info exists env(NE_SERVER)] {
+    # NE_SERVER ::= &lt;addr&gt;[:&lt;port&gt;]
+
+    set parameter(server) "$env(NE_SERVER)"
+  } else {
+    set parameter(server) "0:$parameter(port)"
+  }
+
+  if [info exists env(NE_CONFIG)] {
+    set parameter(configfile) "$env(NE_CONFIG)"
+  }
+
+  if [info exists env(NE_START)] {
+    set parameter(start) "$env(NE_START)"
+  }
+
+  if [info exists env(NE_STOP)] {
+    set parameter(stop) "$env(NE_STOP)"
+  }
+
+  log_user 0
+}
+
+proc parseArguments {} {
+  global argv parameter
+
+  set state flag
+
+  foreach arg $argv {
+    switch -- $state {
+      flag {
+        switch -regexp -- $arg {
+          {-h.*} {usage}
+          {-s.*} {set state server}
+          {-f.*} {set state configfile}
+          {-u.*} {set state start}
+          {-d.*} {set state stop}
+          {-l.*} {set parameter(log) 1}
+          {-l.*} {exp_internal 1}
+          {-t.*} {log_user 1}
+        }
+      }
+      server {
+        set parameter(server) $arg
+
+        set state flag
+      }
+      configfile {
+        set parameter(configfile) $arg
+
+        set state flag
+      }
+      start {
+        set parameter(start) $arg
+
+        set state flag
+      }
+      stop {
+        set parameter(stop) $arg
+
+        set state flag
+      }
+    }
+  }
+
+  if {[info exists parameter(configfile)] &amp;&amp;
+     ![file exists $parameter(configfile)]} {
+    usage
+  }
+}
+
+proc isprocdefined {name} {
+  return ![string compare [info procs $name] $name]
+}
+
+proc init {} {
+  global parameter
+
+  initParameters
+  parseArguments
+
+  # execute initialization file
+
+  if [info exists parameter(configfile)] {
+    set initfile "$parameter(configfile)"
+  } else {
+    set initfile "~/.nthrc"
+  }
+
+  if [file exists $initfile] {
+    uplevel #0 source $initfile
+  }
+}
+
+proc startup {} {
+  global parameter
+  global spawn_id
+  global addr
+  global port
+
+  log I "Start \[[pid]]"
+
+  # connect to server ...
+
+  log I "Opening connection to server $addr:$port"
+
+  if [catch {spawn -noecho telnet $addr $port}] {
+    log E "Connection failed"
+
+    exit 1
+  }
+
+  log I "Connection successfull"
+
+  # execute start procedure if it's defined
+
+  if [info exists parameter(start)] {
+    log I "Executing command &lt;$parameter(start)&gt;"
+
+    if [catch {uplevel #0 $parameter(start)} result] {
+      log E "Error &lt;$result&gt;\n"
+    } else {
+      log I "Result &lt;$result&gt;\n"
+    }
+  }
+}
+
+proc shutdown {} {
+  global parameter
+  global spawn_id
+  global addr
+  global port
+
+  # execute stop procedure if it's defined
+
+  if [info exists parameter(stop)] {
+    log I "Executing command &lt;$parameter(stop)&gt;"
+
+    if [catch {uplevel #0 $parameter(stop)} result] {
+      log E "Error &lt;$result&gt;\n"
+    } else {
+      log I "Result &lt;$result&gt;\n"
+    }
+  }
+
+  log I "Closing connection to server $addr:$port"
+
+  close; wait
+
+  log I "Stop \[[pid]]"
+
+  exit 0
+}
+
+proc run {} {
+  global parameter
+  global spawn_id
+  global addr
+  global port
+
+  set serverinfo [split "$parameter(server)" ":"]
+
+  if {[llength $serverinfo] == 1} {
+    set addr [lindex $serverinfo 0]
+    set port $parameter(port)
+  } else {
+    set addr [lindex $serverinfo 0]
+    set port [lindex $serverinfo 1]
+  }
+
+  trap {
+    log I "Received signal SIGINT"
+
+    shutdown
+  } SIGINT
+
+  trap {
+    log I "Received signal SIGTERM"
+
+    shutdown
+  } SIGTERM
+
+  # execute connection startup
+
+  startup
+
+  # read commands from standard input and
+  # write result on standard output
+
+  set command {}
+
+  while {![eof stdin]} {
+    # read a command from standard input
+    # execute it
+    # send result to standard output
+
+    log I "Reading from stdin a command to execute"
+
+    set input [gets stdin]
+
+    if ![string compare "$input" "." ] {
+      # an input line made only of '.' is used as an eof
+
+      break
+    }
+
+    append command $input
+
+    if [info complete $command] {
+      log I "Executing command &lt;$command&gt;"
+
+      if [catch {uplevel #0 $command} result] {
+        log E "Error &lt;$result&gt;\n"
+      } else {
+        log I "Result &lt;$result&gt;\n"
+      }
+
+      if [string compare "$result" "" ] {
+        puts "$result"
+      }
+
+      set command {}
+    }
+  }
+
+  # execute connection shutdown
+
+  shutdown
+}
+
+proc main {} {
+  init
+  run
+}
+
+main
+
+# end of script</tt></pre>
+</div></div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 0.400<br />
+Last updated 2014-06-28 16:24:11 CEST
+</div>
+<div id="footer-badges">
+<img style="border:none; width:88px; height:31px;"
+     src="../images/gplv3-127x51.png"
+     alt="GPL Version 3" />
+<!-- Histats.com  START  -->
+<a href="http://www.histats.com" target="_blank" title="simple hit counter" >
+<script  type="text/javascript" language="javascript">
+var s_sid = 675659;var st_dominio = 4;
+var cimg = 0;var cwi =112;var che =48;
+</script></a><script  type="text/javascript" language="javascript" src="http://s10.histats.com/js9.js"></script>
+<noscript><a href="http://www.histats.com" target="_blank">
+<img  src="http://s4.histats.com/stats/0.gif?675659&1" alt="simple hit counter" border="0"></a>
+</noscript>
+<!-- Histats.com  END  -->
+</div>
+</div>
+</div>
+</td>
+</tr>
+</table>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-11334618-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>

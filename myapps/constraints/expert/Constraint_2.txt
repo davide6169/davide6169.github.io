@@ -1,0 +1,4 @@
+if there is gas in the engine and the sparks are ok
+then the engine runs
+.
+(GasInEngine and GoodSpark) -> EngineRuns

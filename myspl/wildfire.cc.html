@@ -1,0 +1,1397 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.5.2" />
+<meta name="description" content="an open source UNIX framework for shell script based web service provider" />
+<meta name="keywords" content="mysvc, shell script, web service, provider, service, soa, template, engine, myste, mysde, mysvcd" />
+<link rel="stylesheet" href="../xhtml11.css" type="text/css" />
+<link rel="stylesheet" href="../xhtml11-quirks.css" type="text/css" />
+<link rel="stylesheet" href="../layout1.css" type="text/css" />
+<title>MySVC</title>
+</head>
+<body>
+<div id="layout-banner">
+  <div id="layout-title">MySVC</div>
+  <div id="layout-description">an open source UNIX framework for shell script based web services provider</div>
+</div>
+<table>
+<tr valign="top">
+<td id="layout-menu">
+  <div>&#187;<a href="../index.html">Home</a></div>
+  <div>&#187;<a href="../tools.html">Tools</a></div>
+  <div>&#187;<a href="../manpage.html">Man&nbsp;Page</a></div>
+  <div>&#187;<a href="../userguide.html">User&nbsp;Guide</a></div>
+  <div>&#187;<a href="../changelog.html">ChangeLog</a></div>
+  <div>&#187;<a href="../install.html">Installation</a></div>
+  <div>&#187;<a href="../sourcecode.html">Source Code</a></div>
+  <div>&#187;<a href="../downloads.html">Downloads</a></div>
+  <div>&#187;<a href="../faq.html">FAQ</a></div>
+  <div>&#187;<a href="../support.html">Support</a></div>
+  <div>&#187;<a href="../license.html">License</a></div>
+  <hr/>
+  <div>&#187;<a href="../myapps/index.html">My Apps</a></div>
+  <div>
+  <hr/>
+  <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+  <input type="hidden" name="cmd" value="_s-xclick">
+  <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+  ">
+  <input type="image" src="https://www.paypal.com/en_US/IT/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="">
+  <img alt="" border="0" src="https://www.paypal.com/it_IT/i/scr/pixel.gif" width="1" height="1">
+  </form>
+  </div>
+</td>
+<td>
+<div id="layout-content">
+<div id="header">
+<h1>MySPL Source Code</h1>
+</div>
+<h2 id="_wildfire_cc">wildfire.cc</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre><tt>// $Id$
+
+//  myspl - My Service Protocol Library - Version 1.0 (www.mysvc.it)
+//  Copyright (C) 2009 Davide Cucciniello &lt;davide6169@gmail.com&gt;
+//
+//  This program is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+
+/* **********************************************************************
+ *
+ *  ***   **        *** **  **  ****
+ *   **  **        *  *  *  ** **  *
+ *   *** **  **  * ***   *  *  *
+ *   * ** *   * **   **   * *  *
+ *   * *  *   * *  *  *   **   **
+ *  ***  ***   **  ***     *    ****
+ *             *
+ *            *
+ *
+ *  My Service
+ *
+ * ***********************************************************************
+ *
+ *  ***   **        *** ****  ***
+ *   **  **        *  *  *  *  *
+ *   *** **  **  * ***   *  *  *
+ *   * ** *   * **   **  ***   *
+ *   * *  *   * *  *  *  *     *  *
+ *  ***  ***   **  ***  ***   *****
+ *             *
+ *            *
+ *
+ *  My Service Protocol Library Example Client (Wildfire VMS Client)
+ *
+ *  File: wildfire.cc
+ *
+ *  Description:
+ *    Wildfire VMS Client as usage example for MySPL library
+ *    (realized for provisioning of "Memory" service
+ *     in BLU mobile telephone operator)
+ *
+ * ***********************************************************************
+ *
+ *  History:
+ *    1.0               first version
+ *
+ * *********************************************************************** */
+
+#include "upsp.hh"
+
+// Default values
+
+#define WF_IPADDRESS "10.133.52.66"
+#define WF_PORT      16725
+#define WF_VERSION   "4"
+#define WF_USERNAME  "blu1db01"
+#define WF_PASSWORD  "10.133.52.66"
+
+// Wildfire VRU
+
+#define WF_VRU1      "blu1v01"
+#define WF_VRU2      "blu1v02"
+#define WF_VRU3      "blu1v03"
+
+// Error codes
+
+#define WF_INTERNAL_ERROR   1
+#define WF_CONNECTION_ERROR 2
+#define WF_LOGIN_ERROR      3
+#define WF_COMMAND_ERROR    4
+#define WF_LOGOUT_ERROR     5
+
+// Commands
+
+#define WF_TEST    1
+#define WF_CREATE  2
+#define WF_QUERY   3
+#define WF_FIND    4
+#define WF_SET     5
+#define WF_REMOVE  6
+
+using namespace std;
+
+//
+// Main
+//
+
+int main(int argc,char* argv[])
+{
+  // Default values
+
+  string ipaddress = WF_IPADDRESS;
+  int port = WF_PORT;
+  string wf_version = WF_VERSION;
+  string username = WF_USERNAME;
+  string password = WF_PASSWORD;
+
+  int command = WF_TEST;
+
+  string msisdn;
+  string imsi;
+  string firstname;
+  string lastname;
+  string hostname;
+  string service;
+
+  int fieldindex = -1;
+  string fieldvalue;
+
+  // Trace UPSP commands
+
+  bool upsp_trace = false;
+  bool upsp_log = false;
+
+  // Parsing command line options
+
+  int option;
+
+  while((option = getopt(argc,argv,":hlta:P:v:u:p:cqfdrsx:y:m:i:n:S:F:L:123")) != EOF)
+  {
+    switch(option)
+    {
+      case 'h':
+        cerr &lt;&lt; "usage: wildfire [-l]" &lt;&lt; endl;
+        cerr &lt;&lt; "                [-t]" &lt;&lt; endl;
+        cerr &lt;&lt; "                [-a &lt;ipaddress&gt;]" &lt;&lt; endl;
+        cerr &lt;&lt; "                [-P &lt;port&gt;]" &lt;&lt; endl;
+        cerr &lt;&lt; "                [-v &lt;version&gt;]" &lt;&lt; endl;
+        cerr &lt;&lt; "                [-u &lt;username&gt;]" &lt;&lt; endl;
+        cerr &lt;&lt; "                [-p &lt;password&gt;]" &lt;&lt; endl;
+        cerr &lt;&lt; "                [-c|-q|-f|-s|-d|-r]" &lt;&lt; endl;
+        cerr &lt;&lt; "                [-1|-2|-3]" &lt;&lt; endl;
+        cerr &lt;&lt; "                [-x &lt;fieldindex&gt;]" &lt;&lt; endl;
+        cerr &lt;&lt; "                [-y &lt;fieldvalue&gt;]" &lt;&lt; endl;
+        cerr &lt;&lt; "                [-m &lt;msisdn&gt;]" &lt;&lt; endl;
+        cerr &lt;&lt; "                [-i &lt;imsi&gt;]" &lt;&lt; endl;
+        cerr &lt;&lt; "                [-n &lt;hostname&gt;]" &lt;&lt; endl;
+        cerr &lt;&lt; "                [-S &lt;service&gt;]" &lt;&lt; endl;
+        cerr &lt;&lt; "                [-F &lt;firstname&gt;]" &lt;&lt; endl;
+        cerr &lt;&lt; "                [-L &lt;lastname&gt;]" &lt;&lt; endl;
+        cerr &lt;&lt; endl;
+        cerr &lt;&lt; "  -c =&gt; create" &lt;&lt; endl;
+        cerr &lt;&lt; "  -q =&gt; query" &lt;&lt; endl;
+        cerr &lt;&lt; "  -f =&gt; find" &lt;&lt; endl;
+        cerr &lt;&lt; "  -s =&gt; set" &lt;&lt; endl;
+        cerr &lt;&lt; "  -d =&gt; delete" &lt;&lt; endl;
+        cerr &lt;&lt; "  -r =&gt; remove" &lt;&lt; endl;
+
+        return WF_INTERNAL_ERROR;
+        break;
+      case 'l':
+        upsp_log = true;
+        break;
+      case 't':
+        upsp_trace = true;
+        break;
+      case 'a':
+        ipaddress = optarg;
+        break;
+      case 'P':
+        port = atoi(optarg);
+        break;
+      case 'v':
+        wf_version = optarg;
+        break;
+      case 'u':
+        username = optarg;
+        break;
+      case 'p':
+        password = optarg;
+        break;
+      case 'c':
+        command = WF_CREATE;
+        break;
+      case 'q':
+        command = WF_QUERY;
+        break;
+      case 'f':
+        command = WF_FIND;
+        break;
+      case 's':
+        command = WF_SET;
+        break;
+      case 'd':
+        command = WF_SET;
+        fieldindex = 17;
+        fieldvalue = "true";
+        break;
+      case 'r':
+        command = WF_REMOVE;
+        break;
+      case 'x':
+        fieldindex = atoi(optarg);
+        break;
+      case 'y':
+        fieldvalue = optarg;
+        break;
+      case '1':
+        hostname = WF_VRU1;
+        break;
+      case '2':
+        hostname = WF_VRU2;
+        break;
+      case '3':
+        hostname = WF_VRU3;
+        break;
+      case 'm':
+        msisdn = optarg;
+        break;
+      case 'i':
+        imsi = optarg;
+        break;
+      case 'n':
+        hostname = optarg;
+        break;
+      case 'S':
+        service = optarg;
+        break;
+      case 'F':
+        firstname = optarg;
+        break;
+      case 'L':
+        lastname = optarg;
+        break;
+    }
+  }
+
+  try
+  {
+    SocketClient wildfire(ipaddress,port);
+
+    // Connection to wildfire ...
+
+    if(upsp_log)
+      cerr &lt;&lt; "Connecting to Wildfire ..." &lt;&lt; endl;
+
+    wildfire.connect();
+
+    UPSPHeader               header;
+
+    UPSPVersion              version;
+    UPSPUniversalNAck        universal_nack_body;
+    UPSPLoginReq             login_req;
+    UPSPLoginNAckBody        login_nack_body;
+    UPSPLoopReq              loop_req;
+    UPSPLoopAckBody          loop_ack_body;
+    UPSPLoopNAckBody         loop_nack_body;
+    UPSPCreateReq            create_req;
+    UPSPCreateAckBody        create_ack_body;
+    UPSPCreateNAckBody       create_nack_body;
+    UPSPGetAllReq            get_all_req;
+    UPSPGetAllAckBody        get_all_ack_body;
+    UPSPGetAllNAckBody       get_all_nack_body;
+    UPSPFindReq              find_req;
+    UPSPFindAckBody          find_ack_body;
+    UPSPFindNAckBody         find_nack_body;
+    UPSPSetReq               set_req;
+    UPSPSetNAckBody          set_nack_body;
+    UPSPRemoveSubscReq       remove_subsc_req;
+    UPSPRemoveSubscAck       remove_subsc_ack;
+    UPSPRemoveSubscNAckBody  remove_subsc_nack_body;
+    UPSPLogoutReq            logout_req;
+    UPSPLogoutNAckBody       logout_nack_body;
+
+    int msg_type;
+
+    // Login ...
+
+    if(upsp_log)
+      cerr &lt;&lt; "Sending version ..." &lt;&lt; endl;
+
+    version[4] = wf_version;
+
+    if(upsp_log)
+    {
+      if(upsp_trace)
+        cerr &lt;&lt; version &lt;&lt; endl;
+      cerr &lt;&lt; "  &lt;version&gt; = &lt;"
+           &lt;&lt; ((Int4Field&amp;) version[4]).value()
+           &lt;&lt; "&gt;" &lt;&lt; endl;
+    }
+
+    wildfire &lt;&lt; version;
+
+    login_req[4] = username;
+    login_req[5] = password;
+
+    if(upsp_log)
+    {
+      cerr &lt;&lt; "Sending login_req ..." &lt;&lt; endl;
+      if(upsp_trace)
+        cerr &lt;&lt; login_req;
+      cerr &lt;&lt; "  &lt;username&gt; = &lt;" &lt;&lt; username &lt;&lt; "&gt;" &lt;&lt; endl;
+      cerr &lt;&lt; "  &lt;password&gt; = &lt;" &lt;&lt; password &lt;&lt; "&gt;" &lt;&lt; endl;
+    }
+
+    wildfire &lt;&lt; login_req;
+
+    if(upsp_log)
+      cerr &lt;&lt; "Reading ..." &lt;&lt; endl;
+
+    wildfire &gt;&gt; header;
+
+    if(upsp_log)
+    {
+      if(upsp_trace)
+        cerr &lt;&lt; header &lt;&lt; endl;
+    }
+
+    msg_type = (Int2Field&amp;) header[1];
+
+    switch(msg_type)
+    {
+      case UPSP_LOGIN_ACK:
+      {
+        if(upsp_log)
+          cerr &lt;&lt; "Received login_ack ..." &lt;&lt; endl;
+
+        break;
+      }
+      case UPSP_LOGIN_NACK:
+      {
+        if(upsp_log)
+        {
+          cerr &lt;&lt; "Received login_nack ..." &lt;&lt; endl;
+          cerr &lt;&lt; "Reading login_nack body ..." &lt;&lt; endl;
+        }
+
+        wildfire &gt;&gt; login_nack_body;
+
+        if(upsp_log)
+        {
+          if(upsp_trace)
+            cerr &lt;&lt; login_nack_body &lt;&lt; endl;
+          cerr &lt;&lt; "  &lt;error_code&gt; = &lt;"
+               &lt;&lt; ((Int4Field&amp;) login_nack_body[0]).value()
+               &lt;&lt; "&gt;" &lt;&lt; endl;
+          cerr &lt;&lt; "  &lt;error_msg&gt; = &lt;"
+               &lt;&lt; ((StringField&amp;) login_nack_body[1]).value()
+               &lt;&lt; "&gt;" &lt;&lt; endl;
+        }
+
+        break;
+      }
+      case UPSP_UNIVERSAL_NACK:
+      {
+        if(upsp_log)
+        {
+          cerr &lt;&lt; "Received universal_nack ..." &lt;&lt; endl;
+          cerr &lt;&lt; "Reading universal_nack body ..." &lt;&lt; endl;
+        }
+
+        wildfire &gt;&gt; universal_nack_body;
+
+        if(upsp_log)
+        {
+          if(upsp_trace)
+            cerr &lt;&lt; universal_nack_body &lt;&lt; endl;
+          cerr &lt;&lt; "  &lt;error_code&gt; = &lt;"
+               &lt;&lt; ((Int4Field&amp;) universal_nack_body[0]).value()
+               &lt;&lt; "&gt;" &lt;&lt; endl;
+          cerr &lt;&lt; "  &lt;error_msg&gt; = &lt;"
+               &lt;&lt; ((StringField&amp;) universal_nack_body[1]).value()
+               &lt;&lt; "&gt;" &lt;&lt; endl;
+        }
+
+        break;
+      }
+      default:
+        if(upsp_log)
+          cerr &lt;&lt; "Unknown message type ..." &lt;&lt; endl;
+        break;
+    }
+
+    if(msg_type != UPSP_LOGIN_ACK)
+    {
+      if(upsp_log)
+        cerr &lt;&lt; "Closing connection ... " &lt;&lt; endl;
+      wildfire.close();
+
+      return WF_LOGIN_ERROR;
+    }
+
+    // Command execute ...
+
+    switch(command)
+    {
+      // --------------------------
+      case WF_TEST:
+      {
+        if(upsp_log)
+        {
+          cerr &lt;&lt; "Sending loop_req ..." &lt;&lt; endl;
+          if(upsp_trace)
+            cerr &lt;&lt; loop_req;
+        }
+
+        wildfire &lt;&lt; loop_req;
+
+        if(upsp_log)
+          cerr &lt;&lt; "Reading ..." &lt;&lt; endl;
+
+        wildfire &gt;&gt; header;
+
+        msg_type = (Int2Field&amp;) header[1];
+
+        if(upsp_trace)
+          cerr &lt;&lt; header &lt;&lt; endl;
+
+        switch(msg_type)
+        {
+          case UPSP_LOOP_ACK:
+          {
+            if(upsp_log)
+            {
+              cerr &lt;&lt; "Received loop_ack ..." &lt;&lt; endl;
+              cerr &lt;&lt; "Reading loop_ack body ..." &lt;&lt; endl;
+            }
+
+            wildfire &gt;&gt; loop_ack_body;
+
+            if(upsp_log)
+            {
+              if(upsp_trace)
+                cerr &lt;&lt; loop_ack_body &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;count&gt; = &lt;"
+                   &lt;&lt; ((Int4Field&amp;) loop_ack_body[0]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+            }
+
+            break;
+          }
+          case UPSP_LOOP_NACK:
+          {
+            if(upsp_log)
+            {
+              cerr &lt;&lt; "Received loop_nack ..." &lt;&lt; endl;
+              cerr &lt;&lt; "Reading loop_nack body ..." &lt;&lt; endl;
+            }
+
+            wildfire &gt;&gt; loop_nack_body;
+
+            if(upsp_log)
+            {
+              if(upsp_trace)
+                cerr &lt;&lt; loop_nack_body &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;error_code&gt; = &lt;"
+                   &lt;&lt; ((Int4Field&amp;) loop_nack_body[0]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;error_msg&gt; = &lt;"
+                   &lt;&lt; ((StringField&amp;) loop_nack_body[1]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+            }
+
+            break;
+          }
+          case UPSP_UNIVERSAL_NACK:
+          {
+            if(upsp_log)
+            {
+              cerr &lt;&lt; "Received universal_nack ..." &lt;&lt; endl;
+              cerr &lt;&lt; "Reading universal_nack body ..." &lt;&lt; endl;
+            }
+
+            wildfire &gt;&gt; universal_nack_body;
+
+            if(upsp_log)
+            {
+              if(upsp_trace)
+                cerr &lt;&lt; universal_nack_body &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;error_code&gt; = &lt;"
+                   &lt;&lt; ((Int4Field&amp;) universal_nack_body[0]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;error_msg&gt; = &lt;"
+                   &lt;&lt; ((StringField&amp;) universal_nack_body[1]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+            }
+
+            break;
+          }
+          default:
+            if(upsp_log)
+              cerr &lt;&lt; "Unknown message type ..." &lt;&lt; endl;
+            break;
+        }
+
+        if(msg_type != UPSP_LOOP_ACK)
+        {
+          if(upsp_log)
+            cerr &lt;&lt; "Closing connection ... " &lt;&lt; endl;
+
+          wildfire.close();
+
+          return WF_COMMAND_ERROR;
+        }
+
+        break;
+      }
+      // --------------------------
+      // --------------------------
+      case WF_QUERY:
+      {
+        get_all_req[4] = msisdn;
+
+        if(upsp_log)
+        {
+          cerr &lt;&lt; "Sending get_all_req ..." &lt;&lt; endl;
+          if(upsp_trace)
+            cerr &lt;&lt; get_all_req;
+          cerr &lt;&lt; "  &lt;phone_number&gt; = &lt;" &lt;&lt; msisdn &lt;&lt; "&gt;" &lt;&lt; endl;
+        }
+
+        wildfire &lt;&lt; get_all_req;
+
+        if(upsp_log)
+          cerr &lt;&lt; "Reading ..." &lt;&lt; endl;
+
+        wildfire &gt;&gt; header;
+
+        msg_type = (Int2Field&amp;) header[1];
+
+        if(upsp_log)
+        {
+          if(upsp_trace)
+            cerr &lt;&lt; header &lt;&lt; endl;
+        }
+
+        switch(msg_type)
+        {
+          case UPSP_GET_ALL_ACK:
+          {
+            if(upsp_log)
+            {
+              cerr &lt;&lt; "Received get_all_ack ..." &lt;&lt; endl;
+              cerr &lt;&lt; "Reading get_all_ack body ..." &lt;&lt; endl;
+            }
+
+            wildfire &gt;&gt; get_all_ack_body;
+
+            cout &lt;&lt; ((StringField&amp;) get_all_ack_body[1]).value()
+                 &lt;&lt; ","
+                 &lt;&lt; ((StringField&amp;) get_all_ack_body[2]).value()
+                 &lt;&lt; endl;
+
+            if(upsp_log)
+            {
+              if(upsp_trace)
+                cerr &lt;&lt; get_all_ack_body &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;first_name&gt; = &lt;"
+                   &lt;&lt; ((StringField&amp;) get_all_ack_body[1]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;last_name&gt; = &lt;"
+                   &lt;&lt; ((StringField&amp;) get_all_ack_body[2]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;phone_number&gt; = &lt;"
+                   &lt;&lt; ((StringField&amp;) get_all_ack_body[5]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;fax_number&gt; = &lt;"
+                   &lt;&lt; ((StringField&amp;) get_all_ack_body[7]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;disabled&gt; = &lt;"
+                   &lt;&lt; ((BoolField&amp;) get_all_ack_body[9]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;host_name&gt; = &lt;"
+                   &lt;&lt; ((StringField&amp;) get_all_ack_body[10]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;intl_calls&gt; = &lt;"
+                   &lt;&lt; ((BoolField&amp;) get_all_ack_body[13]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;num_services&gt; = &lt;"
+                   &lt;&lt; ((Int4Field&amp;) get_all_ack_body[22]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+            }
+
+            break;
+          }
+          case UPSP_GET_ALL_NACK:
+          {
+            if(upsp_log)
+            {
+              cerr &lt;&lt; "Received get_all_nack ..." &lt;&lt; endl;
+              cerr &lt;&lt; "Reading get_all_nack body ..." &lt;&lt; endl;
+            }
+
+            wildfire &gt;&gt; get_all_nack_body;
+
+            if(upsp_log)
+            {
+              if(upsp_trace)
+                cerr &lt;&lt; get_all_nack_body &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;error_code&gt; = &lt;"
+                   &lt;&lt; ((Int4Field&amp;) get_all_nack_body[0]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;error_msg&gt; = &lt;"
+                   &lt;&lt; ((StringField&amp;) get_all_nack_body[1]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+            }
+
+            break;
+          }
+          case UPSP_UNIVERSAL_NACK:
+          {
+            if(upsp_log)
+            {
+              cerr &lt;&lt; "Received universal_nack ..." &lt;&lt; endl;
+              cerr &lt;&lt; "Reading universal_nack body ..." &lt;&lt; endl;
+            }
+
+            wildfire &gt;&gt; universal_nack_body;
+
+            if(upsp_log)
+            {
+              if(upsp_trace)
+                cerr &lt;&lt; universal_nack_body &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;error_code&gt; = &lt;"
+                   &lt;&lt; ((Int4Field&amp;) universal_nack_body[0]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;error_msg&gt; = &lt;"
+                   &lt;&lt; ((StringField&amp;) universal_nack_body[1]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+            }
+
+            break;
+          }
+          default:
+            if(upsp_log)
+              cerr &lt;&lt; "Unknown message type ..." &lt;&lt; endl;
+            break;
+        }
+
+        if(msg_type != UPSP_GET_ALL_ACK)
+        {
+          if(upsp_log)
+            cerr &lt;&lt; "Closing connection ... " &lt;&lt; endl;
+
+          wildfire.close();
+
+          return WF_COMMAND_ERROR;
+        }
+
+        break;
+      }
+      // --------------------------
+      // --------------------------
+      case WF_CREATE:
+      {
+        create_req[5] = firstname;
+        create_req[6] = lastname;
+        create_req[9] = msisdn;
+        create_req[14] = "false";
+
+        if(!hostname.empty())
+          create_req[15] = hostname;
+        else if(!imsi.empty())
+        {
+          string hlr_id = imsi.substr(5,2);
+
+          // 2229811... =&gt; 11
+          // 2229821... =&gt; 21
+          // ...
+
+          if((hlr_id == "11") || (hlr_id == "12"))  // VRU1
+            create_req[15] = WF_VRU1;
+          else if((hlr_id == "21") || (hlr_id == "22"))  // VRU2
+            create_req[15] = WF_VRU2;
+          else if((hlr_id == "31") || (hlr_id == "32"))  // VRU3
+            create_req[15] = WF_VRU3;
+          else
+          {
+            if(upsp_log)
+            {
+              cerr &lt;&lt; "Undefined hlr for imsi &lt;" &lt;&lt; imsi &lt;&lt; "&gt;" &lt;&lt; endl;
+              cerr &lt;&lt; "Closing connection ... " &lt;&lt; endl;
+            }
+
+            wildfire.close();
+
+            return WF_INTERNAL_ERROR;
+          }
+        }
+        else
+        {
+          if(upsp_log)
+          {
+            cerr &lt;&lt; "Undefined hostname" &lt;&lt; endl;
+            cerr &lt;&lt; "Closing connection ... " &lt;&lt; endl;
+          }
+
+          wildfire.close();
+
+          return WF_INTERNAL_ERROR;
+        }
+
+        create_req[18] = "true";
+        create_req[25] = "Basic";
+
+        if(upsp_log)
+        {
+          cerr &lt;&lt; "Sending create_req ..." &lt;&lt; endl;
+          if(upsp_trace)
+            cerr &lt;&lt; create_req;
+        }
+
+        wildfire &lt;&lt; create_req;
+
+        if(upsp_log)
+          cerr &lt;&lt; "Reading ..." &lt;&lt; endl;
+
+        wildfire &gt;&gt; header;
+
+        msg_type = (Int2Field&amp;) header[1];
+
+        if(upsp_trace)
+          cerr &lt;&lt; header &lt;&lt; endl;
+
+        switch(msg_type)
+        {
+          case UPSP_CREATE_ACK:
+          {
+            if(upsp_log)
+            {
+              cerr &lt;&lt; "Received create_ack ..." &lt;&lt; endl;
+              cerr &lt;&lt; "Reading create_ack body ..." &lt;&lt; endl;
+            }
+
+            wildfire &gt;&gt; create_ack_body;
+
+            if(upsp_log)
+            {
+              if(upsp_trace)
+                cerr &lt;&lt; create_ack_body &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;forward_on_busy&gt; = &lt;"
+                   &lt;&lt; ((StringField&amp;) create_ack_body[0]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;host_name&gt; = &lt;"
+                   &lt;&lt; ((StringField&amp;) create_ack_body[1]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;curreny_capacity&gt; = &lt;"
+                   &lt;&lt; ((Int4Field&amp;) create_ack_body[2]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+            }
+
+            break;
+          }
+          case UPSP_CREATE_NACK:
+          {
+            if(upsp_log)
+            {
+              cerr &lt;&lt; "Received create_nack ..." &lt;&lt; endl;
+              cerr &lt;&lt; "Reading create_nack body ..." &lt;&lt; endl;
+            }
+
+            wildfire &gt;&gt; create_nack_body;
+
+            if(upsp_log)
+            {
+              if(upsp_trace)
+                cerr &lt;&lt; create_nack_body &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;error_code&gt; = &lt;"
+                   &lt;&lt; ((Int4Field&amp;) create_nack_body[0]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;error_msg&gt; = &lt;"
+                   &lt;&lt; ((StringField&amp;) create_nack_body[1]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+            }
+
+            break;
+          }
+          case UPSP_UNIVERSAL_NACK:
+          {
+            if(upsp_log)
+            {
+              cerr &lt;&lt; "Received universal_nack ..." &lt;&lt; endl;
+              cerr &lt;&lt; "Reading universal_nack body ..." &lt;&lt; endl;
+            }
+
+            wildfire &gt;&gt; universal_nack_body;
+
+            if(upsp_log)
+            {
+              if(upsp_trace)
+                cerr &lt;&lt; universal_nack_body &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;error_code&gt; = &lt;"
+                   &lt;&lt; ((Int4Field&amp;) universal_nack_body[0]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;error_msg&gt; = &lt;"
+                   &lt;&lt; ((StringField&amp;) universal_nack_body[1]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+            }
+
+            break;
+          }
+          default:
+            if(upsp_log)
+              cerr &lt;&lt; "Unknown message type ..." &lt;&lt; endl;
+            break;
+        }
+
+        if(msg_type != UPSP_CREATE_ACK)
+        {
+          if(upsp_log)
+            cerr &lt;&lt; "Closing connection ... " &lt;&lt; endl;
+
+          wildfire.close();
+
+          return WF_COMMAND_ERROR;
+        }
+
+        break;
+      }
+      // --------------------------
+      // --------------------------
+      case WF_FIND:
+      {
+        if(upsp_log)
+        {
+          cerr &lt;&lt; "Sending find_req ..." &lt;&lt; endl;
+          if(upsp_trace)
+            cerr &lt;&lt; find_req;
+        }
+
+        wildfire &lt;&lt; find_req;
+
+        if(upsp_log)
+        {
+          cerr &lt;&lt; "  &lt;first_name&gt; = &lt;" &lt;&lt; firstname &lt;&lt; "&gt;" &lt;&lt; endl;
+          cerr &lt;&lt; "  &lt;last_name&gt; = &lt;" &lt;&lt; lastname &lt;&lt; "&gt;" &lt;&lt; endl;
+
+          cerr &lt;&lt; "Reading ..." &lt;&lt; endl;
+        }
+
+        wildfire &gt;&gt; header;
+
+        msg_type = (Int2Field&amp;) header[1];
+
+        if(upsp_log)
+        {
+          if(upsp_trace)
+            cerr &lt;&lt; header &lt;&lt; endl;
+        }
+
+        switch(msg_type)
+        {
+          case UPSP_FIND_ACK:
+          {
+            if(upsp_log)
+            {
+              cerr &lt;&lt; "Received find_ack ..." &lt;&lt; endl;
+              cerr &lt;&lt; "Reading find_ack body ..." &lt;&lt; endl;
+            }
+
+            wildfire &gt;&gt; find_ack_body;
+
+            if(upsp_log)
+            {
+              if(upsp_trace)
+                cerr &lt;&lt; find_ack_body &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;num_phone_number&gt; = &lt;"
+                   &lt;&lt; ((Int4Field&amp;) find_ack_body[0]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;phone_number&gt; = &lt;"
+                   &lt;&lt; ((StringField&amp;) find_ack_body[1]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+            }
+
+            break;
+          }
+          case UPSP_FIND_NACK:
+          {
+            if(upsp_log)
+            {
+              cerr &lt;&lt; "Received find_nack ..." &lt;&lt; endl;
+              cerr &lt;&lt; "Reading find_nack body ..." &lt;&lt; endl;
+            }
+
+            wildfire &gt;&gt; find_nack_body;
+
+            if(upsp_log)
+            {
+              if(upsp_trace)
+                cerr &lt;&lt; find_nack_body &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;error_code&gt; = &lt;"
+                   &lt;&lt; ((Int4Field&amp;) find_nack_body[0]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;error_msg&gt; = &lt;"
+                   &lt;&lt; ((StringField&amp;) find_nack_body[1]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+            }
+
+            break;
+          }
+          case UPSP_UNIVERSAL_NACK:
+          {
+            if(upsp_log)
+            {
+              cerr &lt;&lt; "Received universal_nack ..." &lt;&lt; endl;
+              cerr &lt;&lt; "Reading universal_nack body ..." &lt;&lt; endl;
+            }
+
+            wildfire &gt;&gt; universal_nack_body;
+
+            if(upsp_log)
+            {
+              if(upsp_trace)
+                cerr &lt;&lt; universal_nack_body &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;error_code&gt; = &lt;"
+                   &lt;&lt; ((Int4Field&amp;) universal_nack_body[0]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;error_msg&gt; = &lt;"
+                   &lt;&lt; ((StringField&amp;) universal_nack_body[1]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+            }
+
+            break;
+          }
+          default:
+            if(upsp_log)
+              cerr &lt;&lt; "Unknown message type ..." &lt;&lt; endl;
+            break;
+        }
+
+        if(msg_type != UPSP_FIND_ACK)
+        {
+          if(upsp_log)
+            cerr &lt;&lt; "Closing connection ... " &lt;&lt; endl;
+
+          wildfire.close();
+
+          return WF_COMMAND_ERROR;
+        }
+
+        break;
+      }
+      // --------------------------
+      // --------------------------
+      case WF_SET:
+      {
+        if(fieldindex &lt;2 || fieldindex &gt;31)
+        {
+          if(upsp_log)
+          {
+            cerr &lt;&lt; "Invalid field index" &lt;&lt; endl;
+            cerr &lt;&lt; "Closing connection ... " &lt;&lt; endl;
+          }
+
+          wildfire.close();
+
+          return WF_INTERNAL_ERROR;
+        }
+
+        set_req[4] = msisdn;
+        set_req[fieldindex] = fieldvalue;
+
+        if(upsp_log)
+        {
+          cerr &lt;&lt; "Sending set_req ..." &lt;&lt; endl;
+          if(upsp_trace)
+            cerr &lt;&lt; set_req;
+        }
+
+        wildfire &lt;&lt; set_req;
+
+        if(upsp_log)
+        {
+          cerr &lt;&lt; "  &lt;" &lt;&lt; (set_req[fieldindex].name())
+               &lt;&lt; "&gt; = &lt;" &lt;&lt; fieldvalue &lt;&lt; "&gt;" &lt;&lt; endl;
+
+          cerr &lt;&lt; "Reading ..." &lt;&lt; endl;
+        }
+
+        wildfire &gt;&gt; header;
+
+        msg_type = (Int2Field&amp;) header[1];
+
+        if(upsp_trace)
+          cerr &lt;&lt; header &lt;&lt; endl;
+
+        switch(msg_type)
+        {
+          case UPSP_SET_ACK:
+          {
+            if(upsp_log)
+            {
+              cerr &lt;&lt; "Received set_ack ..." &lt;&lt; endl;
+              if(upsp_trace)
+                cerr &lt;&lt; header &lt;&lt; endl;
+            }
+
+            break;
+          }
+          case UPSP_SET_NACK:
+          {
+            if(upsp_log)
+            {
+              cerr &lt;&lt; "Received set_nack ..." &lt;&lt; endl;
+              cerr &lt;&lt; "Reading set_nack body ..." &lt;&lt; endl;
+            }
+
+            wildfire &gt;&gt; set_nack_body;
+
+            if(upsp_log)
+            {
+              if(upsp_trace)
+                cerr &lt;&lt; set_nack_body &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;error_code&gt; = &lt;"
+                   &lt;&lt; ((Int4Field&amp;) find_nack_body[0]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;error_msg&gt; = &lt;"
+                   &lt;&lt; ((StringField&amp;) set_nack_body[1]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+            }
+
+            break;
+          }
+          case UPSP_UNIVERSAL_NACK:
+          {
+            if(upsp_log)
+            {
+              cerr &lt;&lt; "Received universal_nack ..." &lt;&lt; endl;
+              cerr &lt;&lt; "Reading universal_nack body ..." &lt;&lt; endl;
+            }
+
+            wildfire &gt;&gt; universal_nack_body;
+
+            if(upsp_log)
+            {
+              if(upsp_trace)
+                cerr &lt;&lt; universal_nack_body &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;error_code&gt; = &lt;"
+                   &lt;&lt; ((Int4Field&amp;) universal_nack_body[0]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;error_msg&gt; = &lt;"
+                   &lt;&lt; ((StringField&amp;) universal_nack_body[1]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+            }
+
+            break;
+          }
+          default:
+            if(upsp_log)
+              cerr &lt;&lt; "Unknown message type ..." &lt;&lt; endl;
+            break;
+        }
+
+        if(msg_type != UPSP_SET_ACK)
+        {
+          if(upsp_log)
+            cerr &lt;&lt; "Closing connection ... " &lt;&lt; endl;
+
+          wildfire.close();
+
+          return WF_COMMAND_ERROR;
+        }
+
+        break;
+      }
+      // --------------------------
+      // --------------------------
+      case WF_REMOVE:
+      {
+        remove_subsc_req[4] = msisdn;
+        remove_subsc_req[5] = service;
+
+        if(upsp_log)
+        {
+          cerr &lt;&lt; "Sending remove_subsc_req ..." &lt;&lt; endl;
+          if(upsp_trace)
+            cerr &lt;&lt; remove_subsc_req;
+        }
+
+        wildfire &lt;&lt; remove_subsc_req;
+
+        if(upsp_log)
+          cerr &lt;&lt; "Reading ..." &lt;&lt; endl;
+
+        wildfire &gt;&gt; header;
+
+        msg_type = (Int2Field&amp;) header[1];
+
+        if(upsp_trace)
+          cerr &lt;&lt; header &lt;&lt; endl;
+
+        switch(msg_type)
+        {
+          case UPSP_REMOVE_SUBSC_ACK:
+          {
+            if(upsp_log)
+            {
+              cerr &lt;&lt; "Received remove_subsc_ack ..." &lt;&lt; endl;
+              cerr &lt;&lt; "Reading remove_subsc_ack ..." &lt;&lt; endl;
+            }
+
+            wildfire &gt;&gt; remove_subsc_ack;
+
+            if(upsp_log)
+            {
+              if(upsp_trace)
+                cerr &lt;&lt; remove_subsc_ack &lt;&lt; endl;
+            }
+
+            break;
+          }
+          case UPSP_REMOVE_SUBSC_NACK:
+          {
+            if(upsp_log)
+            {
+              cerr &lt;&lt; "Received remove_subsc_nack ..." &lt;&lt; endl;
+              cerr &lt;&lt; "Reading remove_subsc_nack body ..." &lt;&lt; endl;
+            }
+
+            wildfire &gt;&gt; remove_subsc_nack_body;
+
+            if(upsp_log)
+            {
+              if(upsp_trace)
+                cerr &lt;&lt; remove_subsc_nack_body &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;error_code&gt; = &lt;"
+                   &lt;&lt; ((Int4Field&amp;) remove_subsc_nack_body[0]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;error_msg&gt; = &lt;"
+                   &lt;&lt; ((StringField&amp;) remove_subsc_nack_body[1]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+            }
+
+            break;
+          }
+          case UPSP_UNIVERSAL_NACK:
+          {
+            if(upsp_log)
+            {
+              cerr &lt;&lt; "Received universal_nack ..." &lt;&lt; endl;
+              cerr &lt;&lt; "Reading universal_nack body ..." &lt;&lt; endl;
+            }
+
+            wildfire &gt;&gt; universal_nack_body;
+
+            if(upsp_log)
+            {
+              if(upsp_trace)
+                cerr &lt;&lt; universal_nack_body &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;error_code&gt; = &lt;"
+                   &lt;&lt; ((Int4Field&amp;) universal_nack_body[0]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+              cerr &lt;&lt; "  &lt;error_msg&gt; = &lt;"
+                   &lt;&lt; ((StringField&amp;) universal_nack_body[1]).value()
+                   &lt;&lt; "&gt;" &lt;&lt; endl;
+            }
+
+            break;
+          }
+          default:
+            if(upsp_log)
+              cerr &lt;&lt; "Unknown message type ..." &lt;&lt; endl;
+            break;
+        }
+
+        if(msg_type != UPSP_REMOVE_SUBSC_ACK)
+        {
+          if(upsp_log)
+            cerr &lt;&lt; "Closing connection ... " &lt;&lt; endl;
+
+          wildfire.close();
+
+          return WF_COMMAND_ERROR;
+        }
+
+        break;
+      }
+      // --------------------------
+    }
+
+    // Logout ...
+
+    if(upsp_log)
+    {
+      cerr &lt;&lt; "Sending logout_req ..." &lt;&lt; endl;
+      if(upsp_trace)
+        cerr &lt;&lt; logout_req;
+    }
+
+    wildfire &lt;&lt; logout_req;
+
+    if(upsp_log)
+      cerr &lt;&lt; "Reading ..." &lt;&lt; endl;
+
+    wildfire &gt;&gt; header;
+
+    msg_type = (Int2Field&amp;) header[1];
+
+    if(upsp_log)
+    {
+      if(upsp_trace)
+        cerr &lt;&lt; header &lt;&lt; endl;
+    }
+
+    switch(msg_type)
+    {
+      case UPSP_LOGOUT_ACK:
+      {
+        if(upsp_log)
+          cerr &lt;&lt; "Received logout_ack ..." &lt;&lt; endl;
+
+        break;
+      }
+      case UPSP_LOGOUT_NACK:
+      {
+        if(upsp_log)
+        {
+          cerr &lt;&lt; "Received logout_nack ..." &lt;&lt; endl;
+          cerr &lt;&lt; "Reading logout_nack body ..." &lt;&lt; endl;
+        }
+
+        wildfire &gt;&gt; logout_nack_body;
+
+        if(upsp_log)
+        {
+          if(upsp_trace)
+            cerr &lt;&lt; logout_nack_body &lt;&lt; endl;
+          cerr &lt;&lt; "  &lt;error_code&gt; = &lt;"
+               &lt;&lt; ((Int4Field&amp;) logout_nack_body[0]).value()
+               &lt;&lt; "&gt;" &lt;&lt; endl;
+          cerr &lt;&lt; "  &lt;error_msg&gt; = &lt;"
+               &lt;&lt; ((StringField&amp;) logout_nack_body[1]).value()
+               &lt;&lt; "&gt;" &lt;&lt; endl;
+        }
+
+        break;
+      }
+      case UPSP_UNIVERSAL_NACK:
+      {
+        if(upsp_log)
+        {
+          cerr &lt;&lt; "Received universal_nack ..." &lt;&lt; endl;
+          cerr &lt;&lt; "Reading universal_nack body ..." &lt;&lt; endl;
+        }
+
+        wildfire &gt;&gt; universal_nack_body;
+
+        if(upsp_log)
+        {
+          if(upsp_trace)
+            cerr &lt;&lt; universal_nack_body &lt;&lt; endl;
+          cerr &lt;&lt; "  &lt;error_code&gt; = &lt;"
+               &lt;&lt; ((Int4Field&amp;) universal_nack_body[0]).value()
+               &lt;&lt; "&gt;" &lt;&lt; endl;
+          cerr &lt;&lt; "  &lt;error_msg&gt; = &lt;"
+               &lt;&lt; ((StringField&amp;) universal_nack_body[1]).value()
+               &lt;&lt; "&gt;" &lt;&lt; endl;
+        }
+
+        break;
+      }
+      default:
+        if(upsp_log)
+          cerr &lt;&lt; "Unknown message type ..." &lt;&lt; endl;
+        break;
+    }
+
+    if(upsp_log)
+      cerr &lt;&lt; "Closing connection ... " &lt;&lt; endl;
+
+    wildfire.close();
+
+    if(upsp_log)
+      cerr &lt;&lt; "Done" &lt;&lt; endl;
+  }
+  catch(SocketException e)
+  {
+    cerr &lt;&lt; e &lt;&lt; endl;
+
+    return WF_CONNECTION_ERROR;
+  }
+  catch(Exception e)
+  {
+    cerr &lt;&lt; e &lt;&lt; endl;
+
+    return WF_INTERNAL_ERROR;
+  }
+  catch(exception e)
+  {
+    cerr &lt;&lt; "System exception" &lt;&lt; endl;
+
+    return WF_INTERNAL_ERROR;
+  }
+  catch(...)
+  {
+    cerr &lt;&lt; "Unknown exception" &lt;&lt; endl;
+
+    return WF_INTERNAL_ERROR;
+  }
+
+  return 0;
+}
+
+/* end of file */</tt></pre>
+</div></div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 0.400<br />
+Last updated 2014-06-28 16:23:46 CEST
+</div>
+<div id="footer-badges">
+<img style="border:none; width:88px; height:31px;"
+     src="../images/gplv3-127x51.png"
+     alt="GPL Version 3" />
+<!-- Histats.com  START  -->
+<a href="http://www.histats.com" target="_blank" title="simple hit counter" >
+<script  type="text/javascript" language="javascript">
+var s_sid = 675659;var st_dominio = 4;
+var cimg = 0;var cwi =112;var che =48;
+</script></a><script  type="text/javascript" language="javascript" src="http://s10.histats.com/js9.js"></script>
+<noscript><a href="http://www.histats.com" target="_blank">
+<img  src="http://s4.histats.com/stats/0.gif?675659&1" alt="simple hit counter" border="0"></a>
+</noscript>
+<!-- Histats.com  END  -->
+</div>
+</div>
+</div>
+</td>
+</tr>
+</table>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-11334618-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+if the battery is charged and the cables are ok
+then the power reaches the plugs
+.
+(BatteryCharged and CablesOK) -> PowerToPlugs

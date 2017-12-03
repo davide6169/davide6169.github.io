@@ -1,0 +1,14 @@
+Example 
+
+Party Organization 
+
+David, John, Mary and Paul wants come to party but they have some 'constraints' for coming to party: 
+
+1. Paul and Mary come to party if John does not come 
+2. John comes to party if and only if there is Paul or there is not Mary 
+3. Mary comes to party if David comes too
+.
+Constraint_1
+Constraint_2
+Constraint_3
+#Constraint_4

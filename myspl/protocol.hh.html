@@ -1,0 +1,834 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.5.2" />
+<meta name="description" content="an open source UNIX framework for shell script based web service provider" />
+<meta name="keywords" content="mysvc, shell script, web service, provider, service, soa, template, engine, myste, mysde, mysvcd" />
+<link rel="stylesheet" href="../xhtml11.css" type="text/css" />
+<link rel="stylesheet" href="../xhtml11-quirks.css" type="text/css" />
+<link rel="stylesheet" href="../layout1.css" type="text/css" />
+<title>MySVC</title>
+</head>
+<body>
+<div id="layout-banner">
+  <div id="layout-title">MySVC</div>
+  <div id="layout-description">an open source UNIX framework for shell script based web services provider</div>
+</div>
+<table>
+<tr valign="top">
+<td id="layout-menu">
+  <div>&#187;<a href="../index.html">Home</a></div>
+  <div>&#187;<a href="../tools.html">Tools</a></div>
+  <div>&#187;<a href="../manpage.html">Man&nbsp;Page</a></div>
+  <div>&#187;<a href="../userguide.html">User&nbsp;Guide</a></div>
+  <div>&#187;<a href="../changelog.html">ChangeLog</a></div>
+  <div>&#187;<a href="../install.html">Installation</a></div>
+  <div>&#187;<a href="../sourcecode.html">Source Code</a></div>
+  <div>&#187;<a href="../downloads.html">Downloads</a></div>
+  <div>&#187;<a href="../faq.html">FAQ</a></div>
+  <div>&#187;<a href="../support.html">Support</a></div>
+  <div>&#187;<a href="../license.html">License</a></div>
+  <hr/>
+  <div>&#187;<a href="../myapps/index.html">My Apps</a></div>
+  <div>
+  <hr/>
+  <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+  <input type="hidden" name="cmd" value="_s-xclick">
+  <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+  ">
+  <input type="image" src="https://www.paypal.com/en_US/IT/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="">
+  <img alt="" border="0" src="https://www.paypal.com/it_IT/i/scr/pixel.gif" width="1" height="1">
+  </form>
+  </div>
+</td>
+<td>
+<div id="layout-content">
+<div id="header">
+<h1>MySPL Source Code</h1>
+</div>
+<h2 id="_protocol_hh">protocol.hh</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre><tt>// $Id$
+
+//  myspl - My Service Protocol Library - Version 1.0 (www.mysvc.it)
+//  Copyright (C) 2009 Davide Cucciniello &lt;davide6169@gmail.com&gt;
+//
+//  This program is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+
+/* **********************************************************************
+ *
+ *  ***   **        *** **  **  ****
+ *   **  **        *  *  *  ** **  *
+ *   *** **  **  * ***   *  *  *
+ *   * ** *   * **   **   * *  *
+ *   * *  *   * *  *  *   **   **
+ *  ***  ***   **  ***     *    ****
+ *             *
+ *            *
+ *
+ *  My Service
+ *
+ * ***********************************************************************
+ *
+ *  ***   **        *** ****  ***
+ *   **  **        *  *  *  *  *
+ *   *** **  **  * ***   *  *  *
+ *   * ** *   * **   **  ***   *
+ *   * *  *   * *  *  *  *     *  *
+ *  ***  ***   **  ***  ***   *****
+ *             *
+ *            *
+ *
+ *  My Service Protocol Library
+ *
+ *  File: protocol.hh
+ *
+ *  Description:
+ *    C++ library to implement any TCP/IP socket client/server
+ *    for binary or ascii protocols
+ *
+ * ***********************************************************************
+ *
+ *  History:
+ *    1.0               first version
+ *
+ * *********************************************************************** */
+
+#ifndef _PROTOCOL_HH_
+#define _PROTOCOL_HH_
+
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;map&gt;
+#include &lt;cstring&gt;
+#include &lt;cctype&gt;
+#include &lt;exception&gt;
+
+#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;sys/utsname.h&gt;
+#include &lt;netdb.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;signal.h&gt;
+
+using namespace std;
+
+/*
+ *  class Exception
+ */
+
+class Exception
+{
+  public:
+    Exception(string message__ = "",
+              int code__ = 0,
+              string file__ = "",
+              int line__ = 0);
+
+    string&amp; file();
+    int&amp; line();
+
+    string&amp; message();
+    int&amp; code();
+
+    virtual void write(ostream&amp; os);
+
+  private:
+    int code_;
+    string message_;
+    string file_;
+    int line_;
+};
+
+/*
+ *  class SocketException
+ */
+
+class SocketException: public Exception
+{
+  public:
+    enum
+    {
+      gethostbynameError = -1,
+      socketError = -2,
+      setsockoptError = -3,
+      connectError = -4,
+      closeError = -5,
+      bindError = -6,
+      listenError = -7,
+      acceptError = -8
+    };
+
+    SocketException(string message__ = "",
+                    int code__ = 0,
+                    string file__ = "",
+                    int line__ = 0);
+};
+
+ostream&amp; operator&lt;&lt;(ostream&amp; os,Exception&amp; e);
+
+/*
+ *  class Reader
+ */
+
+class Reader
+{
+  public:
+    virtual int read(char* buffer,int n,bool peek = false,bool line = false) = 0;
+};
+
+/*
+ *  class Writer
+ */
+
+class Writer
+{
+  public:
+    virtual int write(char* buffer,int n,bool line = false) = 0;
+};
+
+/*
+ *  class SocketReader:
+ */
+
+class SocketReader: public Reader
+{
+  public:
+    SocketReader(int fd);
+
+    int read(char* buffer,int n,bool peek = false,bool line = false);
+
+  private:
+    int fd;
+};
+
+/*
+ *  class SocketWriter
+ */
+
+class SocketWriter: public Writer
+{
+  public:
+    SocketWriter(int fd);
+
+    int write(char* buffer,int n,bool line = false);
+
+  private:
+    int fd;
+};
+
+/*
+ *  class FileReader
+ */
+
+class FileReader: public Reader
+{
+  public:
+    FileReader(int fd);
+
+    int read(char* buffer,int n,bool peek = false,bool line = false);
+
+  private:
+    int fd;
+};
+
+/*
+ *  class FileWriter
+ */
+
+class FileWriter: public Writer
+{
+  public:
+    FileWriter(int fd);
+
+    int write(char* buffer,int n,bool line = false);
+
+  private:
+    int fd;
+};
+
+/*
+ *  class Field
+ */
+
+class Field
+{
+  public:
+    Field();
+    Field(int size, string name__ = "Field");
+    Field(const Field&amp; f);
+
+    int size();
+
+    char* data();
+
+    void init(int size_);
+
+    operator char*();
+
+    char&amp; operator[](int i);
+
+    Field&amp; operator=(string value);
+
+    Field&amp; operator=(Field&amp; f);
+
+    bool operator==(Field&amp; f);
+    bool operator!=(Field&amp; f);
+
+    virtual bool equal(Field&amp; f);
+
+    virtual Field* clone();
+
+    void empty();
+
+    string name();
+
+    virtual bool isAscii();
+
+    virtual void write(ostream&amp; os);
+
+    virtual void read(Reader&amp; r,bool peek = false,bool line = false);
+    virtual void write(Writer&amp; w,bool line = false);
+
+    Field&amp; operator&lt;&lt;(Reader&amp; r);
+    Field&amp; operator&gt;&gt;(Writer&amp; w);
+
+    virtual void read(Field&amp; f,int from = 0);
+    virtual void write(Field&amp; f,int from = 0);
+
+    virtual void assign(char* buffer,int n);
+
+    virtual ~Field();
+
+  protected:
+    virtual void assign(string value);
+
+    virtual void copy(const Field&amp; f);
+
+    virtual void writeValue(ostream&amp; os);
+  private:
+    string name_;
+
+    int size_;
+    char* data_;
+};
+
+ostream&amp; operator&lt;&lt;(ostream&amp; os,Field&amp; f);
+
+/*
+ *  class Message
+ */
+
+class Message
+{
+  public:
+    Message();
+    Message(int size_,string name__ = "Message");
+    Message(const Message&amp; m);
+
+    int size();
+
+    unsigned long bytes();
+
+    Field** data();
+    Field*&amp; data(int i);
+
+    Field&amp; operator[](int i);
+
+    Message&amp; operator=(Message&amp; m);
+
+    bool operator==(Message&amp; f);
+    bool operator!=(Message&amp; f);
+
+    virtual bool equal(Message&amp; f);
+
+    virtual string name();
+
+    void empty();
+
+    virtual void write(ostream&amp; os);
+
+    virtual void read(Reader&amp; r,bool peek = false,bool line = false);
+    virtual void write(Writer&amp; w,bool line = false);
+
+    Message&amp; operator&lt;&lt;(Reader&amp; r);
+    Message&amp; operator&gt;&gt;(Writer&amp; w);
+
+    virtual Message* clone();
+
+    virtual ~Message();
+
+  protected:
+    void assign(int i,Field* f);
+    void assign(Message* m);
+
+    void copy(const Message&amp; m);
+  private:
+    int size_;
+    Field** data_;
+
+    string name_;
+    int nextfield;
+};
+
+ostream&amp; operator&lt;&lt;(ostream&amp; os,Message&amp; m);
+
+/*
+ * TreeMessage
+ */
+
+class TreeMessage
+{
+  public:
+    TreeMessage();
+    TreeMessage(const TreeMessage&amp; m);
+    TreeMessage(Message* info_);
+    TreeMessage(int size_,string name__ = "TreeMessage");
+
+    void init(Message* info_);
+    void init(int size_);
+
+    bool isEmpty();
+    bool isTree();
+    bool isLeaf();
+
+    Message*&amp; info();
+
+    TreeMessage&amp; operator[](int i);
+    TreeMessage*&amp; operator()(int i);
+    Message&amp; operator()();
+
+    TreeMessage&amp; operator=(TreeMessage&amp; m);
+
+    bool operator==(TreeMessage&amp; f);
+    bool operator!=(TreeMessage&amp; f);
+
+    virtual bool equal(TreeMessage&amp; f);
+
+    TreeMessage** data();
+    TreeMessage*&amp; data(int i);
+
+    virtual string name();
+
+    void empty();
+
+    int size();
+
+    unsigned long bytes();
+
+    virtual void write(ostream&amp; os);
+
+    void read(Reader&amp; r,bool peek = false,bool line = false);
+    void write(Writer&amp; w,bool line = false);
+
+    TreeMessage&amp; operator&lt;&lt;(Reader&amp; r);
+    TreeMessage&amp; operator&gt;&gt;(Writer&amp; w);
+
+    virtual void update();
+    virtual void updateTree();
+
+    virtual TreeMessage* clone();
+
+    virtual ~TreeMessage();
+  protected:
+    void assign(Message* m);
+    void assign(int i,TreeMessage* m);
+
+    virtual bool isReadable(int pos);
+    virtual int update(int size_);
+    virtual TreeMessage* child(int pos);
+  private:
+    int size_;
+    Message* info_;
+    TreeMessage** data_;
+
+    string name_;
+};
+
+ostream&amp; operator&lt;&lt;(ostream&amp; os,TreeMessage&amp; m);
+
+/*
+ * FieldMessage
+ */
+
+class FieldMessage: public Message
+{
+  public:
+    FieldMessage(Field* f,string name = "FieldMessage"):
+      Message(1,name)
+    {
+      assign(0,f);
+    }
+};
+
+//  Basic Fields
+
+/*
+ *  class Int2Field
+ */
+
+class Int2Field: public Field
+{
+  public:
+    Int2Field(string name_ = "Int2Field",
+              int value_ = 0);
+
+    virtual bool isAscii();
+
+    int value();
+
+    Field&amp; operator=(int value);
+
+    operator int();
+
+    void write(ostream&amp; os);
+
+    virtual Field* clone();
+
+  protected:
+    void assign(string value_);
+
+    void writeValue(ostream&amp; os);
+
+  private:
+    void assign(int value_);
+};
+
+/*
+ *  class Int4Field
+ */
+
+class Int4Field: public Field
+{
+  public:
+    Int4Field(string name_ = "Int4Field",
+              int value_ = 0);
+
+    virtual bool isAscii();
+
+    int value();
+
+    Field&amp; operator=(int value);
+
+    operator int();
+
+    void write(ostream&amp; os);
+
+    virtual Field* clone();
+
+  protected:
+    void assign(string value_);
+
+    void writeValue(ostream&amp; os);
+  private:
+    void assign(int value_);
+};
+
+/*
+ *  class BoolField
+ */
+
+class BoolField: public Field
+{
+  public:
+    BoolField(string name_ = "BoolField",
+              bool value_ = false,
+              char truevalue = 'T',
+              char falsevalue = 'F');
+
+    virtual bool isAscii();
+
+    bool value();
+
+    Field&amp; operator=(bool value_);
+
+    operator bool();
+
+    void write(ostream&amp; os);
+
+    virtual Field* clone();
+
+  protected:
+    void assign(string value_);
+
+    void writeValue(ostream&amp; os);
+
+  private:
+    char truevalue;
+    char falsevalue;
+
+    void assign(bool value_);
+};
+
+/*
+ *  class OctetField
+ */
+
+class OctetField: public Field
+{
+  public:
+    OctetField(string name_ = "OctetField",
+               char value_ = '\0');
+
+    virtual bool isAscii();
+
+    char value();
+
+    Field&amp; operator=(char value_);
+
+    operator char();
+
+    void write(ostream&amp; os);
+
+    virtual Field* clone();
+
+  protected:
+    void assign(string value_);
+
+    void writeValue(ostream&amp; os);
+  private:
+    void assign(char value_);
+};
+
+/*
+ *  class StringField
+ */
+
+class StringField: public Field
+{
+  public:
+    StringField(int size_,
+                string name_ = "StringField",
+                string value_ = "");
+
+    StringField(string name_ = "StringField",
+                string value_ = "");
+
+    virtual bool isAscii();
+
+    string value();
+
+    operator string();
+
+    Field&amp; operator=(string value_);
+
+    void write(ostream&amp; os);
+
+    virtual Field* clone();
+
+  protected:
+    void assign(string value_);
+
+    void writeValue(ostream&amp; os);
+  private:
+    bool isVariable;
+};
+
+/*
+ *  class Client
+ */
+
+class Client
+{
+  public:
+    Client(bool binary);
+
+    virtual void connect() = 0;
+    virtual void close() = 0;
+
+    void peek(TreeMessage&amp; m);
+    void peek(Message&amp; m);
+    void peek(Field&amp; f);
+
+    Client&amp; operator&gt;&gt;(TreeMessage&amp; m);
+    Client&amp; operator&gt;&gt;(Message&amp; m);
+    Client&amp; operator&gt;&gt;(Field&amp; f);
+
+    Client&amp; operator&lt;&lt;(TreeMessage&amp; m);
+    Client&amp; operator&lt;&lt;(Message&amp; m);
+    Client&amp; operator&lt;&lt;(Field&amp; f);
+
+    virtual ~Client();
+
+  protected:
+    virtual Reader* getReader() = 0;
+    virtual Writer* getWriter() = 0;
+
+  private:
+    bool binary;
+};
+
+/*
+ *  Server
+ */
+
+class Server
+{
+  public:
+    Server(bool binary);
+
+    virtual Client* accept() = 0;
+    virtual void close() = 0;
+
+    virtual ~Server();
+
+  protected:
+    bool binary;
+};
+
+/*
+ *  class SocketClient
+ */
+
+class SocketClient: public Client
+{
+  public:
+    SocketClient(string ipaddress,int port,bool binary = true);
+    SocketClient(int clientfd,bool binary = true);
+
+    void connect();
+    void close();
+
+  protected:
+    virtual Reader* getReader();
+    virtual Writer* getWriter();
+
+  private:
+    string ipaddress;
+    int port;
+
+    struct sockaddr_in sSockaddrin;
+    int clientfd;
+
+    bool isConnected;
+
+    Reader* reader;
+    Writer* writer;
+
+    int init(string ipaddress,int port,
+             struct sockaddr_in&amp; sSockaddrin);
+};
+
+/*
+ *  class SocketServer
+ */
+
+class SocketServer: public Server
+{
+  public:
+    SocketServer(int port,bool binary = true);
+
+    Client* accept();
+    void close();
+
+  private:
+    int port;
+
+    struct sockaddr_in sSockaddrin;
+    int serverfd;
+
+    int init(int port,struct sockaddr_in&amp; sSockaddrin);
+};
+
+/*
+ *  class FileClient
+ */
+
+class FileClient: public Client
+{
+  public:
+    FileClient(string infilename_ = "",
+               string outfilename_ = "",
+               bool binary = true);
+
+    void connect();
+    void close();
+
+  protected:
+    virtual Reader* getReader();
+    virtual Writer* getWriter();
+
+  private:
+    string infilename;
+    string outfilename;
+
+    int infd;
+    int outfd;
+
+    bool isOpened;
+
+    Reader* reader;
+    Writer* writer;
+};
+
+/*
+ *  Helper functions
+ */
+
+void daemon();
+
+unsigned long getLocalIPAddress();
+
+#endif
+
+/* end of file */</tt></pre>
+</div></div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 0.400<br />
+Last updated 2014-06-28 16:23:42 CEST
+</div>
+<div id="footer-badges">
+<img style="border:none; width:88px; height:31px;"
+     src="../images/gplv3-127x51.png"
+     alt="GPL Version 3" />
+<!-- Histats.com  START  -->
+<a href="http://www.histats.com" target="_blank" title="simple hit counter" >
+<script  type="text/javascript" language="javascript">
+var s_sid = 675659;var st_dominio = 4;
+var cimg = 0;var cwi =112;var che =48;
+</script></a><script  type="text/javascript" language="javascript" src="http://s10.histats.com/js9.js"></script>
+<noscript><a href="http://www.histats.com" target="_blank">
+<img  src="http://s4.histats.com/stats/0.gif?675659&1" alt="simple hit counter" border="0"></a>
+</noscript>
+<!-- Histats.com  END  -->
+</div>
+</div>
+</div>
+</td>
+</tr>
+</table>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-11334618-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>

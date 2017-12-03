@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<logout>
+  <response status="4" reason="invalid session"/>
+</logout>

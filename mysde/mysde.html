@@ -1,0 +1,4210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.5.2" />
+<meta name="description" content="an open source UNIX framework for shell script based web service provider" />
+<meta name="keywords" content="mysvc, shell script, web service, provider, service, soa, template, engine, myste, mysde, mysvcd" />
+<link rel="stylesheet" href="../xhtml11.css" type="text/css" />
+<link rel="stylesheet" href="../xhtml11-quirks.css" type="text/css" />
+<link rel="stylesheet" href="../layout1.css" type="text/css" />
+<title>MySVC</title>
+</head>
+<body>
+<div id="layout-banner">
+  <div id="layout-title">MySVC</div>
+  <div id="layout-description">an open source UNIX framework for shell script based web services provider</div>
+</div>
+<table>
+<tr valign="top">
+<td id="layout-menu">
+  <div>&#187;<a href="../index.html">Home</a></div>
+  <div>&#187;<a href="../tools.html">Tools</a></div>
+  <div>&#187;<a href="../manpage.html">Man&nbsp;Page</a></div>
+  <div>&#187;<a href="../userguide.html">User&nbsp;Guide</a></div>
+  <div>&#187;<a href="../changelog.html">ChangeLog</a></div>
+  <div>&#187;<a href="../install.html">Installation</a></div>
+  <div>&#187;<a href="../sourcecode.html">Source Code</a></div>
+  <div>&#187;<a href="../downloads.html">Downloads</a></div>
+  <div>&#187;<a href="../faq.html">FAQ</a></div>
+  <div>&#187;<a href="../support.html">Support</a></div>
+  <div>&#187;<a href="../license.html">License</a></div>
+  <hr/>
+  <div>&#187;<a href="../myapps/index.html">My Apps</a></div>
+  <div>
+  <hr/>
+  <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+  <input type="hidden" name="cmd" value="_s-xclick">
+  <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----MIIHPwYJKoZIhvcNAQcEoIIHMDCCBywCAQExggEwMIIBLAIBADCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwDQYJKoZIhvcNAQEBBQAEgYAWiqN5fcvDviZYNLmeRPAOeH+059PTyUtOFN8++Bx9+RhWYfjY/XwEwfKVwaEeK0+pLj9TDs/FW9ChZZF3FNPjR1Xlg0E3S37taxsarZ2NM6iBhXjSapQPgVGtrCqibd0Diq48ouQTcXPMxKON1Anv/fDoHjjaFPTRVI+KMQX0JTELMAkGBSsOAwIaBQAwgbwGCSqGSIb3DQEHATAUBggqhkiG9w0DBwQInBnxX7TxZ3mAgZhXvGov9cuq17ycIBz4CjE/MwjHddefpVXoPyyh89d/ieP1b6rehpp1R/aW8QBbnS1Fl/INzPU38Y3NTqX7oMhFYsLN1D6YSPjAeoFqIXp1rrTEIDLZRSSIwo8OXuEsPHqK/P+l7S4awyCyWJxdMkqSDK2hPoKXSUHIGA8jf6Rq4DV0CsJzljLJSW8WJMfdpXvKuff4HiEZPaCCA4cwggODMIIC7KADAgECAgEAMA0GCSqGSIb3DQEBBQUAMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbTAeFw0wNDAyMTMxMDEzMTVaFw0zNTAyMTMxMDEzMTVaMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbTCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAwUdO3fxEzEtcnI7ZKZL412XvZPugoni7i7D7prCe0AtaHTc97CYgm7NsAtJyxNLixmhLV8pyIEaiHXWAh8fPKW+R017+EmXrr9EaquPmsVvTywAAE1PMNOKqo2kl4Gxiz9zZqIajOm1fZGWcGS0f5JQ2kBqNbvbg2/Za+GJ/qwUCAwEAAaOB7jCB6zAdBgNVHQ4EFgQUlp98u8ZvF71ZP1LXChvsENZklGswgbsGA1UdIwSBszCBsIAUlp98u8ZvF71ZP1LXChvsENZklGuhgZSkgZEwgY4xCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDQTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLUGF5UGFsIEluYy4xEzARBgNVBAsUCmxpdmVfY2VydHMxETAPBgNVBAMUCGxpdmVfYXBpMRwwGgYJKoZIhvcNAQkBFg1yZUBwYXlwYWwuY29tggEAMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEFBQADgYEAgV86VpqAWuXvX6Oro4qJ1tYVIT5DgWpE692Ag422H7yRIr/9j/iKG4Thia/Oflx4TdL+IFJBAyPK9v6zZNZtBgPBynXb048hsP16l2vi0k5Q2JKiPDsEfBhGI+HnxLXEaUWAcVfCsQFvd2A1sxRr67ip5y2wwBelUecP3AjJ+YcxggGaMIIBlgIBATCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwCQYFKw4DAhoFAKBdMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA4MTAyNTE1NTQzMlowIwYJKoZIhvcNAQkEMRYEFMsXBheWWoPdxAigpR2+KpSpl3NXMA0GCSqGSIb3DQEBAQUABIGAMwKAzwiLVvhRLUQBUUgK5IJQOq4Ci0W9bVWiiCIF3g/DOWMzoJvlQRyxelM5jg2wChbtvg1sj5AoyXaqCdbuEI/7rP0/RhrfFxDqkSbWTOqkcgkMPgNeKvXAC9oD2Dflep/uDlUC2E0w9XEPtps7a5jCiJX5//huQ/usU3f5wmI=-----END PKCS7-----
+  ">
+  <input type="image" src="https://www.paypal.com/en_US/IT/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="">
+  <img alt="" border="0" src="https://www.paypal.com/it_IT/i/scr/pixel.gif" width="1" height="1">
+  </form>
+  </div>
+</td>
+<td>
+<div id="layout-content">
+<div id="header">
+<h1>MySDE Source Code</h1>
+</div>
+<h2 id="_mysde">mysde</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre><tt>#!/bin/sh
+
+#  $Id$
+
+#  mysde - My Service Development Environment - Version 1.0 (www.mysvc.it)
+#  Copyright (C) 2009 Davide Cucciniello &lt;davide6169@gmail.com&gt;
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+
+# #######################################################################
+#
+#  ###   ##        ### ##  ##  ####
+#   ##  ##        #  #  #  ## ##  #
+#   ### ##  ##  # ###   #  #  #
+#   # ## #   # ##   ##   # #  #
+#   # #  #   # #  #  #   ##   ##
+#  ###  ###   ##  ###     #    ####
+#             #
+#            #
+#
+#  My Service
+#
+# #######################################################################
+#
+#  ###   ##        ### #####  #####
+#   ##  ##        #  #  #   #  #  #
+#   ### ##  ##  # ###   #   #  ###
+#   # ## #   # ##   ##  #   #  #
+#   # #  #   # #  #  #  #   #  #  #
+#  ###  ###   ##  ###  #####  #####
+#             #
+#            #
+#
+#  My Service Development Environment
+#
+#  Usage:
+#    mysde [-e]
+#          [-1]
+#          [-n &lt;name&gt;=default]
+#          [-l &lt;libpath&gt;=LD_LIBRARY_PATH]
+#          [-S &lt;subsystems&gt;]
+#          [-s &lt;softwareunits&gt;]
+#          [&lt;basedir&gt;=$HOME/mysde]
+#      -S-|-s- =&gt; read subsystems or softwareunits from stdin
+#      &lt;subsystems&gt;="&lt;subsystem1&gt; &lt;subsystem2&gt; ...&lt;subsystemN&gt;" |
+#                   "&lt;subsystem1&gt;
+#                    &lt;subsystem2&gt;
+#                    ...
+#                    &lt;subsystemN&gt;" |
+#                    &lt;subsystem1&gt;,&lt;subsystem2&gt;[,...],&lt;subsystemN&gt;
+#      &lt;softwareunits&gt;="[&lt;subsystem1&gt;/]&lt;softwareunit1&gt; [&lt;subsystem2&gt;/]&lt;softwareunit2&gt; ... [&lt;subsystemN&gt;/]&lt;softwareunitN&gt;" |
+#                      "[&lt;subsystem1&gt;/]&lt;softwareunit1&gt;
+#                       [&lt;subsystem2&gt;/]&lt;softwareunit2&gt;
+#                       ...
+#                       [&lt;subsystem2&gt;/]&lt;softwareunitN&gt;" |
+#                       [&lt;subsystem1&gt;/]&lt;softwareunit1&gt;,[&lt;subsystem2&gt;/]&lt;softwareunit2&gt;[,...],[&lt;subsystemN&gt;/]&lt;softwareunitN&gt;
+#
+# #######################################################################
+#
+#  History:
+#    1.0               first version
+#
+# #######################################################################
+
+usage()
+{
+  echo "mysde - My Service Development Environment - Version 1.0" 1&gt;&amp;2
+  echo "" 1&gt;&amp;2
+  echo "usage: mysde [-e]" 1&gt;&amp;2
+  echo "             [-1]" 1&gt;&amp;2
+  echo "             [-n &lt;name&gt;=default]" 1&gt;&amp;2
+  echo "             [-l &lt;libpath&gt;=LD_LIBRARY_PATH]" 1&gt;&amp;2
+  echo "             [-S &lt;subsystems&gt;]" 1&gt;&amp;2
+  echo "             [-s &lt;softwareunits&gt;]" 1&gt;&amp;2
+  echo "             [&lt;basedir&gt;=\$HOME/mysde]" 1&gt;&amp;2
+  echo "        -S-|-s- =&gt; read subsystems or softwareunits from stdin" 1&gt;&amp;2
+  echo "        &lt;subsystems&gt;=\"&lt;subsystem1&gt; &lt;subsystem2&gt; ...&lt;subsystemN&gt;\" |" 1&gt;&amp;2
+  echo "                     \"&lt;subsystem1&gt;" 1&gt;&amp;2
+  echo "                      &lt;subsystem2&gt;" 1&gt;&amp;2
+  echo "                      ..." 1&gt;&amp;2
+  echo "                      &lt;subsystemN&gt;\" |" 1&gt;&amp;2
+  echo "                      &lt;subsystem1&gt;,&lt;subsystem2&gt;[,...],&lt;subsystemN&gt;" 1&gt;&amp;2
+  echo "        &lt;softwareunits&gt;=\"[&lt;subsystem1&gt;/]&lt;softwareunit1&gt; [&lt;subsystem2&gt;/]&lt;softwareunit2&gt; ... [&lt;subsystemN&gt;/]&lt;softwareunitN&gt;\" |" 1&gt;&amp;2
+  echo "                        \"[&lt;subsystem1&gt;/]&lt;softwareunit1&gt;" 1&gt;&amp;2
+  echo "                         [&lt;subsystem2&gt;/]&lt;softwareunit2&gt;" 1&gt;&amp;2
+  echo "                         ..." 1&gt;&amp;2
+  echo "                         [&lt;subsystemN&gt;/]&lt;softwareunitN&gt;\" |" 1&gt;&amp;2
+  echo "                         [&lt;subsystem1&gt;/]&lt;softwareunit1&gt;,[&lt;subsystem2&gt;/]&lt;softwareunit2&gt;[,...],[&lt;subsystemN&gt;/]&lt;softwareunitN&gt;" 1&gt;&amp;2
+
+  exit 1
+}
+
+init()
+{
+  action="create"
+  basedir="$HOME/mysde"
+  libpath="LD_LIBRARY_PATH"
+  name="default"
+  subsystems=""
+  softwareunits=""
+
+  PATH=/usr/xpg4/bin:$PATH
+  export PATH
+}
+
+args()
+{
+  while getopts :1n:l:S:s:eh option
+  do
+    case $option in
+      "h")
+        usage
+        ;;
+      "n")
+        name="$OPTARG"
+        ;;
+      "l")
+        libpath="$OPTARG"
+        ;;
+      "1")
+        name=""
+        ;;
+      "e")
+        action="config"
+        ;;
+      "S")
+        subsystems="$OPTARG"
+        ;;
+      "s")
+        softwareunits="$OPTARG"
+        ;;
+      \?)
+        usage
+        ;;
+    esac
+  done
+
+  n=`expr $OPTIND - 1`
+  shift $n
+
+  if [ "$1" != "" ]
+  then
+    basedir="$1"
+  fi
+
+  if [ -d "$basedir" ]
+  then
+    if [ "$subsystems" != "" -o "$softwareunits" != "" ]
+    then
+      conf
+      action="setup"
+    else
+      action="config"
+    fi
+  elif [ -f "$basedir" ]
+  then
+    usage
+  elif [ "$name" = "template" ]
+  then
+    usage
+  else
+    action="create"
+  fi
+}
+
+extract()
+{
+  cat | awk '
+    /^\.--[^+-]+.*--\.$/ { n = 0 }
+    (n &gt; 0) { print &gt;&gt; filename }
+    /^\.\+\+[^+-]+.*\+\+\.$/ {
+      n = 1
+      filename = substr($0,4,length($0)-6)
+      command = "echo " filename
+      command | getline filename
+      close(command)
+    }'
+}
+
+profile()
+{
+cat &lt;&lt;EOF
+# #######################################################################
+#
+#  ###   ##        ### #####  #####
+#   ##  ##        #  #  #   #  #  #
+#   ### ##  ##  # ###   #   #  ###
+#   # ## #   # ##   ##  #   #  #
+#   # #  #   # #  #  #  #   #  #  #
+#  ###  ###   ##  ###  #####  #####
+#             #
+#            #
+#
+#  My Service Development Environment
+#
+#  Profile Environment
+#
+# #######################################################################
+
+# #######################################################################
+
+# PATH=&lt;mypath&gt;:\$PATH...
+
+# #######################################################################
+
+EOF
+echo "# $libpath=&lt;mylibpath&gt;:\$$libpath..."
+cat &lt;&lt;EOF
+
+# #######################################################################
+
+EOF
+  echo "$envbase=$basedir"
+  echo "export $envbase"
+  echo ""
+  echo ". \$$envbase/$confile"
+
+cat &lt;&lt;EOF
+
+# #######################################################################
+EOF
+}
+
+conf()
+{
+  rootname=`basename $basedir`
+
+  basename=`echo "$rootname" | awk '{ print toupper($1) }'`
+
+  envbase="${basename}_BASE"
+  envname="${basename}_NAME"
+  envroot="${basename}_ROOT"
+  envhome="${basename}_HOME"
+
+  rootdir="$basedir/src/$rootname"
+  homedir="$basedir/bin/$rootname"
+
+  confile=".${rootname}rc"
+
+  if [ "$name" = "" ]
+  then
+    buildname=".build"
+  else
+    buildname=".build.$name"
+  fi
+
+  if [ "$name" = "" ]
+  then
+    localname="local"
+  else
+    localname="local.$name"
+  fi
+
+  MYSDE_BASE="$basedir"
+  export MYSDE_BASE
+
+  MYSDE_ROOT="$rootdir"
+  export MYSDE_ROOT
+
+  MYSDE_HOME="$homedir"
+  export MYSDE_HOME
+
+  MYSDE_NAME="$name"
+  export MYSDE_NAME
+
+  MYSDE_CONF="$confile"
+  export MYSDE_CONF
+
+  MYSDE_PATH="$libpath"
+  export MYSDE_PATH
+
+  MYSDE="$rootname"
+  export MYSDE
+}
+
+rename()
+{
+  while read filepath
+  do
+    filename=`basename "$filepath"`
+
+    if [ "$filename" != "mysde" ]
+    then
+      ed -s "$filepath" &lt;&lt;EOF
+g/\$MYSDE_CONF/s/\$MYSDE_CONF/$MYSDE_CONF/g
+g/\${MYSDE_CONF}/s/\${MYSDE_CONF}/$MYSDE_CONF/g
+w
+q
+EOF
+
+    if [ "$filename" = ".${rootname}.template" -o "$filename" = "${confile}.template" ]
+    then
+      ed -s "$filepath" &lt;&lt;EOF
+g/\$MYSDE_PATH/s/\$MYSDE_PATH/LD_LIBRARY_PATH/g
+g/\${MYSDE_PATH}/s/\${MYSDE_PATH}/LD_LIBRARY_PATH/g
+w
+q
+EOF
+    else
+      ed -s "$filepath" &lt;&lt;EOF
+g/\$MYSDE_PATH/s/\$MYSDE_PATH/$MYSDE_PATH/g
+g/\${MYSDE_PATH}/s/\${MYSDE_PATH}/$MYSDE_PATH/g
+w
+q
+EOF
+    fi
+
+    ed -s "$filepath" &lt;&lt;EOF
+g/\$MYSDE/s/\$MYSDE/$MYSDE/g
+g/\${MYSDE}/s/\${MYSDE}/$MYSDE/g
+g/MYSDE/s/MYSDE/$basename/g
+w
+q
+EOF
+    fi
+ done
+}
+
+create()
+{
+  conf
+
+  mkdir -p $basedir
+
+  mkdir $basedir/src
+  mkdir $basedir/bin
+  mkdir $basedir/lib
+  mkdir $basedir/classes
+  mkdir $basedir/pkg
+  mkdir $basedir/$buildname
+  mkdir $basedir/$localname
+  mkdir $basedir/$localname/bin
+  mkdir $basedir/$localname/lib
+  mkdir $basedir/$localname/man
+  mkdir $basedir/makefiles
+  mkdir $basedir/usr
+  mkdir $basedir/usr/lib
+  mkdir $basedir/usr/bin
+  mkdir $basedir/sys
+  mkdir $basedir/sys/lib
+  mkdir $basedir/sys/bin
+  mkdir $basedir/arc
+  mkdir $basedir/arc/src
+  mkdir $basedir/arc/bin
+  mkdir $basedir/docs
+  mkdir $basedir/man
+
+  if [ "$name" != "" ]
+  then
+    (cd $basedir; ln -s $buildname .build)
+    (cd $basedir; ln -s $localname local)
+  fi
+
+  mkdir $rootdir
+
+  mkdir $rootdir/src
+  mkdir $rootdir/include
+  mkdir $rootdir/lib
+  mkdir $rootdir/bin
+  mkdir $rootdir/local
+  mkdir $rootdir/local/lib
+  mkdir $rootdir/local/bin
+  mkdir $rootdir/local/man
+  mkdir $rootdir/classes
+  mkdir $rootdir/conf
+  mkdir $rootdir/docs
+  mkdir $rootdir/man
+  mkdir $rootdir/web
+  mkdir $rootdir/src/makefiles
+  mkdir $rootdir/sys
+  mkdir $rootdir/sys/lib
+  mkdir $rootdir/sys/bin
+  mkdir $rootdir/src/RCS
+
+  cat $0 | extract
+
+  if [ "$name" != "" ]
+  then
+    mv -f $basedir/makefiles/Makefile $basedir/makefiles/Makefile.${name}
+
+    (cd $basedir/makefiles; ln -s Makefile.${name} Makefile)
+
+    mv -f $basedir/.$rootname $basedir/.${rootname}.$name
+
+    (cd $basedir; ln -s .${rootname}.$name .$rootname)
+
+    mv -f $basedir/$confile $basedir/${confile}.$name
+
+    (cd $basedir; ln -s ${confile}.$name $confile)
+
+    mv -f $rootdir/.$rootname $rootdir/.${rootname}.$name
+
+    (cd $rootdir; ln -s .${rootname}.$name .$rootname)
+
+    mv -f $rootdir/$confile $rootdir/${confile}.$name
+
+    (cd $rootdir; ln -s ${confile}.$name $confile)
+  fi
+
+  cp -f $rootdir/src/makefiles/Makefile.system $rootdir/src/Makefile
+
+  cp -f $0 $rootdir/sys/bin/.
+
+  mkdir $basedir/.build.template
+  mkdir $basedir/.local.template
+  mkdir $basedir/.local.template/bin
+  mkdir $basedir/.local.template/lib
+  mkdir $basedir/.local.template/man
+
+  cp -f $basedir/makefiles/Makefile $basedir/makefiles/.Makefile.template
+  cp -f $basedir/.${rootname} $basedir/.${rootname}.template
+  cp -f $basedir/${confile} $basedir/${confile}.template
+  cp -f $rootdir/.${rootname} $rootdir/.${rootname}.template
+  cp -f $rootdir/${confile} $rootdir/${confile}.template
+
+  (cd $basedir; ln -s $rootdir/README)
+
+  find $basedir -type file | rename
+
+  if [ "$name" != "" ]
+  then
+    profile &gt; $basedir/.profile.$name
+
+    cp -f $basedir/.profile.$name $basedir/.profile.template
+
+    (cd $basedir; ln -s .profile.$name .profile)
+  else
+    profile &gt; $basedir/.profile
+
+    cp -f $basedir/.profile $basedir/.profile.template
+  fi
+
+  if [ "$subsystems" != "" -o "$softwareunits" != "" ]
+  then
+    setup
+  fi
+
+  cat $basedir/.profile
+}
+
+config()
+{
+  conf
+
+  profile
+}
+
+list()
+{
+  cat | awk '
+    {
+      for(i=1;i&lt;=NF;i++)
+      {
+        n = split($i,s,",")
+
+        for(j=1;j&lt;=n;j++)
+          print s[j]
+      }
+    }' | grep -v '^ *$'
+}
+
+setup()
+{
+  . $basedir/.profile
+
+  if [ "$subsystems" != "" ]
+  then
+    echo "$subsystems" | list | while read subsystem
+    do
+      if [ ! -d $rootdir/src/$subsystem ]
+      then
+        (cd $rootdir/src; make init subsystems="$subsystem")
+      fi
+    done
+  fi
+
+  if [ "$softwareunits" != "" ]
+  then
+    echo "$softwareunits" | list | while read softwareitem
+    do
+      softwareunit=`echo "$softwareitem" | awk -F/ '{ print $(NF) }'`
+
+      n=`echo "$softwareitem" | awk -F/ '{ print NF }'`
+
+      if [ $n -gt 1 ]
+      then
+        subsystem=`echo "$softwareitem" | awk -F/ '{ print $(NF-1) }'`
+      elif [ "$subsystems" = "" ]
+      then
+        usage
+      else
+        subsystem=`echo "$subsystems" | head -1`
+      fi
+
+      if [ ! -d $rootdir/src/$subsystem ]
+      then
+        (cd $rootdir/src; make init subsystems="$subsystem")
+      fi
+
+      if [ ! -d $rootdir/src/$subsystem/src/$softwareunit ]
+      then
+        (cd $rootdir/src/$subsystem/src; make init softwareunits="$softwareunit")
+      fi
+    done
+  fi
+}
+
+main()
+{
+  case "$action" in
+    "create")
+      create
+      ;;
+    "config")
+      config
+      ;;
+    "setup")
+      setup
+      ;;
+  esac
+}
+
+init "$@"
+args "$@"
+main "$@"
+
+# end of file
+
+exit
+
+.++$MYSDE_ROOT/README++.
+# $Id$
+
+#  mysde - My Service Development Environment - Version 1.0 (www.mysvc.it)
+#  Copyright (C) 2009 Davide Cucciniello &lt;davide6169@gmail.com&gt;
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+
+# #######################################################################
+#
+#  ###   ##        ### ##  ##  ####
+#   ##  ##        #  #  #  ## ##  #
+#   ### ##  ##  # ###   #  #  #
+#   # ## #   # ##   ##   # #  #
+#   # #  #   # #  #  #   ##   ##
+#  ###  ###   ##  ###     #    ####
+#             #
+#            #
+#
+#  My Service
+#
+# #######################################################################
+#
+#  ###   ##        ### #####  #####
+#   ##  ##        #  #  #   #  #  #
+#   ### ##  ##  # ###   #   #  ###
+#   # ## #   # ##   ##  #   #  #
+#   # #  #   # #  #  #  #   #  #  #
+#  ###  ###   ##  ###  #####  #####
+#             #
+#            #
+#
+#  My Service Development Environment
+#
+#  README
+#
+# #######################################################################
+#
+#  History:
+#    1.0               first version
+#
+# #######################################################################
+
+\-------------------------------------------------------------------------
+Introduction
+\-------------------------------------------------------------------------
+
+MySDE (My Service Development Environment) is the light UNIX
+development environment makefile based of MySVC framework
+for C/C++ and Java software projects, including support:
+  - for build external libraries and binaries from packages sources
+    with configuration for more UNIX environments
+  - for configuration management (RCS)
+  - for third party C/C++ and Java libraries
+    (including J2EE web applications .war)
+  - for Lex &amp; Jacc compilers
+  - for AsciiDoc based web sites
+  - for FTP deploy
+
+This environment is configured as:
+* a base environment
+  (under $MYSDE_BASE)
+* a root environment, which is a subset of the base environment
+  (under $MYSDE_ROOT=$MYSDE_BASE/src/&lt;mysystem&gt;)
+The base environment contains:
+* all package sources and binaries
+* all makefiles to build binaries from sources
+* the support to create initial configuration for more UNIX
+  environments and switch from one environment to another
+  (each environment using its environment variable name for
+   shared libraries)
+* the support to archive system binaries and sources
+The root environment contains all system sources and
+its configured as a tree with three levels:
+* The system is the root of the tree
+* The subsystems are the childs of the system
+* The software units are the childs of each subsystem
+  and the leafs of the tree
+
+system
+  |
+  | ---- subsystem1
+  |          |
+  |          | ---- softwareunit11
+  |          | ---- softwareunit12
+  |          | ---- ...
+  |          | ---- softwareunit1M
+  | ---- subsystem2
+  |          |
+  |          | ---- softwareunit21
+  |          | ---- softwareunit22
+  |          | ---- ...
+  |          | ---- softwareunit2M
+  | ...
+  | ---- subsystemN
+             |
+             | ---- softwareunitN1
+             | ---- softwareunitN2
+             | ---- ...
+             | ---- softwareunitNM
+
+Each of the three levels (system, subsystem and software unit)
+has an src subdirectory containing the corresponding
+Makefile to customize filling some variables
+
+There is also a forth Makefile, included by other three makefiles,
+that is the "engine" of the development environment
+
+The src subdirectories of the software units contain all the
+software (including scripts and configuration files)
+
+Each software unit can generate one the following objects:
+* a C/C++ application
+* a C/C++ library (lib*.a or lib*.so) that can be used (linked):
+    - only from other software units of its own subsystem
+      ("subsystem" library)
+        or
+    - also from software units of other subsystems
+      ("system" library)
+* a Java application
+* a Java library (.jar)
+* a Java/J2EE web application (.war)
+* an AsciiDoc based Web Site
+  (with automatic FTP deploy)
+
+From the system level is then possible to generate Java libraries
+(*.jar) or web applications (*.war)
+
+\-------------------------------------------------------------------------
+Examples
+\-------------------------------------------------------------------------
+
+The MySDE installation kit is made only of the mysde shell script.
+
+In order to use MySDE you must:
+
+* create the development environment executing mysde (specifying
+  as optional argument its base directory):
+      mysde
+  (if not base directory is specified then $HOME/mysde is used as default)
+
+* to use the development environment execute:
+      . $HOME/mysde/.profile
+  (to set all environment variables including
+   $MYSDE_BASE as the base directory $HOME/mysde and
+   $MYSDE_ROOT as the root directory $HOME/mysde/src/mysde,
+   or $MYSYSTEM_BASE and $MYSYSTEM_ROOT if, for example,
+   $HOME/mysystem was specified as base directory)
+
+* if necessary customize file $MYSDE_BASE/.mysderc with
+  environment variables, such as external PATH or
+  LD_LIBRARY_PATH or others environment variables
+  (or $MYSYSTEM_BASE/.mysystemrc if, for example,
+   $HOME/mysystem was specified as base directory)
+
+* copy under $MYSDE_BASE/pkg the source packages .tar.gz
+  to be used by development environment (e.g. rcs-5.7.tar.gz),
+  buildable with commands such as:
+  configure
+  make
+  make install
+
+* customize $MYSDE_BASE/makefiles/Makefile to add actions
+  to build each source package copying the predefined templates
+  build.mypkg and clean.mypkg (or customizing it if the commands
+  specified into build.mypkg.template and clean.mypkg.template
+  templates are not ok to build or clean the package)
+  build.rcs-5.7:
+        make build package=rcs-5.7
+
+  clean.rcs-5.7:
+        make clean package=rcs-5.7
+
+* build each package executing under $MYSDE_BASE:
+  make build.rcs-5.7
+
+* add some subsystem and/or softwareunit to development
+  environment:
+      mysde -S mysubsystem1/mysoftwareunit1,mysubsystem2/mysoftwareunit2
+  (or mysde -S mysubsystem1/mysoftwareunit1,mysubsystem2/mysoftwareunit2 $HOME/mysystem
+   if, for example, $HOME/mysystem was specified as base directory)
+
+*  note that you can specify once the subsytem for all software units (if is common)
+   with -S &lt;subsystem&gt; and -s &lt;softwareunits&gt;
+   or specify for each software unit its corresponding subsystem with
+    -s &lt;subsystem1&gt;/&lt;softwareunit1&gt;,&lt;subsystem2&gt;/&lt;softwareunit2&gt;,...,&lt;subsystemN&gt;/&lt;softwareunitN&gt;
+   or as
+    -s "&lt;subsystem1&gt;/&lt;softwareunit1&gt; &lt;subsystem2&gt;/&lt;softwareunit2&gt; &lt;subsystemN&gt;/&lt;softwareunitN&gt;"
+
+* another way to add a subsystem is to execute under $MYSDE_ROOT/src
+      make init subsystems="mysubsystem"
+
+* another way to add a software unit is to execute under $MYSDE_ROOT/src
+      make init softwareunits="mysoftwareunit"
+
+* customize $MYSDE_ROOT/src/Makefile specifying into variable SUBSYSTEMS
+  the list of added subsystems (using one backslash as line terminator,
+  for each line, if muliple lines are used to specify the list
+  instead of spaces)
+
+* for each subsystem customize $MYSDE_ROOT/src/mysubsystem/src/Makefile
+  specifying into variable SOFTWAREUNITS the list of its softwareunits
+
+* for each softwareunit of each subsystem copy under
+  $MYSDE_ROOT/src/mysubsytem/src/mysoftwareunit/src the source code and
+  configuration files used by that softwareunit
+
+* for each softwareunit of each subsystem customize
+  $MYSYSTEM_ROOT/src/mysubsytem/src/mysoftwareunit/src/Makefile
+  specifying values for variables corresponding to source code
+  files, binary targets, library paths, library names  or other
+  options (e.g. for a C++ main application TARGET_BIN for the name
+  of executable and SOURCES.cc and SOURCES.hh the name of C++ source
+  code files)
+
+* build the softwareunit and install (e.g. under $MYSDE_ROOT/bin,
+  $MYSDE_ROOT/lib, $MYSDE_ROOT/classes of $MYSDE_ROOT/web)
+  its deliverables (e.g. C++ executable, Java or C++ library)
+  executing under $MYSDE_ROOT/src/mysubsytem/src/mysoftwareunit/src:
+      make
+      make install
+
+* to backup only the development environment root tree execute
+  under $MYSDE_ROOT/src:
+      make tar
+  (creating under $MYSDE_ROOT/.. a file mysde-YYYYMMDDhhmmssr-src.tar.gz)
+
+* to backup your entire development environment base tree execute
+  under $MYSDE_BASE:
+      make tar
+  (creating under $MYSDE_BASE/.. a file mysde-YYYYMMDDhhmmss.tar.gz)
+
+* to use the development environment under another UNIX OS
+  (e.g. a sun) is sufficient
+    - make a backup of the entire development environment
+      base tree
+    - copy via ftp this backup file mysde-YYYYMMDDhhmmss.tar.gz
+      on the new sun host
+    - untar the backup:
+        gunzip mysde-YYYYMMDDhhmmss.tar.gz
+        tar xvf mysde-YYYYMMDDhhmmss.tar
+    - execute . $MYSDE_BASE/.profile to init all environment
+      variables
+    - setup a new environment executing under $MYSDE_BASE:
+      make init names="sun"
+      (to create a new default set of sun configuration files)
+      make conf name="sun"
+      (to switch all symbolic links
+       to sun files $MYSDE_BASE/.mysderc.sun,
+       $MYSDE_BASE/local.sun, $MYSDE_BASE/.build.sun and
+       $MYSDE_BASE/makefiles/Makefile.sun)
+    - customize (if necessary) $MYSDE_BASE/.mysderc and
+      $MYSDE_BASE/makefiles/Makefile
+    - rebuild all packages from their sources executing the same
+      "make build" commands from $MYSDE_BASE
+      (e.g. make build package=rcs-5.7)
+    - rebuild all subsystems and sofwareunit, e.g. executing
+      from $MYSDE_ROOT/src:
+          make clean
+          make
+
+* to return developing on the previous UNIX OS (e.g. "default"
+  created as default when setup the development environment)
+  is sufficient:
+    - backup the entire development environment base tree
+    - copy and untar this backup on the previous UNIX
+    - execute:
+        make conf name="default"
+        (to switch all symbolic links
+         to default files $MYSDE_BASE/.mysderc.default,
+         $MYSDE_BASE/local.default, $MYSDE_BASE/.build.default and
+         $MYSDE_BASE/makefiles/Makefile.default)
+    - rebuild all subsystems and sofwareunits executing
+      from $MYSDE_ROOT/src:
+          make clean
+          make
+
+* to get help on make commands availables execute
+  from $MYSDE_BASE and $MYSDE_ROOT/src:
+      make help
+
+* two main rules when edit a Makefile:
+    - when assign a value to a variable
+        don't put spaces after equal ('=')
+        if a value is multi-line end each line
+        with a backspace ('\')
+    - each command of a target must begin
+      with a single tab character
+  use ": set list" editing files with vi to view
+  the hidden characters such as tabs and end of lines
+  (then ":set nolist" to switch off)
+
+* look at $MYSDE_ROOT/src/makefiles/Makefile as Makefile example
+
+\-------------------------------------------------------------------------
+Setup
+\-------------------------------------------------------------------------
+
+In order to install MySDE you must:
+* execute mysde script to create the development tree
+  (with optionally the initial set of subsystems and software units)
+       mysde [-e]
+             [-1]
+             [-n &lt;name&gt;=default]
+             [-l &lt;libpath&gt;=LD_LIBRARY_PATH]
+             [-S &lt;subsystems&gt;]
+             [-s &lt;softwareunits&gt;]
+             [&lt;basedir&gt;=$HOME/mysde]
+        -S-|-s- =&gt; read subsystems or softwareunits from stdin
+        &lt;subsystems&gt;="&lt;subsystem1&gt; &lt;subsystem2&gt; ...&lt;subsystemN&gt;" |
+                     "&lt;subsystem1&gt;
+                      &lt;subsystem2&gt;
+                      ...
+                      &lt;subsystemN&gt;" |
+                      &lt;subsystem1&gt;,&lt;subsystem2&gt;[,...],&lt;subsystemN&gt;
+        &lt;softwareunits&gt;="[&lt;subsystem1&gt;/]&lt;softwareunit1&gt; [&lt;subsystem2&gt;/]&lt;softwareunit2&gt; ... [&lt;subsystemN&gt;/]&lt;softwareunitN&gt;" |
+                        "[&lt;subsystem1&gt;/]&lt;softwareunit1&gt;
+                         [&lt;subsystem2&gt;/]&lt;softwareunit2&gt;
+                         ...
+                         [&lt;subsystemN&gt;/]&lt;softwareunitN&gt;" |
+                         [&lt;subsystem1&gt;/]&lt;softwareunit1&gt;,[&lt;subsystem2&gt;/]&lt;softwareunit2&gt;[,...],[&lt;subsystemN&gt;/]&lt;softwareunitN&gt;
+      -e =&gt; get only configuration for $HOME/.profile
+      -s =&gt; configure for only one environment
+      -n =&gt; set name of default environment
+      -l =&gt; set name of environment variable used for shared libraries
+      &lt;basedir&gt; =&gt;base directory of the service development tree
+      (e.g. /home/mysystem)
+* you can add later other subsystems and/or software units using
+  the same mysde script with the same base directory of
+  the existing development tree
+* add the output of mysde script to $HOME/.profile
+  (this output is always stored as $MYSDE_BASE/.profile)
+* execute . $HOME/.profile
+* the MYSDE_ROOT is automatically set to $MYSDE_BASE/src/mysde
+* the MYSDE_HOME is automatically set to $MYSDE_BASE/bin/mysde
+* if a base directory was specified as argument on mysde script
+  then the prefix of environment variables for base and root
+  direcotory are based on 'basename' of base directory; e.g.
+  if $HOME/mysystem is the base directory then
+  MYSYSTEM_BASE and MYSYSTEM_ROOT are the names of
+  environment variables
+* if default $HOME/mysde was used as base directory this create:
+* under $MYSDE_BASE the following tree:
+      mysde/
+         |
+         | --- README
+         | --- .mysde (-&gt; .mysde.&lt;name&gt;)
+         | --- .mysderc (-&gt; .mysderc.&lt;name&gt;)
+         | --- bin/
+         |      |
+         |      | --- &lt;binaries&gt; (empty)
+         | --- src/
+         |      |
+         |      | --- &lt;sources&gt; (see tree under $MYSDE_ROOT)
+         ! --- makefiles/
+         |      |
+         |      | --- Makefile (-&gt; Makefile.&lt;name&gt;)
+         | --- local/ (-&gt; local.&lt;name&gt;)
+         | --- .build/ (-&gt; .build.&lt;name&gt;)
+         | --- makefiles/
+         | --- pkg/
+         | --- docs/
+         | --- man/
+         | --- usr/
+         |      |
+         |      | --- bin
+         |      | --- lib
+         | --- arc/
+         |      |
+         |      | --- bin
+         |      | --- lib
+         | --- sys/
+         |      |
+         |      | --- bin
+         |      | --- lib
+* $MYSDE_BASE/bin is the directory of mysde binaries
+* $MYSDE_BASE/src is the directory of mysde sources
+* $MYSDE_BASE/pkg is the directory for package sources (.tar.gz)
+* $MYSDE_BASE/usr is the directory for external binaries and libraries
+  not buildable from package sources
+* $MYSDE_BASE/arc is the directory for mysde binaries and sources archive
+* $MYSDE_BASE/makefiles/Makefile is the base Makefile to build
+  package binaries from package sources
+  (if not -1 option is specified to mysde then is a symbolic link to current
+   Makefile.&lt;name&gt; of &lt;name&gt; environment)
+* $MYSDE_BASE/.build and $MYSDE_BASE/local are the directories
+  for build and install of package sources
+  (if not -1 option is specified to mysde then is a symbolic link to current
+   .build.&lt;name&gt; and local.&lt;name&gt; directories of &lt;name&gt; environment)
+* $MYSDE_BASE/Makefile is the base Makefile with targets for
+   - build and clean a single package or all packages
+     (make build, make clean)
+   - build and clean all packages
+     (make build-all, make clean-all)
+   - tar all system base tree
+   - init one or more &lt;name&gt; environments
+     (make init names="osx sun linux")
+   - configure a &lt;name&gt; as current environment
+     (make init name="osx")
+* $MYSDE_BASE/makefiles/Makefile is the makefile to customize
+  in order to define action to build and clean packages &lt;package&gt;.tar.gz
+  under $MYSDE_BASE/pkg; e.g. if package is rcs-5.7.tar.gz then:
+  - with copy &amp; paste of "build.mypkg" and "clean.mypkg" section
+    as "build.rcs-5.7" and "clean.rcs-5.7"
+    (if the commands under "build.mypkg.template" and
+     "clean.mypkg.template" are sufficient to build and clean rcs-5.7 package)
+    build.rcs-5.7:
+        @ make build package="rcs-5.7"
+    clean.rcs-5.7:
+        @ make clean package="rcs-5.7"
+  - with copy &amp; paste of "build.mypkg.template" and "clean.mypkg.template" section
+    as "build.rcs-5.7" and "clean.rcs-5.7" updating them as necessary to build
+    package rcs-5.7
+    (if the commands under "build.mypkg.template" and
+     "clean.mypkg.template" are not sufficient to build and clean rcs-5.7 package)
+* NOTE: writing a Makefile each command associated with a rule
+  the command MUST start with a (single) tab character; e.g.:
+  build.mypkg:
+        @ make build package="mypkg"
+  (the line containing the command "@ make build package="mypkg" MUST start
+   with a tab character, use ":set list" on vi editor to view the hidden
+   characters on a line such as tab characters, then
+   ":set nolist" to switch off)
+* to build and clean a package is then sufficient type
+  make build package="rcs-5.7"
+    or
+  make clean package="rcs-5.7"
+  under $MYSDE_BASE
+* the build is executed under $MYSDE_BASE/.build and
+  the output of build are installed under $MYSDE_BASE/local
+* under $MYSDE_ROOT the following tree:
+      mysde/
+         |
+         | --- .mysde (-&gt; .mysde.&lt;name&gt;)
+         | --- .mysderc (-&gt; .mysderc.&lt;name&gt;)
+         | --- README
+         | --- sys/
+         |      |
+         |      | --- bin/
+         |      |      |
+         |      |      | --- mysde
+         | --- src/
+         |      |
+         |      | --- Makefile
+         |      | --- RCS/
+         !      | --- makefiles/
+         |             |
+         |             | --- Makefile
+         |             | --- Makefile.system
+         |             | --- Makefile.subsystem
+         |             | --- Makefile.softwareunit
+         | --- bin/
+         | --- lib/
+         | --- include/
+         | --- classes/
+         | --- conf/
+         | --- docs/
+         | --- web/
+  in which $MYSDE_ROOT/src/Makefile is a copy of Makefile.system
+* go to the $MYSDE_ROOT/src directory
+* create the web applications and web sites (AsciiDoc based) root directories
+  executing the command:
+    make init webapps="mywebapp1 ... mywebappN"
+    make init websites="mywebsite1 ... mywebsiteN"
+  this create the following tree:
+      mysde/
+         |
+         | --- .mysde (-&gt; .mysde.&lt;name&gt;)
+         | --- .mysderc (-&gt; .mysderc.&lt;name&gt;)
+         | --- README
+         | --- sys/
+         |      |
+         |      | --- bin/
+         |      |      |
+         |      |      | --- mysde
+         | --- src/
+         |      |
+         |      | --- Makefile
+         |      | --- RCS/
+         !      | --- makefiles/
+         |             |
+         |             | --- Makefile
+         |             | --- Makefile.system
+         |             | --- Makefile.subsystem
+         |             | --- Makefile.softwareunit
+         | --- bin/
+         | --- lib/
+         | --- include/
+         | --- classes/
+         | --- conf/
+         | --- docs/
+         | --- web/
+                |
+                | --- MyWebApp1/
+                !         |
+                |         | --- WEB-INF/
+                |                  | --- classes/
+                |                  | --- lib/
+                | --- MyWebApp2/
+                !         |
+                |         | --- WEB-INF/
+                |                  | --- classes/
+                |                  | --- lib/
+                | --- .../
+                | --- MyWebAppN/
+                |         |
+                |         | --- WEB-INF/
+                |                  | --- classes/
+                |                  | --- lib/
+                | --- MyWebSite1/
+                | --- MyWebSite2/
+                | ...
+                | --- MyWebSiteN/
+* edit the system Makefile ($MYSDE_ROOT/src/Makefile) setting the
+  SUBSYSTEMS variable, as:
+    SUBSYSTEMS=\
+      MySubsystem1 \
+      MySubsystem2 \
+      ... \
+      MySubsystemN
+  (note the &lt;end of line&gt; after each backslash '\')
+* create the subtrees corresponding to each of the subsystems,
+  executing from the $MYSDE_ROOT/src directory the command:
+    make init subsystems="MySubsystem1 MySubsystem2 ... MySubsystemN"
+  that creates the following tree:
+      mysde/
+         |
+         | --- .mysde (-&gt; .mysde.&lt;name&gt;)
+         | --- .mysderc (-&gt; .mysderc.&lt;name&gt;)
+         | --- README
+         | --- sys/
+         |      |
+         |      | --- bin/
+         |      |      |
+         |      |      | --- mysde
+         | --- src/
+         |      |
+         |      | --- Makefile
+         |      | --- RCS/
+         !      | --- bin/
+         |      |      |
+         |      |      | --- mysde
+         !      | --- makefiles/
+         |      !      |
+         |      |      | --- Makefile
+         |      |      | --- Makefile.system
+         |      |      | --- Makefile.subsystem
+         |      |      | --- Makefile.softwareunit
+         |      | --- MySubsystem1/
+         |      |          | --- include/
+         |      !          | --- lib/
+         |      |          | --- src/
+         |      |                 | --- Makefile
+         |      |                 | --- RCS/
+         |      | --- MySubsystem2/
+         |                 | --- include/
+         |                 | --- lib/
+         |                 | --- src/
+         |      |                 | --- Makefile
+         |      |                 | --- RCS/
+         |      | --- ...
+         |      | --- MySubsystemN
+         |                 | --- include/
+         |                 | --- lib/
+         |                 | --- src/
+         | --- bin/
+         | --- lib/
+         | --- include/
+         | --- classes/
+         | --- conf/
+         | --- docs/
+         | --- web/
+                |
+                | --- MyWebApp1/
+                !         |
+                |         | --- WEB-INF/
+                |                  | --- classes/
+                |                  | --- lib/
+                | --- MyWebApp2/
+                !         |
+                |         | --- WEB-INF/
+                |                  | --- classes/
+                |                  | --- lib/
+                | --- .../
+                | --- MyWebAppN/
+                |         |
+                |         | --- WEB-INF/
+                |                  | --- classes/
+                |                  | --- lib/
+                | --- MyWebSite1/
+                | --- MyWebSite2/
+                | ...
+                | --- MyWebSiteN/
+  each subsystem subdirectory contains the include, lib and src subdirectories,
+  where the $MYSDE_ROOT/src/MySubsystem/src/Makefile is a copy of
+  Makefile.subsystem
+* to add one or more subsystems can also be used the command mysde:
+    mysde -S "mysubsystem1 mysubsystem2 ... mysubsystemN"
+      or
+    mysde -S mysubsystem1,mysubsystem,...,mysubsystemN
+* edit each subsystem Makefile ($MYSDE_ROOT/src/MySubsystem/src/Makefile)
+  setting the SOFTWAREUNITS variable, as:
+    SOFTWAREUNITS=\
+      MySoftwareUnit1 \
+      MySoftwareUnit2 \
+      ... \
+      MySoftwareUnitM
+  (note the &lt;end of line&gt; after each backslash '\')
+* create the subtrees corresponding to each of the software units,
+  executing from each of the $MYSDE_ROOT/src/MySubsystem/src directory
+  the command:
+    make init softwareunits="MySoftwareUnit1 MySoftwareUnit2 ... MySoftwareUnitN"
+  that creates the following tree:
+      mysde/
+         |
+         | --- .mysde (-&gt; .mysde.&lt;name&gt;)
+         | --- .mysderc (-&gt; .mysderc.&lt;name&gt;)
+         | --- README
+         | --- sys/
+         |      |
+         |      | --- bin/
+         |      |      |
+         |      |      | --- mysde
+         | --- src/
+         |      |
+         |      | --- Makefile
+         |      | --- RCS/
+         !      | --- makefiles/
+         |      !      |
+         |      |      | --- Makefile
+         |      |      | --- Makefile.system
+         |      |      | --- Makefile.subsystem
+         |      |      | --- Makefile.softwareunit
+         |      | --- MySubsystem1/
+         |      |          | --- include/
+         |      !          | --- lib/
+         |      |          | --- src/
+         |      |                 | --- Makefile
+         |      |                 | --- RCS/
+         |      |                 | --- MySoftwareUnit11/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- MySoftwareUnit12/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- ...
+         |      |                 | --- MySoftwareUnit1M/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      | --- MySubsystem2/
+         |      |          | --- include/
+         |      |          | --- lib/
+         |      |          | --- src/
+         |      |                 | --- Makefile
+         |      |                 | --- RCS/
+         |      |                 | --- MySoftwareUnit21/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- MySoftwareUnit22/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- ...
+         |      |                 | --- MySoftwareUnit2M/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      | --- ...
+         |      | --- MySubsystemN
+         |      |          | --- include/
+         |      |          | --- lib/
+         |      |          | --- src/
+         |      |                 | --- MySoftwareUnit21/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- MySoftwareUnit22/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- ...
+         |      |                 | --- MySoftwareUnit2M/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         | --- bin/
+         | --- lib/
+         | --- include/
+         | --- classes/
+         | --- conf/
+         | --- docs/
+         | --- web/
+                |
+                | --- MyWebApp1/
+                !         |
+                |         | --- WEB-INF/
+                |                  | --- classes/
+                |                  | --- lib/
+                | --- MyWebApp2/
+                !         |
+                |         | --- WEB-INF/
+                |                  | --- classes/
+                |                  | --- lib/
+                | --- .../
+                | --- MyWebAppN/
+                |          |
+                |          | --- WEB-INF/
+                |                   | --- classes/
+                |                   | --- lib/
+                | --- MyWebSite1/
+                | --- MyWebSite2/
+                | ...
+                | --- MyWebSiteN/
+  each software unit subdirectory contains only the src subdirectories,
+  where the $MYSDE_ROOT/src/MySubsystem/src/MySoftwareUnit/src/Makefile
+  is a copy of Makefile.softwareunit
+* to add one or more software unit can also be used the command mysde:
+    mysde -s "mysubsystem1/mysoftwareunit1 mysubsystem2/mysoftwareunit2 ... mysubsystemN/mysoftwareunitN"
+      or
+    mysde -S mysubsystem -s "mysoftwareunit1 mysoftwareunit2 ... mysoftwareunitN"
+      or
+    mysde -s mysubsystem1/mysoftwareunit1,mysubsystem2/mysoftwareunit2,mysubsystemN/mysoftwareunitN
+      or
+    mysde -S mysubsystem -s mysoftwareunit1,mysoftwareunit2,mysoftwareunitN
+* for the software units containing Java packages
+  (sources java files that contains "package declaration")
+  execute from the corresponding src subdirectory
+  ($MYSDE_ROOT/src/MySubsystem/src/MySoftwareUnit/src)
+  the command:
+    make init packages="mypackage1.mysubpackage1 ... mypackageN.mysubpackageN"
+  that create into software unit src subdirectory the
+  directory structure corresponding to the package names,
+  creating also an RCS subdirectory for each leaf
+  (for configuration management support)
+  e.g. if the software unit is MySoftwareUnit11
+  this creates the following tree:
+      mysde/
+         |
+         | --- .mysde (-&gt; .mysde.&lt;name&gt;)
+         | --- .mysderc (-&gt; .mysderc.&lt;name&gt;)
+         | --- README
+         | --- sys/
+         |      |
+         |      | --- bin/
+         |      |      |
+         |      |      | --- mysde
+         | --- src/
+         |      |
+         |      | --- Makefile
+         |      | --- RCS/
+         !      | --- makefiles/
+         |      !      |
+         |      |      | --- Makefile
+         |      |      | --- Makefile.system
+         |      |      | --- Makefile.subsystem
+         |      |      | --- Makefile.softwareunit
+         |      | --- MySubsystem1/
+         |      |          | --- include/
+         |      !          | --- lib/
+         |      |          | --- src/
+         |      |                 | --- Makefile
+         |      |                 | --- RCS/
+         |      |                 | --- MySoftwareUnit11/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- mypackage1/
+         |      |                 |                 |         |--- mysubpackage1/
+         |      |                 |                 |                   |--- RCS/
+         |      |                 |                 | --- mypackage2/
+         |      |                 |                 |         |--- mysubpackage2/
+         |      |                 |                 |                   |--- RCS/
+         |      |                 |                 | --- .../
+         |      |                 |                 | --- mypackageN/
+         |      |                 |                 |         |--- mysubpackageN/
+         |      |                 |                 |                   |--- RCS/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- MySoftwareUnit12/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- ...
+         |      |                 | --- MySoftwareUnit1M/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      | --- MySubsystem2/
+         |      |          | --- include/
+         |      |          | --- lib/
+         |      |          | --- src/
+         |      |                 | --- Makefile
+         |      |                 | --- RCS/
+         |      |                 | --- MySoftwareUnit21/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- MySoftwareUnit22/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- ...
+         |      |                 | --- MySoftwareUnit2M/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      | --- ...
+         |      | --- MySubsystemN
+         |      |          | --- include/
+         |      |          | --- lib/
+         |      |          | --- src/
+         |      |                 | --- MySoftwareUnit21/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- MySoftwareUnit22/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- ...
+         |      |                 | --- MySoftwareUnit2M/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         | --- bin/
+         | --- lib/
+         | --- include/
+         | --- classes/
+         | --- conf/
+         | --- docs/
+         | --- web/
+                |
+                | --- MyWebApp1/
+                !         |
+                |         | --- WEB-INF/
+                |                  | --- classes/
+                |                  | --- lib/
+                | --- MyWebApp2/
+                !         |
+                |         | --- WEB-INF/
+                |                  | --- classes/
+                |                  | --- lib/
+                | --- .../
+                | --- MyWebAppN/
+                |         |
+                |         | --- WEB-INF/
+                |                  | --- classes/
+                |                  | --- lib/
+                | --- MyWebSite1/
+                | --- MyWebSite2/
+                | ...
+                | --- MyWebSiteN/
+* for the software units containing, into separate directories,
+  web application files other than class files (e.g. *.html, *.js)
+  execute from the corresponding src subdirectory
+  ($MYSDE_ROOT/src/MySubsystem/src/MySoftwareUnit/src)
+  the command:
+    make init webappdirs="mywebappdir1 ... mywebappdirN"
+  (where each "mywebappdir" can contains subdirectories)
+  that:
+    - create into software unit src subdirectory the
+      directory structure corresponding to the web application
+      directories, creating also an RCS subdirectory for each leaf
+    - create into web application root directory the
+      same directories (without RCS)
+  e.g. if TARGET_WEB=MyWebApp1 and software unit is MySoftwareUnit11
+  this creates the following tree:
+      mysde/
+         |
+         | --- .mysde (-&gt; .mysde.&lt;name&gt;)
+         | --- .mysderc (-&gt; .mysderc.&lt;name&gt;)
+         | --- README
+         | --- sys/
+         |      |
+         |      | --- bin/
+         |      |      |
+         |      |      | --- mysde
+         | --- src/
+         |      |
+         |      | --- Makefile
+         |      | --- RCS/
+         !      | --- makefiles/
+         |      !      |
+         |      |      | --- Makefile
+         |      |      | --- Makefile.system
+         |      |      | --- Makefile.subsystem
+         |      |      | --- Makefile.softwareunit
+         |      | --- MySubsystem1/
+         |      |          | --- include/
+         |      !          | --- lib/
+         |      |          | --- src/
+         |      |                 | --- Makefile
+         |      |                 | --- RCS/
+         |      |                 | --- MySoftwareUnit11/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- mywebappdir1/
+         |      |                 |                 |         | --- RCS/
+         |      |                 |                 | --- mywebappdir2/
+         |      |                 |                 |         | --- RCS/
+         |      |                 |                 | --- ...
+         |      |                 |                 | --- mywebappdirN/
+         |      |                 |                 |         | --- RCS/
+         |      |                 |                 | --- mypackage1/
+         |      |                 |                 |         |--- mysubpackage1/
+         |      |                 |                 |                   |--- RCS/
+         |      |                 |                 | --- mypackage2/
+         |      |                 |                 |         |--- mysubpackage2/
+         |      |                 |                 |                   |--- RCS/
+         |      |                 |                 | --- .../
+         |      |                 |                 | --- mypackageN/
+         |      |                 |                 |         |--- mysubpackageN/
+         |      |                 |                 |                   |--- RCS/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- MySoftwareUnit12/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- ...
+         |      |                 | --- MySoftwareUnit1M/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      | --- MySubsystem2/
+         |      |          | --- include/
+         |      |          | --- lib/
+         |      |          | --- src/
+         |      |                 | --- Makefile
+         |      |                 | --- RCS/
+         |      |                 | --- MySoftwareUnit21/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- MySoftwareUnit22/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- ...
+         |      |                 | --- MySoftwareUnit2M/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      | --- ...
+         |      | --- MySubsystemN
+         |      |          | --- include/
+         |      |          | --- lib/
+         |      |          | --- src/
+         |      |                 | --- MySoftwareUnit21/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- MySoftwareUnit22/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         |      |                 | --- ...
+         |      |                 | --- MySoftwareUnit2M/
+         |      |                 |          |
+         |      |                 |          | --- src/
+         |      |                 |                 | --- Makefile
+         |      |                 |                 | --- RCS/
+         | --- bin/
+         | --- lib/
+         | --- include/
+         | --- classes/
+         | --- conf/
+         | --- docs/
+         | --- web/
+                |
+                | --- MyWebApp1/
+                !         |
+                !         | --- mywebappdir1/
+                !         | --- mywebappdir2/
+                !         | --- ...
+                !         | --- mywebappdirN/
+                |         | --- WEB-INF/
+                |                  | --- classes/
+                |                  | --- lib/
+                | --- MyWebApp2/
+                !         |
+                |         | --- WEB-INF/
+                |                  | --- classes/
+                |                  | --- lib/
+                | --- .../
+                | --- MyWebAppN/
+                |          |
+                |          | --- WEB-INF/
+                |                   | --- classes/
+                |                   | --- lib/
+                | --- MyWebSite1/
+                | --- MyWebSite2/
+                | ...
+                | --- MyWebSiteN/
+
+Note that you can add other subsystems and software units later,
+but to generate an application or a library you must create
+at least a subsystem and for this subsystem at least a software unit
+
+\-------------------------------------------------------------------------
+Variables
+\-------------------------------------------------------------------------
+Before using the MySDE development environment you must fill some
+variables into all three Makefiles at system, subsystem and
+software unit level:
+* system:
+  # -----------------------------------------------------
+  SUBSYSTEMS=\
+    MySubsystem1 \
+    MySubsystem2 \
+    ...\
+    MySubsystemN
+
+  TARGET_JARS=\
+    mywebapp1.war[:mywebapp1manifestfilepath]\
+    mywebapp2.war[:mywebapp2manifestfilepath]\
+    ...\
+    mywebappN.war[:mywebappNmanifestfilepath]\
+    myjar1name.jar[:myjar1dir[:myjar1file1,...,myjar1fileM[:myjar1manifestfilepath]]]\
+    myjar2name.jar[:myjar2dir[:myjar2file1,...,myjar2fileM[:myjar2manifestfilepath]]]\
+    ...\
+    myjarNname.jar[:myjarNdir[:myjarNfile1,...,myjarNfileM[:myjarNmanifestfilepath]]]
+    (default: myjardir = classes, myjarfiles = .)
+
+  SYS_JARS=\
+    /path/to/myjarfile1.jar \
+    /path/to/myjarfile2.jar \
+    ...\
+    /path/to/myjarfileN.jar
+
+  SYS_LIBS=\
+    -l/path/to/mylibfile1.a \
+    -l/path/to/mylibfile2.a \
+    ...\
+    -l/path/to/mylibfileN.a
+
+  SYS_INC_PATH=\
+    -I/path/to/myincludedir1 \
+    -I/path/to/myincludedir2 \
+    ...\
+    -I/path/to/myincludedirN
+
+  SYS_LIB_PATH=\
+    -L/path/to/mylibdir1 \
+    -L/path/to/mylibdir2 \
+    ...\
+    -L/path/to/mylibdirN
+
+  # System Java virtual machine options
+  SYS_JAVA_OPTS=myjavavmoptions
+
+  # System javadoc options
+  SYS_JDOC_OPTS=myjavadocoptions
+
+  # System flags for C/C++, Java, Lex and Yacc compilers, AsciiDoc tool
+  SYS_CFLAGS=
+  SYS_JFLAGS=
+  SYS_LFLAGS=
+  SYS_YFLAGS=
+  SYS_AFLAGS=
+
+  # System flags for checkin and checkout (RCS)
+  SYS_CIFLAGS=
+  SYS_COFLAGS=
+  # -----------------------------------------------------
+* subsystem:
+  # -----------------------------------------------------
+  SOFTWAREUNITS=\
+    MySoftwareUnit1 \
+    MySoftwareUnit2 \
+    ...\
+    MySoftwareUnitN
+
+  SUB_JARS=\
+    /path/to/myjarfile1.jar \
+    /path/to/myjarfile2.jar \
+    ...\
+    /path/to/myjarfileN.jar
+
+  SUB_LIBS=\
+    -l/path/to/mylibfile1.a \
+    -l/path/to/mylibfile2.a \
+    ...\
+    -l/path/to/mylibfileN.a
+
+  SUB_INC_PATH=\
+    -I/path/to/myincludedir1 \
+    -I/path/to/myincludedir2 \
+    ...\
+    -I/path/to/myincludedirN
+
+  SUB_LIB_PATH=\
+    -L/path/to/mylibdir1 \
+    -L/path/to/mylibdir2 \
+    ...\
+    -L/path/to/mylibdirN
+
+  # Subsystem Java virtual machine options
+  SUB_JAVA_OPTS=myjavavmoptions
+
+  # Subsystem javadoc options
+  SUB_JDOC_OPTS=myjavadocoptions
+
+  # Subsystem flags for C/C++, Java, Lex and Yacc compilers, AsciiDoc tool
+  SUB_CFLAGS=
+  SUB_JFLAGS=
+  SUB_LFLAGS=
+  SUB_YFLAGS=
+  SUB_AFLAGS=
+
+  # Subsystem flags for checkin and checkout (RCS)
+  SUB_CIFLAGS=
+  SUB_COFLAGS=
+  # -----------------------------------------------------
+* software unit:
+  # -----------------------------------------------------
+  # Java WEB application
+  TARGET_WEB=mywebapp
+
+  # Java main class name and args
+  TARGET_MAIN=my.java.main.class
+  TARGET_ARGS=myjavamainargs
+
+  # AsciiDoc based web site
+  TARGET_WEBSITE=mywebsite
+
+  TARGET_BIN=myapplication
+
+  SYS_TARGET_LIB=libmysystem.a
+  # or
+  SYS_TARGET_LIB=libmysystem.so
+
+  SUB_TARGET_LIB=libmysubsystem.a
+  # or
+  SUB_TARGET_LIB=libmysubsystem.so
+
+  TARGET_SCRIPTS=\
+    myscript1.sh \
+    myscript2.awk \
+    ...\
+    myscriptN.pl
+
+  TARGET_CONF=\
+    myconfigfile1.conf \
+    myconfigfile2.conf \
+    ...\
+    myconfigfileN.conf
+
+  JARS=\
+    /path/to/myjarfile1.jar \
+    /path/to/myjarfile2.jar \
+    ...\
+    /path/to/myjarfileN.jar
+
+  EXTERN_WEB=\
+    /my/external/web/resourcefile1[:my/local/webapp/outputdir1] \
+    /my/external/web/resourcefile2[:my/local/webapp/outputdir2] \
+    ...\
+    /my/external/web/resourcefileN[:my/local/webapp/outputdirN]
+    (default: my/local/webapp/outputdir = WEB-INF/lib)
+
+  EXTERN_WEB=\
+    /my/external/web/resourcefile1[:my/local/webapp/outputdir1] \
+    /my/external/web/resourcefile2[:my/local/webapp/outputdir2] \
+    ...\
+    /my/external/web/resourcefileN[:my/local/webapp/outputdirN]
+    (default: my/local/webapp/outputdir = .)
+
+  EXTERN_ROOT=\
+    /my/external/website/resources/root/dir
+
+  LIBS=\
+    -l/path/to/mylibfile1.a \
+    -l/path/to/mylibfile2.a \
+    ...\
+    -l/path/to/mylibfileN.a
+
+  INC_PATH=\
+    -I/path/to/myincludedir1 \
+    -I/path/to/myincludedir2 \
+    ...\
+    -I/path/to/myincludedirN
+
+  LIB_PATH=\
+    -L/path/to/mylibdir1 \
+    -L/path/to/mylibdir2 \
+    ...\
+    -L/path/to/mylibdirN
+
+  SYS_HEADERS.h=\
+    mysystemheaderfile1.h \
+    mysytemsheaderfile2.h \
+    ...
+    mysystemheaderfileN.h
+
+  SUB_HEADERS.h=\
+    mysubsystemheaderfile1.h \
+    mysubsytemsheaderfile2.h \
+    ...
+    mysubsystemheaderfileN.h
+
+  HEADERS.h=\
+    mylocalheaderfile1.h \
+    mylocalheaderfile2.h \
+    ...
+    mylocalheaderfileN.h
+
+  SOURCES.c=\
+    mycsourcefile1.h \
+    mycsourcefile2.h \
+    ...
+    mycsourcefileN.h
+
+  SOURCES.c=\
+    mycsourcefile1.h \
+    mycsourcefile2.h \
+    ...
+    mycsourcefileN.h
+
+  SOURCES.cc=\
+    mycplusplussourcefile1.cc \
+    mycplusplussourcefile2.cc \
+    ...
+    mycplusplussourcefileN.cc
+
+  SOURCES.java=\
+    myjavasourcefile1.java \
+    my/package/path/from/src/javasourcefile2.java \
+    ...
+    my/package/path/from/src/javasourcefileN.java
+
+  SOURCES.web=\
+    mywebsourcefile1.html \
+    mywebsourcefile2.txt \
+    ...
+    mywebsourcefileN.js
+
+  SOURCES.l=\
+    mylexsourcefile1.l \
+    mylexsourcefile2.l \
+    ...
+    mylexsourcefileN.l
+
+  SOURCES.y=\
+    myyaccsourcefile1.y \
+    myyaccsourcefile2.y \
+    ...
+    myyaccsourcefileN.y
+
+  SOURCES.txt=\
+    myasciidocsourcefile1.txt \
+    myasciidocsourcefile2.txt \
+    ...
+    myasciidocsourcefileN.txt
+
+  # Software Unit Java virtual machine options
+  JAVA_OPTS=myjavavmoptions
+
+  # Software Unit javadoc options
+  JDOC_OPTS=myjavadocoptions
+
+  # Software Unit flags for C/C++, Java, Lex and Yacc compilers, AsciiDoc tool
+  CFLAGS=
+  JFLAGS=
+  LFLAGS=
+  YFLAGS=
+  AFLAGS=
+
+  # Software Unit flags for checkin and checkout (RCS)
+  CIFLAGS=
+  COFLAGS=
+
+  # Software Unit FTP deploy parameters
+  FTP_HOST=
+  FTP_USERNAME=
+  FTP_PASSWORD=
+  FTP_REMOTEDIR=
+  FTP_LOCALDIR=
+
+  if FTP_LOCALDIR is empty and TARGET_WEBSITE is not empty
+  then default value of FTP_LOCALDIR is ${MYSDE_ROOT}/web/${TARGET_WEBSITE}
+  # -----------------------------------------------------
+
+The common Makefile can be edited to modify the path of compilers
+and tools
+
+\-------------------------------------------------------------------------
+Usage
+\-------------------------------------------------------------------------
+To use the MySDE development environment you must execute the make command
+from one of the src subdirectories at the three levels:
+* system level:
+    - make
+        create all objects of the systems
+    - make clean
+        delete all objects of the systems
+    - make tar
+        make a tar of the system src subdirectory
+    - make checkin [rev=&lt;revision&gt;]
+        make the checkin of all objects of the system
+    - make checkout [rev=&lt;revision&gt;]
+        make the checkout of all objects of the system
+    - make jar
+        create all java libraries
+    - make javadoc
+        execute javadoc for all classes of the system
+    - make deploy
+        execute FTP deploy for all subsystems
+* subsystem level
+    - make
+        create all objects of the subsystem
+    - make clean
+        delete all objects of the subsystem
+    - make tar
+        make a tar of the subsystem src subdirectory
+    - make checkin [rev=&lt;revision&gt;]
+        make the checkin of all objects of the subsystem
+    - make checkout [rev=&lt;revision&gt;]
+        make the checkout of all objects of the subsystem
+    - make javadoc
+        execute javadoc for all classes of the subsystem
+    - make deploy
+        execute FTP deploy for all software units
+* software unit level
+    - make
+        create all objects of the software unit
+    - make clean
+        delete all objects of the software unit
+    - make tar
+        make a tar of the software unit src subdirectory
+    - make checkin [rev=&lt;revision&gt;]
+        make the checkin of all objects of the software unit
+    - make checkout [rev=&lt;revision&gt;]
+        make the checkout of all objects of the software unit
+    - make javadoc
+        execute javadoc for all classes of the software unit
+    - make install
+        install the objects of the software unit:
+          - C/C++ application and scripts into bin system subdirectory
+          - C/C++ library into lib system or subsystem subdirectory
+          - Java classes into classes system subdirectory
+            (removing them from src software unit subdirectory)
+            or in web application classes subdirectory
+          - configuration files into conf system subdirectory
+          - local and external web application files into
+            web application root subdirectory
+    - ... | make path
+        print on standard output the string evaluated joining
+        all strings from standard input with ":"
+    - make classpath
+        print on standard output the string to use as CLASSPATH value
+        (including classes system subdirectory and all Java libraries)
+    - make run
+        execute the Java application configured in the software unit
+        Makefile
+    - make deploy
+        execute FTP deploy of software unit
+    - make webappdeploy
+        deploy the web application to the web server
+
+The command "make help" from each src level give a summary of the
+available commands
+
+\-------------------------------------------------------------------------
+Notes
+\-------------------------------------------------------------------------
+* in order to use the MySDE environment the following tools
+  must be installed and available for command-line execution:
+    - make
+    - tar
+    - gzip
+    - ci and co
+      (for checkin and checkout with RCS)
+    - asciidoc
+      (for websites)
+* for each web application archive must be specified into TARGET_JARS
+  the .war filename (e.g. TARGET_JARS=mywebapp.war)
+  and optionally the path to relative manifest file
+
+# end of file
+.--$MYSDE_ROOT/README--.
+
+\-------------------------------------------------------------------------
+Makefiles
+\-------------------------------------------------------------------------
+.++$MYSDE_BASE/Makefile++.
+# $Id$
+
+# #######################################################################
+#
+#  ###   ##        ### #####  #####
+#   ##  ##        #  #  #   #  #  #
+#   ### ##  ##  # ###   #   #  ###
+#   # ## #   # ##   ##  #   #  #
+#   # #  #   # #  #  #  #   #  #  #
+#  ###  ###   ##  ###  #####  #####
+#             #
+#            #
+#
+#  My Service Development Environment
+#
+#  Base Makefile
+#
+# #######################################################################
+
+PACKAGES=
+
+# #######################################################################
+
+libpath=LD_LIBRARY_PATH
+
+all: build-all
+
+build:
+        @ if [ "${package}" != "" ]; then \
+          cd ${MYSDE_BASE}/.build; \
+          if [ ! -d ${package} ]; then \
+            cp -f ${MYSDE_BASE}/pkg/${package}.tar.gz ${MYSDE_BASE}/.build/.; \
+            gunzip ${package}.tar.gz; \
+            tar xvf ${package}.tar; \
+            rm -f ${package}.tar; \
+            cd ${package}; \
+            ./configure --prefix=${MYSDE_BASE}/local; \
+          else \
+            cd ${package}; \
+          fi; \
+          make; \
+          make install; \
+        fi
+
+clean:
+        @ if [ "${package}" != "" ]; then \
+          cd ${MYSDE_BASE}/.build/${package}; \
+          make clean; \
+        fi
+
+build-all:
+    @ if [ "${packages}" != "" ]; then \
+      pkglist="${packages}";
+    elif [ "${PACKAGES}" != "" ]; then \
+      pkglist="${PACKAGES}";
+    fi; \
+    if [ "${pkglist}" != "" ]; then \
+    for i in `echo ${pkglist}`; \
+    do \
+      make build.$ii; \
+    done; \
+    fi
+
+clean-all:
+    @ if [ "${packages}" != "" ]; then \
+      pkglist="${packages}";
+    elif [ "${PACKAGES}" != "" ]; then \
+      pkglist="${PACKAGES}";
+    fi; \
+    if [ "${pkglist}" != "" ]; then \
+    for i in `echo ${pkglist}`; \
+    do \
+      make clean.$$i; \
+    done; \
+    fi
+
+tar:
+        @ r=`basename ${MYSDE_BASE}`; \
+        mkdir ${MYSDE_BASE}/.tmp; \
+        cd ${MYSDE_BASE}/.tmp; \
+        mkdir $$r; \
+        cd $$r; \
+        mkdir arc bin build local src; \
+        cp -rf ${MYSDE_BASE}/pkg .; \
+        cp -rf ${MYSDE_BASE}/usr .; \
+        cp ${MYSDE_BASE}/Makefile .; \
+        cd ${MYSDE_BASE}/src/$$r/src; \
+        make clean; \
+        make tar; \
+        cd ../..; \
+        tarfile=`ls -1rt $$r*-src.tar.gz | tail -1`; \
+        cp "$$tarfile" ${MYSDE_BASE}/.tmp/$$r/src/.; \
+        mv "$$tarfile" ${MYSDE_BASE}/arc/.; \
+        cd ${MYSDE_BASE}/.tmp; \
+        j=$$r-`date '+%Y%m%d%H%M%S'`.tar; \
+        tar cvf "$$j" ./$$r; \
+        gzip "$$j"; \
+        mv "$$j".gz ${MYSDE_BASE}/..; \
+        cd ..; \
+        rm -rf ./.tmp
+
+init:
+        @ if [ "${names}" != "" ]; then \
+          for i in `echo ${names}`; \
+          do \
+            rootname=.`basename ${MYSDE}`; \
+            confile=.`basename ${MYSDE_BASE}`rc; \
+            if [ ! -d ${MYSDE_BASE}/.build.$$i ]; then \
+              cp -rf ${MYSDE_BASE}/.build.template ${MYSDE_BASE}/.build.$$i; \
+            fi; \
+            if [ ! -d ${MYSDE_BASE}/local.$$i ]; then \
+              cp -rf ${MYSDE_BASE}/.local.template ${MYSDE_BASE}/local.$$i; \
+            fi; \
+            if [ ! -f ${MYSDE_BASE}/makefiles/Makefile.$$i ]; then \
+              cp -f ${MYSDE_BASE}/makefiles/.Makefile.template ${MYSDE_BASE}/makefiles/Makefile.$$i; \
+            fi; \
+            if [ ! -f ${MYSDE_BASE}/.profile.$$i ]; then \
+              cp -f ${MYSDE_BASE}/.profile.template ${MYSDE_BASE}/.profile.$$i; \
+            fi; \
+            if [ ! -f ${MYSDE_BASE}/$$rootname.$$i ]; then \
+              cat ${MYSDE_BASE}/$$rootname.template | sed "s/LD_LIBRARY_PATH/${libpath}/g" &gt; ${MYSDE_BASE}/$$rootname.$$i; \
+            fi; \
+            if [ ! -f ${MYSDE_BASE}/$$confile.$$i ]; then \
+              cat ${MYSDE_BASE}/$$confile.template | sed "s/LD_LIBRARY_PATH/${libpath}/g" &gt; ${MYSDE_BASE}/$$confile.$$i; \
+            fi; \
+            if [ ! -f ${MYSDE_ROOT}/$$rootname.$$i ]; then \
+              cat ${MYSDE_ROOT}/$$rootname.template | sed "s/LD_LIBRARY_PATH/${libpath}/g" &gt; ${MYSDE_ROOT}/$$rootname.$$i; \
+            fi; \
+            if [ ! -f ${MYSDE_ROOT}/$$confile.$$i ]; then \
+              cat ${MYSDE_ROOT}/$$confile.template | sed "s/LD_LIBRARY_PATH/${libpath}/g" &gt; ${MYSDE_ROOT}/$$confile.$$i; \
+            fi; \
+          done \
+        fi
+
+conf:
+        @ if [ "${name}" != "" ]; then \
+            islink=`ls -l ${MYSDE_BASE}/makefiles/Makefile | grep '^l'`; \
+            if [ "$$islink" != "" ]; then \
+              rm -f ${MYSDE_BASE}/makefiles/Makefile; \
+              (cd ${MYSDE_BASE}/makefiles; ln -s Makefile.$$name Makefile); \
+            fi; \
+            islink=`ls -l ${MYSDE_BASE}/.profile | grep '^l'`; \
+            if [ "$$islink" != "" ]; then \
+              rm -f ${MYSDE_BASE}/.profile; \
+              (cd ${MYSDE_BASE}; ln -s .profile.$$name .profile); \
+            fi; \
+            rootname=.`basename ${MYSDE}`; \
+            confile=.`basename ${MYSDE_BASE}`rc; \
+            islink=`ls -l ${MYSDE_BASE}/$$confile | grep '^l'`; \
+            if [ "$$islink" != "" ]; then \
+              rm -f ${MYSDE_BASE}/$$confile; \
+              (cd ${MYSDE_BASE}; ln -s $$confile.$$name $$confile); \
+            fi; \
+            islink=`ls -l ${MYSDE_BASE}/$$rootname | grep '^l'`; \
+            if [ "$$islink" != "" ]; then \
+              rm -f ${MYSDE_BASE}/$$rootname; \
+              (cd ${MYSDE_BASE}; ln -s $$rootname.$$name $$rootname); \
+            fi; \
+            islink=`ls -l ${MYSDE_ROOT}/$$confile | grep '^l'`; \
+            if [ "$$islink" != "" ]; then \
+              rm -f ${MYSDE_ROOT}/$$confile; \
+              (cd ${MYSDE_ROOT}; ln -s $$confile.$$name $$confile); \
+            fi; \
+            islink=`ls -l ${MYSDE_ROOT}/$$rootname | grep '^l'`; \
+            if [ "$$islink" != "" ]; then \
+              rm -f ${MYSDE_ROOT}/$$rootname; \
+              (cd ${MYSDE_ROOT}; ln -s $$rootname.$$name $$rootname); \
+            fi; \
+            islink=`ls -l ${MYSDE_BASE}/local | grep '^l'`; \
+            if [ "$$islink" != "" ]; then \
+              rm -f ${MYSDE_BASE}/local; \
+              (cd ${MYSDE_BASE}; ln -s local.$$name local); \
+            fi; \
+            islink=`ls -l ${MYSDE_BASE}/.build | grep '^l'`; \
+            if [ "$$islink" != "" ]; then \
+              rm -f ${MYSDE_BASE}/.build; \
+              (cd ${MYSDE_BASE}; ln -s build.$$name build); \
+            fi; \
+          fi
+
+help:
+        @ echo "make build package=\"MyPackage\""; \
+          echo "make clean package=\"MyPackage\""; \
+          echo "make build-all [packages=\"MyPackage1 ... MyPackageN\"]"; \
+          echo "make clean-all [packages=\"MyPackage1 ... MyPackageN\"]"; \
+          echo "make init names=\"MyName1 ... MyNameN\""; \
+          echo "make conf name=\"MyName\""
+
+# #######################################################################
+
+include ${MYSDE_BASE}/makefiles/Makefile
+
+# #######################################################################
+
+# end of file
+.--$MYSDE_BASE/Makefile--.
+
+.++$MYSDE_BASE/makefiles/Makefile++.
+# $Id$
+
+# #######################################################################
+#
+#  ###   ##        ### #####  #####
+#   ##  ##        #  #  #   #  #  #
+#   ### ##  ##  # ###   #   #  ###
+#   # ## #   # ##   ##  #   #  #
+#   # #  #   # #  #  #  #   #  #  #
+#  ###  ###   ##  ###  #####  #####
+#             #
+#            #
+#
+#  My Service Development Environment
+#
+#  Platform Makefile
+#
+# #######################################################################
+
+build.mypkg.template:
+        @ cd ${MYSDE_BASE}/.build; \
+        if [ ! -d mypkg ]; then \
+          cp -f ${MYSDE_BASE}/pkg/mypkg.tar.gz ${MYSDE_BASE}/.build/.; \
+          gunzip mypkg.tar.gz; \
+          tar xvf mypkg.tar; \
+          rm -f mypkg.tar; \
+          cd mypkg; \
+          ./configure --prefix=${MYSDE_BASE}/local; \
+        else \
+          cd mypkg; \
+        fi; \
+        make; \
+        make install
+
+clean.mypkg.template:
+        @ cd ${MYSDE_BASE}/.build/mypkg; \
+        make clean
+
+build.mypkg:
+        @ make build package="mypkg"
+
+clean.mypkg:
+        @ make clean package="mypkg"
+
+# #######################################################################
+
+# end of file
+.--$MYSDE_BASE/makefiles/Makefile--.
+
+.++$MYSDE_BASE/$MYSDE_CONF++.
+# $Id$
+
+# #######################################################################
+#
+#  ###   ##        ### #####  #####
+#   ##  ##        #  #  #   #  #  #
+#   ### ##  ##  # ###   #   #  ###
+#   # ## #   # ##   ##  #   #  #
+#   # #  #   # #  #  #  #   #  #  #
+#  ###  ###   ##  ###  #####  #####
+#             #
+#            #
+#
+#  My Service Development Environment
+#
+#  Base Environment
+#
+# #######################################################################
+
+. ${MYSDE_BASE}/.${MYSDE}
+
+# #######################################################################
+
+# MY_USER_BASEENV_1=&lt;myenv1&gt;  # add here your user base env variable 1...
+# export MY_USER_BASEENV_1
+# ...
+# MY_USER_BASEENV_N=&lt;myenvN&gt;  # add here your user base env variable N...
+# export MY_USER_BASEENV_N
+
+# #######################################################################
+
+PATH=$PATH
+# PATH=$PATH:&lt;mypath1&gt; # add here your PATH 1...
+# ...
+# PATH=$PATH:&lt;mypathN&gt; # add here your PATH N...
+export PATH
+
+# #######################################################################
+
+${MYSDE_PATH}=$${MYSDE_PATH}
+# ${MYSDE_PATH}=$${MYSDE_PATH}:&lt;mylibpath1&gt; # add here your ${MYSDE_PATH} 1...
+# ...
+# ${MYSDE_PATH}=$${MYSDE_PATH}:&lt;mylibpathN&gt; # add here your ${MYSDE_PATH} N...
+export ${MYSDE_PATH}
+
+# #######################################################################
+
+CLASSPATH=$CLASSPATH
+# CLASSPATH=$CLASSPATH:`jardir2classpath &lt;myclasspath1&gt;` # add here your CLASSPATH 1...
+# ...
+# CLASSPATH=$CLASSPATH:`jardir2classpath &lt;myclasspathN&gt;` # add here your CLASSPATH N...
+export CLASSPATH
+
+# #######################################################################
+
+alias ${MYSDE}-src="cd ${MYSDE_ROOT}/src"
+
+# #######################################################################
+
+# end of file
+.--$MYSDE_BASE/$MYSDE_CONF--.
+
+.++$MYSDE_BASE/.$MYSDE++.
+# $Id$
+
+# #######################################################################
+#
+#  ###   ##        ### #####  #####
+#   ##  ##        #  #  #   #  #  #
+#   ### ##  ##  # ###   #   #  ###
+#   # ## #   # ##   ##  #   #  #
+#   # #  #   # #  #  #  #   #  #  #
+#  ###  ###   ##  ###  #####  #####
+#             #
+#            #
+#
+#  My Service Development Environment
+#
+#  Common Base Environment
+#
+# #######################################################################
+
+MYSDE_ROOT=${MYSDE_BASE}/src/${MYSDE}
+export MYSDE_ROOT
+
+MYSDE_HOME=${MYSDE_BASE}/bin/${MYSDE}
+export MYSDE_HOME
+
+# #######################################################################
+
+. ${MYSDE_ROOT}/${MYSDE_CONF}
+
+# #######################################################################
+
+PATH=$PATH:${MYSDE_BASE}/bin
+PATH=$PATH:${MYSDE_BASE}/sys/bin
+PATH=$PATH:${MYSDE_BASE}/local/bin
+PATH=$PATH:${MYSDE_BASE}/usr/bin
+export PATH
+
+# #######################################################################
+
+${MYSDE_PATH}=$${MYSDE_PATH}:${MYSDE_BASE}/lib
+${MYSDE_PATH}=$${MYSDE_PATH}:${MYSDE_BASE}/sys/lib
+${MYSDE_PATH}=$${MYSDE_PATH}:${MYSDE_BASE}/local/lib
+${MYSDE_PATH}=$${MYSDE_PATH}:${MYSDE_BASE}/usr/lib
+export ${MYSDE_PATH}
+
+# #######################################################################
+
+CLASSPATH=$CLASSPATH:${MYSDE_BASE}/classes
+CLASSPATH=$CLASSPATH:`jardir2classpath ${MYSDE_BASE}/lib`
+CLASSPATH=$CLASSPATH:`jardir2classpath ${MYSDE_BASE}/sys/lib`
+CLASSPATH=$CLASSPATH:`jardir2classpath ${MYSDE_BASE}/local/lib`
+CLASSPATH=$CLASSPATH:`jardir2classpath ${MYSDE_BASE}/usr/lib`
+export CLASSPATH
+
+# #######################################################################
+
+MANPATH=$MANPATH:${MYSDE_BASE}/man
+MANPATH=$MANPATH:${MYSDE_BASE}/local/man
+export MANPATH
+
+# #######################################################################
+
+# end of file
+.--$MYSDE_BASE/.$MYSDE--.
+
+.++$MYSDE_ROOT/.$MYSDE++.
+# $Id$
+
+# #######################################################################
+#
+#  ###   ##        ### #####  #####
+#   ##  ##        #  #  #   #  #  #
+#   ### ##  ##  # ###   #   #  ###
+#   # ## #   # ##   ##  #   #  #
+#   # #  #   # #  #  #  #   #  #  #
+#  ###  ###   ##  ###  #####  #####
+#             #
+#            #
+#
+#  My Service Development Environment
+#
+#  Common Root Environment
+#
+# #######################################################################
+
+jardir2classpath()
+{
+  find $1 -name '*.jar'  | awk '
+  {
+    for(i=1;i&lt;=NF;i++){
+      if(!path){
+        path = $i
+      } else {
+        path = path ":" $i
+      }
+    }
+  }
+  END {
+    print path
+  }'
+}
+
+# #######################################################################
+
+PATH=${MYSDE_ROOT}/local/bin:$PATH
+PATH=${MYSDE_ROOT}/sys/bin:$PATH
+PATH=${MYSDE_ROOT}/bin:$PATH
+export PATH
+
+# #######################################################################
+
+${MYSDE_PATH}=${MYSDE_ROOT}/local/lib:$${MYSDE_PATH}
+${MYSDE_PATH}=${MYSDE_ROOT}/sys/lib:$${MYSDE_PATH}
+${MYSDE_PATH}=${MYSDE_ROOT}/lib:$${MYSDE_PATH}
+export ${MYSDE_PATH}
+
+# #######################################################################
+
+CLASSPATH=${MYSDE_ROOT}/classes:$CLASSPATH
+CLASSPATH=`jardir2classpath ${MYSDE_ROOT}/lib`:$CLASSPATH
+CLASSPATH=`jardir2classpath ${MYSDE_ROOT}/sys/lib`:$CLASSPATH
+CLASSPATH=`jardir2classpath ${MYSDE_ROOT}/local/lib`:$CLASSPATH
+export CLASSPATH
+
+# #######################################################################
+
+MANPATH=${MYSDE_ROOT}/local/man:$MANPATH
+MANPATH=${MYSDE_ROOT}/man:$MANPATH
+export MANPATH
+
+# #######################################################################
+
+# end of file
+.--$MYSDE_ROOT/.$MYSDE--.
+
+.++$MYSDE_ROOT/$MYSDE_CONF++.
+# $Id$
+
+# #######################################################################
+#
+#  ###   ##        ### #####  #####
+#   ##  ##        #  #  #   #  #  #
+#   ### ##  ##  # ###   #   #  ###
+#   # ## #   # ##   ##  #   #  #
+#   # #  #   # #  #  #  #   #  #  #
+#  ###  ###   ##  ###  #####  #####
+#             #
+#            #
+#
+#  My Service Development Environment
+#
+#  Root Environment
+#
+# #######################################################################
+
+. ${MYSDE_ROOT}/.${MYSDE}
+
+# #######################################################################
+
+# MY_USER_ROOTENV_1=&lt;myenv1&gt;  # add here your user root env variable 1...
+# export MY_USER_ROOTENV_1
+# ...
+# MY_USER_ROOTENV_N=&lt;myenvN&gt;  # add here your user root env variable N...
+# export MY_USER_ROOTENV_N
+
+# #######################################################################
+
+PATH=$PATH
+# PATH=&lt;mypath1&gt;:$PATH1 # add here your PATH 1...
+# ...
+# PATH=&lt;mypathN&gt;:$PATHN # add here your PATH N...
+export PATH
+
+# #######################################################################
+
+${MYSDE_PATH}=$${MYSDE_PATH}
+# ${MYSDE_PATH}=&lt;mylibpath1&gt;:$${MYSDE_PATH} # add here your ${MYSDE_PATH} 1...
+# ...
+# ${MYSDE_PATH}=&lt;mylibpathN&gt;:$${MYSDE_PATH} # add here your ${MYSDE_PATH} N...
+export ${MYSDE_PATH}
+
+# #######################################################################
+
+CLASSPATH=$CLASSPATH
+# CLASSPATH=`jardir2classpath &lt;myclasspath1&gt;`:$CLASSPATH # add here your CLASSPATH 1...
+# ...
+# CLASSPATH=`jardir2classpath &lt;myclasspathN&gt;`:$CLASSPATH # add here your CLASSPATH N...
+export CLASSPATH
+
+# #######################################################################
+
+# end of file
+.--$MYSDE_ROOT/$MYSDE_CONF--.
+
+.++$MYSDE_ROOT/src/makefiles/Makefile++.
+# $Id$
+
+# #######################################################################
+#
+#  ###   ##        ### #####  #####
+#   ##  ##        #  #  #   #  #  #
+#   ### ##  ##  # ###   #   #  ###
+#   # ## #   # ##   ##  #   #  #
+#   # #  #   # #  #  #  #   #  #  #
+#  ###  ###   ##  ###  #####  #####
+#             #
+#            #
+#
+#  My Service Development Environment
+#
+#  Common Makefile
+#
+# #######################################################################
+#
+# Compilers &amp; Tools
+#
+# #######################################################################
+
+# #######################################################################
+#
+# make
+#
+# #######################################################################
+
+MAKE=make
+
+# #######################################################################
+
+# #######################################################################
+#
+# tar
+#
+# #######################################################################
+
+TAR=tar
+
+# #######################################################################
+
+# #######################################################################
+#
+# zip
+#
+# #######################################################################
+
+ZIP=gzip
+
+# #######################################################################
+
+# #######################################################################
+#
+# C/C++
+#
+# #######################################################################
+
+CC=gcc
+CCPLUS=g++
+
+# #######################################################################
+
+# #######################################################################
+#
+# Linker/Archiver
+#
+# #######################################################################
+
+LINKER=${CCPLUS}
+ARCHIVER=ar -rc
+
+# #######################################################################
+
+# #######################################################################
+#
+# Java
+#
+# #######################################################################
+
+JAVAC=javac
+JAVA=java
+JAR=jar
+JAVADOC=javadoc
+
+# #######################################################################
+
+# #######################################################################
+#
+# Lex &amp; Jacc
+#
+# #######################################################################
+
+LEX=lex
+YACC=yacc
+
+# #######################################################################
+
+# #######################################################################
+#
+# RCS
+#
+# #######################################################################
+
+CI=ci
+CO=co
+
+# #######################################################################
+
+# #######################################################################
+#
+# Web Server
+#
+# #######################################################################
+
+WEB_SERVER=tomcat
+
+# #######################################################################
+
+# #######################################################################
+#
+# AsciiDoc
+#
+# #######################################################################
+
+ASCIIDOC=asciidoc
+
+# #######################################################################
+
+# #######################################################################
+#
+# System Makefile variables
+#
+# #######################################################################
+
+# SUBSYSTEMS=\
+#   MySubsystem1 \
+#   MySubsystem2 \
+#   ...\
+#   MySubsystemN
+
+# TARGET_JARS=\
+#   mywebapp1.war[:mywebapp1manifestfilepath]\
+#   mywebapp2.war[:mywebapp2manifestfilepath]\
+#   ...\
+#   mywebappN.war[:mywebappNmanifestfilepath]\
+#   myjar1name.jar[:myjar1dir[:myjar1file1,...,myjar1fileM[:myjar1manifestfilepath]]]\
+#   myjar2name.jar[:myjar2dir[:myjar2file1,...,myjar2fileM[:myjar2manifestfilepath]]]\
+#   ...\
+#   myjarNname.jar[:myjarNdir[:myjarNfile1,...,myjarNfileM[:myjarNmanifestfilepath]]]
+#   (default: myjardir = classes, myjarfile = .)
+
+# SYS_JARS=\
+#   /path/to/myjarfile1.jar \
+#   /path/to/myjarfile2.jar \
+#   ...\
+#   /path/to/myjarfileN.jar
+
+# SYS_LIBS=\
+#   -l/path/to/mylibfile1.a \
+#   -l/path/to/mylibfile2.a \
+#   ...\
+#   -l/path/to/mylibfileN.a
+
+# SYS_INC_PATH=\
+#   -I/path/to/myincludedir1 \
+#   -I/path/to/myincludedir2 \
+#   ...\
+#   -I/path/to/myincludedirN
+
+# SYS_LIB_PATH=\
+#   -L/path/to/mylibdir1 \
+#   -L/path/to/mylibdir2 \
+#   ...\
+#   -L/path/to/mylibdirN
+
+# System Java virtual machine options
+# SYS_JAVA_OPTS=myjavavmoptions
+
+# System javadoc options
+# SYS_JDOC_OPTS=myjavadocoptions
+
+# System flags for C/C++, Java, Lex and Yacc compilers, AsciiDoc tool
+# SYS_CFLAGS=
+# SYS_JFLAGS=
+# SYS_LFLAGS=
+# SYS_YFLAGS=
+# SYS_AFLAGS=
+
+# System flags for checkin and checkout (RCS)
+# SYS_CIFLAGS=
+# SYS_COFLAGS=
+
+# #######################################################################
+
+# #######################################################################
+#
+# Subsystem Makefile variables
+#
+# #######################################################################
+
+# SOFTWAREUNITS=\
+#   MySoftwareUnit1 \
+#   MySoftwareUnit2 \
+#   ...\
+#   MySoftwareUnitN
+
+#  SUB_JARS=\
+#    /path/to/myjarfile1.jar \
+#    /path/to/myjarfile2.jar \
+#    ...\
+#    /path/to/myjarfileN.jar
+
+# SUB_LIBS=\
+#   -l/path/to/mylibfile1.a \
+#   -l/path/to/mylibfile2.a \
+#   ...\
+#   -l/path/to/mylibfileN.a
+
+# SUB_INC_PATH=\
+#   -I/path/to/myincludedir1 \
+#   -I/path/to/myincludedir2 \
+#   ...\
+#   -I/path/to/myincludedirN
+
+# SUB_LIB_PATH=\
+#   -L/path/to/mylibdir1 \
+#   -L/path/to/mylibdir2 \
+#   ...\
+#   -L/path/to/mylibdirN
+
+# Subsystem Java virtual machine options
+# SUB_JAVA_OPTS=myjavavmoptions
+
+# Subsystem javadoc options
+# SUB_JDOC_OPTS=myjavadocoptions
+
+# Subsystem flags for C/C++, Java, Lex and Yacc compilers, AsciiDoc tool
+# SUB_CFLAGS=
+# SUB_JFLAGS=
+# SUB_LFLAGS=
+# SUB_YFLAGS=
+# SUB_AFLAGS=
+
+# Subsystem flags for checkin and checkout (RCS)
+# SUB_CIFLAGS=
+# SUB_COFLAGS=
+
+# #######################################################################
+
+# #######################################################################
+#
+# Software Unit Makefile variables
+#
+# #######################################################################
+
+# Java main class name and args
+# TARGET_MAIN=my.java.main.class
+# TARGET_ARGS=myjavamainargs
+
+# TARGET_BIN=myapplication
+
+# SYS_TARGET_LIB=libmyystem.a
+# or
+# SYS_TARGET_LIB=libmyystem.so
+
+# SUB_TARGET_LIB=libmysubsystem.a
+# or
+# SUB_TARGET_LIB=libmysubsystem.so
+
+# TARGET_SCRIPTS=\
+#   myscript1.sh \
+#   myscript2.awk \
+#   ...\
+#   myscriptN.pl
+
+# TARGET_CONF=\
+#   myconfigfile1.conf \
+#   myconfigfile2.conf \
+#   ...\
+#   myconfigfileN.conf
+
+#  EXTERN_WEB=\
+#    /my/external/web/resourcefile1[:my/local/webapp/outputdir1] \
+#    /my/external/web/resourcefile2[:my/local/webapp/outputdir2] \
+#    ...\
+#    /my/external/web/resourcefileN[:my/local/webapp/outputdirN]
+#    (default: my/local/webapp/outputdir = WEB-INF/lib)
+
+#  EXTERN_ROOT=\
+#    /my/external/website/resources/root/dir
+
+#  EXTERN_WEBSITE=\
+#    ${EXTERN_ROOT}/resourcefile1[:my/local/website/outputdir1] \
+#    ${EXTERN_ROOT}/resourcefile2[:my/local/website/outputdir2] \
+#    ... \
+#    ${EXTERN_ROOT}/resourcefileN[:my/local/website/outputdirN]
+
+# JARS=\
+#   /path/to/myjarfile1.jar \
+#   /path/to/myjarfile2.jar \
+#   ...\
+#   /path/to/myjarfileN.jar
+
+# LIBS=\
+#   -l/path/to/mylibfile1.a \
+#   -l/path/to/mylibfile2.a \
+#   ...\
+#   -l/path/to/mylibfileN.a
+
+# INC_PATH=\
+#   -I/path/to/myincludedir1 \
+#   -I/path/to/myincludedir2 \
+#   ...\
+#   -I/path/to/myincludedirN
+
+# SYS_HEADERS.h=\
+#   mysystemheaderfile1.h \
+#   mysytemsheaderfile2.h \
+#   ...
+#   mysystemheaderfileN.h
+
+# SUB_HEADERS.h=\
+#   mysubsystemheaderfile1.h \
+#   mysubsytemsheaderfile2.h \
+#   ...
+#   mysubsystemheaderfileN.h
+
+# HEADERS.h=\
+#   mylocalheaderfile1.h \
+#   mylocalheaderfile2.h \
+#   ...
+#   mylocalheaderfileN.h
+
+# SOURCES.c=\
+#   mycsourcefile1.h \
+#   mycsourcefile2.h \
+#   ...
+#   mycsourcefileN.h
+
+# SOURCES.c=\
+#   mycsourcefile1.h \
+#   mycsourcefile2.h \
+#   ...
+#   mycsourcefileN.h
+
+# SOURCES.cc=\
+#   mycplusplussourcefile1.cc \
+#   mycplusplussourcefile2.cc \
+#   ...
+#   mycplusplussourcefileN.cc
+
+# SOURCES.java=\
+#   myjavasourcefile1.java \
+#   my/package/path/from/src/javasourcefile2.java \
+#   ...
+#   my/package/path/from/src/javasourcefileN.java
+
+# SOURCES.web=\
+#   mywebsourcefile1.html \
+#   mywebsourcefile2.txt \
+#   ...
+#   mywebsourcefileN.js
+
+# SOURCES.l=\
+#   mylexsourcefile1.l \
+#   mylexsourcefile2.l \
+#   ...
+#   mylexsourcefileN.l
+
+# SOURCES.y=\
+#   myyaccsourcefile1.y \
+#   myyaccsourcefile2.y \
+#   ...
+#   myyaccsourcefileN.y
+
+# SOURCES.txt=\
+#   myasciidocsourcefile1.txt \
+#   myasciidocsourcefile2.txt \
+#   ...
+#   myasciidocsourcefileN.txt
+
+# Software Unit Java virtual machine options
+# JAVA_OPTS=myjavavmoptions
+
+# Software Unit javadoc options
+# JDOC_OPTS=myjavadocoptions
+
+# Software Unit flags for C/C++, Java, Lex and Yacc compilers, AsciiDoc tool
+# CFLAGS=
+# JFLAGS=
+# LFLAGS=
+# YFLAGS=
+# AFLAGS=
+
+# Software Unit flags for checkin and checkout (RCS)
+# CIFLAGS=
+# COFLAGS=
+
+# Software Unit FTP deploy parameters
+# FTP_HOST=
+# FTP_USERNAME=
+# FTP_PASSWORD=
+# FTP_REMOTEDIR=
+# FTP_LOCALDIR=
+
+# if FTP_LOCALDIR is empty and TARGET_WEBSITE is not empty
+# then default value of FTP_LOCALDIR is ${MYSDE_ROOT}/web/${TARGET_WEBSITE}
+
+# #######################################################################
+
+# #######################################################################
+#
+# Common Makefile variables
+#
+# #######################################################################
+
+SHELL=/bin/sh
+
+.SUFFIXES:.o .cc .c .class .java .lex .y .txt .html
+
+.SILENT:
+
+#
+#  Source files
+#
+
+SRCS=\
+     ${TARGET_SCRIPTS} \
+     ${TARGET_CONF} \
+     ${SYS_HEADERS.h} \
+     ${SUB_HEADERS.h} \
+     ${HEADERS.h} \
+     ${SOURCES.c} \
+     ${SOURCES.cc} \
+     ${SOURCES.java} \
+     ${SOURCES.web} \
+     ${SOURCES.l} \
+     ${SOURCES.y} \
+     ${SOURCES.txt}
+
+#
+#  Object files
+#
+
+OBJS=${SOURCES.c:.c=.o} \
+     ${SOURCES.cc:.cc=.o} \
+     ${SOURCES.l:.lex=.o} \
+     ${SOURCES.y:.yacc=.o}
+
+#
+#  Class files
+#
+
+CLASSES=${SOURCES.java:.java=.class}
+
+#
+#  AsciiDoc files
+#
+
+HTML=${SOURCES.txt:.txt=.html}
+
+#
+#  Software Unit files to clean
+#
+
+CLEAN=*.o *.a lex.yy.c y.tab.c y.tab.h core \
+      ${TARGET_BIN} \
+      ${SYS_TARGET_LIB} \
+      ${SUB_TARGET_LIB} \
+      ${CLASSES} \
+      ${HTML}
+
+#
+# Default destination directory for class files
+#
+
+CLASSES_DIR=
+
+#
+# Default src level
+#
+
+SRC_LEVEL=2
+
+#
+# Default subsystems and software units for init
+#
+
+subsystems=
+softwareunits=
+
+#
+# Default web application for war
+#
+
+webapp=
+
+# tmp...
+SYS_AFLAGS=
+SUB_AFLAGS=
+
+# #######################################################################
+
+# #######################################################################
+#
+# Common Makefile rules
+#
+# #######################################################################
+
+all:
+        @ if [ `echo "${SOFTWAREUNITS}" | wc -w` = 0 ]; then \
+    ${MAKE} system; \
+  elif [ `echo "${SRCS}" | wc -w` = 0 ]; then \
+    ${MAKE} subsystem; \
+  else \
+    ${MAKE} softwareunit; \
+  fi
+
+${TARGET_BIN}: ${OBJS}
+        @ ${LINKER} ${SYS_CFLAGS} ${SUB_CFLAGS} ${CFLAGS} \
+      -I../../../include -I../../../../../include \
+      ${SYS_INC_PATH} ${SUB_INC_PATH} ${INC_PATH} \
+      -L../../../lib -L../../../../../lib \
+      ${SYS_LIB_PATH} ${SUB_LIB_PATH} ${LIB_PATH} \
+      ${SYS_CFLAGS} ${SUB_CFLAGS} ${CFLAGS} \
+      ${OBJS} \
+      ${SYS_LIBS} ${SUB_LIBS} ${LIBS} \
+      -o $@
+
+${SYS_TARGET_LIB} ${SUB_TARGET_LIB}: ${OBJS}
+        @ i=`echo "$@" | awk -F. '{ print $$(NF) }'`; \
+  if [ "$$i" = "a" ]; then \
+    ${ARCHIVER} $@ ${OBJS}; \
+  else \
+    ${CC} -shared -fPIC ${SYS_CFLAGS} ${SUB_CFLAGS} ${CFLAGS} \
+    -I../../../include -I../../../../../include \
+    ${SYS_INC_PATH} ${SUB_INC_PATH} ${INC_PATH} \
+    -o $@ ${SOURCES.c}; \
+  fi
+
+${TARGET_SCRIPTS}:
+        @ chmod +x $@
+
+${TARGET_WEBSITE}: ${HTML}
+
+root:
+        @ mkdir src; \
+  mkdir src/RCS; \
+  mkdir src/makefiles; \
+  mkdir bin; \
+  mkdir lib; \
+  mkdir include; \
+  mkdir classes; \
+  mkdir conf; \
+  mkdir docs; \
+  mkdir web; \
+  mv Makefile.subsystem ./src/makefiles/.; \
+  mv Makefile.softwareunit ./src/makefiles/.; \
+  mv Makefile.system ./src/makefiles/.; \
+  mv Makefile ./src/makefiles/.; \
+  mv README ./src/makefiles/.; \
+  cp ./src/makefiles/Makefile.system ./src/Makefile
+
+init:
+        @ if [ "${subsystems}" != "" ]; then \
+    for i in `echo ${subsystems}`; \
+    do \
+      mkdir $$i; \
+      mkdir $$i/include; \
+      mkdir $$i/lib; \
+      mkdir $$i/src; \
+      mkdir $$i/src/RCS; \
+      cp ./makefiles/Makefile.subsystem ./$$i/src/Makefile; \
+    done \
+  elif [ "${softwareunits}" != "" ]; then \
+    for i in `echo ${softwareunits}`; \
+    do \
+      mkdir $$i; \
+      mkdir $$i/src; \
+      mkdir $$i/src/RCS; \
+      cp ../../makefiles/Makefile.softwareunit ./$$i/src/Makefile; \
+    done; \
+  elif [ "${webapps}" != "" ]; then \
+    for i in `echo ${webapps}`; \
+    do \
+      mkdir ../web/$$i; \
+      mkdir ../web/$$i/WEB-INF; \
+      mkdir ../web/$$i/WEB-INF/classes; \
+      mkdir ../web/$$i/WEB-INF/lib; \
+    done; \
+  elif [ "${webappdirs}" != "" ]; then \
+    if [ "${TARGET_WEB}" != "" ]; then \
+      for i in `echo ${webappdirs}`; \
+      do \
+        mkdir -p $$i; \
+        mkdir -p $$i/RCS; \
+        if [ ! -d ../../../../../web/${TARGET_WEB}/$$i ]; then \
+          mkdir -p ../../../../../web/${TARGET_WEB}/$$i; \
+        fi; \
+      done \
+    fi; \
+  elif [ "${websites}" != "" ]; then \
+    for i in `echo ${websites}`; \
+    do \
+      mkdir ../web/$$i; \
+    done; \
+  elif [ "${packages}" != "" ]; then \
+    for i in `echo ${packages}`; \
+    do \
+      packagedir=`echo "$$i" | sed 's/\./\//g'`; \
+      mkdir -p $${packagedir}; \
+      mkdir -p $${packagedir}/RCS; \
+    done; \
+  fi
+
+jar:
+        @ for i in `echo ${TARGET_JARS}`; \
+    do \
+      n=`echo "$$i" | awk -F: '{ print NF }'`; \
+      jar_name=`echo "$$i" | cut -d: -f1`; \
+      jar_suffix=`echo "$${jar_name}" | awk -F. '{ print $$(NF) }'`; \
+      if [ "$${jar_suffix}" = "war" ]; then \
+        jar_root="web/"`basename $${jar_name} .war`; \
+        jar_files="."; \
+      else \
+        if [ "$${n}" -gt "1" ]; then \
+          jar_root=`echo "$$i" | cut -d: -f2`; \
+        else \
+           jar_root="classes"; \
+        fi; \
+        if [ "$${n}" -gt "2" ]; then \
+          jar_files=`echo "$$i" | cut -d: -f3 | sed 's/,/ /g'`; \
+        else \
+          jar_files="."; \
+        fi; \
+      fi; \
+      jar_libdir="${MYSDE_ROOT}/lib"; \
+      pwd=`pwd`; \
+      cd ../$${jar_root}; \
+      if [ "$${n}" -gt "3" ]; then \
+        jar_manifest=`echo "$$i" | cut -d: -f$$n`; \
+        ${JAR} cmf $${jar_manifest} \
+          $${jar_libdir}/$${jar_name} $${jar_files}; \
+      else \
+        ${JAR} cf $${jar_libdir}/$${jar_name} $${jar_files}; \
+      fi; \
+      cd $$pwd; \
+    done
+
+war:
+        @ if [ "${webapp}" != "" ]; then \
+    TARGET_JARS="${webapp}.war"; \
+    fi; \
+    for i in `echo ${TARGET_JARS}`; \
+    do \
+      n=`echo "$$i" | awk -F: '{ print NF }'`; \
+      jar_name=`echo "$$i" | cut -d: -f1`; \
+      jar_suffix=`echo "$${jar_name}" | awk -F. '{ print $$(NF) }'`; \
+      if [ "$${jar_suffix}" = "war" ]; then \
+        jar_root="web/"`basename $${jar_name} .war`; \
+        jar_files="."; \
+        jar_libdir="${MYSDE_ROOT}/lib"; \
+        if [ -d ../$${jar_root} ]; then \
+          pwd=`pwd`; \
+          cd ../$${jar_root}; \
+          if [ "$${n}" -gt "1" ]; then \
+            jar_manifest=`echo "$$i" | cut -d: -f$$n`; \
+            ${JAR} cmf $${jar_manifest} \
+              $${jar_libdir}/$${jar_name} $${jar_files}; \
+          else \
+            ${JAR} cf $${jar_libdir}/$${jar_name} $${jar_files}; \
+          fi; \
+          cd $$pwd; \
+        fi; \
+      fi; \
+    done
+
+sys_install_jar: jar
+
+depend: .depend
+
+.depend: _dummy_ Makefile ${SOURCES.c} ${SOURCES.cc} ${SOURCES.l} ${SOURCES.y}
+        @ makedepend -I../../../include -I../../../../../include \
+        ${SYS_INC_PATH} ${SUB_INC_PATH} ${INC_PATH} \
+        -f .depend -- ${SOURCES.c} ${SOURCES.cc}
+
+install: install_inc install_lib install_bin install_scripts install_conf install_classes install_web install_website
+
+install_inc:
+        @ if [ "${SYS_HEADERS.h}" != "" ]; then \
+            cp -f ${SYS_HEADERS.h} ../../../../../include; \
+          fi
+        @ if [ "${SUB_HEADERS.h}" != "" ]; then \
+            cp -f ${SUB_HEADERS.h} ../../../include; \
+          fi
+
+install_lib:
+        @ if [ "${SUB_TARGET_LIB}" != "" ]; then \
+            ${MAKE}; \
+            cp -f ${SUB_TARGET_LIB} ../../../lib; \
+          elif [ "${SYS_TARGET_LIB}" != "" ]; then \
+            ${MAKE}; \
+            cp -f ${SYS_TARGET_LIB} ../../../../../lib; \
+          fi
+
+install_bin:
+        @ if [ "${TARGET_BIN}" != "" ]; then \
+            ${MAKE}; \
+            cp -f ${TARGET_BIN} ../../../../../bin; \
+          fi
+
+install_scripts:
+        @ if [ "${TARGET_SCRIPTS}" != "" ]; then \
+            ${MAKE}; \
+            cp -f ${TARGET_SCRIPTS} ../../../../../bin; \
+          fi
+
+install_conf:
+        @ if [ "${TARGET_CONF}" != "" ]; then \
+            cp -f ${TARGET_CONF} ../../../../../conf; \
+          fi
+
+install_classes_0: ${CLASSES}
+        @ if [ "${TARGET_WEB}" != "" ]; then \
+            if [ ! -d ../../../../../web/${TARGET_WEB}/WEB-INF/classes ]; then \
+              mkdir -p ../../../../../web/${TARGET_WEB}/WEB-INF/classes; \
+            fi; \
+            cp -f `echo "${CLASSES}" | sed 's/\.class/*.class/g'` ../../../../../web/${TARGET_WEB}/WEB-INF/classes; \
+          else \
+            cp -f `echo "${CLASSES}" | sed 's/\.class/*.class/g'` ../../../../../classes; \
+          fi
+
+install_classes:
+        @ if [ "${CLASSES}" != "" ]; then \
+            make install_classes_0; \
+          fi
+
+install_web: ${HTML}
+        @ if [ "${TARGET_WEB}" != "" ]; then \
+            for i in `echo ${SOURCES.web}`; \
+            do \
+              j=`dirname $$i`; \
+              if [ ! -d ../../../../../web/${TARGET_WEB}/$$j ]; then \
+                mkdir -p ../../../../../web/${TARGET_WEB}/$$j; \
+              fi; \
+              cp -f $$i ../../../../../web/${TARGET_WEB}/$$j/.; \
+            done; \
+            for i in `echo ${EXTERN_WEB}`; \
+            do \
+              input_file=`echo "$$i" | cut -d: -f1`; \
+              n=`echo "$$i" | awk -F: '{ print NF }'`; \
+              if [ "$${n}" -gt "1" ]; then \
+                output_dir=`echo "$$i" | cut -d: -f2`; \
+              else \
+                output_dir="WEB-INF/lib"; \
+              fi; \
+              if [ "${EXTERN_ROOT}" != "" ]; then \
+                output_dir=`echo "$${output_dir}" | sed "s@^${EXTERN_ROOT}@@g"`; \
+              fi; \
+              if [ ! -d ../../../../../web/${TARGET_WEB}/$${output_dir} ]; then \
+                mkdir -p ../../../../../web/${TARGET_WEB}/$${output_dir}; \
+              fi; \
+              cp -f $${input_file} ../../../../../web/${TARGET_WEB}/$${output_dir}/.; \
+            done \
+          fi
+
+install_website:
+        @ if [ "${TARGET_WEBSITE}" != "" ]; then \
+            for i in `echo ${HTML}`; \
+            do \
+              j=`dirname $$i`; \
+              if [ ! -d ../../../../../web/${TARGET_WEBSITE}/$$j ]; then \
+                mkdir -p ../../../../../web/${TARGET_WEBSITE}/$$j; \
+              fi; \
+              cp -f $$i ../../../../../web/${TARGET_WEBSITE}/$$j/.; \
+            done; \
+            for i in `echo ${EXTERN_WEBSITE}`; \
+            do \
+              input_file=`echo "$$i" | awk -F: '{ print $$1 }'`; \
+              n=`echo "$$i" | awk -F: '{ print NF }'`; \
+              if [ "$${n}" -gt "1" ]; then \
+                output_dir=`echo "$$i" | awk -F: '{ print $$2 }'`; \
+              else \
+                output_dir=`dirname $${input_file}`; \
+              fi; \
+              if [ "${EXTERN_ROOT}" != "" ]; then \
+                output_dir=`echo "$${output_dir}" | sed "s@^${EXTERN_ROOT}@@g"`; \
+              fi; \
+              if [ ! -d ../../../../../web/${TARGET_WEBSITE}/$${output_dir} ]; then \
+                mkdir -p ../../../../../web/${TARGET_WEBSITE}/$${output_dir}; \
+              fi; \
+              cp -f $${input_file} ../../../../../web/${TARGET_WEBSITE}/$${output_dir}/.; \
+            done \
+          fi
+
+sub_install_inc:
+        @ for i in `echo ${SOFTWAREUNITS}`; \
+          do \
+            cd $$i/src; \
+            ${MAKE} install_inc; \
+            cd ../..; \
+          done
+
+sys_install_inc:
+        @ for i in `echo ${SUBSYSTEMS}`; \
+          do \
+            cd $$i/src; \
+            ${MAKE} sub_install_inc; \
+            cd ../..; \
+          done
+
+sub_install_lib:
+        @ for i in `echo ${SOFTWAREUNITS}`; \
+          do \
+            cd $$i/src; \
+            ${MAKE} install_lib; \
+            cd ../..; \
+          done
+
+sys_install_lib:
+        @ for i in `echo ${SUBSYSTEMS}`; \
+          do \
+            cd $$i/src; \
+            ${MAKE} sub_install_lib; \
+            cd ../..; \
+          done
+
+sub_install_bin:
+        @ for i in `echo ${SOFTWAREUNITS}`; \
+          do \
+            cd $$i/src; \
+            ${MAKE} install_bin; \
+            cd ../..; \
+          done
+
+sys_install_bin:
+        @ for i in `echo ${SUBSYSTEMS}`; \
+          do \
+            cd $$i/src; \
+            ${MAKE} sub_install_bin; \
+            cd ../..; \
+          done
+
+sub_install_conf:
+        @ for i in `echo ${SOFTWAREUNITS}`; \
+          do \
+            cd $$i/src; \
+            ${MAKE} install_conf; \
+            cd ../..; \
+          done
+
+sys_install_conf:
+        @ for i in `echo ${SUBSYSTEMS}`; \
+          do \
+            cd $$i/src; \
+            ${MAKE} sub_install_conf; \
+            cd ../..; \
+          done
+
+sub_install_classes:
+        @ for i in `echo ${SOFTWAREUNITS}`; \
+          do \
+            cd $$i/src; \
+            ${MAKE} install_classes; \
+            cd ../..; \
+          done
+
+sys_install_classes:
+        @ for i in `echo ${SUBSYSTEMS}`; \
+          do \
+            cd $$i/src; \
+            ${MAKE} sub_install_classes; \
+            cd ../..; \
+          done
+
+sub_install_web:
+        @ for i in `echo ${SOFTWAREUNITS}`; \
+          do \
+            cd $$i/src; \
+            ${MAKE} install_web; \
+            cd ../..; \
+          done
+
+sys_install_web:
+        @ for i in `echo ${SUBSYSTEMS}`; \
+          do \
+            cd $$i/src; \
+            ${MAKE} sub_install_web; \
+            cd ../..; \
+          done
+
+sub_install_website:
+        @ for i in `echo ${SOFTWAREUNITS}`; \
+          do \
+            cd $$i/src; \
+            ${MAKE} install_website; \
+            cd ../..; \
+          done
+
+sys_install_website:
+        @ for i in `echo ${SUBSYSTEMS}`; \
+          do \
+            cd $$i/src; \
+            ${MAKE} sub_install_website; \
+            cd ../..; \
+          done
+
+sub_install_scripts:
+        @ for i in `echo ${SOFTWAREUNITS}`; \
+          do \
+            cd $$i/src; \
+            ${MAKE} install_scripts; \
+            cd ../..; \
+          done
+
+sys_install_scripts:
+        @ for i in `echo ${SUBSYSTEMS}`; \
+          do \
+            cd $$i/src; \
+            ${MAKE} sub_install_scripts; \
+            cd ../..; \
+          done
+
+clean:
+        @ if [ `echo "${SOFTWAREUNITS}" | wc -w` = 0 ]; then \
+            ${MAKE} system_clean; \
+          elif [ `echo "${SRCS}" | wc -w` = 0 ]; then \
+            ${MAKE} subsystem_clean; \
+          else \
+            ${MAKE} softwareunit_clean; \
+          fi
+
+softwareunit_clean:
+        @ rm -f ${CLEAN}
+        @ rm -f `echo "${CLASSES}" | sed 's/\.class/$$\*.class/g'`
+        @ if [ "${SRC_LEVEL}" = "0" ]; then \
+            pwd=`pwd`; \
+            cd ../../../include; \
+            rm -f ${SUB_HEADERS.h}; \
+            cd ../lib; \
+            rm -f ${SUB_TARGET_LIB}; \
+            cd ../../../include; \
+            rm -f ${SYS_HEADERS.h}; \
+            cd ../bin; \
+            rm -f ${TARGET_BIN}; \
+            rm -f ${TARGET_SCRIPTS}; \
+            cd ../lib; \
+            rm -f ${SYS_TARGET_LIB}; \
+            cd ../conf; \
+            rm -f ${TARGET_CONF}; \
+            if [ "${TARGET_WEB}" != "" ]; then \
+              rm -rf ../web/${TARGET_WEB}; \
+            fi; \
+            cd ../classes; \
+            rm -f ${CLASSES}; \
+            rm -f `echo "${CLASSES}" | sed 's/\.class/$$\*.class/g'`; \
+            cd $$pwd; \
+          elif [ "${SRC_LEVEL}" = "1" ]; then \
+            pwd=`pwd`; \
+            cd ../../../include; \
+            rm -f ${SUB_HEADERS.h}; \
+            cd ../lib; \
+            rm -f ${SUB_TARGET_LIB}; \
+            cd $$pwd; \
+          fi
+
+subsystem_clean:
+        @ for i in `echo ${SOFTWAREUNITS}`; \
+          do \
+            cd $$i/src; \
+            if [ "${SRC_LEVEL}" = "1" ]; then \
+              ${MAKE} softwareunit_clean SRC_LEVEL=0; \
+            else \
+              ${MAKE} softwareunit_clean SRC_LEVEL=1; \
+            fi; \
+            cd ../..; \
+          done
+
+system_clean:
+        @ for i in `echo ${TARGET_JARS}`; \
+          do \
+            jar_name=`echo "$$i" | cut -d: -f1`; \
+            rm -f ../lib/$${jar_name}; \
+          done
+        @ for i in `echo ${SUBSYSTEMS}`; \
+          do \
+            cd $$i/src; \
+            ${MAKE} subsystem_clean SRC_LEVEL=1; \
+            cd ../..; \
+          done
+
+system:
+        @ ${MAKE} sys_install_scripts
+        @ ${MAKE} sys_install_conf
+        @ ${MAKE} sys_install_inc
+        @ ${MAKE} sys_install_lib
+        @ ${MAKE} sys_install_bin
+        @ ${MAKE} sys_install_classes
+        @ ${MAKE} sys_install_web
+        @ ${MAKE} sys_install_jar
+        @ ${MAKE} sys_install_website
+
+subsystem:
+        @ ${MAKE} sub_install_scripts
+        @ ${MAKE} sub_install_conf
+        @ ${MAKE} sub_install_inc
+        @ ${MAKE} sub_install_lib
+        @ ${MAKE} sub_install_bin
+        @ ${MAKE} sub_install_classes
+        @ ${MAKE} sub_install_web
+        @ ${MAKE} sub_install_website
+
+softwareunit: ${TARGET_BIN} \
+              ${TARGET_SCRIPTS} \
+              ${SYS_TARGET_LIB} \
+              ${SUB_TARGET_LIB} \
+              ${CLASSES} \
+              ${TARGET_WEBSITE}
+
+classes: ${CLASSES}
+
+deploy:
+        @ if [ `echo "${SOFTWAREUNITS}" | wc -w` = 0 ]; then \
+            ${MAKE} system_deploy; \
+          elif [ `echo "${SRCS}" | wc -w` = 0 -a `echo "${FTP_HOST}" | wc -w` = 0 ]; then \
+            ${MAKE} subsystem_deploy; \
+          else \
+            ${MAKE} softwareunit_deploy; \
+          fi
+
+softwareunit_deploy:
+        @ if [ "${FTP_HOST}" != "" ]; then \
+            localdir="${FTP_LOCALDIR}"; \
+            if [ "$$localdir" = "" ]; then \
+              if [ "${TARGET_WEBSITE}" != "" ]; then \
+                localdir="../../../../../web/${TARGET_WEBSITE}"; \
+              fi; \
+            fi; \
+            cd $$localdir; \
+            find . -type file | \
+              sed -e 's/&amp;/&amp;amp;/g' -e "s/'/&amp;apos;/g" -e 's/\"/&amp;quot;/g' -e 's/&lt;/&amp;lt;/g' -e 's/&gt;/&amp;gt;/g' | \
+                awk -v host="${FTP_HOST}" -v username="${FTP_USERNAME}" -v password="${FTP_PASSWORD}" \
+                    -v localdir="$$localdir" -v remotedir="${FTP_REMOTEDIR}" -F/ ' \
+                BEGIN { \
+                  print "open " host; \
+                  print "user " username " " password; \
+                  \
+                  if(remotedir != "" &amp;&amp; remotedir != ".") \
+                  { \
+                    print "mkdir " remotedir; \
+                    print "cd " remotedir; \
+                  } \
+                  \
+                  print "bin"; \
+                } \
+                { \
+                  j = 1; \
+                  while((j &lt;= n) &amp;&amp; (j &lt; NF) &amp;&amp; ($$j == stack[j])) \
+                    j++; \
+                  \
+                  for(i=n;i&gt;=j;i--) \
+                  { \
+                    print "lcd .."; \
+                    print "cd .."; \
+                  } \
+                  \
+                  n = j-1; \
+                  \
+                  for(i=j;i&lt;NF;i++) \
+                  { \
+                    stack[++n] = $$i; \
+                    \
+                    if(!((i==1) &amp;&amp; ($$i == ""))) \
+                    { \
+                      if($$i != ".") \
+                      { \
+                        print "lcd " $$i; \
+                        print "mkdir " $$i; \
+                        print "cd " $$i; \
+                      } \
+                    } \
+                  } \
+                  \
+                  print "put " $$(NF); \
+                } \
+                END { \
+                  for(i=n;i&gt;=1;i--) \
+                  { \
+                    print "lcd .."; \
+                    print "cd .."; \
+                  } \
+                  \
+                  print "bye"; \
+                }' | ftp -n &gt;/dev/null; \
+          fi
+
+subsystem_deploy:
+        @ for i in `echo ${SOFTWAREUNITS}`; \
+          do \
+            cd $$i/src; \
+            ${MAKE} softwareunit_deploy; \
+            cd ../..; \
+          done
+
+system_deploy:
+        @ for i in `echo ${SUBSYSTEMS}`; \
+          do \
+            cd $$i/src; \
+            ${MAKE} subsystem_deploy; \
+            cd ../..; \
+          done
+
+checkin:
+        @ if [ `echo "${SOFTWAREUNITS}" | wc -w` = 0 ]; then \
+            ${MAKE} system_checkin rev=${rev}; \
+          elif [ `echo "${SRCS}" | wc -w` = 0 ]; then \
+            ${MAKE} subsystem_checkin rev=${rev}; \
+          else \
+            ${MAKE} softwareunit_checkin rev=${rev}; \
+          fi
+
+checkout:
+        @ if [ `echo "${SOFTWAREUNITS}" | wc -w` = 0 ]; then \
+            ${MAKE} system_checkout rev=${rev}; \
+          elif [ `echo "${SRCS}" | wc -w` = 0 ]; then \
+            ${MAKE} subsystem_checkout rev=${rev}; \
+          else \
+            ${MAKE} softwareunit_checkout rev=${rev}; \
+          fi
+
+softwareunit_checkin:
+        @ if [ "${rev}" != "" ]; then \
+            if [ `echo "${SRCS}" | grep '[^ ]' | wc -l` != 0 ]; then \
+              ${CI} -t-. -m. -f -l -r${rev} \
+                   ${SYS_CIFLAGS} ${SUB_CIFLAGS} ${CIFLAGS} \
+                     Makefile ${SRCS}; \
+            fi \
+          else \
+            if [ `echo "${SRCS}" | grep '[^ ]' | wc -l` != 0 ]; then \
+              ${CI} -t-. -m. -f -l \
+                   ${SYS_CIFLAGS} ${SUB_CIFLAGS} ${CIFLAGS} \
+                     Makefile ${SRCS}; \
+            fi \
+          fi
+
+softwareunit_checkout:
+        @ if [ "${rev}" != "" ]; then \
+            if [ `echo "${SRCS}" | grep '[^ ]' | wc -l` != 0 ]; then \
+                   ${CO} -f -r${rev} \
+                   ${SYS_COFLAGS} ${SUB_COFLAGS} ${COFLAGS} \
+                     Makefile ${SRCS}; \
+              chmod +w Makefile ${SRCS}; \
+            fi \
+          else \
+            if [ `echo "${SRCS}" | grep '[^ ]' | wc -l` != 0 ]; then \
+                   ${CO} -f \
+                   ${SYS_COFLAGS} ${SUB_COFLAGS} ${COFLAGS} \
+                     Makefile ${SRCS}; \
+              chmod +w Makefile ${SRCS}; \
+            fi \
+          fi
+
+system_checkin:
+        @ if [ "${rev}" != "" ]; then \
+            ${CI} -t-. -m. -f -l -r${rev} ${SYS_CIFLAGS} \
+              Makefile make/Makefile; \
+          else \
+            ${CI} -t-. -m. -f -l ${SYS_CIFLAGS} \
+              Makefile make/Makefile; \
+          fi; \
+          for i in `echo ${SUBSYSTEMS}`; \
+          do \
+            cd $$i/src; \
+            ${MAKE} subsystem_checkin rev=${rev}; \
+            cd ../..; \
+          done
+
+subsystem_checkin:
+        @ if [ "${rev}" != "" ]; then \
+            ${CI} -t-. -m. -f -l -r${rev} ${SYS_CIFLAGS} ${SUB_CIFLAGS} \
+              Makefile; \
+          else \
+            ${CI} -t-. -m. -f -l ${SYS_CIFLAGS} ${SUB_CIFLAGS} \
+              Makefile; \
+          fi; \
+          for i in `echo ${SOFTWAREUNITS}`; \
+          do \
+            cd $$i/src; \
+            ${MAKE} softwareunit_checkin rev=${rev}; \
+            cd ../..; \
+          done
+
+system_checkout:
+        @ if [ "${rev}" != "" ]; then \
+            ${CO} -f -r${rev} ${SYS_COFLAGS} \
+              Makefile make/Makefile; \
+            chmod +w Makefile make/Makefile; \
+          else \
+            ${CO} -f ${SYS_COFLAGS} \
+              Makefile make/Makefile; \
+            chmod +w Makefile make/Makefile; \
+          fi; \
+          for i in `echo ${SUBSYSTEMS}`; \
+          do \
+            cd $$i/src; \
+            ${MAKE} subsystem_checkout rev=${rev}; \
+            cd ../..; \
+          done
+
+subsystem_checkout:
+        @ if [ "${rev}" != "" ]; then \
+            ${CO} -f -r${rev} ${SYS_COFLAGS} ${SUB_COFLAGS} \
+              Makefile; \
+            chmod +w Makefile; \
+          else \
+            ${CO} -f ${SYS_COFLAGS} ${SUB_COFLAGS} \
+              Makefile; \
+            chmod +w Makefile; \
+          fi; \
+          for i in `echo ${SOFTWAREUNITS}`; \
+          do \
+            cd $$i/src; \
+            ${MAKE} softwareunit_checkout rev=${rev}; \
+            cd ../..; \
+          done
+
+javadoc:
+        @ if [ `echo "${SOFTWAREUNITS}" | wc -w` = 0 ]; then \
+            ${MAKE} system_javadoc; \
+          elif [ `echo "${SRCS}" | wc -w` = 0 ]; then \
+            ${MAKE} subsystem_javadoc; \
+          else \
+            ${MAKE} softwareunit_javadoc; \
+          fi
+
+softwareunit_javadoc:
+        @ if [ "${SOURCES.java}" != "" ]; then \
+            ${JAVADOC} \
+              -d ../../../../../docs \
+              -classpath ../../../../../classes \
+              ${SYS_JDOC_OPTS} ${SUB_JDOC_OPTS} ${JDOC_OPTS} \
+                ${SOURCES.java}; \
+          fi
+
+subsystem_javadoc:
+        @ for i in `echo ${SOFTWAREUNITS}`; \
+          do \
+            cd $$i/src; \
+            ${MAKE} softwareunit_javadoc; \
+            cd ../..; \
+          done
+
+system_javadoc:
+        @ for i in `echo ${SUBSYSTEMS}`; \
+          do \
+            cd $$i/src; \
+            ${MAKE} subsystem_javadoc; \
+            cd ../..; \
+          done
+
+path:
+        @ echo "`cat | awk ' \
+            { \
+              for(i=1;i&lt;=NF;i++){ \
+                if(!path){ \
+                  path = $$i \
+                } else { \
+                  path = path ":" $$i \
+                } \
+              } \
+            } \
+            END { \
+              print path \
+            }'`"
+
+classpath:
+        @ if [ "${TARGET_WEB}" != "" ]; then \
+            echo "`echo \" \
+            . \
+            ${MYSDE_ROOT}/web/${TARGET_WEB}/WEB-INF/classes \
+            ${MYSDE_ROOT}/classes \
+            ${JARS} \
+            ${SUB_JARS} \
+            ${SYS_JARS}\" | ${MAKE} path`"; \
+          else \
+            echo "`echo \" \
+            . \
+            ${MYSDE_ROOT}/classes \
+            ${JARS} \
+            ${SUB_JARS} \
+            ${SYS_JARS}\" | ${MAKE} path`"; \
+          fi
+
+tomcat_deploy:
+        @ i=`pwd`; \
+          cd ${MYSDE_ROOT}/src; \
+          make war; \
+          cd ${CATALINA_HOME}/bin; \
+          ./shutdown.sh; \
+          rm -rf ../work/Catalina/localhost/${TARGET_WEB}; \
+          rm -rf ../webapps/${TARGET_WEB}; \
+          mv -f ${MYSDE_ROOT}/lib/${TARGET_WEB}.war ../webapps/.; \
+          ./startup.sh; \
+          cd $$i
+
+webappdeploy:
+        @ if [ "${TARGET_WEB}" != "" ]; then \
+            if [ "${WEB_SERVER}" != "" ]; then \
+              make ${WEB_SERVER}_deploy; \
+            fi; \
+          fi
+
+run:
+        @ ${JAVA} -classpath `${MAKE} classpath` \
+            ${JAVA_OPTS} ${SUB_JAVA_OPTS} ${SYS_JAVA_OPTS} \
+              ${TARGET_MAIN} ${TARGET_ARGS}
+
+tar:
+        @ i=`pwd | awk -F/ '{ print $$(NF-1) }'`; \
+          j=`echo "$$i" | tr '[A-Z]' '[a-z]'`-`date '+%Y%m%d%H%M%S'`-src.tar; \
+          cd ../..; \
+          ${TAR} cvf "$$j" "./$$i"; \
+          ${ZIP} "$$j"
+
+help:
+        @ echo "make root"; \
+          echo "make init subsystems=\"MySubsystem1 ... MySubsystemN\""; \
+          echo "make init softwareunits=\"MySoftwareUnit1 ... MySoftwareUnitN\""; \
+          echo "make init packages=\"my.java.package.dir1 ... my.java.package.dirN\""; \
+          echo "make init webapps=\"mywebapp1 ... mywebappN\""; \
+          echo "make init webappdirs=\"my/webapp/dir1 ... my/webapp/dirN\""; \
+          echo "make init websites=\"mywebsite1 ... mywebsiteN\""; \
+          echo "make"; \
+          echo "make clean"; \
+          echo "make install"; \
+          echo "make checkin [rev=&lt;revision&gt;]"; \
+          echo "make checkout [rev=&lt;revision&gt;]"; \
+          echo "make tar"; \
+          echo "make jar"; \
+          echo "make war [webapp=&lt;mywebapp&gt;]"; \
+          echo "make javadoc"; \
+          echo "... | make path"; \
+          echo "make classpath"; \
+          echo "make run"; \
+          echo "make deploy"; \
+          echo "make webappdeploy"
+
+_dummy_:
+
+#
+#  Suffix rules
+#
+
+.c.o:
+        @ ${CC} ${SYS_CFLAGS} ${SUB_CFLAGS} ${CFLAGS} \
+        -I../../../include -I../../../../../include \
+        ${SYS_INC_PATH} ${SUB_INC_PATH} ${INC_PATH} \
+        -c $&lt; -o $@
+
+.cc.o:
+        @ ${CCPLUS} ${SYS_CFLAGS} ${SUB_CFLAGS} ${CFLAGS} \
+        -I../../../include -I../../../../../include \
+        ${SYS_INC_PATH} ${SUB_INC_PATH} ${INC_PATH} \
+        -c $&lt; -o $@
+
+.java.class:
+        @ ${JAVAC} ${SYS_JFLAGS} ${SUB_JFLAGS} ${JFLAGS} \
+          -classpath `make classpath` ${CLASSES_DIR} $&lt;
+
+.lex.c:
+        @ ${LEX} ${SYS_LFLAGS} ${SUB_LFLAGS} ${LFLAGS} $&lt;
+        @ mv lex.yy.c $@
+
+.yacc.c:
+        @ ${YACC} ${SYS_YFLAGS} ${SUB_YFLAGS} ${YFLAGS} $&lt;
+        @ mv y.tab.c $@
+
+.sh:
+        @ chmod +x $&lt;
+
+.txt.html:
+        @ srcfile=`echo "$&lt;" | awk -F: '{ print $$1 }'`; \
+          options=`echo "$&lt;" | awk -F: '{ print $$2 }'`; \
+          ${ASCIIDOC} ${SYS_AFLAGS} ${SUB_AFLAGS} ${AFLAGS} \
+            $$options $$srcfile
+
+# #######################################################################
+
+# end of file
+.--$MYSDE_ROOT/src/makefiles/Makefile--.
+
+.++$MYSDE_ROOT/src/makefiles/Makefile.system++.
+# $Id$
+
+# #######################################################################
+#
+#  ###   ##        ### #####  #####
+#   ##  ##        #  #  #   #  #  #
+#   ### ##  ##  # ###   #   #  ###
+#   # ## #   # ##   ##  #   #  #
+#   # #  #   # #  #  #  #   #  #  #
+#  ###  ###   ##  ###  #####  #####
+#             #
+#            #
+#
+#  My Service Development Environment
+#
+#  System Makefile
+#
+# #######################################################################
+
+SUBSYSTEMS=
+
+# #######################################################################
+
+TARGET_JARS=
+
+# #######################################################################
+
+SYS_JARS=
+SYS_LIBS=
+
+# #######################################################################
+
+SYS_INC_PATH=
+SYS_LIB_PATH=
+
+# #######################################################################
+
+SYS_JAVA_OPTS=
+SYS_JDOC_OPTS=
+
+# #######################################################################
+
+SYS_CFLAGS=
+SYS_JFLAGS=
+SYS_LFLAGS=
+SYS_YFLAGS=
+SYS_AFLAGS=
+
+# #######################################################################
+
+SYS_CIFLAGS=
+SYS_COFLAGS=
+
+# #######################################################################
+
+include ${MYSDE_ROOT}/src/makefiles/Makefile
+
+# #######################################################################
+
+# #######################################################################
+
+# end of file
+.--$MYSDE_ROOT/src/makefiles/Makefile.system--.
+
+.++$MYSDE_ROOT/src/makefiles/Makefile.subsystem++.
+# $Id$
+
+# #######################################################################
+#
+#  ###   ##        ### #####  #####
+#   ##  ##        #  #  #   #  #  #
+#   ### ##  ##  # ###   #   #  ###
+#   # ## #   # ##   ##  #   #  #
+#   # #  #   # #  #  #  #   #  #  #
+#  ###  ###   ##  ###  #####  #####
+#             #
+#            #
+#
+#  My Service Development Environment
+#
+#  Subsystem Makefile
+#
+# #######################################################################
+
+SOFTWAREUNITS=
+
+# #######################################################################
+
+SUB_JARS=
+SUB_LIBS=
+
+# #######################################################################
+
+SUB_INC_PATH=
+SUB_LIB_PATH=
+
+# #######################################################################
+
+SUB_JAVA_OPTS=
+SUB_JDOC_OPTS=
+
+# #######################################################################
+
+SUB_CFLAGS=
+SUB_JFLAGS=
+SUB_LFLAGS=
+SUB_YFLAGS=
+SUB_AFLAGS=
+
+# #######################################################################
+
+SUB_CIFLAGS=
+SUB_COFLAGS=
+
+# #######################################################################
+
+include ${MYSDE_ROOT}/src/Makefile
+
+# #######################################################################
+
+# end of file
+.--$MYSDE_ROOT/src/makefiles/Makefile.subsystem--.
+
+.++$MYSDE_ROOT/src/makefiles/Makefile.softwareunit++.
+# $Id$
+
+# #######################################################################
+#
+#  ###   ##        ### #####  #####
+#   ##  ##        #  #  #   #  #  #
+#   ### ##  ##  # ###   #   #  ###
+#   # ## #   # ##   ##  #   #  #
+#   # #  #   # #  #  #  #   #  #  #
+#  ###  ###   ##  ###  #####  #####
+#             #
+#            #
+#
+#  My Service Development Environment
+#
+#  Software Unit Makefile
+#
+# #######################################################################
+
+TARGET_WEB=
+
+# #######################################################################
+
+TARGET_WEBSITE=
+
+# #######################################################################
+
+TARGET_MAIN=
+TARGET_ARGS=
+
+# #######################################################################
+
+TARGET_BIN=
+
+# #######################################################################
+
+SYS_TARGET_LIB=
+SUB_TARGET_LIB=
+
+# #######################################################################
+
+TARGET_SCRIPTS=
+
+# #######################################################################
+
+TARGET_CONF=
+
+# #######################################################################
+
+JARS=
+
+# #######################################################################
+
+EXTERN_WEB=
+
+# #######################################################################
+
+LIBS=
+
+# #######################################################################
+
+INC_PATH=
+LIB_PATH=
+
+# #######################################################################
+
+SYS_HEADERS.h=
+SUB_HEADERS.h=
+
+HEADERS.h=
+SOURCES.c=
+
+SOURCES.cc=
+
+# #######################################################################
+
+SOURCES.java=
+
+# #######################################################################
+
+SOURCES.web=
+
+# #######################################################################
+
+SOURCES.l=
+SOURCES.y=
+
+# #######################################################################
+
+SOURCES.txt=
+
+# #######################################################################
+
+JAVA_OPTS=
+JDOC_OPTS=
+
+# #######################################################################
+
+CFLAGS=
+JFLAGS=
+LFLAGS=
+YFLAGS=
+AFLAGS=
+
+# #######################################################################
+
+CIFLAGS=
+COFLAGS=
+
+# #######################################################################
+
+FTP_HOST=
+FTP_USERNAME=
+FTP_PASSWORD=
+FTP_REMOTEDIR=
+FTP_LOCALDIR=
+
+# #######################################################################
+
+include ../../Makefile
+
+# #######################################################################
+
+# #######################################################################
+
+# end of file
+.--$MYSDE_ROOT/src/makefiles/Makefile.softwareunit--.
+
+# end of file</tt></pre>
+</div></div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 0.400<br />
+Last updated 2014-06-28 16:23:40 CEST
+</div>
+<div id="footer-badges">
+<img style="border:none; width:88px; height:31px;"
+     src="../images/gplv3-127x51.png"
+     alt="GPL Version 3" />
+<!-- Histats.com  START  -->
+<a href="http://www.histats.com" target="_blank" title="simple hit counter" >
+<script  type="text/javascript" language="javascript">
+var s_sid = 675659;var st_dominio = 4;
+var cimg = 0;var cwi =112;var che =48;
+</script></a><script  type="text/javascript" language="javascript" src="http://s10.histats.com/js9.js"></script>
+<noscript><a href="http://www.histats.com" target="_blank">
+<img  src="http://s4.histats.com/stats/0.gif?675659&1" alt="simple hit counter" border="0"></a>
+</noscript>
+<!-- Histats.com  END  -->
+</div>
+</div>
+</div>
+</td>
+</tr>
+</table>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-11334618-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>

@@ -1,0 +1,1083 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.5.2" />
+<meta name="description" content="an open source UNIX framework for shell script based web service provider" />
+<meta name="keywords" content="mysvc, shell script, web service, provider, service, soa, template, engine, myste, mysde, mysvcd" />
+<link rel="stylesheet" href="../xhtml11.css" type="text/css" />
+<link rel="stylesheet" href="../xhtml11-quirks.css" type="text/css" />
+<link rel="stylesheet" href="../layout1.css" type="text/css" />
+<title>MySVC</title>
+</head>
+<body>
+<div id="layout-banner">
+  <div id="layout-title">MySVC</div>
+  <div id="layout-description">an open source UNIX framework for shell script based web services provider</div>
+</div>
+<table>
+<tr valign="top">
+<td id="layout-menu">
+  <div>&#187;<a href="../index.html">Home</a></div>
+  <div>&#187;<a href="../tools.html">Tools</a></div>
+  <div>&#187;<a href="../manpage.html">Man&nbsp;Page</a></div>
+  <div>&#187;<a href="../userguide.html">User&nbsp;Guide</a></div>
+  <div>&#187;<a href="../changelog.html">ChangeLog</a></div>
+  <div>&#187;<a href="../install.html">Installation</a></div>
+  <div>&#187;<a href="../sourcecode.html">Source Code</a></div>
+  <div>&#187;<a href="../downloads.html">Downloads</a></div>
+  <div>&#187;<a href="../faq.html">FAQ</a></div>
+  <div>&#187;<a href="../support.html">Support</a></div>
+  <div>&#187;<a href="../license.html">License</a></div>
+  <hr/>
+  <div>&#187;<a href="../myapps/index.html">My Apps</a></div>
+  <div>
+  <hr/>
+  <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+  <input type="hidden" name="cmd" value="_s-xclick">
+  <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+  ">
+  <input type="image" src="https://www.paypal.com/en_US/IT/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="">
+  <img alt="" border="0" src="https://www.paypal.com/it_IT/i/scr/pixel.gif" width="1" height="1">
+  </form>
+  </div>
+</td>
+<td>
+<div id="layout-content">
+<div id="header">
+<h1>MySPL Source Code</h1>
+</div>
+<h2 id="_upsp_hh">upsp.hh</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre><tt>// $Id$
+
+//  myspl - My Service Protocol Library - Version 1.0 (www.mysvc.it)
+//  Copyright (C) 2009 Davide Cucciniello &lt;davide6169@gmail.com&gt;
+//
+//  This program is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+
+/* **********************************************************************
+ *
+ *  ***   **        *** **  **  ****
+ *   **  **        *  *  *  ** **  *
+ *   *** **  **  * ***   *  *  *
+ *   * ** *   * **   **   * *  *
+ *   * *  *   * *  *  *   **   **
+ *  ***  ***   **  ***     *    ****
+ *             *
+ *            *
+ *
+ *  My Service
+ *
+ * ***********************************************************************
+ *
+ *  ***   **        *** ****  ***
+ *   **  **        *  *  *  *  *
+ *   *** **  **  * ***   *  *  *
+ *   * ** *   * **   **  ***   *
+ *   * *  *   * *  *  *  *     *  *
+ *  ***  ***   **  ***  ***   *****
+ *             *
+ *            *
+ *
+ *  My Service Protocol Library Example Client (Wildfire VMS Client)
+ *
+ *  File: upsp.hh
+ *
+ *  Description:
+ *    Wildfire VMS Client as usage example for MySPL library
+ *    (realized for provisioning of "Memory" service
+ *     in BLU mobile telephone operator)
+ *
+ * ***********************************************************************
+ *
+ *  History:
+ *    1.0               first version
+ *
+ * *********************************************************************** */
+
+#ifndef _UPSP_HH_
+#define _UPSP_HH_
+
+#include "protocol.hh"
+
+// ---------------------------------
+//
+//  UPSP Messages
+//
+// ---------------------------------
+
+#define UPSP_VERSION            10
+#define UPSP_UNIVERSAL_NACK     11
+#define UPSP_LOGIN_REQ          1
+#define UPSP_LOGIN_ACK          2
+#define UPSP_LOGIN_NACK         3
+#define UPSP_LOGOUT_REQ         4
+#define UPSP_LOGOUT_ACK         5
+#define UPSP_LOGOUT_NACK        6
+#define UPSP_LOOP_REQ           7
+#define UPSP_LOOP_ACK           8
+#define UPSP_LOOP_NACK          9
+#define UPSP_CREATE_REQ         12
+#define UPSP_CREATE_ACK         13
+#define UPSP_CREATE_NACK        14
+#define UPSP_SET_REQ            15
+#define UPSP_SET_ACK            16
+#define UPSP_SET_NACK           17
+#define UPSP_GET_ALL_REQ        18
+#define UPSP_GET_ALL_ACK        19
+#define UPSP_GET_ALL_NACK       20
+#define UPSP_FIND_REQ           21
+#define UPSP_FIND_ACK           22
+#define UPSP_FIND_NACK          23
+#define UPSP_REMOVE_SUBSC_REQ   39
+#define UPSP_REMOVE_SUBSC_ACK   40
+#define UPSP_REMOVE_SUBSC_NACK  41
+
+//
+// HEADER
+//
+
+class UPSPHeader: public Message
+{
+  public:
+    UPSPHeader():
+      Message(4,"HEADER")
+    {
+      // Header fields
+      assign(0,new Int4Field("length"));
+      assign(1,new Int2Field("msg_type"));
+      assign(2,new Int4Field("client_data_1"));
+      assign(3,new Int4Field("client_data_2"));
+    }
+};
+
+//
+// VERSION
+//
+
+class UPSPVersion: public Message
+{
+  public:
+    UPSPVersion():
+      Message(5,"VERSION")
+    {
+      // Header fields
+      assign(0,new Int4Field("length",18));
+      assign(1,new Int2Field("msg_type",UPSP_VERSION));
+      assign(2,new Int4Field("client_data_1"));
+      assign(3,new Int4Field("client_data_2"));
+
+      // Body field
+      assign(4,new Int4Field("version",4));
+    }
+};
+
+//
+// UNIVERSAL_NACK
+//
+
+class UPSPUniversalNAck: public Message
+{
+  public:
+    UPSPUniversalNAck():
+      Message(6,"UNIVERSAL_NACK")
+    {
+      // Header fields
+      assign(0,new Int4Field("length",530));
+      assign(1,new Int2Field("msg_type",UPSP_UNIVERSAL_NACK));
+      assign(2,new Int4Field("client_data_1"));
+      assign(3,new Int4Field("client_data_2"));
+
+      // Body fields
+      assign(4,new Int4Field("error_code"));
+      assign(5,new StringField(512,"error_msg"));
+    }
+};
+
+//
+// UNIVERSAL_NACK Body
+//
+
+class UPSPUniversalNAckBody: public Message
+{
+  public:
+    UPSPUniversalNAckBody():
+      Message(2,"UNIVERSAL_NACK_BODY")
+    {
+      // Body fields
+      assign(0,new Int4Field("error_code"));
+      assign(1,new StringField(512,"error_msg"));
+    }
+};
+
+//
+// LOGIN_REQ
+//
+
+class UPSPLoginReq: public Message
+{
+  public:
+    UPSPLoginReq():
+      Message(6,"LOGIN_REQ")
+    {
+      // Header fields
+      assign(0,new Int4Field("length",71));
+      assign(1,new Int2Field("msg_type",UPSP_LOGIN_REQ));
+      assign(2,new Int4Field("client_data_1"));
+      assign(3,new Int4Field("client_data_2"));
+
+      // Body fields
+      assign(4,new StringField(32,"username"));  // to init
+      assign(5,new StringField(25,"password"));  // to init
+    }
+};
+
+//
+// LOGIN_ACK
+//
+
+class UPSPLoginAck: public Message
+{
+  public:
+    UPSPLoginAck():
+      Message(4,"LOGIN_ACK")
+    {
+      // Header fields
+      assign(0,new Int4Field("length",14));
+      assign(1,new Int2Field("msg_type",UPSP_LOGIN_ACK));
+      assign(2,new Int4Field("client_data_1"));
+      assign(3,new Int4Field("client_data_2"));
+    }
+};
+
+//
+// LOGIN_NACK
+//
+
+class UPSPLoginNAck: public Message
+{
+  public:
+    UPSPLoginNAck():
+      Message(6,"LOGIN_NACK")
+    {
+      // Header fields
+      assign(0,new Int4Field("length",530));
+      assign(1,new Int2Field("msg_type",UPSP_LOGIN_NACK));
+      assign(2,new Int4Field("client_data_1"));
+      assign(3,new Int4Field("client_data_2"));
+
+      // Body fields
+      assign(4,new Int4Field("error_code"));
+      assign(5,new StringField(512,"error_msg"));
+    }
+};
+
+//
+// LOGIN_NACK Body
+//
+
+class UPSPLoginNAckBody: public Message
+{
+  public:
+    UPSPLoginNAckBody():
+      Message(2,"LOGIN_NACK_BODY")
+    {
+      // Body fields
+      assign(0,new Int4Field("error_code"));
+      assign(1,new StringField(512,"error_msg"));
+    }
+};
+
+//
+// LOGOUT_REQ
+//
+
+class UPSPLogoutReq: public Message
+{
+  public:
+    UPSPLogoutReq():
+      Message(4,"LOGOUT_REQ")
+    {
+      // Header fields
+      assign(0,new Int4Field("length",14));
+      assign(1,new Int2Field("msg_type",UPSP_LOGOUT_REQ));
+      assign(2,new Int4Field("client_data_1"));
+      assign(3,new Int4Field("client_data_2"));
+    }
+};
+
+//
+// LOGOUT_ACK
+//
+
+class UPSPLogoutAck: public Message
+{
+  public:
+    UPSPLogoutAck():
+      Message(4,"LOGOUT_ACK")
+    {
+      // Header fields
+      assign(0,new Int4Field("length",14));
+      assign(1,new Int2Field("msg_type",UPSP_LOGOUT_ACK));
+      assign(2,new Int4Field("client_data_1"));
+      assign(3,new Int4Field("client_data_2"));
+    }
+};
+
+//
+// LOGOUT_NACK
+//
+
+class UPSPLogoutNAck: public Message
+{
+  public:
+    UPSPLogoutNAck():
+      Message(6,"LOGOUT_NACK")
+    {
+      // Header fields
+      assign(0,new Int4Field("length",530));
+      assign(1,new Int2Field("msg_type",UPSP_LOGOUT_NACK));
+      assign(2,new Int4Field("client_data_1"));
+      assign(3,new Int4Field("client_data_2"));
+
+      // Body fields
+      assign(4,new Int4Field("error_code"));
+      assign(5,new StringField(512,"error_msg"));
+    }
+};
+
+//
+// LOGOUT_NACK Body
+//
+
+class UPSPLogoutNAckBody: public Message
+{
+  public:
+    UPSPLogoutNAckBody():
+      Message(2,"LOGOUT_NACK_BODY")
+    {
+      // Body fields
+      assign(0,new Int4Field("error_code"));
+      assign(1,new StringField(512,"error_msg"));
+    }
+};
+
+//
+// LOOP_REQ
+//
+
+class UPSPLoopReq: public Message
+{
+  public:
+    UPSPLoopReq():
+      Message(5,"LOOP_REQ")
+    {
+      // Header fields
+      assign(0,new Int4Field("length",18));
+      assign(1,new Int2Field("msg_type",UPSP_LOOP_REQ));
+      assign(2,new Int4Field("client_data_1"));
+      assign(3,new Int4Field("client_data_2"));
+
+      // Body field
+      assign(4,new Int4Field("count"));
+    }
+};
+
+//
+// LOOP_ACK
+//
+
+class UPSPLoopAck: public Message
+{
+  public:
+    UPSPLoopAck():
+      Message(5,"LOOP_ACK")
+    {
+      // Header fields
+      assign(0,new Int4Field("length",18));
+      assign(1,new Int2Field("msg_type",UPSP_LOOP_ACK));
+      assign(2,new Int4Field("client_data_1"));
+      assign(3,new Int4Field("client_data_2"));
+
+      // Body field
+      assign(4,new Int4Field("count"));
+    }
+};
+
+//
+// LOOP_ACK Body
+//
+
+class UPSPLoopAckBody: public Message
+{
+  public:
+    UPSPLoopAckBody():
+      Message(1,"LOOP_ACK_BODY")
+    {
+      // Body field
+      assign(0,new Int4Field("count"));
+    }
+};
+
+//
+// LOOP_NACK
+//
+
+class UPSPLoopNAck: public Message
+{
+  public:
+    UPSPLoopNAck():
+      Message(6,"LOOP_NACK")
+    {
+      // Header fields
+      assign(0,new Int4Field("length",530));
+      assign(1,new Int2Field("msg_type",UPSP_LOOP_NACK));
+      assign(2,new Int4Field("client_data_1"));
+      assign(3,new Int4Field("client_data_2"));
+
+      // Body fields
+      assign(4,new Int4Field("error_code"));
+      assign(5,new StringField(512,"error_msg"));
+    }
+};
+
+//
+// LOOP_NACK Body
+//
+
+class UPSPLoopNAckBody: public Message
+{
+  public:
+    UPSPLoopNAckBody():
+      Message(2,"LOOP_NACK_BODY")
+    {
+      // Body fields
+      assign(0,new Int4Field("error_code"));
+      assign(1,new StringField(512,"error_msg"));
+    }
+};
+
+//
+// CREATE_REQ
+//
+
+class UPSPCreateReq: public Message
+{
+  public:
+    UPSPCreateReq():
+      Message(32,"CREATE_REQ")
+    {
+      // Header fields
+      assign(0,new Int4Field("length",469));
+      assign(1,new Int2Field("msg_type",UPSP_CREATE_REQ));
+      assign(2,new Int4Field("client_data_1"));
+      assign(3,new Int4Field("client_data_2"));
+
+      // Body fields
+      assign(4,new StringField(33,"title"));
+      assign(5,new StringField(33,"first_name"));
+      assign(6,new StringField(33,"last_name"));
+
+      assign(7,new StringField(9,"middle_initial"));
+      assign(8,new StringField(9,"suffix"));
+      assign(9,new StringField(25,"phone_number"));  // Required
+      assign(10,new StringField(25,"trusted_number"));
+      assign(11,new StringField(25,"fax_number"));
+      assign(12,new BoolField("has_dedicated_fax_number"));
+
+      assign(13,new StringField(25,"pass_code"));
+      assign(14,new BoolField("disabled"));
+      assign(15,new StringField(33,"host_name"));
+      assign(16,new BoolField("to_be_deleted"));
+      assign(17,new BoolField("trusted_phone_needs_password"));
+      assign(18,new BoolField("intl_calls"));
+      assign(19,new BoolField("mwi"));
+      assign(20,new BoolField("text_messaging"));
+      assign(21,new BoolField("oatm"));
+
+      assign(22,new BoolField("calls_fronted"));
+      assign(23,new StringField(17,"gip_cos"));
+      assign(24,new StringField(9,"pager_id"));
+      assign(25,new StringField(33,"initial_service","Basic")); // Required
+      assign(26,new Int4Field("save_utterances_num_sessions"));
+      assign(27,new BoolField("restricted_presentation"));
+      assign(28,new StringField(33,"customer_defined1"));
+      assign(29,new StringField(33,"customer_defined2"));
+      assign(30,new StringField(33,"customer_defined3"));
+      assign(31,new StringField(33,"customer_defined4"));
+    }
+};
+
+//
+// CREATE_ACK
+//
+
+class UPSPCreateAck: public Message
+{
+  public:
+    UPSPCreateAck():
+      Message(7,"CREATE_ACK")
+    {
+      // Header fields
+      assign(0,new Int4Field("length",76));
+      assign(1,new Int2Field("msg_type",UPSP_CREATE_ACK));
+      assign(2,new Int4Field("client_data_1"));
+      assign(3,new Int4Field("client_data_2"));
+
+      // Body field
+      assign(4,new StringField(25,"forward_on_busy"));
+      assign(5,new StringField(33,"host_name"));
+      assign(6,new Int4Field("current_capacity"));
+    }
+};
+
+//
+// CREATE_ACK Body
+//
+
+class UPSPCreateAckBody: public Message
+{
+  public:
+    UPSPCreateAckBody():
+      Message(3,"CREATE_ACK_BODY")
+    {
+      // Body field
+      assign(0,new StringField(25,"forward_on_busy"));
+      assign(1,new StringField(33,"host_name"));
+      assign(2,new Int4Field("current_capacity"));
+    }
+};
+
+//
+// CREATE_NACK
+//
+
+class UPSPCreateNAck: public Message
+{
+  public:
+    UPSPCreateNAck():
+      Message(6,"CREATE_NACK")
+    {
+      // Header fields
+      assign(0,new Int4Field("length",530));
+      assign(1,new Int2Field("msg_type",UPSP_CREATE_NACK));
+      assign(2,new Int4Field("client_data_1"));
+      assign(3,new Int4Field("client_data_2"));
+
+      // Body field
+      assign(4,new Int4Field("error_code"));
+      assign(5,new StringField(512,"error_msg"));
+    }
+};
+
+//
+// CREATE_NACK Body
+//
+
+class UPSPCreateNAckBody: public Message
+{
+  public:
+    UPSPCreateNAckBody():
+      Message(2,"CREATE_NACK_BODY")
+    {
+      // Body field
+      assign(0,new Int4Field("error_code"));
+      assign(1,new StringField(512,"error_msg"));
+    }
+};
+
+//
+// SET_REQ
+//
+
+class UPSPSetReq: public Message
+{
+  public:
+    UPSPSetReq():
+      Message(32,"SET_REQ")
+    {
+      // Header fields
+      assign(0,new Int4Field("length",429));
+      assign(1,new Int2Field("msg_type",UPSP_SET_REQ));
+      assign(2,new Int4Field("client_data_1"));
+      assign(3,new Int4Field("client_data_2"));
+
+      // Body fields
+      assign(4,new StringField(25,"current_phone_number")); // Required
+      assign(5,new StringField(33,"title"));
+      assign(6,new StringField(33,"first_name"));
+      assign(7,new StringField(33,"last_name"));
+      assign(8,new StringField(9,"middle_initial"));
+      assign(9,new StringField(9,"suffix"));
+      assign(10,new StringField(25,"new_phone_number"));
+      assign(11,new StringField(25,"trusted_number"));
+      assign(12,new StringField(25,"fax_number"));
+      assign(13,new BoolField("has_dedicated_fax_number"));
+      assign(14,new StringField(25,"pass_code"));
+      assign(15,new BoolField("clear_passcode"));
+      assign(16,new BoolField("disabled"));
+      assign(17,new BoolField("to_be_deleted"));
+
+      assign(18,new BoolField("trusted_phone_needs_password"));
+      assign(19,new BoolField("intl_calls"));
+      assign(20,new BoolField("mwi"));
+      assign(21,new BoolField("text_messaging"));
+      assign(22,new BoolField("oatm"));
+
+      assign(23,new BoolField("calls_fronted"));
+      assign(24,new StringField(17,"gip_cos"));
+      assign(25,new StringField(9,"pager_id"));
+      assign(26,new Int4Field("save_utterances_num_sessions"));
+      assign(27,new BoolField("restricted_presentation"));
+      assign(28,new StringField(33,"customer_defined1"));
+      assign(29,new StringField(33,"customer_defined2"));
+      assign(30,new StringField(33,"customer_defined3"));
+      assign(31,new StringField(33,"customer_defined4"));
+    }
+};
+
+//
+// SET_ACK
+//
+
+class UPSPSetAck: public Message
+{
+  public:
+    UPSPSetAck():
+      Message(4,"SET_ACK")
+    {
+      // Header fields
+      assign(0,new Int4Field("length"));
+      assign(1,new Int2Field("msg_type"));
+      assign(2,new Int4Field("client_data_1"));
+      assign(3,new Int4Field("client_data_2"));
+    }
+};
+
+//
+// SET_NACK
+//
+
+class UPSPSetNAck: public Message
+{
+  public:
+    UPSPSetNAck():
+      Message(6,"SET_NACK")
+    {
+      // Header fields
+      assign(0,new Int4Field("length",530));
+      assign(1,new Int2Field("msg_type",UPSP_SET_NACK));
+      assign(2,new Int4Field("client_data_1"));
+      assign(3,new Int4Field("client_data_2"));
+
+      // Body field
+      assign(4,new Int4Field("error_code"));
+      assign(5,new StringField(512,"error_msg"));
+    }
+};
+
+//
+// SET_NACK Body
+//
+
+class UPSPSetNAckBody: public Message
+{
+  public:
+    UPSPSetNAckBody():
+      Message(2,"SET_NACK_BODY")
+    {
+      // Body field
+      assign(0,new Int4Field("error_code"));
+      assign(1,new StringField(512,"error_msg"));
+    }
+};
+
+//
+// GET_ALL_REQ
+//
+
+class UPSPGetAllReq: public Message
+{
+  public:
+    UPSPGetAllReq():
+      Message(5,"GET_ALL_REQ")
+    {
+      // Header fields
+      assign(0,new Int4Field("length",39));
+      assign(1,new Int2Field("msg_type",UPSP_GET_ALL_REQ));
+      assign(2,new Int4Field("client_data_1"));
+      assign(3,new Int4Field("client_data_2"));
+
+      // Body field
+      assign(4,new StringField(25,"phone_number"));  // Required
+    }
+};
+
+//
+// GET_ALL_ACK
+//
+
+class UPSPGetAllAck: public Message
+{
+  public:
+    UPSPGetAllAck():
+      Message(33,"GET_ALL_ACK")
+    {
+      // Header fields
+      assign(0,new Int4Field("length",1100));
+      assign(1,new Int2Field("msg_type",UPSP_GET_ALL_ACK));
+      assign(2,new Int4Field("client_data_1"));
+      assign(3,new Int4Field("client_data_2"));
+
+      // Body fields
+      assign(4,new StringField(33,"title"));
+      assign(5,new StringField(33,"first_name"));
+      assign(6,new StringField(33,"last_name"));
+
+      assign(7,new StringField(9,"middle_initial"));
+      assign(8,new StringField(9,"suffix"));
+      assign(9,new StringField(25,"phone_number"));
+      assign(10,new StringField(25,"trusted_number"));
+      assign(11,new StringField(25,"fax_number"));
+      assign(12,new BoolField("has_dedicated_fax_number"));
+
+      assign(13,new BoolField("disabled"));
+      assign(14,new StringField(33,"host_name"));
+      assign(15,new BoolField("to_be_deleted"));
+      assign(16,new BoolField("trusted_phone_needs_password"));
+      assign(17,new BoolField("intl_calls"));
+      assign(18,new BoolField("mwi"));
+      assign(19,new BoolField("text_messaging"));
+      assign(20,new BoolField("oatm"));
+
+      assign(21,new BoolField("calls_fronted"));
+      assign(22,new StringField(17,"gip_cos"));
+      assign(23,new StringField(9,"pager_id"));
+      assign(24,new StringField(25,"forward_on_busy"));
+      assign(25,new Int4Field("save_utterances_num_sessions"));
+      assign(26,new Int4Field("num_services"));
+      assign(27,new StringField(660,"service_name"));
+      assign(28,new BoolField("restricted_presentation"));
+      assign(29,new StringField(33,"customer_defined1"));
+      assign(30,new StringField(33,"customer_defined2"));
+      assign(31,new StringField(33,"customer_defined3"));
+      assign(32,new StringField(33,"customer_defined4"));
+    }
+};
+
+//
+// GET_ALL_ACK Body
+//
+
+class UPSPGetAllAckBody: public Message
+{
+  public:
+    UPSPGetAllAckBody():
+      Message(29,"GET_ALL_ACK_BODY")
+    {
+      // Body fields
+      assign(0,new StringField(33,"title"));
+      assign(1,new StringField(33,"first_name"));
+      assign(2,new StringField(33,"last_name"));
+
+      assign(3,new StringField(9,"middle_initial"));
+      assign(4,new StringField(9,"suffix"));
+      assign(5,new StringField(25,"phone_number"));
+      assign(6,new StringField(25,"trusted_number"));
+      assign(7,new StringField(25,"fax_number"));
+      assign(8,new BoolField("has_dedicated_fax_number"));
+
+      assign(9,new BoolField("disabled"));
+      assign(10,new StringField(33,"host_name"));
+      assign(11,new BoolField("to_be_deleted"));
+      assign(12,new BoolField("trusted_phone_needs_password"));
+      assign(13,new BoolField("intl_calls"));
+      assign(14,new BoolField("mwi"));
+      assign(15,new BoolField("text_messaging"));
+      assign(16,new BoolField("oatm"));
+
+      assign(17,new BoolField("calls_fronted"));
+      assign(18,new StringField(17,"gip_cos"));
+      assign(19,new StringField(9,"pager_id"));
+      assign(20,new StringField(25,"forward_on_busy"));
+      assign(21,new Int4Field("save_utterances_num_sessions"));
+      assign(22,new Int4Field("num_services"));
+      assign(23,new StringField(660,"service_name"));
+      assign(24,new BoolField("restricted_presentation"));
+      assign(25,new StringField(33,"customer_defined1"));
+      assign(26,new StringField(33,"customer_defined2"));
+      assign(27,new StringField(33,"customer_defined3"));
+      assign(28,new StringField(33,"customer_defined4"));
+    }
+};
+
+//
+// GET_ALL_NACK
+//
+
+class UPSPGetAllNAck: public Message
+{
+  public:
+    UPSPGetAllNAck():
+      Message(6,"SET_NACK")
+    {
+      // Header fields
+      assign(0,new Int4Field("length",530));
+      assign(1,new Int2Field("msg_type",UPSP_GET_ALL_NACK));
+      assign(2,new Int4Field("client_data_1"));
+      assign(3,new Int4Field("client_data_2"));
+
+      // Body field
+      assign(4,new Int4Field("error_code"));
+      assign(5,new StringField(512,"error_msg"));
+    }
+};
+
+//
+// GET_ALL_NACK Body
+//
+
+class UPSPGetAllNAckBody: public Message
+{
+  public:
+    UPSPGetAllNAckBody():
+      Message(2,"GET_ALL_NACK_BODY")
+    {
+      // Body field
+      assign(0,new Int4Field("error_code"));
+      assign(1,new StringField(512,"error_msg"));
+    }
+};
+
+//
+// FIND_REQ
+//
+
+class UPSPFindReq: public Message
+{
+  public:
+    UPSPFindReq():
+      Message(6,"FIND_REQ")
+    {
+      // Header fields
+      assign(0,new Int4Field("length",80));
+      assign(1,new Int2Field("msg_type",UPSP_FIND_REQ));
+      assign(2,new Int4Field("client_data_1"));
+      assign(3,new Int4Field("client_data_2"));
+
+      // Body fields
+      assign(4,new StringField(33,"first_name"));
+      assign(5,new StringField(33,"last_name"));
+    }
+};
+
+//
+// FIND_ACK
+//
+
+class UPSPFindAck: public Message
+{
+  public:
+    UPSPFindAck():
+      Message(6,"FIND_ACK")
+    {
+      // Header fields
+      assign(0,new Int4Field("length",518));
+      assign(1,new Int2Field("msg_type",UPSP_FIND_ACK));
+      assign(2,new Int4Field("client_data_1"));
+      assign(3,new Int4Field("client_data_2"));
+
+      // Body fields
+      assign(4,new Int4Field("num_phone_number"));
+      assign(5,new StringField(500,"phone_number"));
+    }
+};
+
+//
+// FIND_ACK Body
+//
+
+class UPSPFindAckBody: public Message
+{
+  public:
+    UPSPFindAckBody():
+      Message(2,"FIND_ACK_BODY")
+    {
+      // Body fields
+      assign(0,new Int4Field("num_phone_number"));
+      assign(1,new StringField(500,"phone_number"));
+    }
+};
+
+//
+// FIND_NACK
+//
+
+class UPSPFindNAck: public Message
+{
+  public:
+    UPSPFindNAck():
+      Message(6,"FIND_NACK")
+    {
+      // Header fields
+      assign(0,new Int4Field("length",530));
+      assign(1,new Int2Field("msg_type",UPSP_FIND_NACK));
+      assign(2,new Int4Field("client_data_1"));
+      assign(3,new Int4Field("client_data_2"));
+
+      // Body field
+      assign(4,new Int4Field("error_code"));
+      assign(5,new StringField(512,"error_msg"));
+    }
+};
+
+//
+// FIND_NACK Body
+//
+
+class UPSPFindNAckBody: public Message
+{
+  public:
+    UPSPFindNAckBody():
+      Message(2,"FIND_NACK_BODY")
+    {
+      // Body field
+      assign(0,new Int4Field("error_code"));
+      assign(1,new StringField(512,"error_msg"));
+    }
+};
+
+//
+// REMOVE_SUBSC_REQ
+//
+
+class UPSPRemoveSubscReq: public Message
+{
+  public:
+    UPSPRemoveSubscReq():
+      Message(6,"REMOVE_SUBSC_REQ")
+    {
+      // Header fields
+      assign(0,new Int4Field("length",72));
+      assign(1,new Int2Field("msg_type",UPSP_REMOVE_SUBSC_REQ));
+      assign(2,new Int4Field("client_data_1"));
+      assign(3,new Int4Field("client_data_2"));
+
+      // Body fields
+      assign(4,new StringField(25,"phone_number"));
+      assign(5,new StringField(33,"notification_service"));
+    }
+};
+
+//
+// REMOVE_SUBSC_ACK
+//
+
+class UPSPRemoveSubscAck: public Message
+{
+  public:
+    UPSPRemoveSubscAck():
+      Message(4,"REMOVE_SUBSC_ACK")
+    {
+      // Header fields
+      assign(0,new Int4Field("length",14));
+      assign(1,new Int2Field("msg_type",UPSP_REMOVE_SUBSC_ACK));
+      assign(2,new Int4Field("client_data_1"));
+      assign(3,new Int4Field("client_data_2"));
+    }
+};
+
+//
+// REMOVE_SUBSC_NACK
+//
+
+class UPSPRemoveSubscNAck: public Message
+{
+  public:
+    UPSPRemoveSubscNAck():
+      Message(6,"REMOVE_SUBSC_NACK")
+    {
+      // Header fields
+      assign(0,new Int4Field("length",530));
+      assign(1,new Int2Field("msg_type",UPSP_REMOVE_SUBSC_NACK));
+      assign(2,new Int4Field("client_data_1"));
+      assign(3,new Int4Field("client_data_2"));
+
+      // Body field
+      assign(4,new Int4Field("error_code"));
+      assign(5,new StringField(512,"error_msg"));
+    }
+};
+
+//
+// REMOVE_SUBSC_NACK Body
+//
+
+class UPSPRemoveSubscNAckBody: public Message
+{
+  public:
+    UPSPRemoveSubscNAckBody():
+      Message(2,"REMOVE_SUBSC_NACK_BODY")
+    {
+      // Body field
+      assign(0,new Int4Field("error_code"));
+      assign(1,new StringField(512,"error_msg"));
+    }
+};
+
+#endif
+
+/* end of file */</tt></pre>
+</div></div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 0.400<br />
+Last updated 2014-06-28 16:23:46 CEST
+</div>
+<div id="footer-badges">
+<img style="border:none; width:88px; height:31px;"
+     src="../images/gplv3-127x51.png"
+     alt="GPL Version 3" />
+<!-- Histats.com  START  -->
+<a href="http://www.histats.com" target="_blank" title="simple hit counter" >
+<script  type="text/javascript" language="javascript">
+var s_sid = 675659;var st_dominio = 4;
+var cimg = 0;var cwi =112;var che =48;
+</script></a><script  type="text/javascript" language="javascript" src="http://s10.histats.com/js9.js"></script>
+<noscript><a href="http://www.histats.com" target="_blank">
+<img  src="http://s4.histats.com/stats/0.gif?675659&1" alt="simple hit counter" border="0"></a>
+</noscript>
+<!-- Histats.com  END  -->
+</div>
+</div>
+</div>
+</td>
+</tr>
+</table>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-11334618-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>

@@ -1,0 +1,657 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.5.2" />
+<meta name="description" content="an open source UNIX framework for shell script based web service provider" />
+<meta name="keywords" content="mysvc, shell script, web service, provider, service, soa, template, engine, myste, mysde, mysvcd" />
+<link rel="stylesheet" href="../xhtml11.css" type="text/css" />
+<link rel="stylesheet" href="../xhtml11-quirks.css" type="text/css" />
+<link rel="stylesheet" href="../layout1.css" type="text/css" />
+<script type="text/javascript">
+/*<![CDATA[*/
+window.onload = function(){generateToc(2)}
+/*]]>*/
+</script>
+<script type="text/javascript" src="../toc.js"></script>
+<title>MySVC</title>
+</head>
+<body>
+<div id="layout-banner">
+  <div id="layout-title">MySVC</div>
+  <div id="layout-description">an open source UNIX framework for shell script based web services provider</div>
+</div>
+<table>
+<tr valign="top">
+<td id="layout-menu">
+  <div>&#187;<a href="../index.html">Home</a></div>
+  <div>&#187;<a href="../tools.html">Tools</a></div>
+  <div>&#187;<a href="../manpage.html">Man&nbsp;Page</a></div>
+  <div>&#187;<a href="../userguide.html">User&nbsp;Guide</a></div>
+  <div>&#187;<a href="../changelog.html">ChangeLog</a></div>
+  <div>&#187;<a href="../install.html">Installation</a></div>
+  <div>&#187;<a href="../sourcecode.html">Source Code</a></div>
+  <div>&#187;<a href="../downloads.html">Downloads</a></div>
+  <div>&#187;<a href="../faq.html">FAQ</a></div>
+  <div>&#187;<a href="../support.html">Support</a></div>
+  <div>&#187;<a href="../license.html">License</a></div>
+  <hr/>
+  <div>&#187;<a href="../myapps/index.html">My Apps</a></div>
+  <div>
+  <hr/>
+  <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+  <input type="hidden" name="cmd" value="_s-xclick">
+  <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+  ">
+  <input type="image" src="https://www.paypal.com/en_US/IT/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="">
+  <img alt="" border="0" src="https://www.paypal.com/it_IT/i/scr/pixel.gif" width="1" height="1">
+  </form>
+  </div>
+</td>
+<td>
+<div id="layout-content">
+<div id="header">
+<h1>MyExpr User Guide</h1>
+</div>
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+<h2 id="_introduction">Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>MyExpr (<em>My Service Expression Engine</em>) is a Java library (<em>myexpr.jar</em>) implementing a general purpose parser for expressions based on precedence operator parsing, using regular expressions to define lexical analyzer and generating a binary syntax tree as parser output.</p></div>
+<div class="paragraph"><p>The abstract grammar of supported expressions is:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&lt;Expr&gt; ::= &lt;Term&gt; |
+           &lt;Term&gt; BinaryOperator &lt;Expr&gt;</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&lt;Term&gt; ::= Operand |
+           UnaryOperator &lt;Term&gt; |
+           &lt;Term&gt; UnaryOperator |
+           OpenedParenthesis &lt;Formula&gt; ClosedParenthesis</tt></pre>
+</div></div>
+<div class="paragraph"><p>It&#8217;s made from the following source classes and interfaces under package <em>it.mysvc.myexpr</em>:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="Operators.java.html">Operators.java</a>
+</p>
+</li>
+<li>
+<p>
+<a href="Lexer.java.html">Lexer.java</a>
+</p>
+</li>
+<li>
+<p>
+<a href="Parser.java.html">Parser.java</a>
+</p>
+</li>
+<li>
+<p>
+<a href="Factory.java.html">Factory.java</a>
+</p>
+</li>
+<li>
+<p>
+<a href="Writer.java.html">Writer.java</a>
+</p>
+</li>
+<li>
+<p>
+<a href="Token.java.html">Token.java</a>
+</p>
+</li>
+<li>
+<p>
+<a href="Precedence.java.html">Precedence.java</a>
+</p>
+</li>
+<li>
+<p>
+<a href="Expr.java.html">Expr.java</a>
+</p>
+</li>
+<li>
+<p>
+<a href="Printer.java.html">Printer.java</a>
+</p>
+</li>
+<li>
+<p>
+<a href="SyntaxException.java.html">SyntaxException.java</a>
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>To implement your expression engine you must implement the interfaces <em>Operators</em>, <em>Lexer</em>, <em>Factory</em>, <em>Writer</em> and (optionally) subclass the class <em>Expr</em> representing the syntax tree of the expression</p></div>
+</div>
+<h2 id="_operators_interface">Operators (interface)</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Define:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+the number and precedence of binary operators
+</p>
+</li>
+<li>
+<p>
+if a binary operator is left associative
+</p>
+</li>
+<li>
+<p>
+if a unary operator is prefix or postfix
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>...
+public class MyExprOperators implements Operators
+{
+  // binary operators
+  public static final int AND         = 0;
+  public static final int OR          = 1;
+  public static final int IMPLIES     = 2;
+  public static final int EQUIVALENT  = 3;
+  public static final int ASSIGN      = 4;
+
+  // unary operator
+  public static int NOT               = 0;
+
+  // constants TRUE and FALSE
+  public static final int TRUE        = -1;
+  public static final int FALSE       = 0;
+
+  public int getBinaryOperators()
+  {
+    return 5;
+  }
+
+  public int getPrecedence(int binaryOperator)
+  {
+    switch(binaryOperator)
+    {
+      // AND
+      case 0:
+        return 5;
+      // OR
+      case 1:
+        return 4;
+      // IMPLIES
+      case 2:
+        return 3;
+      // EQUIVALENT
+      case 3:
+        return 2;
+      // ASSIGN
+      default:
+        return 1;
+    }
+  }
+
+  public boolean isLeftAssociative(int binaryOperator)
+  {
+    return true;
+  }
+
+  public boolean isPrefix(int unaryOperator)
+  {
+    return true;
+  }
+
+  public boolean isPostfix(int unaryOperator)
+  {
+    return true;
+  }
+}
+...</tt></pre>
+</div></div>
+<div class="paragraph"><p>The code used to indentify the binary and unary operators corresponds to the <em>code</em> attribute of tokens and syntax tree nodes</p></div>
+</div>
+<h2 id="_lexer_interface">Lexer (interface)</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Represents the lexical analyzer, used from <em>Parser</em> to get token stream from the string representation of expression.</p></div>
+<div class="paragraph"><p>It defines the following components of the expression grammar:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+blanks
+</p>
+</li>
+<li>
+<p>
+unary operators
+</p>
+</li>
+<li>
+<p>
+binary operators
+</p>
+</li>
+<li>
+<p>
+opened parenthesis
+</p>
+</li>
+<li>
+<p>
+closed parenthesis
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>These components are defined by an array of regular expressions, where the index of this array represents the token <em>code</em>, used by <em>Writer</em> subclasses to get String representation from the <em>(code,info)</em> values of tokens (copied to nodes of <em>Expr</em> syntax tree)</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>...
+// MyExprLexer:
+
+public String[] getBinaryOperators()
+{
+  return new String[]
+  {
+    "&amp;|and|\\*",
+    "\\||or|\\+",
+    "-&gt;|implies",
+    "&lt;-&gt;|iff",
+    "=|is"
+  };
+}
+...
+public String[] getUnaryOperators()
+{
+  return new String[]
+  {
+    "-|~|!|not",
+    "\\[[0-9]*\\]", // box modal unary operator
+    "&lt;[0-9]*&gt;" // diamond modal unary operator
+  };
+}
+...
+// MyExprWriter:
+
+public String getBinaryOperator(int code,String info)
+{
+  switch(code)
+  {
+    case MyExprOperators.AND:
+      return "&amp;";
+    case MyExprOperators.OR:
+      return "|";
+    case MyExprOperators.IMPLIES:
+      return "-&gt;";
+    case MyExprOperators.EQUIVALENT:
+      return "&lt;-&gt;";
+    case MyExprOperators.ASSIGN:
+      return "=";
+   }
+
+   return null;
+}
+...</tt></pre>
+</div></div>
+</div>
+<h2 id="_factory_interface">Factory (interface)</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>It&#8217;s a simple class for type casting if you have to subclass the <em>Expr</em> class to define a custom class representing the syntax tree of expression (e.g. <em>MyExpr</em>)</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>...
+public Expr getExpr(int code,String info)
+{
+  return new MyExpr(code,info);
+}
+...</tt></pre>
+</div></div>
+</div>
+<h2 id="_writer_interface">Writer (interface)</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Define the conversion to string of:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+unary and binary operators
+</p>
+</li>
+<li>
+<p>
+operands
+</p>
+</li>
+<li>
+<p>
+opened and closed parenthesis
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>See <a href="MyExprWriter.java.html">MyExprWriter.java</a> for an example.</p></div>
+</div>
+<h2 id="_expr_class">Expr (class)</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Represents the binary syntax tree of the expression and is generated by the <em>Parser</em>.</p></div>
+<div class="paragraph"><p>It can be optionally subclassed if you need a custom class with methods implementing custom functions on expression syntax tree</p></div>
+<div class="paragraph"><p>Its main methods are:
+- to get info of tree nodes and their left and right subtrees, left
+- to test if a tree node is an operand (a leaf), a unary operator or binary operator
+- to clone a subtree (using an instance of <em>Factory</em>)
+- to convert a subtree to its string representation using an instance of <em>Printer</em>)</p></div>
+<div class="paragraph"><p>See <a href="MyExpr.java.html">MyExpr.java</a> for an example.</p></div>
+<div class="paragraph"><p>The following classes must be not subclassed:</p></div>
+</div>
+<h2 id="_parser_class">Parser (class)</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Is the main class implementing the precedence operator expression parser based on the following grammar:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&lt;Expr&gt; ::= &lt;Term&gt; |
+           &lt;Term&gt; BinaryOperator &lt;Expr&gt;</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>&lt;Term&gt; ::= Operand |
+           UnaryOperator &lt;Term&gt; |
+           &lt;Term&gt; UnaryOperator |
+           OpenedParenthesis &lt;Formula&gt; ClosedParenthesis</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>Non terminal symbols:
+  { &lt;Expr&gt;, &lt;Term&gt; }</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>Terminal symbols:
+  {
+    Operand,
+    UnaryOperator,
+    BinaryOperator,
+    OpenedParenthesis,
+    ClosedParenthesis
+  }</tt></pre>
+</div></div>
+<div class="paragraph"><p>The arguments for <em>Parser</em> constructor are three objects of classes implementing the following interfaces:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Operators
+</p>
+</li>
+<li>
+<p>
+Lexer
+</p>
+</li>
+<li>
+<p>
+Factory
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Its main method is <em>Expr parse(String expr)</em> to create from the string representing the expression its corresponding <em>Expr</em> instance as syntax tree.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>import it.mysvc.expr.*;
+...
+Parser parser = new Parser(new MyExprOperators(),new MyExprLexer(),new MyExprFactory());
+...
+Expr expr = parser.parse("x*(y+-z))");
+...</tt></pre>
+</div></div>
+<div class="paragraph"><p>It use lexical analyzer to get stream of tokens from string expression and to get for each token the corresponding <em>code</em> and <em>info</em></p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>...
+switch(token.type)
+{
+  case BinaryOperator:
+    token.code = lexer.getBinaryOperator(m,info);
+    token.info = lexer.getBinaryOperator(info);
+    break;
+  case UnaryOperator:
+    token.code = lexer.getUnaryOperator(m,info);
+    token.info = lexer.getUnaryOperator(info);
+    break;
+  case Operand:
+    token.code = lexer.getOperand(m,info);
+    token.info = lexer.getOperand(info);
+    break;
+  case OpenedParenthesis:
+    token.code = lexer.getOpenedParenthesis(m,info);
+    token.info = lexer.getOpenedParenthesis(info);
+    break;
+  case ClosedParenthesis:
+    token.code = lexer.getClosedParenthesis(m,info);
+    token.info = lexer.getClosedParenthesis(info);
+    break;
+}
+...</tt></pre>
+</div></div>
+</div>
+<h2 id="_printer_class">Printer (class)</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Created from a <em>Parser</em> and a <em>Writer</em> and used from <em>Expr</em> to convert the syntax tree to corresponding string representation:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>...
+Writer writer = new MyExprWriter();
+Printer printer = new Printer(parser,writer);
+...
+System.out.println(expr.toString(printer));
+...</tt></pre>
+</div></div>
+<div class="paragraph"><p>You don&#8217;t have to subclass this class</p></div>
+</div>
+<h2 id="_token_class">Token (class)</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The lexical analyzer (<em>Lexer</em>) takes in input the string representing the expression and produces a stream of <em>Token</em> as input for <em>Parser</em></p></div>
+<div class="paragraph"><p>Each token has:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+a <em>type</em>:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Operand
+</p>
+</li>
+<li>
+<p>
+UnaryOperator
+</p>
+</li>
+<li>
+<p>
+BinaryOperator
+</p>
+</li>
+<li>
+<p>
+OpenedParenthesis
+</p>
+</li>
+<li>
+<p>
+ClosedParenthesis
+</p>
+</li>
+<li>
+<p>
+a code
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+a <em>code</em> (an int representing the index)
+</p>
+</li>
+<li>
+<p>
+an <em>info</em> (a String representing the info content of token)
+</p>
+</li>
+</ul></div>
+</div>
+<h2 id="_precedence_class">Precedence (class)</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Class used by <em>Parser</em> to evaluate the relative precedence of binary operators.</p></div>
+<div class="paragraph"><p>You don&#8217;t have to subclass this class</p></div>
+</div>
+<h2 id="_syntaxexception_class">SyntaxException (class)</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Implement a syntax exception while parsing the expression string converting it into <em>Expr</em> syntax tree.</p></div>
+<div class="paragraph"><p>Type of syntax errors:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+EmptyExpression,
+</p>
+</li>
+<li>
+<p>
+UnknownToken,
+</p>
+</li>
+<li>
+<p>
+InvalidOperand,
+</p>
+</li>
+<li>
+<p>
+InvalidUnaryOperator,
+</p>
+</li>
+<li>
+<p>
+InvalidBinaryOperator,
+</p>
+</li>
+<li>
+<p>
+InvalidOpenedParenthesis,
+</p>
+</li>
+<li>
+<p>
+InvalidClosedParenthesis,
+</p>
+</li>
+<li>
+<p>
+OpenedParenthesisExpected,
+</p>
+</li>
+<li>
+<p>
+ClosedParenthesisExpected
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>try
+{
+  ...
+  Expr expr = parser.parse("x*(y+-z))");
+  ...
+}
+catch(SyntaxException e)
+{
+  System.out.println("Syntax Exception");
+  System.out.println("expr {" + e.getExpr() + "}");
+  System.out.println("queue {" + e.getQueue() + "}");
+  System.out.println("token {" + e.getToken() + "}");
+  System.out.println("type {" + e.getType() + "}");
+  System.out.println("character {" + e.getCharacter() + "}");
+  System.out.println("position {" + e.getPosition() + "}");
+}</tt></pre>
+</div></div>
+<div class="paragraph"><p>To use <em>myexpr</em> library (<em>myexpr.jar</em>):</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+add <em>myexpr.jar</em> to your Java CLASSPATH environment variable
+</p>
+</li>
+<li>
+<p>
+write the Java subclasses and interfaces corresponding to your expression definition, starting as template from the example classes under package <em>it.mysvc.myexpr.example</em> implementing a simple engine of (modal) propositional formulas and made with the following source code files:
+</p>
+</li>
+<li>
+<p>
+<a href="MyExprOperators.java.html">MyExprOperators.java</a>
+</p>
+</li>
+<li>
+<p>
+<a href="MyExprLexer.java.html">MyExprLexer.java</a>
+</p>
+</li>
+<li>
+<p>
+<a href="MyExprFactory.java.html">MyExprFactory.java</a>
+</p>
+</li>
+<li>
+<p>
+<a href="MyExprWriter.java.html">MyExprWriter.java</a>
+</p>
+</li>
+<li>
+<p>
+<a href="MyExpr.java.html">MyExpr.java</a>
+</p>
+</li>
+<li>
+<p>
+<a href="MyExprTester.java.html">MyExprTester.java</a>
+</p>
+</li>
+</ul></div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 0.400<br />
+Last updated 2014-06-28 16:24:00 CEST
+</div>
+<div id="footer-badges">
+<img style="border:none; width:88px; height:31px;"
+     src="../images/gplv3-127x51.png"
+     alt="GPL Version 3" />
+<!-- Histats.com  START  -->
+<a href="http://www.histats.com" target="_blank" title="simple hit counter" >
+<script  type="text/javascript" language="javascript">
+var s_sid = 675659;var st_dominio = 4;
+var cimg = 0;var cwi =112;var che =48;
+</script></a><script  type="text/javascript" language="javascript" src="http://s10.histats.com/js9.js"></script>
+<noscript><a href="http://www.histats.com" target="_blank">
+<img  src="http://s4.histats.com/stats/0.gif?675659&1" alt="simple hit counter" border="0"></a>
+</noscript>
+<!-- Histats.com  END  -->
+</div>
+</div>
+</div>
+</td>
+</tr>
+</table>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-11334618-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>

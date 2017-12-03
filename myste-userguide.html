@@ -1,0 +1,1270 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.3.5" />
+<meta name="description" content="an open source UNIX framework for shell script based web service provider" />
+<meta name="keywords" content="mysvc, shell script based web services provider, myste, template engine, mystl, mysde" />
+<link rel="stylesheet" href="./xhtml11.css" type="text/css" />
+<link rel="stylesheet" href="./xhtml11-quirks.css" type="text/css" />
+<link rel="stylesheet" href="./layout1.css" type="text/css" />
+<title>MySTE User Guide</title>
+</head>
+<body>
+<div id="layout-banner">
+  <div id="layout-title">MySVC</div>
+  <div id="layout-description">an open source UNIX framework for shell script based web services provider</div>
+</div>
+<table>
+<tr valign="top">
+<td id="layout-menu">
+  <div>&#187;<a href="./index.html">Home</a></div>
+  <div>&#187;<a href="./manpages.html">Man&nbsp;Pages</a></div>
+  <div>&#187;<a href="./userguides.html">User&nbsp;Guides</a></div>
+  <div>&#187;<a href="./readme.html">README</a></div>
+  <div>&#187;<a href="./changelog.html">ChangeLog</a></div>
+  <div>&#187;<a href="./install.html">Installation</a></div>
+  <div>&#187;<a href="./downloads.html">Downloads</a></div>
+  <div>&#187;<a href="./faq.html">FAQ</a></div>
+  <div>&#187;<a href="./support.html">Support</a></div>
+  <hr/>
+  <div>
+  <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+  <input type="hidden" name="cmd" value="_s-xclick">
+  <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+  ">
+  <input type="image" src="https://www.paypal.com/en_US/IT/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="">
+  <img alt="" border="0" src="https://www.paypal.com/it_IT/i/scr/pixel.gif" width="1" height="1">
+  </form>
+  </div>
+</td>
+<td>
+<div id="layout-content">
+<div id="header">
+<h1>MySTE User Guide</h1>
+</div>
+<h2 id="_introduction">Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><em><em>MySTE</em></em> is an open source UNIX tool to handle template files.</p></div>
+<div class="paragraph"><p>It has features of other UNIX tools (e.g. C preprocessor, m4 macro processor, awk  and tar) but is more simple to use and add other original features useful into ICT environments, such as:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+expanding a definition referencing numbered or named fields for each instance record read from file, from standard input or from another definition:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+input
+</p>
+<div class="literalblock">
+<div class="content">
+<pre><tt>@define sim_activate_prepaid(msisdn,imsi)
+SIM:ACTIVATE:PREPAID:@msisdn@:@imsi@
+@end
+@define sim_list_postpaid
+222981122334455 393801234567
+222981122334456 393801234568
+222981122334457 393801234569
+@end
+@define sim_list_prepaid
+393801234567 222981122334455
+393801234568 222981122334456
+393801234569 222981122334457
+@end
+@foreach sim_list_postpaid
+SIM:ACTIVATE:POSTPAID:@2@:@1@
+@end
+@foreach sim_list_prepaid
+@sim_activate_prepaid(@1@,@2@)
+@end</tt></pre>
+</div></div>
+</li>
+<li>
+<p>
+output
+</p>
+<div class="literalblock">
+<div class="content">
+<pre><tt>SIM:ACTIVATE:POSTPAID:393801234567:222981122334455
+SIM:ACTIVATE:POSTPAID:393801234568:222981122334456
+SIM:ACTIVATE:POSTPAID:393801234569:222981122334457
+SIM:ACTIVATE:PREPAID:393801234567:222981122334455
+SIM:ACTIVATE:PREPAID:393801234568:222981122334456
+SIM:ACTIVATE:PREPAID:393801234569:222981122334457</tt></pre>
+</div></div>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+generating all (or random) N,K combinations or dispositions (or a subset defined by an external process as sequence validator):
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+input
+</p>
+<div class="literalblock">
+<div class="content">
+<pre><tt>@sequence 5,4
+@sequence 3^2</tt></pre>
+</div></div>
+</li>
+<li>
+<p>
+output
+</p>
+<div class="literalblock">
+<div class="content">
+<pre><tt>1 2 3 4
+1 2 3 5
+1 2 4 5
+1 3 4 5
+2 3 4 5
+1,1
+1,2
+1,3
+2,1
+2,2
+2,3
+3,1
+3,2
+3,3</tt></pre>
+</div></div>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+handling an archive of text files (such tar cvf, tvf or xvf&#8230;):
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+input
+</p>
+<div class="literalblock">
+<div class="content">
+<pre><tt>first file...
+@file a/b/f1.txt
+this is the first file content...
+@define A
+11 22 33
+44 55 66
+@end
+A value is @A@
+@end a/b/f1.txt
+second file...
+@define mysecondfile f2.txt
+@file @mysecondfile@
+this is the content...
+... of the second file
+containing two templates...
+@template t1
+@define X 11
+@define Y 12
+@end t1
+@template t2
+@define X 21
+@define Y 22
+@end t2
+@end @mysecondfile@
+last file...
+@file f3.txt
+last file content...
+@end f3.txt
+@extract</tt></pre>
+</div></div>
+</li>
+<li>
+<p>
+output
+</p>
+<div class="literalblock">
+<div class="content">
+<pre><tt>first file...
+second file...
+last file...</tt></pre>
+</div></div>
+</li>
+<li>
+<p>
+file <tt>f1.txt</tt>
+</p>
+<div class="literalblock">
+<div class="content">
+<pre><tt>this is the first file content...
+@define A
+11 22 33
+44 55 66
+@end
+A value is @A@</tt></pre>
+</div></div>
+</li>
+<li>
+<p>
+file <tt>f2.txt</tt>
+</p>
+<div class="literalblock">
+<div class="content">
+<pre><tt>this is the content...
+... of the second file
+containing two templates...
+@template t1
+@define X 11
+@define Y 12
+@end t1
+@template t2
+@define X 21
+@define Y 22
+@end t2</tt></pre>
+</div></div>
+</li>
+<li>
+<p>
+file <tt>f3.txt</tt>
+</p>
+<div class="literalblock">
+<div class="content">
+<pre><tt>last file content...</tt></pre>
+</div></div>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="paragraph"><p>It is implemented as (bourne) shell script using only standard UNIX commands and is designed as a front end of its engine, an internal shell function awk
+  based called <tt>smp</tt> (<em>Simple Macro Processor</em>).</p></div>
+<div class="paragraph"><p>By default, when executed without command line parameters, <tt>myste</tt> is a filter that copies standard input to standard output and could contains one of the following:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+normal text (not copied on standard output when <tt>myste</tt> is executed with command line parameters) containing also references to parameter values enclosed between two "@" characters (e.g. "myparameter value is @myparameter@"), being "@" the only special character handled by <tt>myste</tt>
+</p>
+</li>
+<li>
+<p>
+processing instructions specified with a "@" character at begin of a line followed by a command and parameters (e.g. "@define myparameter 1")
+</p>
+</li>
+</ul></div>
+</div>
+<h2 id="_command_line">Command line</h2>
+<div class="sectionbody">
+<div class="literalblock">
+<div class="content">
+<pre><tt>myste [-t "&lt;template&gt;"]
+      [-f "&lt;inputfile&gt;"]
+      [-p &lt;arguments&gt;]
+      [-H "&lt;header&gt;"]
+      [-F "&lt;footer&gt;"]]
+      [-d "&lt;separator&gt;"]
+      [-o &lt;outputfile&gt;]]
+      [-D "&lt;name&gt;[=&lt;value&gt;]"]*
+      [-s &lt;n&gt;,&lt;k&gt; [&lt;validator&gt;]]
+      [-s &lt;n&gt;^&lt;k&gt; [&lt;validator&gt;]]
+      [-r &lt;n&gt;,&lt;k&gt; [&lt;repetion&gt;]]
+      [-r &lt;n&gt;^&lt;k&gt; [&lt;repetion&gt;]]
+      [-r &lt;n&gt; [&lt;repetion&gt;]]
+      [-e]
+      [-x]
+      [-C]
+      [-T]
+      [-X]
+      [-l]
+      [[-c]&lt;configfile&gt;]
+      ["&lt;parameter&gt;"]</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>-e =&gt; foreach
+-x =&gt; export
+-C =&gt; create archive
+-T =&gt; list archive
+-X =&gt; extract archive
+-l =&gt; extract on stdout
+-s &lt;n&gt;,&lt;k&gt; =&gt; (valid) combinations (n&gt;k)
+-s &lt;n&gt;^&lt;k&gt; =&gt; (valid) dispositions
+-r &lt;n&gt;,&lt;k&gt; =&gt; combination(s) (n&gt;k)
+-r &lt;n&gt;^&lt;k&gt; =&gt; disposition(s)
+-r &lt;n&gt; =&gt; random integer between 1 and &lt;n&gt;
+-n =&gt; not execute</tt></pre>
+</div></div>
+<div class="sidebarblock">
+<div class="sidebar-content">
+<div class="sidebar-title">Usage</div>
+<div class="ulist"><ul>
+<li>
+<p>
+myste
+   (evaluate config file from stdin)
+</p>
+</li>
+<li>
+<p>
+myste /my/path/to/configfile
+   (evaluate config file
+    /my/path/to/configfile)
+</p>
+</li>
+<li>
+<p>
+myste /my/path/to/configfile myparametername
+   (evaluate parameter myparametername of config file
+    /my/path/to/configfile)
+</p>
+</li>
+<li>
+<p>
+myste /my/path/to/configfile "myparametername(arg1,&#8230;,argN)"
+   or
+</p>
+</li>
+<li>
+<p>
+myste -p "arg1,&#8230;,argN" /my/path/to/configfile myparametername
+   (evaluate parameter myparametername of config file
+    /my/path/to/configfile with arguments arg1,&#8230;,argN)
+</p>
+</li>
+<li>
+<p>
+myste /my/path/to/configfile "myparametername[i]"
+   (evaluate parameter myparametername of config file
+    /my/path/to/configfile and extract substring
+    from i-th character to the end, starting from 1)
+</p>
+</li>
+<li>
+<p>
+myste /my/path/to/configfile "myparametername(arg1,&#8230;,argN)[i]"
+   or
+</p>
+</li>
+<li>
+<p>
+myste -p "arg1,&#8230;,argN" /my/path/to/configfile "myparametername[i]"
+   (evaluate parameter myparametername of config file
+    /my/path/to/configfile with arguments arg1,&#8230;,argN
+    and extract substring from i-th character to the end, starting from 1)
+</p>
+</li>
+<li>
+<p>
+myste /my/path/to/configfile "myparametername[i,j]"
+   (evaluate parameter myparametername of config file
+    /my/path/to/configfile and extract substring
+    from i-th character, starting from 1, with length j)
+</p>
+</li>
+<li>
+<p>
+myste /my/path/to/configfile "myparametername(arg1,&#8230;,argN)[i,j]"
+   or
+</p>
+</li>
+<li>
+<p>
+myste -p "arg1,&#8230;,argN" /my/path/to/configfile "myparametername[i,j]"
+   (evaluate parameter myparametername of config file
+    /my/path/to/configfile with arguments arg1,&#8230;,argN
+    and extract substring from i-th character, starting from 1,
+    with length j)
+</p>
+</li>
+<li>
+<p>
+myste -f /my/path/to/inputfile -p 1,3 \
+   /my/path/to/configfile myparametername
+ (evaluate parameter myparametername of config file
+  /my/path/to/configfile using as arguments
+  first and third field of csv input file
+  /my/path/to/inputfile,
+  where fields are separated by default with spaces,
+  or with the character &lt;separator&gt; if is specified)
+</p>
+</li>
+<li>
+<p>
+myste -f "/my/path/to/inputfile(x,y,z)" \
+   /my/path/to/configfile myparametername
+ (evaluate parameter myparametername of config file
+  /my/path/to/configfile using as arguments x,y,z
+  assigned from first three fields of csv input file
+  /my/path/to/inputfile,
+  (first to x, second to y and third to z)
+  where fields are separated by default with spaces,
+  or with the character &lt;separator&gt; if is specified)
+</p>
+</li>
+<li>
+<p>
+myste -e /my/path/to/configfile myparametername
+  (evaluate parameter myparametername of config file
+   /my/path/to/configfile using as arguments
+   fields of csv read from stdin)
+</p>
+</li>
+<li>
+<p>
+cat /my/path/to/configfile | myste -x
+  (create bourne shell export script for all parameters)
+</p>
+</li>
+<li>
+<p>
+myste -x /my/path/to/configfile
+  (create bourne shell export script for all parameters)
+</p>
+</li>
+<li>
+<p>
+myste -x /my/path/to/configfile myparameterexpr
+  (create bourne shell export script for parameters
+   whose name match with regular expression
+   contained into value of myparameterexpr)
+</p>
+</li>
+<li>
+<p>
+myste -X
+  (extract files from stdin, each file being delimited by
+   @file &lt;path&gt;
+   &lt;content&gt;
+   @end &lt;path&gt;)
+</p>
+</li>
+<li>
+<p>
+myste -X /my/path/to/configfile
+  (extract files from config file /my/path/to/configfile,
+   each file being delimited by
+   @file &lt;path&gt;
+   &lt;content&gt;
+   @end &lt;path&gt;)
+</p>
+</li>
+<li>
+<p>
+myste -X /my/path/to/configfile myparameterexpr
+  (extract files from config file /my/path/to/configfile
+   files whose path match with regular expression
+   contained into value of myparameterexpr,
+   each file being delimited by
+   @file &lt;path&gt;
+   &lt;content&gt;
+   @end &lt;path&gt;)
+</p>
+</li>
+<li>
+<p>
+myste -T
+   (extract list of files from stdin, each file being delimited by
+    @file &lt;path&gt;
+    &lt;content&gt;
+    @end &lt;path&gt;)
+</p>
+</li>
+<li>
+<p>
+myste -T /my/path/to/configfile
+   (extract list of files from config file /my/path/to/configfile,
+    each file being delimited by
+    @file &lt;path&gt;
+    &lt;content&gt;
+    @end &lt;path&gt;)
+</p>
+</li>
+<li>
+<p>
+myste -l
+  (extract on stdout files from stdin, each file being delimited by
+   @file &lt;path&gt;
+   &lt;content&gt;
+   @end &lt;path&gt;)
+</p>
+</li>
+<li>
+<p>
+myste -l /my/path/to/configfile
+  (extract on stdout files from config file /my/path/to/configfile,
+   each file being delimited by
+   @file &lt;path&gt;
+   &lt;content&gt;
+   @end &lt;path&gt;)
+</p>
+</li>
+<li>
+<p>
+myste -l /my/path/to/configfile myparameterexpr
+  (extract on stdout files from config file /my/path/to/configfile
+   files whose path match with regular expression
+   contained into value of myparameterexpr,
+   each file being delimited by
+   @file &lt;path&gt;
+   &lt;content&gt;
+   @end &lt;path&gt;)
+</p>
+</li>
+<li>
+<p>
+myste -s n,k [/my/path/to/validation/filter]
+  (evaluate all combinations from n and k)
+</p>
+</li>
+<li>
+<p>
+myste -s n^k [/my/path/to/validation/filter]
+  (evaluate all dispositions from n and k)
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>if template is specified, then it&#8217;s evaluated before evaluating parameters</p></div>
+</div></div>
+</div>
+<h2 id="_syntax">Syntax</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><tt>myste</tt> is a filter to evaluate configuration parameters from
+template files containing any text or one of the following
+commands, each starting at begin of the line:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>@template &lt;name&gt;[(&lt;arg1&gt;,...,&lt;argN&gt;)]
+...
+&lt;value&gt;
+...
+@end &lt;name&gt;</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>@eval &lt;name&gt;[(&lt;arg1&gt;,...,&lt;argN&gt;)]</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>@define &lt;name&gt;[(&lt;arg1&gt;,...,&lt;argN&gt;&gt;)] &lt;value&gt;</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>@define &lt;name&gt;[(&lt;arg1&gt;,...,&lt;argN&gt;&gt;)]
+...
+&lt;value&gt;
+...
+@end</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>@undef [&lt;name&gt;]</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>@ifdef &lt;name&gt; [&lt;value&gt;]
+...
+&lt;value&gt;
+...
+@endif</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>@ifdef &lt;name&gt; [&lt;value&gt;]
+...
+&lt;value&gt;
+...
+@else
+...
+&lt;value&gt;
+...
+@endif</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>@ifndef &lt;name&gt; [&lt;value&gt;]
+...
+&lt;value&gt;
+...
+@endif</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>@ifndef &lt;name&gt; [&lt;value&gt;]
+...
+&lt;value&gt;
+...
+@else
+...
+&lt;value&gt;
+...
+@endif</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>@include &lt;name&gt;</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>@foreach &lt;name&gt;[(&lt;arg1&gt;,...,&lt;argN&gt;)] &lt;value&gt;</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>@foreach &lt;name&gt;[(&lt;arg1&gt;,...,&lt;argN&gt;)]
+...
+&lt;value&gt;
+...
+@end</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>@printf &lt;name&gt; [&lt;value&gt;]</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>@system &lt;value&gt;</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>@system
+...
+&lt;value&gt;
+...
+@end</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>@env [&lt;name&gt;]</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>@export [&lt;value&gt;]</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>@sequence &lt;value&gt;,&lt;value&gt; [&lt;value&gt;]</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>@sequence &lt;value&gt;^&lt;value&gt; [&lt;value&gt;]</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>@random &lt;value&gt;,&lt;value&gt; [&lt;value&gt;]</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>@random &lt;value&gt;^&lt;value&gt; [&lt;value&gt;]</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>@random &lt;value&gt; [&lt;value&gt;]</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>@exit [&lt;code&gt;] [&lt;value&gt;]</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>@file &lt;value&gt;
+...
+&lt;value&gt;
+...
+@end &lt;value&gt;</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>@extract [stdout] [&lt;value&gt;]</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>@extract list</tt></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>@archive &lt;value&gt; &lt;value&gt;</tt></pre>
+</div></div>
+</div>
+<h2 id="_tutorials">Tutorials</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+a template, defined with @template, could contains anything
+  but others templates and is evaluated with @eval
+  (similar to @include but with lines imported from template definition
+  instead of file)
+</p>
+</li>
+<li>
+<p>
+the text value of a macro, defined with @define, could contains
+  references to other macro values, as:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+@name@
+</p>
+</li>
+<li>
+<p>
+@name(arg1,&#8230;,argN)@
+        &#8658; name (template or macro) value
+</p>
+</li>
+<li>
+<p>
+@name[i]@
+</p>
+</li>
+<li>
+<p>
+@name(arg1,&#8230;,argN)[i]@
+        &#8658; substring of each row of name value starting from i, with i&gt;=1
+</p>
+</li>
+<li>
+<p>
+@name[i,j]@
+</p>
+</li>
+<li>
+<p>
+@name(arg1,&#8230;,argN)[i,j]@
+        &#8658; substring of each row of name value starting from i with length j
+</p>
+</li>
+<li>
+<p>
+@name&lt;list&gt;@
+        &#8658; repeat the value of name for each row of list value,
+           or for each row of csv file list if macro named list
+           is not defined
+           name definition could contains references to
+</p>
+</li>
+<li>
+<p>
+@0@ for actual record (line)
+</p>
+</li>
+<li>
+<p>
+@1@ for first field of record
+</p>
+</li>
+<li>
+<p>
+@2@ for second field of record
+             &#8230;
+</p>
+</li>
+<li>
+<p>
+@n@ for n-th field of record
+</p>
+</li>
+<li>
+<p>
+@NF@ for the number of field of actual record (with NF&gt;=1)
+</p>
+</li>
+<li>
+<p>
+@NR@ for the number of actual record (with NR&gt;=1)
+            the default field separator (spaces or tabs) can
+            be changed defining a value for the FS reserved variable
+            (e.g. @define FS ,)
+</p>
+</li>
+<li>
+<p>
+@name&lt;list&gt;[i]@
+        &#8658; repeat substring (starting from i) for each row of list value,
+           or for each row of file list if macro named list
+           is not defined
+</p>
+</li>
+<li>
+<p>
+@name&lt;list&gt;[i,j]@
+        &#8658; repeat substring (starting from i with length j)
+           for each row of list value,
+           or for each row of file list if macro named list
+           is not defined
+</p>
+</li>
+<li>
+<p>
+@$(command)@
+        &#8658; is the output generated from an external command
+</p>
+</li>
+<li>
+<p>
+@?(command)@
+        &#8658; is the exit status generated from an external command
+</p>
+</li>
+<li>
+<p>
+@name++@
+        &#8658; return value and then increment it
+</p>
+</li>
+<li>
+<p>
+@name--@
+        &#8658; return value and then decrement it
+</p>
+</li>
+<li>
+<p>
+@++name@
+        &#8658; increment value and then return it
+</p>
+</li>
+<li>
+<p>
+@--name@
+        &#8658; decrement value and then return it
+</p>
+</li>
+<li>
+<p>
+@&gt;(string)@
+        &#8658; is the upper case version of string
+           ("this Is a String" &#8594; "THIS IS A STRING")
+</p>
+</li>
+<li>
+<p>
+@&lt;(string)@
+        &#8658; is the lower case version of string
+           ("this Is a String" &#8594; "this is a string")
+</p>
+</li>
+<li>
+<p>
+@-(string)@
+        &#8658; is the word separated version of a capitalized string
+           ("thisIsAString" &#8594; "this-is-a-string")
+           the "-" character is used as default separator
+           or WS ("word separator") value if is defined
+           (e.g. @define WS _)
+</p>
+</li>
+<li>
+<p>
+@.(string)@
+        &#8658; is the capitalized version of an word separated string
+           ("this-is-a-string" &#8594; "thisIsAString")
+           the "-" character is used as default separator
+           or WS ("word separator") value if is defined
+           (e.g. @define WS _)
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+@ifdef, @ifndef, @undef and @include have the usual meaning
+  as the C preprocessor, but can be specified a regular expression
+  as value for pattern matching with name value
+  @foreach list, like @name&lt;list&gt;@, repeat the value specified
+  for each row of list value, or for each row of file list
+  if macro named list is not defined
+  (having @0@, @1@,&#8230;, @NF@ and @NR@ in the value the same
+   meaning as in @name&lt;list&gt;@)
+</p>
+</li>
+<li>
+<p>
+@system execute external commands
+</p>
+</li>
+<li>
+<p>
+@export create a bourne shell export script for all parameters
+</p>
+</li>
+<li>
+<p>
+@export &lt;regexp&gt; create bourne shell export script for parameters
+  whose name match with regular expression &lt;regexp&gt; or with
+  regular expressions contained into value of &lt;regexp&gt;
+</p>
+</li>
+<li>
+<p>
+@extract extract all @files
+</p>
+</li>
+<li>
+<p>
+@extract [stdout] &lt;regexp&gt; extract all files (@file)
+  whose path match with regular expression &lt;regexp&gt; or with
+  regular expressions contained into value of &lt;regexp&gt;
+</p>
+</li>
+<li>
+<p>
+if optional stdout option is specified after @extract then files
+  are extracted on stdout
+</p>
+</li>
+<li>
+<p>
+@sequence n,k generates all combinations with n and k parameters
+</p>
+</li>
+<li>
+<p>
+@sequence n^k generates all dispositions with n and k parameters
+</p>
+</li>
+<li>
+<p>
+for combination and disposition sequences can be specified
+  the optional parameter &lt;validator&gt; which is a path to an external
+  application called for each partial or complete sequence using
+  sequence values as command line arguments:
+    if the application return an exit status 0 then the sequence is
+    valid else is not valid
+    if a partial sequence is not valid then all sequences having
+    this partial sequence as prefix are not generated
+</p>
+</li>
+<li>
+<p>
+only valid sequences go to standard output
+  (without &lt;validator&gt; than as default all sequences are valid)
+</p>
+</li>
+<li>
+<p>
+@random n,k generates a random combination with n and k parameters
+</p>
+</li>
+<li>
+<p>
+@random n^k generates a random disposition with n and k parameters
+</p>
+</li>
+<li>
+<p>
+@random n generates a random number between 1 and n
+</p>
+</li>
+<li>
+<p>
+for random combination and disposition can be specified
+  the optional parameter &lt;repetition&gt; in order to specify
+  the number of random sequences that has to be generated
+  (default is 1)
+</p>
+</li>
+<li>
+<p>
+define stdout reserverd variable to forward standard output to file
+  or to a buffer if is defined
+</p>
+</li>
+<li>
+<p>
+define stdout to empty or /dev/null value to suppress output
+</p>
+</li>
+<li>
+<p>
+undef stdout to return on normal output
+</p>
+</li>
+<li>
+<p>
+there is only one global scope
+</p>
+</li>
+<li>
+<p>
+all environment variables are initially defined
+</p>
+</li>
+<li>
+<p>
+to package more files (even ste configuration files) into
+  one unique file, each file content can ben delimited
+  between @file &lt;path&gt; and @end &lt;path&gt;
+</p>
+</li>
+<li>
+<p>
+to extract all packaged files can be used -X option of ste,
+  optionally followed by a regular expression of all path
+  to be extracted
+</p>
+</li>
+</ul></div>
+</div>
+<h2 id="_examples">Examples</h2>
+<div class="sectionbody">
+<div class="literalblock">
+<div class="content">
+<pre><tt>global (outside of templates) definitions...
+@define myglobalname this is the value of myglobalname
+@define myotherglobalname(x,y)
+this is the value of myotherglobalname(@x@,@y@)
+@end
+substring of myglobalname starting from 2nd character is
+@myglobalname[2]@
+substring of myglobalname starting from 2nd character
+with length 8
+@myglobalname[2,8]@
+The actual file and line are @__FILE__@ and @__LINE__@
+@@ this is a comment...
+defining first template...
+@template my-template-1
+this is the first line of template my-template-1
+@@ this is another comment...
+defining mylocalname with a single line value...
+@define mylocalname this is a single line value
+the value of mylocalname is @mylocalname@
+redefining mylocalname with a multiple line value...
+@define mylocalname
+this is
+a multiple line
+value
+@end
+the value of mylocalname is @mylocalname@
+@define mylist
+111 222 field11 field12 field13
+333 444 field21 field22 field23
+555 666 field31 field32 field33
+@end
+@foreach mylist
+the record @NR@ is @0@ and its first three fields are
+  @1@, @2@ and @3@
+@end
+the number of records of mylist is @NR@
+defining printf commands...
+@define size-of-second-field 18
+@printf 1 %.10d
+@printf 2 %@size-of-second-field@.3f
+@printf 3 %-10s
+@printf NR %.15d
+defining "," as field separator...
+@define FS ,
+@@ myotherlist fields are separated by "," character
+@@ (FS = field separator)
+@define myotherlist
+field11,field12,field13
+field21,field22,field23
+field31,field32,field33
+@end
+@@ remove the previous printf...
+@printf 1
+@printf 2
+@printf 3
+@printf NR
+@foreach myotherlist(x,y)
+the record @NR@ is @0@ and its fields are
+  @1@, @2@ and @3@
+the first field is @x@ and the second is @y@
+@end
+the number of records of mylist is @NR@
+@define mybody
+  first field: @1@
+  second field: @2@
+@end
+@define myschema
+this is the header
+of myschema
+@mybody&lt;mylist&gt;@
+this is the footer of myschema
+@end
+defining x with value y
+@define x y
+defining y with value z
+@define y z
+@undef @x@
+now y is undefined
+value of y is @y@
+@undef FS
+@@ spaces or tabs are the (default) field separator...
+the value of myschema is
+@myschema@
+this is the last line of template my-template-1
+@end my-template-1
+done
+defining second template...
+@define mytemplate2(myarg1,myarg2)
+this is the first line of template mytemplate2(@myarg1@,@myarg2@)
+@define myshellcommand echo "Hello World"
+the output of a shell command is @$(echo "Hello World")@
+the output of the same shell command is @$(@myshellcommand@)@
+the exit status of a shell command is @?(echo "Hello World")@
+the exit status of a shell command is @?(@myshellcommand@)@
+the upper case version of string "this Is a String" is
+@&gt;(this Is a String)@
+the lower case version of string "this Is a String" is
+@&lt;(this Is a String)@
+the word separated version of capitalized string
+thisIsAString is @-(thisIsAString)@
+change the default word separator with underscore...
+@define WS _
+the word separated version of capitalized string
+thisIsAString is @-(thisIsAString)@
+return to default word separator ("-")...
+@undef WS
+the capitalized version of the word separated string
+this-is-a-string is @.(this-is-a-string)@
+this is the last line of template mytemplate2
+@end mytemplate2
+done
+the value of myglobalname is @myglobalname@
+the value of myotherglobalname is @myotherglobalname(2,3)@
+evaluating template my-template-1...
+@eval my-template-1
+done
+evaluating template mytemplate2...
+@eval mytemplate2(arg1value,arg2value)
+@undef
+now all template and macro definitions are removed
+the value of myglobalname is @myglobalname@
+@env PATH
+now the PATH environment variable is defined
+the value of environment variable PATH is @PATH@
+forward (appending) standard output on file myoutput.txt...
+@define stdout myoutput.txt
+@env
+now all the environment variables are defined
+the value of environment variable HOME is @HOME@
+return to default standard output...
+@undef stdout
+executing the command ls -l...
+@system ls -l
+forwarding (appending) stardard output on buffer mybuffer...
+@define mybuffer
+@end
+@define stdout mybuffer
+creating dir1 and dir2 directories...
+@system
+if [ ! -d dir1 ]
+then
+  mkdir dir1
+fi
+if [ ! -d dir2 ]
+then
+  mkdir dir2
+fi
+@end
+done
+return to default standard output...
+@undef stdout
+the value of mybuffer is
+@mybuffer@
+@ifndef myid2
+the variable myid2 is not defined
+@end
+@define myid2 valueofmyid2
+@ifdef myid [a-z]+[a-z0-9]*
+there is pattern matching
+@else
+there is not pattern matching
+@end
+@ifndef myid2
+@exit -1 The variable myid2 is not defined
+@end
+this is the last line read from input
+generation of all combinations of length 4 with 5 objects...
+@sequence 5,4
+the combinations are:
+1 2 3 4
+1 2 3 5
+1 2 4 5
+1 3 4 5
+2 3 4 5
+generation of all dispositions of length 2 with 3 objects...
+@define FS ,
+@sequence 3^2
+the dispositions are:
+1,1
+1,2
+1,3
+2,1
+2,2
+2,3
+3,1
+3,2
+3,3
+@undef FS
+generation of 8 random combinations of length 4 with 5 objects...
+@random 5,4 8
+generation of a random dispositions of length 2 with 3 objects...
+@random 3^2
+generation of a random integer number between 1 and 9...
+@random 9
+@exit
+this line is not read...
+package of more (text) files into one file...
+first file...
+@define myfilename a/b/f1.txt
+@file @myfilename@
+this is the first file content...
+@define A
+11 22 33
+44 55 66
+@end
+A value is @A@
+@end @myfilename@
+done
+second file...
+@define mysecondfile f2.txt
+@file f2.txt
+this is the content...
+... of the second file
+@end f2.txt
+last file...
+@file c2.txt
+last file content...
+@end c2.txt
+extracting first file...
+@extract a/b/f1.txt
+extracting second file...
+@extract @mysecondfile@
+extracting all files matching .*2.txt...
+@extract .*2.txt
+extracting all files...
+@extract
+extracting on stdout first file...
+@extract stdout a/b/f1.txt
+extracting on stdout all files...
+@extract stdout</tt></pre>
+</div></div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 1.0<br />
+Last updated 2009-04-04 00:47:13 CEST
+</div>
+<div id="footer-badges">
+<a href="http://validator.w3.org/check?uri=referer">
+  <img style="border:none; width:88px; height:31px;"
+       src="http://www.w3.org/Icons/valid-xhtml11"
+       alt="Valid XHTML 1.1!" />
+</a>
+<a href="http://jigsaw.w3.org/css-validator/check/referer">
+  <img style="border:none; width:88px; height:31px;"
+       src="http://jigsaw.w3.org/css-validator/images/vcss"
+       alt="Valid CSS!" />
+</a>
+<a href="http://www.mozilla.org/products/firefox/">
+  <img style="border:none; width:110px; height:32px;"
+       src="http://www.spreadfirefox.com/community/images/affiliates/Buttons/110x32/safer.gif"
+       alt="Get Firefox!" />
+</a>
+</div>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</body>
+</html>

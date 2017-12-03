@@ -1,0 +1,5832 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.5.2" />
+<meta name="description" content="an open source UNIX framework for shell script based web service provider" />
+<meta name="keywords" content="mysvc, shell script, web service, provider, service, soa, template, engine, myste, mysde, mysvcd" />
+<link rel="stylesheet" href="../xhtml11.css" type="text/css" />
+<link rel="stylesheet" href="../xhtml11-quirks.css" type="text/css" />
+<link rel="stylesheet" href="../layout1.css" type="text/css" />
+<title>MySVC</title>
+</head>
+<body>
+<div id="layout-banner">
+  <div id="layout-title">MySVC</div>
+  <div id="layout-description">an open source UNIX framework for shell script based web services provider</div>
+</div>
+<table>
+<tr valign="top">
+<td id="layout-menu">
+  <div>&#187;<a href="../index.html">Home</a></div>
+  <div>&#187;<a href="../tools.html">Tools</a></div>
+  <div>&#187;<a href="../manpage.html">Man&nbsp;Page</a></div>
+  <div>&#187;<a href="../userguide.html">User&nbsp;Guide</a></div>
+  <div>&#187;<a href="../changelog.html">ChangeLog</a></div>
+  <div>&#187;<a href="../install.html">Installation</a></div>
+  <div>&#187;<a href="../sourcecode.html">Source Code</a></div>
+  <div>&#187;<a href="../downloads.html">Downloads</a></div>
+  <div>&#187;<a href="../faq.html">FAQ</a></div>
+  <div>&#187;<a href="../support.html">Support</a></div>
+  <div>&#187;<a href="../license.html">License</a></div>
+  <hr/>
+  <div>&#187;<a href="../myapps/index.html">My Apps</a></div>
+  <div>
+  <hr/>
+  <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+  <input type="hidden" name="cmd" value="_s-xclick">
+  <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----MIIHPwYJKoZIhvcNAQcEoIIHMDCCBywCAQExggEwMIIBLAIBADCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwDQYJKoZIhvcNAQEBBQAEgYAWiqN5fcvDviZYNLmeRPAOeH+059PTyUtOFN8++Bx9+RhWYfjY/XwEwfKVwaEeK0+pLj9TDs/FW9ChZZF3FNPjR1Xlg0E3S37taxsarZ2NM6iBhXjSapQPgVGtrCqibd0Diq48ouQTcXPMxKON1Anv/fDoHjjaFPTRVI+KMQX0JTELMAkGBSsOAwIaBQAwgbwGCSqGSIb3DQEHATAUBggqhkiG9w0DBwQInBnxX7TxZ3mAgZhXvGov9cuq17ycIBz4CjE/MwjHddefpVXoPyyh89d/ieP1b6rehpp1R/aW8QBbnS1Fl/INzPU38Y3NTqX7oMhFYsLN1D6YSPjAeoFqIXp1rrTEIDLZRSSIwo8OXuEsPHqK/P+l7S4awyCyWJxdMkqSDK2hPoKXSUHIGA8jf6Rq4DV0CsJzljLJSW8WJMfdpXvKuff4HiEZPaCCA4cwggODMIIC7KADAgECAgEAMA0GCSqGSIb3DQEBBQUAMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbTAeFw0wNDAyMTMxMDEzMTVaFw0zNTAyMTMxMDEzMTVaMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbTCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAwUdO3fxEzEtcnI7ZKZL412XvZPugoni7i7D7prCe0AtaHTc97CYgm7NsAtJyxNLixmhLV8pyIEaiHXWAh8fPKW+R017+EmXrr9EaquPmsVvTywAAE1PMNOKqo2kl4Gxiz9zZqIajOm1fZGWcGS0f5JQ2kBqNbvbg2/Za+GJ/qwUCAwEAAaOB7jCB6zAdBgNVHQ4EFgQUlp98u8ZvF71ZP1LXChvsENZklGswgbsGA1UdIwSBszCBsIAUlp98u8ZvF71ZP1LXChvsENZklGuhgZSkgZEwgY4xCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDQTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLUGF5UGFsIEluYy4xEzARBgNVBAsUCmxpdmVfY2VydHMxETAPBgNVBAMUCGxpdmVfYXBpMRwwGgYJKoZIhvcNAQkBFg1yZUBwYXlwYWwuY29tggEAMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEFBQADgYEAgV86VpqAWuXvX6Oro4qJ1tYVIT5DgWpE692Ag422H7yRIr/9j/iKG4Thia/Oflx4TdL+IFJBAyPK9v6zZNZtBgPBynXb048hsP16l2vi0k5Q2JKiPDsEfBhGI+HnxLXEaUWAcVfCsQFvd2A1sxRr67ip5y2wwBelUecP3AjJ+YcxggGaMIIBlgIBATCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwCQYFKw4DAhoFAKBdMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA4MTAyNTE1NTQzMlowIwYJKoZIhvcNAQkEMRYEFMsXBheWWoPdxAigpR2+KpSpl3NXMA0GCSqGSIb3DQEBAQUABIGAMwKAzwiLVvhRLUQBUUgK5IJQOq4Ci0W9bVWiiCIF3g/DOWMzoJvlQRyxelM5jg2wChbtvg1sj5AoyXaqCdbuEI/7rP0/RhrfFxDqkSbWTOqkcgkMPgNeKvXAC9oD2Dflep/uDlUC2E0w9XEPtps7a5jCiJX5//huQ/usU3f5wmI=-----END PKCS7-----
+  ">
+  <input type="image" src="https://www.paypal.com/en_US/IT/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="">
+  <img alt="" border="0" src="https://www.paypal.com/it_IT/i/scr/pixel.gif" width="1" height="1">
+  </form>
+  </div>
+</td>
+<td>
+<div id="layout-content">
+<div id="header">
+<h1>MySTE Source Code</h1>
+</div>
+<h2 id="_myste">myste</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre><tt>#!/bin/sh
+
+#  $Id$
+
+#  myste - My Service Template Engine - Version 1.0 (www.mysvc.it)
+#  Copyright (C) 2009 Davide Cucciniello &lt;davide6169@gmail.com&gt;
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+
+# #######################################################################
+#
+#  ###   ##        ### ##  ##  ####
+#   ##  ##        #  #  #  ## ##  #
+#   ### ##  ##  # ###   #  #  #
+#   # ## #   # ##   ##   # #  #
+#   # #  #   # #  #  #   ##   ##
+#  ###  ###   ##  ###     #    ####
+#             #
+#            #
+#
+#  My Service
+#
+# #######################################################################
+#
+#  ###   ##        ### ##### #####
+#   ##  ##        #  #   #    #  #
+#   ### ##  ##  # ###    #    ###
+#   # ## #   # ##   ##   #    #
+#   # #  #   # #  #  #   #    #  #
+#  ###  ###   ##  ###   ###  #####
+#             #
+#            #
+#
+#  My Service Template Engine
+#
+#  Usage:
+#    myste [-t "&lt;template&gt;"]
+#          [-f "&lt;inputfile&gt;"]
+#          [-p &lt;arguments&gt;]
+#          [-H "&lt;header&gt;"]
+#          [-F "&lt;footer&gt;"]]
+#          [-d "&lt;separator&gt;"]
+#          [-o &lt;outputfile&gt;]]
+#          [-D "&lt;name&gt;[=&lt;value&gt;]"]*
+#          [-s &lt;n&gt;,&lt;k&gt; [&lt;validator&gt;]]
+#          [-s &lt;n&gt;^&lt;k&gt; [&lt;validator&gt;]]
+#          [-r &lt;n&gt;,&lt;k&gt; [&lt;repetion&gt;]]
+#          [-r &lt;n&gt;^&lt;k&gt; [&lt;repetion&gt;]]
+#          [-r &lt;n&gt; [&lt;repetion&gt;]]
+#          [dir &lt;localdir&gt;]
+#          [dir ftp://&lt;username&gt;[:&lt;password&gt;]@&lt;remotehost&gt;[:&lt;port&gt;][/&lt;remotedir&gt;[/.]|&lt;remotefile&gt;] [&lt;remotefiles&gt;=*]]
+#          [get ftp://&lt;username&gt;[:&lt;password&gt;]@&lt;remotehost&gt;[:&lt;port&gt;][/&lt;remotedir&gt;[/.]|&lt;remotefile&gt;] [&lt;localdir&gt;=.] [&lt;remotefiles&gt;=*]]
+#          [put ftp://&lt;username&gt;[:&lt;password&gt;]@&lt;remotehost&gt;[:&lt;port&gt;][/&lt;remotedir&gt;] [&lt;localdir&gt;=.|&lt;localfile&gt;] [&lt;localfiles&gt;=*]]
+#          [del ftp://&lt;username&gt;[:&lt;password&gt;]@&lt;remotehost&gt;[:&lt;port&gt;][/&lt;remotedir&gt;[/.]|&lt;remotefile&gt;] [&lt;remotefiles&gt;=*]]
+#          [-e]
+#          [-x]
+#          [-C]
+#          [-T]
+#          [-X]
+#          [-l]
+#          [[-c]&lt;configfile&gt;]
+#          ["&lt;parameter&gt;"]
+#
+#      -e =&gt; foreach
+#      -x =&gt; export
+#      -C =&gt; create archive
+#      -T =&gt; list archive
+#      -X =&gt; extract archive on files
+#      -l =&gt; extract archive on stdout
+#      -s &lt;n&gt;,&lt;k&gt; =&gt; (valid) combinations (n&gt;k)
+#      -s &lt;n&gt;^&lt;k&gt; =&gt; (valid) dispositions
+#      -r &lt;n&gt;,&lt;k&gt; =&gt; combination(s) (n&gt;k)
+#      -r &lt;n&gt;^&lt;k&gt; =&gt; disposition(s)
+#      -r &lt;n&gt; =&gt; random integer between 1 and &lt;n&gt;
+#      -n =&gt; not execute
+#
+#    myste
+#      (evaluate config file from stdin)
+#
+#    myste /my/path/to/configfile
+#      (evaluate config file
+#       /my/path/to/configfile)
+#
+#    myste /my/path/to/configfile myparametername
+#      (evaluate parameter myparametername of config file
+#       /my/path/to/configfile)
+#
+#    myste /my/path/to/configfile "myparametername(arg1,...,argN)"
+#      or
+#    myste -p "arg1,...,argN" /my/path/to/configfile myparametername
+#      (evaluate parameter myparametername of config file
+#       /my/path/to/configfile with arguments arg1,...,argN)
+#
+#    myste /my/path/to/configfile "myparametername[i]"
+#      (evaluate parameter myparametername of config file
+#       /my/path/to/configfile and extract substring
+#       from i-th character to the end, starting from 1)
+#
+#    myste /my/path/to/configfile "myparametername(arg1,...,argN)[i]"
+#      or
+#    myste -p "arg1,...,argN" /my/path/to/configfile "myparametername[i]"
+#      (evaluate parameter myparametername of config file
+#       /my/path/to/configfile with arguments arg1,...,argN
+#       and extract substring from i-th character to the end, starting from 1)
+#
+#    myste /my/path/to/configfile "myparametername[i,j]"
+#      (evaluate parameter myparametername of config file
+#       /my/path/to/configfile and extract substring
+#       from i-th character, starting from 1, with length j)
+#
+#    myste /my/path/to/configfile "myparametername(arg1,...,argN)[i,j]"
+#      or
+#    myste -p "arg1,...,argN" /my/path/to/configfile "myparametername[i,j]"
+#      (evaluate parameter myparametername of config file
+#       /my/path/to/configfile with arguments arg1,...,argN
+#       and extract substring from i-th character, starting from 1,
+#       with length j)
+#
+#    myste -f /my/path/to/inputfile -p 1,3 \
+#      /my/path/to/configfile myparametername
+#    (evaluate parameter myparametername of config file
+#     /my/path/to/configfile using as arguments
+#     first and third field of csv input file
+#     /my/path/to/inputfile,
+#     where fields are separated by default with spaces,
+#     or with the character &lt;separator&gt; if is specified)
+#
+#    myste -f "/my/path/to/inputfile(x,y,z)" \
+#      /my/path/to/configfile myparametername
+#    (evaluate parameter myparametername of config file
+#     /my/path/to/configfile using as arguments x,y,z
+#     assigned from first three fields of csv input file
+#     /my/path/to/inputfile,
+#     (first to x, second to y and third to z)
+#     where fields are separated by default with spaces,
+#     or with the character &lt;separator&gt; if is specified)
+#
+#     myste -e /my/path/to/configfile myparametername
+#     (evaluate parameter myparametername of config file
+#      /my/path/to/configfile using as arguments
+#      fields of csv read from stdin)
+#
+#     cat /my/path/to/configfile | myste -t mytemplate
+#     (evaluate template mytemplate of config file
+#      /my/path/to/configfile)
+#
+#     cat /my/path/to/configfile | myste -x
+#     (create bourne shell export script for all parameters)
+#
+#     myste -x /my/path/to/configfile
+#     (create bourne shell export script for all parameters)
+#
+#     myste -x /my/path/to/configfile myparameterexpr
+#     (create bourne shell export script for parameters
+#      whose name match with regular expression
+#      contained into value of myparameterexpr)
+#
+#     myste -C
+#     (create on stdout an archive of all files of . directory,
+#      each file being delimited by
+#      @file &lt;path&gt;
+#      &lt;content&gt;
+#      @end &lt;path&gt;)
+#
+#     myste -C /my/root/path
+#     (create on stdout an archive of all files of /my/root/path directory,
+#      each file being delimited by
+#      @file &lt;path&gt;
+#      &lt;content&gt;
+#      @end &lt;path&gt;)
+#
+#     myste -C /my/root/path "*.txt"
+#     (create on stdout an archive of all *.txt files of /my/root/path directory,
+#      each file being delimited by
+#      @file &lt;path&gt;
+#      &lt;content&gt;
+#      @end &lt;path&gt;)
+#
+#     myste -X
+#     (extract files from stdin, each file being delimited by
+#      @file &lt;path&gt;
+#      &lt;content&gt;
+#      @end &lt;path&gt;)
+#
+#     myste -X /my/path/to/configfile
+#     (extract files from config file /my/path/to/configfile,
+#      each file being delimited by
+#      @file &lt;path&gt;
+#      &lt;content&gt;
+#      @end &lt;path&gt;)
+#
+#     myste -X /my/path/to/configfile myparameterexpr
+#     (extract files from config file /my/path/to/configfile
+#      files whose path match with regular expression
+#      contained into value of myparameterexpr,
+#      each file being delimited by
+#      @file &lt;path&gt;
+#      &lt;content&gt;
+#      @end &lt;path&gt;)
+#
+#     myste -T
+#     (extract list of files from stdin, each file being delimited by
+#      @file &lt;path&gt;
+#      &lt;content&gt;
+#      @end &lt;path&gt;)
+#
+#     myste -T /my/path/to/configfile
+#     (extract list of files from config file /my/path/to/configfile,
+#      each file being delimited by
+#      @file &lt;path&gt;
+#      &lt;content&gt;
+#      @end &lt;path&gt;)
+#
+#     myste -l
+#     (extract on stdout files from stdin, each file being delimited by
+#      @file &lt;path&gt;
+#      &lt;content&gt;
+#      @end &lt;path&gt;)
+#
+#     myste -l /my/path/to/configfile
+#     (extract on stdout files from config file /my/path/to/configfile,
+#      each file being delimited by
+#      @file &lt;path&gt;
+#      &lt;content&gt;
+#      @end &lt;path&gt;)
+#
+#     myste -l /my/path/to/configfile myparameterexpr
+#     (extract on stdout files from config file /my/path/to/configfile
+#      files whose path match with regular expression
+#      contained into value of myparameterexpr,
+#      each file being delimited by
+#      @file &lt;path&gt;
+#      &lt;content&gt;
+#      @end &lt;path&gt;)
+#
+#     myste -s n,k [/my/path/to/validation/filter]
+#     (evaluate all combinations from n and k)
+#
+#     myste -s n^k [/my/path/to/validation/filter]
+#     (evaluate all dispositions from n and k)
+#
+#     myste dir /my/local/dir
+#     (get xml local directory tree)
+#
+#     myste dir ftp://myusername:mypassword@myremotehost/my/remote/file
+#     (get remote info of my/remote/file of myremotehost
+#      using ftp with myusername and mypassword)
+#
+#     myste dir ftp://myusername:mypassword@myremotehost/my/remote/dir
+#     (get remote directory tree of all files under my/remote/dir of myremotehost
+#      with recursion on subdirectories
+#      using ftp with myusername and mypassword)
+#
+#     myste dir ftp://myusername:mypassword@myremotehost/my/remote/dir/.
+#     (get remote directory tree of all files under my/remote/dir of myremotehost
+#      without recursion on subdirectories
+#      using ftp with myusername and mypassword)
+#
+#     myste dir ftp://myusername:mypassword@myremotehost:1234/my/remote/dir *.txt
+#     (get remote directory tree of all files *.txt under my/remote/dir of myremotehost
+#      with recursion on subdirectories
+#      using ftp with myusername, mypassword and server port 1234)
+#
+#     myste dir ftp://myusername:mypassword@myremotehost/my/remote/dir/. *.txt
+#     (get remote directory tree of all files *.txt under my/remote/dir of myremotehost
+#      without recursion on subdirectories
+#      using ftp with myusername and mypassword)
+#
+#     myste get ftp://myusername:mypassword@myremotehost/my/remote/dir
+#     (get to current local directory all files under my/remote/dir of myremotehost
+#      with recursion on subdirectories
+#      using ftp with myusername and mypassword)
+#
+#     myste get ftp://myusername:mypassword@myremotehost/my/remote/dir/.
+#     (get to current local directory all files under my/remote/dir of myremotehost
+#      without recursion on subdirectories
+#      using ftp with myusername and mypassword)
+#
+#     myste get ftp://myusername:mypassword@myremotehost/my/remote/file
+#     (get to current local directory file my/remote/file of myremotehost
+#      using ftp with myusername and mypassword)
+#
+#     myste get ftp://myusername:mypassword@myremotehost/my/remote/dir /my/local/dir
+#     (get to local directory /my/local/dir all files under my/remote/dir of myremotehost
+#      with recursion on subdirectories
+#      using ftp with myusername and mypassword)
+#
+#     myste get ftp://myusername:mypassword@myremotehost/my/remote/dir/. /my/local/dir
+#     (get to local directory /my/local/dir all files under my/remote/dir of myremotehost
+#      without recursion on subdirectories
+#      using ftp with myusername and mypassword)
+#
+#     myste get ftp://myusername:mypassword@myremotehost/my/remote/dir /my/local/dir *.txt
+#     (get to local directory /my/local/dir all files *.txt under my/remote/dir of myremotehost
+#      with recursion on subdirectories
+#      using ftp with myusername and mypassword)
+#
+#     myste get ftp://myusername:mypassword@myremotehost/my/remote/dir/. /my/local/dir *.txt
+#     (get to local directory /my/local/dir all files *.txt under my/remote/dir of myremotehost
+#      without recursion on subdirectories
+#      using ftp with myusername and mypassword)
+#
+#     myste put ftp://myusername:mypassword@myremotehost/my/remote/dir
+#     (put all local files under current local directory under my/remote/dir of myremotehost
+#      with recursion on local subdirectories
+#      using ftp with myusername and mypassword)
+#
+#     myste put ftp://myusername:mypassword@myremotehost/my/remote/dir/.
+#     (put all local files under current local directory under my/remote/dir of myremotehost
+#      without recursion on local subdirectories
+#      using ftp with myusername and mypassword)
+#
+#     myste put ftp://myusername:mypassword@myremotehost/my/remote/dir . *.txt
+#     (put all local files *.txt under current local directory to my/remote/dir of myremotehost
+#      without recursion on local subdirectories
+#      using ftp with myusername and mypassword)
+#
+#     myste put ftp://myusername:mypassword@myremotehost/my/remote/dir /my/local/dir *.txt
+#     (put all local files *.txt under local directory /my/local/dir to my/remote/dir of myremotehost
+#      with recursion on local subdirectories
+#      using ftp with myusername and mypassword)
+#
+#     myste del ftp://myusername:mypassword@myremotehost/my/remote/file
+#     (del remote file my/remote/file of myremotehost
+#      using ftp with myusername and mypassword)
+#
+#     myste del ftp://myusername:mypassword@myremotehost/my/remote/dir
+#     (del remote directory my/remote/dir of myremotehost
+#      with recursion on subdirectories
+#      using ftp with myusername and mypassword)
+#
+#     myste del ftp://myusername:mypassword@myremotehost/my/remote/dir/.
+#     (del remote directory my/remote/dir of myremotehost
+#      without recursion on subdirectories
+#      using ftp with myusername and mypassword)
+#
+#     myste del ftp://myusername:mypassword@myremotehost/my/remote/dir *.txt
+#     (del all files *.txt under remote directory my/remote/dir of myremotehost
+#      with recursion on subdirectories
+#      using ftp with myusername and mypassword)
+#
+#     myste del ftp://myusername:mypassword@myremotehost/my/remote/dir/. *.txt
+#     (del all files *.txt under remote directory my/remote/dir of myremotehost
+#      without recursion on subdirectories
+#      using ftp with myusername and mypassword)
+#
+#     if template is specified, then it's evaluated before
+#     evaluating parameters
+#
+#  Input:
+#    &lt;stdin&gt; or &lt;configfile&gt; if specified
+#
+#  Output:
+#    &lt;stdout&gt; or &lt;outputfile&gt;:
+#      parameter value
+#    (&lt;outputfile&gt; iff &lt;inputfile&gt; and &lt;outputfile&gt; are specified)
+#
+#    &lt;exit status&gt;:
+#       0 =&gt; parameter found
+#       1 =&gt; parameter not found
+#
+#  Summary:
+#    MySTE is an open source UNIX standalone tool part of MySVC framework.
+#    It is a bourne shell script as template engine to handle template files
+#    having features of other UNIX tools such as
+#    C preprocessor, m4 macro processor, awk, tar, ftp
+#    and other original features useful into ICT environments
+#    such as (N,K) combinations and disposition generator,
+#    capitalized strings converter or readable archive of
+#    text file creator...
+#
+#  Syntax:
+#    @template &lt;name&gt;[(&lt;arg1&gt;,...,&lt;argN&gt;)]
+#    ...
+#    &lt;value&gt;
+#    ...
+#    @end &lt;name&gt;
+#
+#    @eval &lt;name&gt;[(&lt;arg1&gt;,...,&lt;argN&gt;)]
+#
+#    @define &lt;name&gt;[(&lt;arg1&gt;,...,&lt;argN&gt;&gt;)] &lt;value&gt;
+#
+#    @define &lt;name&gt;[(&lt;arg1&gt;,...,&lt;argN&gt;&gt;)]
+#    ...
+#    &lt;value&gt;
+#    ...
+#    @end
+#
+#    @undef [&lt;name&gt;]
+#
+#    @ifdef &lt;name&gt; [&lt;value&gt;]
+#    ...
+#    &lt;value&gt;
+#    ...
+#    @endif
+#
+#    @ifdef &lt;name&gt; [&lt;value&gt;]
+#    ...
+#    &lt;value&gt;
+#    ...
+#    @else
+#    ...
+#    &lt;value&gt;
+#    ...
+#    @endif
+#
+#    @ifndef &lt;name&gt; [&lt;value&gt;]
+#    ...
+#    &lt;value&gt;
+#    ...
+#    @endif
+#
+#    @ifndef &lt;name&gt; [&lt;value&gt;]
+#    ...
+#    &lt;value&gt;
+#    ...
+#    @else
+#    ...
+#    &lt;value&gt;
+#    ...
+#    @endif
+#
+#    @include &lt;name&gt;
+#
+#    @foreach &lt;name&gt;[(&lt;arg1&gt;,...,&lt;argN&gt;)] &lt;value&gt;
+#
+#    @foreach &lt;name&gt;[(&lt;arg1&gt;,...,&lt;argN&gt;)]
+#    ...
+#    &lt;value&gt;
+#    ...
+#    @end
+#
+#    @printf &lt;name&gt; [&lt;value&gt;]
+#
+#    @system &lt;value&gt;
+#
+#    @system
+#    ...
+#    &lt;value&gt;
+#    ...
+#    @end
+#
+#    @env [&lt;name&gt;]
+#
+#    @export [&lt;value&gt;]
+#
+#    @sequence &lt;value&gt;,&lt;value&gt; [&lt;value&gt;]
+#
+#    @sequence &lt;value&gt;^&lt;value&gt; [&lt;value&gt;]
+#
+#    @random &lt;value&gt;,&lt;value&gt; [&lt;value&gt;]
+#
+#    @random &lt;value&gt;^&lt;value&gt; [&lt;value&gt;]
+#
+#    @random &lt;value&gt; [&lt;value&gt;]
+#
+#    @exit [&lt;code&gt;] [&lt;value&gt;]
+#
+#    @file &lt;value&gt;
+#    ...
+#    &lt;value&gt;
+#    ...
+#    @end &lt;value&gt;
+#
+#    @extract [stdout] [&lt;value&gt;]
+#
+#    @extract list
+#
+#    @archive [&lt;value&gt;] [&lt;value&gt;]
+#
+#    @dir &lt;localdir&gt;
+#
+#    @dir ftp://&lt;username&gt;[:&lt;password&gt;]@&lt;remotehost&gt;[:&lt;port&gt;][/&lt;remotedir&gt;[/.]|&lt;remotefile&gt;] [&lt;remotefiles&gt;=*]
+#
+#    @get ftp://&lt;username&gt;[:&lt;password&gt;]@&lt;remotehost&gt;[:&lt;port&gt;][/&lt;remotedir&gt;[/.]|&lt;remotefile&gt;] [&lt;localdir&gt;=.] [&lt;remotefiles&gt;=*]
+#
+#    @put ftp://&lt;username&gt;[:&lt;password&gt;]@&lt;remotehost&gt;[:&lt;port&gt;][/&lt;remotedir&gt;] [&lt;localdir&gt;=.|&lt;localfile&gt;] [&lt;localfiles&gt;=*]
+#
+#    @del ftp://&lt;username&gt;[:&lt;password&gt;]@&lt;remotehost&gt;[:&lt;port&gt;][/&lt;remotedir&gt;[/.]|&lt;remotefile&gt;] [&lt;remotefiles&gt;=*]
+#
+#    @foreach ftp://&lt;username&gt;[:&lt;password&gt;]@&lt;remotehost&gt;[:&lt;port&gt;][/&lt;remotedir&gt;[/.]|&lt;remotefile&gt;] [dir] [&lt;remotefiles&gt;=*]
+#    ...
+#    &lt;value&gt; (fields as "ls -l" output)
+#    ...
+#    @end
+#
+#    @foreach ftp://&lt;username&gt;[:&lt;password&gt;]@&lt;remotehost&gt;[:&lt;port&gt;][/&lt;remotedir&gt;[/.]|&lt;remotefile&gt;] get [&lt;localdir&gt;=.] [&lt;remotefiles&gt;=*]
+#    ...
+#    &lt;value&gt;
+#    ...
+#    @end
+#
+#    @foreach ftp://&lt;username&gt;[:&lt;password&gt;]@&lt;remotehost&gt;[:&lt;port&gt;][/&lt;remotedir&gt;] put [&lt;localdir&gt;=.|&lt;localfile&gt;] [&lt;localfiles&gt;=*]
+#    ...
+#    &lt;value&gt;
+#    ...
+#    @end
+#
+#    @foreach ftp://&lt;username&gt;[:&lt;password&gt;]@&lt;remotehost&gt;[:&lt;port&gt;][/&lt;remotedir&gt;[/.]|&lt;remotefile&gt;] del [&lt;remotefiles&gt;=*]
+#    ...
+#    &lt;value&gt;
+#    ...
+#    @end
+#
+#  Notes:
+#  - a template, defined with @template, could contains anything
+#    but others templates and is evaluated with @eval
+#    (similar to @include but with lines imported from template definition
+#    instead of file)
+#  - the text value of a macro, defined with @define, could contains
+#    references to other macro values, as:
+#      * @name@
+#      * @name(arg1,...,argN)@
+#          =&gt; name (template or macro) value
+#      * @name[i]@
+#      * @name(arg1,...,argN)[i]@
+#          =&gt; substring of each row of name value starting from i, with i&gt;=1
+#      * @name[i,j]@
+#      * @name(arg1,...,argN)[i,j]@
+#          =&gt; substring of each row of name value starting from i with length j
+#      * @name&lt;list&gt;@
+#          =&gt; repeat the value of name for each row of list value,
+#             or for each row of csv file list if macro named list
+#             is not defined
+#             name definition could contains references to
+#               * @0@ for actual record (line)
+#               * @1@ for first field of record
+#               * @2@ for second field of record
+#               ...
+#               * @n@ for n-th field of record
+#               * @NF@ for the number of field of actual record (with NF&gt;=1)
+#               * @NR@ for the number of actual record (with NR&gt;=1)
+#              the default field separator (spaces or tabs) can
+#              be changed defining a value for the FS reserved variable
+#              (e.g. @define FS ,)
+#      * @name&lt;list&gt;[i]@
+#          =&gt; repeat substring (starting from i) for each row of list value,
+#             or for each row of file list if macro named list
+#             is not defined
+#      * @name&lt;list&gt;[i,j]@
+#          =&gt; repeat substring (starting from i with length j)
+#             for each row of list value,
+#             or for each row of file list if macro named list
+#             is not defined
+#      * @$(command)@
+#          =&gt; is the output generated from an external command
+#      * @?(command)@
+#          =&gt; is the exit status generated from an external command
+#      * @name++@
+#          =&gt; return value and then increment it
+#      * @name--@
+#          =&gt; return value and then decrement it
+#      * @++name@
+#          =&gt; increment value and then return it
+#      * @--name@
+#          =&gt; decrement value and then return it
+#      * @&gt;(string)@
+#          =&gt; is the upper case version of string
+#             ("this Is a String" -&gt; "THIS IS A STRING")
+#      * @&lt;(string)@
+#          =&gt; is the lower case version of string
+#             ("this Is a String" -&gt; "this is a string")
+#      * @-(string)@
+#          =&gt; is the word separated version of a capitalized string
+#             ("thisIsAString" -&gt; "this-is-a-string")
+#             the "-" character is used as default separator
+#             or WS ("word separator") value if is defined
+#             (e.g. @define WS _)
+#      * @.(string)@
+#          =&gt; is the capitalized version of an word separated string
+#             ("this-is-a-string" -&gt; "thisIsAString")
+#             the "-" character is used as default separator
+#             or WS ("word separator") value if is defined
+#             (e.g. @define WS _)
+#  - @ifdef, @ifndef, @undef and @include have the usual meaning
+#    as the C preprocessor, but can be specified a regular expression
+#    as value for pattern matching with name value
+#    @foreach list, like @name&lt;list&gt;@, repeat the value specified
+#    for each row of list value, or for each row of file list
+#    if macro named list is not defined
+#    (having @0@, @1@,..., @NF@ and @NR@ in the value the same
+#     meaning as in @name&lt;list&gt;@)
+#  - @system execute external commands
+#  - @export create a bourne shell export script for all parameters
+#  - @export &lt;regexp&gt; create bourne shell export script for parameters
+#    whose name match with regular expression &lt;regexp&gt; or with
+#    regular expressions contained into value of &lt;regexp&gt;
+#  - @extract extract all @files
+#  - @extract [stdout] &lt;regexp&gt; extract all files (@file)
+#    whose path match with regular expression &lt;regexp&gt; or with
+#    regular expressions contained into value of &lt;regexp&gt;
+#  - if optional stdout option is specified after @extract then files
+#    are extracted on stdout
+#  - @sequence n,k generates all combinations with n and k parameters
+#  - @sequence n^k generates all dispositions with n and k parameters
+#  - for combination and disposition sequences can be specified
+#    the optional parameter &lt;validator&gt; which is a path to an external
+#    application called for each partial or complete sequence using
+#    sequence values as command line arguments:
+#      if the application return an exit status 0 then the sequence is
+#      valid else is not valid
+#      if a partial sequence is not valid then all sequences having
+#      this partial sequence as prefix are not generated
+#  - only valid sequences go to standard output
+#    (without &lt;validator&gt; than as default all sequences are valid)
+#  - @random n,k generates a random combination with n and k parameters
+#  - @random n^k generates a random disposition with n and k parameters
+#  - @random n generates a random number between 1 and n
+#  - for random combination and disposition can be specified
+#    the optional parameter &lt;repetition&gt; in order to specify
+#    the number of random sequences that has to be generated
+#    (default is 1)
+#  - define stdout reserverd variable to forward standard output to file
+#    or to a buffer if is defined
+#  - define stdout to empty or /dev/null value to suppress output
+#  - undef stdout to return on normal output
+#  - there is only one global scope
+#  - all environment variables are initially defined
+#  - to package (on stdout) more files (even myste configuration files)
+#    into one unique file can be used the -C option of myste
+#    followed by optionals parameters [&lt;rootdir&gt;] and [&lt;path&gt;]
+#    (same as find &lt;rootdir&gt; -path &lt;path&gt;)
+#    where each file content will be delimited
+#    between @file &lt;path&gt; and @end &lt;path&gt;
+#  - to extract all packaged files can be used -X option of myste,
+#    optionally followed by a regular expression of all path
+#    to be extracted
+#  - a @template can contains also @file definitions and
+#    a @file can contains everything
+#    (also other files and @template definitions)
+#  - if the last item of output of ftp @put, @get, @dir, @del
+#    or @foreach ftp://... (field @9@)
+#    ends with '/' then is a directory else is a file
+#  - to obtain a log file with the trace of an ftp session
+#    define the stderr predefined variable with the
+#    path of log file
+#
+#  Examples:
+#    global (outside of templates) definitions...
+#    @define myglobalname this is the value of myglobalname
+#    @define myotherglobalname(x,y)
+#    this is the value of myotherglobalname(@x@,@y@)
+#    @end
+#    substring of myglobalname starting from 2nd character is
+#    @myglobalname[2]@
+#    substring of myglobalname starting from 2nd character
+#    with length 8
+#    @myglobalname[2,8]@
+#    The actual file and line are @__FILE__@ and @__LINE__@
+#    @@ this is a comment...
+#    defining first template...
+#    @template my-template-1
+#    this is the first line of template my-template-1
+#    @@ this is another comment...
+#    defining mylocalname with a single line value...
+#    @define mylocalname this is a single line value
+#    the value of mylocalname is @mylocalname@
+#    redefining mylocalname with a multiple line value...
+#    @define mylocalname
+#    this is
+#    a multiple line
+#    value
+#    @end
+#    the value of mylocalname is @mylocalname@
+#    @define mylist
+#    111 222 field11 field12 field13
+#    333 444 field21 field22 field23
+#    555 666 field31 field32 field33
+#    @end
+#    @foreach mylist
+#    the record @NR@ is @0@ and its first three fields are
+#      @1@, @2@ and @3@
+#    @end
+#    the number of records of mylist is @NR@
+#    defining printf commands...
+#    @define size-of-second-field 18
+#    @printf 1 %.10d
+#    @printf 2 %@size-of-second-field@.3f
+#    @printf 3 %-10s
+#    @printf NR %.15d
+#    defining "," as field separator...
+#    @define FS ,
+#    @@ myotherlist fields are separated by "," character
+#    @@ (FS = field separator)
+#    @define myotherlist
+#    field11,field12,field13
+#    field21,field22,field23
+#    field31,field32,field33
+#    @end
+#    @@ remove the previous printf...
+#    @printf 1
+#    @printf 2
+#    @printf 3
+#    @printf NR
+#    @foreach myotherlist(x,y)
+#    the record @NR@ is @0@ and its fields are
+#      @1@, @2@ and @3@
+#    the first field is @x@ and the second is @y@
+#    @end
+#    the number of records of mylist is @NR@
+#    @define mybody
+#      first field: @1@
+#      second field: @2@
+#    @end
+#    @define myschema
+#    this is the header
+#    of myschema
+#    @mybody&lt;mylist&gt;@
+#    this is the footer of myschema
+#    @end
+#    defining x with value y
+#    @define x y
+#    defining y with value z
+#    @define y z
+#    @undef @x@
+#    now y is undefined
+#    value of y is @y@
+#    @undef FS
+#    @@ spaces or tabs are the (default) field separator...
+#    the value of myschema is
+#    @myschema@
+#    this is the last line of template my-template-1
+#    @end my-template-1
+#    done
+#    defining second template...
+#    @define mytemplate2(myarg1,myarg2)
+#    this is the first line of template mytemplate2(@myarg1@,@myarg2@)
+#    @define myshellcommand echo "Hello World"
+#    the output of a shell command is @$(echo "Hello World")@
+#    the output of the same shell command is @$(@myshellcommand@)@
+#    the exit status of a shell command is @?(echo "Hello World")@
+#    the exit status of a shell command is @?(@myshellcommand@)@
+#    the upper case version of string "this Is a String" is
+#    @&gt;(this Is a String)@
+#    the lower case version of string "this Is a String" is
+#    @&lt;(this Is a String)@
+#    the word separated version of capitalized string
+#    thisIsAString is @-(thisIsAString)@
+#    change the default word separator with underscore...
+#    @define WS _
+#    the word separated version of capitalized string
+#    thisIsAString is @-(thisIsAString)@
+#    return to default word separator ("-")...
+#    @undef WS
+#    the capitalized version of the word separated string
+#    this-is-a-string is @.(this-is-a-string)@
+#    this is the last line of template mytemplate2
+#    @end mytemplate2
+#    done
+#    the value of myglobalname is @myglobalname@
+#    the value of myotherglobalname is @myotherglobalname(2,3)@
+#    evaluating template my-template-1...
+#    @eval my-template-1
+#    done
+#    evaluating template mytemplate2...
+#    @eval mytemplate2(arg1value,arg2value)
+#    @undef
+#    now all template and macro definitions are removed
+#    the value of myglobalname is @myglobalname@
+#    @env PATH
+#    now the PATH environment variable is defined
+#    the value of environment variable PATH is @PATH@
+#    forward (appending) standard output on file myoutput.txt...
+#    @define stdout myoutput.txt
+#    @env
+#    now all the environment variables are defined
+#    the value of environment variable HOME is @HOME@
+#    return to default standard output...
+#    @undef stdout
+#    executing the command ls -l...
+#    @system ls -l
+#    forwarding (appending) stardard output on buffer mybuffer...
+#    @define mybuffer
+#    @end
+#    @define stdout mybuffer
+#    removing dir1 and dir2 directories...
+#    @system rm -rf dir1
+#    @system rm -rf dir2
+#    creating dir1 and dir2 directories...
+#    @system
+#    mkdir dir1
+#    @end
+#    @system mkdir dir2
+#    done
+#    return to default standard output...
+#    @undef stdout
+#    the value of mybuffer is
+#    @mybuffer@
+#    @ifndef myid2
+#    the variable myid2 is not defined
+#    @endif
+#    @define myid2 valueofmyid2
+#    @ifdef myid2 [a-z]+[a-z0-9]*
+#    there is pattern matching
+#    @else
+#    there is not pattern matching
+#    @endif
+#    @ifndef myid2
+#    exiting...
+#    @exit -1 The variable myid2 is not defined
+#    @endif
+#    this is the last line read from input
+#    generation of all combinations of length 4 with 5 objects...
+#    @sequence 5,4
+#    the combinations are:
+#    1 2 3 4
+#    1 2 3 5
+#    1 2 4 5
+#    1 3 4 5
+#    2 3 4 5
+#    generation of all dispositions of length 2 with 3 objects...
+#    @define FS ,
+#    @sequence 3^2
+#    the dispositions are:
+#    1,1
+#    1,2
+#    1,3
+#    2,1
+#    2,2
+#    2,3
+#    3,1
+#    3,2
+#    3,3
+#    @undef FS
+#    generation of 8 random combinations of length 4 with 5 objects...
+#    @random 5,4 8
+#    generation of a random disposition of length 2 with 3 objects...
+#    @random 3^2
+#    generation of a random integer number between 1 and 9...
+#    @random 9
+#    @@exit
+#    if previous line was "@exit" this line is not read...
+#    archive automatically on stdout more (text) files into one file...
+#    @archive @HOME@/src *.c
+#    archive manually more (text) files into one file...
+#    first file...
+#    @file a/b/f1.txt
+#    this is the first file content...
+#    @define A
+#    11 22 33
+#    44 55 66
+#    @end
+#    A value is @A@
+#    @end a/b/f1.txt
+#    done
+#    second file...
+#    @define mysecondfile f2.txt
+#    @file f2.txt
+#    this is the content...
+#    ... of the second file
+#    containing two templates...
+#    @template t1
+#    @define X 11
+#    @define Y 12
+#    @end t1
+#    @template t2
+#    @define X 21
+#    @define Y 22
+#    @end t2
+#    @end f2.txt
+#    last file...
+#    @file c2.txt
+#    last file content...
+#    @end c2.txt
+#    extracting first file...
+#    @extract a/b/f1.txt
+#    a template can contains also files...
+#    @template t1
+#    begin t1...
+#    @file a/b/f1.txt
+#    this is the new file content...
+#    @end a/b/f1.txt
+#    end t1...
+#    @end t1
+#    extracting new first file content defined into t1...
+#    @eval t1
+#    extracting second file...
+#    @extract @mysecondfile@
+#    extracting all files matching .*2.txt...
+#    @extract .*2.txt
+#    extracting all files...
+#    @extract
+#    extracting on stdout first file...
+#    @extract stdout a/b/f1.txt
+#    extracting on stdout all files...
+#    @extract stdout
+#    @@ get xml local directory tree...
+#    @dir /my/local/dir
+#    ...
+#    @@ get remote info of my/remote/file of myremotehost (as "ls -l")
+#    @@ using ftp with myusername and mypassword...
+#    @dir ftp://myusername:mypassword@myremotehost/my/remote/file
+#    ...
+#    @@ get remote directory tree of all files under my/remote/dir of myremotehost
+#    @@ with recursion on subdirectories
+#    @@ using ftp with myusername and mypassword...
+#    @dir ftp://myusername:mypassword@myremotehost/my/remote/dir
+#    ...
+#    @@ get remote directory tree of all files under my/remote/dir of myremotehost
+#    @@ without recursion on subdirectories
+#    @@ using ftp with myusername and mypassword...
+#    @dir ftp://myusername:mypassword@myremotehost/my/remote/dir/.
+#    ...
+#    @@ get remote directory tree of all files *.txt under my/remote/dir of myremotehost
+#    @@ with recursion on subdirectories
+#    @@ using ftp with myusername, mypassword and server port 1234...
+#    @dir ftp://myusername:mypassword@myremotehost:1234/my/remote/dir *.txt
+#    ...
+#    @@ get remote directory tree of all files *.txt under my/remote/dir of myremotehost
+#    @@ without recursion on subdirectories
+#    @@ using ftp with myusername and mypassword...
+#    @dir ftp://myusername:mypassword@myremotehost/my/remote/dir/. *.txt
+#    ...
+#    @@ get to current local directory all files under my/remote/dir of myremotehost
+#    @@ with recursion on subdirectories
+#    @@ using ftp with myusername and mypassword...
+#    @get ftp://myusername:mypassword@myremotehost/my/remote/dir
+#    ...
+#    @@ get to current local directory all files under my/remote/dir of myremotehost
+#    @@ without recursion on subdirectories
+#    @@ using ftp with myusername and mypassword...
+#    @get ftp://myusername:mypassword@myremotehost/my/remote/dir/.
+#    ...
+#    @@ get to current local directory file my/remote/file of myremotehost
+#    @@ using ftp with myusername and mypassword...
+#    @get ftp://myusername:mypassword@myremotehost/my/remote/file
+#    ...
+#    @@ get to local directory /my/local/dir all files under my/remote/dir of myremotehost
+#    @@ with recursion on subdirectories
+#    @@ using ftp with myusername and mypassword...
+#    @get ftp://myusername:mypassword@myremotehost/my/remote/dir /my/local/dir
+#    ...
+#    @@ get to local directory /my/local/dir all files under my/remote/dir of myremotehost
+#    @@ without recursion on subdirectories
+#    @@ using ftp with myusername and mypassword...
+#    @get ftp://myusername:mypassword@myremotehost/my/remote/dir/. /my/local/dir
+#    ...
+#    @@ get to local directory /my/local/dir all files *.txt under my/remote/dir of myremotehost
+#    @@ with recursion on subdirectories
+#    @@ using ftp with myusername and mypassword...
+#    @get ftp://myusername:mypassword@myremotehost/my/remote/dir /my/local/dir *.txt
+#    ...
+#    @@ get to local directory /my/local/dir all files *.txt under my/remote/dir of myremotehost
+#    @@ without recursion on subdirectories
+#    @@ using ftp with myusername and mypassword...
+#    @get ftp://myusername:mypassword@myremotehost/my/remote/dir/. /my/local/dir *.txt
+#    ...
+#    @@ put all local files under current local directory under my/remote/dir of myremotehost
+#    @@ with recursion on local subdirectories
+#    @@ using ftp with myusername and mypassword...
+#    @put ftp://myusername:mypassword@myremotehost/my/remote/dir
+#    ...
+#    @@ put all local files under current local directory under my/remote/dir of myremotehost
+#    @@ without recursion on local subdirectories
+#    @@ using ftp with myusername and mypassword...
+#    @put ftp://myusername:mypassword@myremotehost/my/remote/dir/.
+#    ...
+#    @@ put all local files *.txt under current local directory to my/remote/dir of myremotehost
+#    @@ without recursion on local subdirectories
+#    @@ using ftp with myusername and mypassword...
+#    @put ftp://myusername:mypassword@myremotehost/my/remote/dir . *.txt
+#    ...
+#    @@ put all local files *.txt under local directory /my/local/dir to my/remote/dir of myremotehost
+#    @@ with recursion on local subdirectories
+#    @@ using ftp with myusername and mypassword...
+#    @put ftp://myusername:mypassword@myremotehost/my/remote/dir /my/local/dir *.txt
+#    ...
+#    @@ del remote file my/remote/file of myremotehost
+#    @@ using ftp with myusername and mypassword...
+#    @del ftp://myusername:mypassword@myremotehost/my/remote/file
+#    ...
+#    @@ del remote directory my/remote/dir of myremotehost
+#    @@ with recursion on subdirectories
+#    @@ using ftp with myusername and mypassword...
+#    @del ftp://myusername:mypassword@myremotehost/my/remote/dir
+#    ...
+#    @@ del remote directory my/remote/dir of myremotehost
+#    @@ without recursion on subdirectories
+#    @@ using ftp with myusername and mypassword...
+#    @del ftp://myusername:mypassword@myremotehost/my/remote/dir/.
+#    ...
+#    @@ del all files *.txt under remote directory my/remote/dir of myremotehost
+#    @@ with recursion on subdirectories
+#    @@ using ftp with myusername and mypassword...
+#    @del ftp://myusername:mypassword@myremotehost/my/remote/dir *.txt
+#    ...
+#    @@ del all files *.txt under remote directory my/remote/dir of myremotehost
+#    @@ without recursion on subdirectories
+#    @@ using ftp with myusername and mypassword...
+#    @del ftp://myusername:mypassword@myremotehost/my/remote/dir/. *.txt
+#    ...
+#    @@ get remote info of my/remote/file of myremotehost
+#    @@ using ftp with myusername and mypassword...
+#    @foreach ftp://myusername:mypassword@myremotehost/my/remote/file
+#    the info of file @9@ (@NF@) are &lt;@0@&gt; (as "ls -l")
+#    @end
+#    @@ the number of files is @NR@
+#    ...
+#    @@ get remote directory tree of all files under my/remote/dir of myremotehost
+#    @@ with recursion on subdirectories
+#    @@ using ftp with myusername and mypassword...
+#    @foreach ftp://myusername:mypassword@myremotehost/my/remote/dir
+#    the info of file @9@ (@NF@) with size @5@ are &lt;@0@&gt;
+#    @end
+#    ...
+#    @@ get remote directory tree of all files under my/remote/dir of myremotehost
+#    @@ without recursion on subdirectories
+#    @@ using ftp with myusername and mypassword...
+#    @foreach ftp://myusername:mypassword@myremotehost/my/remote/dir/.
+#    the info of file @9@ (@NF@) with size @5@ are &lt;@0@&gt;
+#    @end
+#    ...
+#    @@ get remote directory tree of all files *.txt under my/remote/dir of myremotehost
+#    @@ with recursion on subdirectories
+#    @@ using ftp with myusername, mypassword and server port 1234...
+#    @foreach ftp://myusername:mypassword@myremotehost:1234/my/remote/dir *.txt
+#    the info of file @9@ (@NF@) with size @5@ are &lt;@0@&gt;
+#    @end
+#    ...
+#    @@ get remote directory tree of all files *.txt under my/remote/dir of myremotehost
+#    @@ without recursion on subdirectories
+#    @@ using ftp with myusername and mypassword...
+#    @foreach ftp://myusername:mypassword@myremotehost/my/remote/dir/. *.txt
+#    the info of file @9@ (@NF@) with size @5@ are &lt;@0@&gt;
+#    @end
+#    ...
+#    @@ get to current local directory all files under my/remote/dir of myremotehost
+#    @@ with recursion on subdirectories
+#    @@ using ftp with myusername and mypassword...
+#    @foreach ftp://myusername:mypassword@myremotehost/my/remote/dir
+#    the info of file @9@ (@NF@) with size @5@ are &lt;@0@&gt;
+#    @end
+#    ...
+#    @@ get to current local directory all files under my/remote/dir of myremotehost
+#    @@ without recursion on subdirectories
+#    @@ using ftp with myusername and mypassword...
+#    @foreach ftp://myusername:mypassword@myremotehost/my/remote/dir/.
+#    the info of file @9@ (@NF@) with size @5@ are &lt;@0@&gt;
+#    @end
+#    ...
+#    @@ get to current local directory file my/remote/file of myremotehost
+#    @@ using ftp with myusername and mypassword...
+#    @foreach ftp://myusername:mypassword@myremotehost/my/remote/file
+#    the info of file @9@ (@NF@) with size @5@ are &lt;@0@&gt;
+#    @end
+#    ...
+#    @@ get to local directory /my/local/dir all files under my/remote/dir of myremotehost
+#    @@ with recursion on subdirectories
+#    @@ using ftp with myusername and mypassword...
+#    @foreach ftp://myusername:mypassword@myremotehost/my/remote/dir /my/local/dir
+#    the info of file @9@ (@NF@) with size @5@ are &lt;@0@&gt;
+#    @end
+#    ...
+#    @@ get to local directory /my/local/dir all files under my/remote/dir of myremotehost
+#    @@ without recursion on subdirectories
+#    @@ using ftp with myusername and mypassword...
+#    @foreach ftp://myusername:mypassword@myremotehost/my/remote/dir/. /my/local/dir
+#    the info of file @9@ (@NF@) with size @5@ are &lt;@0@&gt;
+#    @end
+#    ...
+#    @@ get to local directory /my/local/dir all files *.txt under my/remote/dir of myremotehost
+#    @@ with recursion on subdirectories
+#    @@ using ftp with myusername and mypassword...
+#    @foreach ftp://myusername:mypassword@myremotehost/my/remote/dir /my/local/dir *.txt
+#    the info of file @9@ (@NF@) with size @5@ are &lt;@0@&gt;
+#    @end
+#    ...
+#    @@ get to local directory /my/local/dir all files *.txt under my/remote/dir of myremotehost
+#    @@ without recursion on subdirectories
+#    @@ using ftp with myusername and mypassword...
+#    @foreach ftp://myusername:mypassword@myremotehost/my/remote/dir/. /my/local/dir *.txt
+#    the info of file @9@ (@NF@) with size @5@ are &lt;@0@&gt;
+#    @end
+#    ...
+#    @@ put all local files under current local directory under my/remote/dir of myremotehost
+#    @@ with recursion on local subdirectories
+#    @@ using ftp with myusername and mypassword...
+#    @foreach ftp://myusername:mypassword@myremotehost/my/remote/dir
+#    the info of file @9@ (@NF@) with size @5@ are &lt;@0@&gt;
+#    @end
+#    ...
+#    @@ put all local files under current local directory under my/remote/dir of myremotehost
+#    @@ without recursion on local subdirectories
+#    @@ using ftp with myusername and mypassword...
+#    @foreach ftp://myusername:mypassword@myremotehost/my/remote/dir/.
+#    the info of file @9@ (@NF@) with size @5@ are &lt;@0@&gt;
+#    @end
+#    ...
+#    @@ put all local files *.txt under current local directory to my/remote/dir of myremotehost
+#    @@ without recursion on local subdirectories
+#    @@ using ftp with myusername and mypassword...
+#    @foreach ftp://myusername:mypassword@myremotehost/my/remote/dir . *.txt
+#    the info of file @9@ (@NF@) with size @5@ are &lt;@0@&gt;
+#    @end
+#    ...
+#    @@ put all local files *.txt under local directory /my/local/dir to my/remote/dir of myremotehost
+#    @@ with recursion on local subdirectories
+#    @@ using ftp with myusername and mypassword...
+#    @foreach ftp://myusername:mypassword@myremotehost/my/remote/dir /my/local/dir *.txt
+#    the info of file @9@ (@NF@) with size @5@ are &lt;@0@&gt;
+#    @end
+#    ...
+#    @@ del remote file my/remote/file of myremotehost
+#    @@ using ftp with myusername and mypassword...
+#    @foreach ftp://myusername:mypassword@myremotehost/my/remote/file
+#    the info of file @9@ (@NF@) with size @5@ are &lt;@0@&gt;
+#    @end
+#    ...
+#    @@ del remote directory my/remote/dir of myremotehost
+#    @@ with recursion on subdirectories
+#    @@ using ftp with myusername and mypassword...
+#    @foreach ftp://myusername:mypassword@myremotehost/my/remote/dir
+#    the info of file @9@ (@NF@) with size @5@ are &lt;@0@&gt;
+#    @end
+#    ...
+#    @@ del remote directory my/remote/dir of myremotehost
+#    @@ without recursion on subdirectories
+#    @@ using ftp with myusername and mypassword...
+#    @foreach ftp://myusername:mypassword@myremotehost/my/remote/dir/.
+#    the info of file @9@ (@NF@) with size @5@ are &lt;@0@&gt;
+#    @end
+#    ...
+#    @@ del all files *.txt under remote directory my/remote/dir of myremotehost
+#    @@ with recursion on subdirectories
+#    @@ using ftp with myusername and mypassword...
+#    @foreach ftp://myusername:mypassword@myremotehost/my/remote/dir *.txt
+#    the info of file @9@ (@NF@) with size @5@ are &lt;@0@&gt;
+#    @end
+#    ...
+#    @@ del all files *.txt under remote directory my/remote/dir of myremotehost
+#    @@ without recursion on subdirectories
+#    @@ using ftp with myusername and mypassword...
+#    @foreach ftp://myusername:mypassword@myremotehost/my/remote/dir/. *.txt
+#    the info of file @9@ (@NF@) with size @5@ are &lt;@0@&gt;
+#    @end
+#    ...
+#    @@ to export on a log file an ftp session before the ftp commnad
+#    @@ define the stderr predefined variable with the path of log file...
+#
+# #######################################################################
+#
+#  History:
+#    1.0               first version
+#
+# #######################################################################
+
+usage()
+{
+  echo "myste - My Service Template Engine - Version 1.0" 1&gt;&amp;2
+  echo "" 1&gt;&amp;2
+  echo "usage: myste [-t \"&lt;template&gt;\"]" 1&gt;&amp;2
+  echo "             [-f \"&lt;inputfile&gt;\"]" 1&gt;&amp;2
+  echo "             [-p &lt;arguments&gt;]" 1&gt;&amp;2
+  echo "             [-H \"&lt;header&gt;\"]" 1&gt;&amp;2
+  echo "             [-F \"&lt;footer&gt;\"]" 1&gt;&amp;2
+  echo "             [-d \"&lt;separator&gt;\"]" 1&gt;&amp;2
+  echo "             [-o &lt;outputfile&gt;]]" 1&gt;&amp;2
+  echo "             [-D \"&lt;name&gt;[=&lt;value&gt;]\"]*" 1&gt;&amp;2
+  echo "             [-s &lt;n&gt;,&lt;k&gt; [&lt;validator&gt;]]" 1&gt;&amp;2
+  echo "             [-s &lt;n&gt;^&lt;k&gt; [&lt;validator&gt;]]" 1&gt;&amp;2
+  echo "             [-r &lt;n&gt;,&lt;k&gt; [&lt;repetion&gt;]]" 1&gt;&amp;2
+  echo "             [-r &lt;n&gt;^&lt;k&gt; [&lt;repetion&gt;]]" 1&gt;&amp;2
+  echo "             [-r &lt;n&gt; [&lt;repetion&gt;]]" 1&gt;&amp;2
+  echo "             [dir ftp://&lt;username&gt;[:&lt;password&gt;]@&lt;remotehost&gt;[:&lt;port&gt;][/&lt;remotedir&gt;[/.]|&lt;remotefile&gt;] [&lt;remotefiles&gt;=*]]" 1&gt;&amp;2
+  echo "             [get ftp://&lt;username&gt;[:&lt;password&gt;]@&lt;remotehost&gt;[:&lt;port&gt;][/&lt;remotedir&gt;[/.]|&lt;remotefile&gt;] [&lt;localdir&gt;=.] [&lt;remotefiles&gt;=*]]" 1&gt;&amp;2
+  echo "             [put ftp://&lt;username&gt;[:&lt;password&gt;]@&lt;remotehost&gt;[:&lt;port&gt;][/&lt;remotedir&gt;] [&lt;localdir&gt;=.|&lt;localfile&gt;] [&lt;localfiles&gt;=*]]" 1&gt;&amp;2
+  echo "             [del ftp://&lt;username&gt;[:&lt;password&gt;]@&lt;remotehost&gt;[:&lt;port&gt;][/&lt;remotedir&gt;[/.]|&lt;remotefile&gt;] [&lt;remotefiles&gt;=*]]" 1&gt;&amp;2
+  echo "             [-e]" 1&gt;&amp;2
+  echo "             [-x]" 1&gt;&amp;2
+  echo "             [-C]" 1&gt;&amp;2
+  echo "             [-T]" 1&gt;&amp;2
+  echo "             [-X]" 1&gt;&amp;2
+  echo "             [-l]" 1&gt;&amp;2
+  echo "             [-n]" 1&gt;&amp;2
+  echo "             [[-c]&lt;configfile&gt;]" 1&gt;&amp;2
+  echo "             [\"&lt;parameter&gt;\"]" 1&gt;&amp;2
+  echo "" 1&gt;&amp;2
+  echo "  -e =&gt; foreach" 1&gt;&amp;2
+  echo "  -x =&gt; export" 1&gt;&amp;2
+  echo "  -C =&gt; create archive" 1&gt;&amp;2
+  echo "  -T =&gt; list archive" 1&gt;&amp;2
+  echo "  -X =&gt; extract archive on files" 1&gt;&amp;2
+  echo "  -l =&gt; extract archive on stdout" 1&gt;&amp;2
+  echo "  -s &lt;n&gt;,&lt;k&gt; =&gt; (valid) combinations" 1&gt;&amp;2
+  echo "  -s &lt;n&gt;^&lt;k&gt; =&gt; (valid) dispositions" 1&gt;&amp;2
+  echo "  -r &lt;n&gt;,&lt;k&gt; =&gt; random combination(s)" 1&gt;&amp;2
+  echo "  -r &lt;n&gt;^&lt;k&gt; =&gt; random disposition(s)" 1&gt;&amp;2
+  echo "  -r &lt;n&gt; =&gt; random integer between 1 and &lt;n&gt;" 1&gt;&amp;2
+  echo "  -n =&gt; not execute" 1&gt;&amp;2
+
+  exit 1
+}
+
+init()
+{
+  template=""
+  inputfile=""
+  arguments=""
+  header=""
+  footer=""
+  separator=""
+  outputfile=""
+  configfile=""
+  parameter=""
+  define=""
+  sequence=""
+  random=""
+  foreach=""
+  export=""
+  extract=""
+  stdout=""
+  archive=""
+  list=""
+  ftp=""
+  action=""
+  xml=""
+  parameters=""
+  filter="smp"
+
+  PATH=/usr/xpg4/bin:$PATH
+  export PATH
+}
+
+args()
+{
+  while getopts :c:t:f:p:H:F:d:o:D:s:r:exXCTlnh option
+  do
+    case $option in
+      "h")
+        usage
+        ;;
+      "c")
+        configfile="$OPTARG"
+        ;;
+      "t")
+        template="$OPTARG"
+        ;;
+      "f")
+        inputfile="$OPTARG"
+        ;;
+      "p")
+        arguments="$OPTARG"
+        ;;
+      "H")
+        header="$OPTARG"
+        ;;
+      "F")
+        footer="$OPTARG"
+        ;;
+      "d")
+        separator="$OPTARG"
+        ;;
+      "o")
+        outputfile="$OPTARG"
+        ;;
+      "D")
+        optarg=`echo "$OPTARG" | awk '
+        {
+          if(i = index($0,"="))
+            print $0;
+          else
+            print $0 "=";
+        }'`
+
+        if [ "$define" = "" ]; then
+          define="$optarg"
+        else
+          define="$define $optarg"
+        fi
+        ;;
+      "s")
+        sequence="$OPTARG"
+        ;;
+      "r")
+        random="$OPTARG"
+        ;;
+      "e")
+        foreach="1"
+        ;;
+      "x")
+        export="1"
+        ;;
+      "X")
+        extract="1"
+        ;;
+      "C")
+        archive="1"
+        ;;
+      "T")
+        extract="1"
+        list="1"
+        ;;
+      "l")
+        extract="1"
+        stdout="1"
+        ;;
+      "n")
+        filter="cat"
+        ;;
+      \?)
+        usage
+        ;;
+    esac
+  done
+
+  n=`expr $OPTIND - 1`
+  shift $n
+
+  case "$1" in
+    "dir")
+      action="dir"
+
+      argv=`echo "$2" | cut -c 1-6`
+
+      if [ "$argv" = "ftp://" ]
+      then
+        ftp="1"
+      else
+        xml="1"
+      fi
+      ;;
+    "put")
+      ftp="1"
+      action="put"
+      ;;
+    "get")
+      ftp="1"
+      action="get"
+      ;;
+    "del")
+      ftp="1"
+      action="del"
+      ;;
+  esac
+
+  if [ "$action" = "" ]
+  then
+    if [ $# -gt 0 ]
+    then
+      if [ "$sequence" != "" ]
+      then
+        sequence="$sequence $1"
+      elif [ "$random" != "" ]
+      then
+        random="$random $1"
+      elif [ "$configfile" = "" ]
+      then
+        configfile="$1"
+        shift
+      fi
+    fi
+
+    if [ $# -gt 0 ]
+    then
+      parameter="$1"
+      shift
+    fi
+
+    if [ $# -gt 0 ]
+    then
+      usage
+    fi
+  else
+    shift
+    parameters="$@"
+  fi
+}
+
+smp()
+{
+  awk '
+  BEGIN {
+    for(i in ENVIRON)
+      symtab[i] = ENVIRON[i]
+
+    for(i=1;i&lt;ARGC;i++)
+      if(match(ARGV[i],/.+=.*/))
+      {
+        k = index(ARGV[i],"=")
+        name = substr(ARGV[i],1,k-1)
+
+        if(k&lt;length(ARGV[i]))
+          symtab[name] = substr(ARGV[i],k+1)
+        else
+          symtab[name] = ""
+
+        deftab[name] = symtab[name]
+      }
+
+    include[0] = 0
+
+    upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    lower = "abcdefghijklmnopqrstuvwxyz"
+
+    srand()
+  }
+
+  function validate(s,p,f   ,q,i,j)
+  {
+    if(f)
+    {
+      q = s[1]
+
+      for(i=2;i&lt;=p;i++)
+      {
+        if("FS" in symtab)
+          q = q symtab["FS"] s[i]
+        else
+          q = q " " s[i]
+      }
+
+      j = system(f " " q)
+
+      return !j
+    }
+    else
+      return 1
+  }
+
+  function sequence(n,k,c,f   ,s,p,q,i)
+  {
+    symtab["NR"] = 0
+
+    p = 1
+    s[1] = 0
+
+    do
+    {
+      s[p]++
+
+      while((p&lt;k)&amp;&amp;validate(s,p,f))
+      {
+        p++
+
+        if(c)
+          s[p] = s[p-1] + 1
+        else
+          s[p] = 1
+      }
+
+      if((p==k)&amp;&amp;validate(s,k,f))
+      {
+         for(i=1;i&lt;=k;i++)
+           symtab[i] = s[i]
+
+         symtab["NF"] = k
+         symtab["NR"]++
+
+         q = s[1]
+
+         for(i=2;i&lt;=k;i++)
+         {
+           if("FS" in symtab)
+             q = q symtab["FS"] s[i]
+           else
+             q = q " " s[i]
+         }
+
+         symtab[0] = q
+
+         output(eval("@" buffer "@"))
+      }
+
+      if(c)
+      {
+        while(s[p]==n-k+p)
+          p--
+      }
+      else
+      {
+        while(s[p]==n)
+          p--
+      }
+    }while(p&gt;0)
+  }
+
+  function random(n,k,c   ,
+                  found,s,p,q,i,j)
+  {
+    symtab["NR"] = 0
+
+    if(c)
+      j = n-k+1
+    else
+      j = n
+
+    do
+    {
+      p = 1
+      s[1] = 0
+
+      found = 0
+
+      do
+      {
+        s[p]++
+
+        while((p&lt;k)&amp;&amp;!(int(rand()*32767)%j))
+        {
+          p++
+
+          if(c)
+            s[p] = s[p-1] + 1
+          else
+            s[p] = 1
+        }
+
+        if((p==k)&amp;&amp;!(int(rand()*32767)%j))
+        {
+           found = 1
+
+           for(i=1;i&lt;=k;i++)
+             symtab[i] = s[i]
+
+           symtab["NF"] = k
+           symtab["NR"]++
+
+           q = s[1]
+
+           for(i=2;i&lt;=k;i++)
+           {
+             if("FS" in symtab)
+               q = q symtab["FS"] s[i]
+             else
+               q = q " " s[i]
+           }
+
+           symtab[0] = q
+
+           output(eval("@" buffer "@"))
+        }
+        else
+        {
+          if(c)
+          {
+            while(s[p]==n-k+p)
+              p--
+          }
+          else
+          {
+            while(s[p]==n)
+              p--
+          }
+        }
+      }while(p&gt;0&amp;&amp;!found)
+    }while(!p)
+  }
+
+  function export(p  ,q,r,n,i,j,k,s,t,u)
+  {
+    if(!p)
+      q = ".*"
+    else
+      q = eval(p)
+
+    n = split(q,r,"\n")
+
+    delete exptab
+
+    for(j=1;j&lt;=n;j++)
+    {
+      k = r[j]
+
+      if(substr(k,1,1) != "^")
+        k = "^" k
+
+      if(substr(r[j],length(r[j]),1) != "$")
+        k = k "$"
+
+      for(i in symtab)
+      {
+        if((i != "__FILE__")&amp;&amp;
+           (i != "__LINE__")&amp;&amp;
+            match(i,k)&amp;&amp;
+            !(i ".template" in symtab)&amp;&amp;
+          !(i in exptab))
+        {
+          t = symtab[i]
+
+          exptab[i] = t
+
+          for(u in symtab)
+          {
+            while(match(t,"@" u "@"))
+              sub("@" u "@","${" substr(t,RSTART+1,RLENGTH-2) "}",t)
+          }
+
+          while(match(t,/@\$\([^@]+\)@/))
+            sub(/@\$\([^@]+\)@/,"\"`" substr(t,RSTART+3,RLENGTH-5) "`\"",t)
+
+          t = eval(t)
+
+          gsub(/"/,"\\\"",t)
+
+          s = i "=" "\"" t "\""
+
+          output(s)
+          output("export " i)
+        }
+      }
+    }
+  }
+
+  function extract(d,p  ,q,r,n,i,j,h,k,s,t,u)
+  {
+    if(!p)
+      q = ".*"
+    else
+      q = eval(p)
+
+    n = split(q,r,"\n")
+
+    delete exttab
+
+    for(j=1;j&lt;=n;j++)
+    {
+      k = r[j]
+
+      for(i in filetab)
+      {
+        if((i != "__FILE__") &amp;&amp;
+           (i != "__LINE__") &amp;&amp;
+            match(i,k) &amp;&amp;
+          !(i in exttab))
+        {
+          if(d == 2)
+            print i
+          else
+          {
+            t = filetab[i]
+
+            exttab[i] = t
+
+            filename = eval(i)
+
+            "dirname \"" filename "\"" | getline dirname
+
+            if(dirname &amp;&amp; dirname != "." &amp;&amp;
+                          dirname != "..")
+            {
+              "mkdir -p \"" dirname "\"" | getline
+            }
+
+            if(filename)
+            {
+              "cp /dev/null \"" filename "\"" | getline
+            }
+
+            if(d == 1)
+            {
+              if(t)
+                print t
+            }
+            else
+            {
+              if(t)
+                print t &gt; filename
+            }
+          }
+        }
+      }
+    }
+  }
+
+  function archive(d,f   ,p,q,c,e,h)
+  {
+    if(!d)
+      p = "."
+    else
+      p = eval(d)
+
+    if(!f)
+      q = "*"
+    else
+      q = eval(f)
+
+    c = "find \"" p "\" -type file -path \"" q "\" 2&gt;/dev/null"
+
+    while (c | getline e)
+    {
+      print "@file " e
+
+      while((getline h &lt; e) &gt; 0)
+        print h
+
+      close(e)
+
+      print "@end " e
+    }
+
+    close(c)
+  }
+
+  function put(host,port,username,password,localdir,remotedir,filepath    ,
+                out,i,j,n,r,m,command,stack,path,filter,status,
+                isfile,line,localfile,nf,field,k,h,f,q,rootdir)
+  {
+    if(!("stderr" in symtab))
+      filter = "ftp -n"
+    else
+    {
+      logfile = eval(symtab["stderr"])
+
+      filter = "tee -a " logfile " | ftp -n | tee -a " logfile
+    }
+
+    command = "find " localdir " -type dir"
+
+    if(command | getline path)
+      isfile = 0
+    else
+      isfile = 1
+
+    close(command)
+
+    if(isfile)
+    {
+      filepath = localdir
+
+      command = "dirname " localdir "; basename " localdir
+
+      command | getline localdir
+      command | getline localfile
+
+      close(command)
+
+      command = "cd \"" localdir "\"; find . -type file -name \"" localfile "\""
+    }
+    else
+      command = "cd \"" localdir "\"; find . -type dir -name \"" filepath "\" | sed 's/\$/\\\\\\\\//g'; find . -type file -name \"" filepath "\""
+
+    out = "open " host " " port
+    out = out "\n" "user " username " " password
+
+    if(localdir != "" &amp;&amp; localdir != ".")
+    {
+      out = out "\n" "lcd " localdir
+    }
+
+    if(remotedir != "" &amp;&amp; remotedir != ".")
+    {
+      m = split(remotedir,r,"/")
+
+      for(i=1;i&lt;=m;i++)
+      {
+        if(r[i] != "")
+        {
+          out = out "\n" "mkdir " r[i]
+          out = out "\n" "cd " r[i]
+        }
+      }
+    }
+
+    out = out "\n" "bin"
+
+    delete stack
+
+    n = 0
+    q = 1
+    h = 1
+
+    if(remotedir != "" &amp;&amp; remotedir != ".")
+      f[1] = remotedir
+    else
+      f[1] = ""
+
+    while(command | getline path)
+    {
+      m = split(path,r,"/")
+
+      j = 1
+      while((j &lt;= n) &amp;&amp; (j &lt; m) &amp;&amp; (r[j] == stack[j]))
+        j++
+
+      for(i=n;i&gt;=j;i--)
+      {
+        out = out "\n" "lcd .."
+        out = out "\n" "cd .."
+        h--
+      }
+
+      n = j-1
+
+      for(i=j;i&lt;m;i++)
+      {
+        stack[++n] = r[i]
+
+        if(!((i==1) &amp;&amp; (r[i] == "")))
+        {
+          if(r[i] != ".")
+          {
+            out = out "\n" "lcd " r[i]
+
+            if(r[m] == "")
+              out = out "\n" "mkdir " r[i]
+
+            out = out "\n" "cd " r[i]
+
+            f[++h] = r[i]
+          }
+        }
+      }
+
+      if(r[m] != "")
+      {
+        rootdir[q] = f[1]
+        for(i=2;i&lt;=h;i++)
+          rootdir[q] = rootdir[q] "/" f[i]
+
+        q++
+
+        out = out "\n" "put " r[m]
+        out = out "\n" "dir " r[m]
+      }
+    }
+
+    close(command)
+
+    for(i=n;i&gt;=1;i--)
+    {
+      out = out "\n" "lcd .."
+      out = out "\n" "cd .."
+    }
+
+    out = out "\n" "bye"
+
+    command = "echo \"" out "\" | " filter
+
+    i = 0
+    symtab["NR"] = 0
+
+    while(command | getline line)
+    {
+      nf = split(line,field)
+
+      if(nf &gt; 8)
+      {
+        i++
+        symtab[0] = line
+        symtab["NF"] = nf
+        symtab["NR"]++
+
+        for(k=1;k&lt;=nf;k++)
+          symtab[k] = field[k]
+
+        sub(symtab[nf] "$", rootdir[i] "/" symtab[nf],symtab[0])
+        symtab[nf] = rootdir[i] "/" symtab[nf]
+
+        output(eval("@" buffer "@"))
+      }
+    }
+
+    close(command)
+  }
+
+  function get(host,port,username,password,localdir,remotepath,filepath,isfirst   ,
+                out,command,filter,line,nf,field,rootdir,np,path,i,j,k,r,p,d,s,q,h)
+  {
+    if(!("stderr" in symtab))
+      filter = "ftp -n"
+    else
+    {
+      logfile = eval(symtab["stderr"])
+
+      filter = "tee -a " logfile " | ftp -n | tee -a " logfile
+    }
+
+    if(localdir != "" &amp;&amp; localdir != "." &amp;&amp; localdir != "..")
+    {
+      command = "mkdir -p " localdir
+      status = system(command)
+      close(command)
+    }
+
+    if(remotepath ~ /\/\.$/)
+    {
+      r = 0
+      sub("\/\.$","",remotepath)
+    }
+    else
+      r = 1
+
+    if(isfirst &amp;&amp; r &amp;&amp; filepath == "*")
+    {
+      nf = split(remotepath,field,"/")
+
+      if((nf &gt; 0) &amp;&amp; (field[nf] != ""))
+      {
+        out = "open " host " " port
+        out = out "\n" "user " username " " password
+        out = out "\n" "dir \\\"" remotepath "\\\""
+        out = out "\n" "bye"
+
+        command = "echo \"" out "\" | " filter
+
+        found = 0
+
+        while(command | getline line)
+        {
+          if(!found)
+          {
+            nf = split(line,field)
+
+            if((nf &gt; 8) &amp;&amp; !(line ~ /^d/))
+            {
+              if(match(line,/^[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +/))
+              {
+                nf = 9
+                field[nf] = substr(line,RLENGTH+1)
+
+                field[nf+1] = substr(line,1,RLENGTH)
+              }
+
+              found = 1
+            }
+            else
+            {
+              found = 0
+              break
+            }
+          }
+          else
+          {
+            found = 0
+            break
+          }
+        }
+
+        close(command)
+
+        if(found)
+        {
+          nf = split(remotepath,field,"/")
+
+          if(nf == 1)
+          {
+            filepath = remotepath
+            remotepath = ""
+          }
+          else
+          {
+            filepath = field[nf]
+
+            remotepath = field[1]
+
+            for(i=2;i&lt;=nf-1;i++)
+              if(field[i] != "")
+                remotepath = remotepath "/" field[i]
+          }
+
+          get(host,port,username,password,localdir,remotepath,filepath)
+
+          return
+        }
+      }
+    }
+
+    if(isfirst &amp;&amp; remotepath != "")
+    {
+      rootdir = ""
+
+      nf = split(remotepath,field,"/")
+
+      for(i=1;i&lt;=nf;i++)
+      {
+        if(field[i] != "")
+        {
+          if(rootdir == "")
+            rootdir = field[i]
+          else
+            rootdir = rootdir "/" field[i]
+
+          found = 0
+
+          out = "open " host " " port
+          out = out "\n" "user " username " " password
+          out = out "\n" "cd \\\"" rootdir "/..\\\""
+          out = out "\n" "dir"
+          out = out "\n" "bye"
+
+          command = "echo \"" out "\" | " filter
+
+          while(command | getline line)
+          {
+            np = split(line,path)
+
+            if(np &gt; 8)
+            {
+              if(match(line,/^[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +/))
+              {
+                np = 9
+                path[np] = substr(line,RLENGTH+1)
+              }
+            }
+
+            if(line ~ /^d/)
+            {
+              if(path[np] == field[i])
+              {
+                found = 1
+                break
+              }
+            }
+          }
+
+          close(command)
+
+          if(!found)
+            return
+        }
+      }
+    }
+
+    out = "open " host " " port
+    out = out "\n" "user " username " " password
+    out = out "\n" "lcd \\\"" localdir "\\\""
+    if(remotepath != "")
+      out = out "\n" "cd \\\"" remotepath "\\\""
+    out = out "\n" "dir"
+    out = out "\n" "bye"
+
+    command = "echo \"" out "\" | " filter
+
+    rootdir = remotepath
+
+    delete p
+    delete d
+    delete s
+    delete q
+    delete h
+
+    p[0] = 0
+    d[0] = 0
+    s[0] = 0
+
+    while(command | getline line)
+    {
+      nf = split(line,field)
+
+      if(nf &gt; 8)
+      {
+        if(match(line,/^[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +/))
+        {
+          nf = 9
+          field[nf] = substr(line,RLENGTH+1)
+          field[nf+1] = substr(line,1,RLENGTH)
+        }
+
+        p[0]++
+
+        if(line ~ /^d/)
+        {
+          s[0]++
+          s[s[0]] = field[nf]
+          d[p[0]] = field[nf]
+        }
+        else
+          h[p[0]] = field[nf]
+      }
+    }
+
+    close(command)
+
+    if(filepath != "*")
+    {
+      out = "open " host " " port
+      out = out "\n" "user " username " " password
+      if(remotepath != "")
+        out = out "\n" "cd \\\"" remotepath "\\\""
+      out = out "\n" "dir \\\"" filepath "\\\""
+      out = out "\n" "bye"
+
+      command = "echo \"" out "\" | " filter
+
+      while(command | getline line)
+      {
+        nf = split(line,field)
+
+        if(nf &gt; 8)
+        {
+          if(match(line,/^[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +/))
+          {
+            nf = 9
+            field[nf] = substr(line,RLENGTH+1)
+            field[nf+1] = substr(line,1,RLENGTH)
+          }
+
+          q[field[nf]] = 1
+        }
+        else
+          break
+      }
+
+      close(command)
+    }
+
+    j = 0
+
+    while(j&lt;p[0])
+    {
+      if(!r)
+      {
+        i = 1
+        j = p[0]
+      }
+      else
+      {
+        i = ++j
+
+        if(i in h)
+          while((j&lt;p[0]) &amp;&amp; ((j+1) in h))
+            j++
+        else
+          while((j&lt;p[0]) &amp;&amp; ((j+1) in d))
+            j++
+      }
+
+      if(r &amp;&amp; (i in d))
+      {
+        for(k=i;k&lt;=j;k++)
+          if(k in d)
+          {
+            if((d[k] != ".") &amp;&amp; (d[k] != ".."))
+              get(host,port,username,password,localdir "/" d[k],remotepath "/" d[k],filepath)
+          }
+      }
+      else
+      {
+        out = "open " host " " port
+        out = out "\n" "user " username " " password
+        out = out "\n" "lcd \\\"" localdir "\\\""
+        if(remotepath != "")
+          out = out "\n" "cd \\\"" remotepath "\\\""
+        out = out "\n" "bin"
+
+        for(k=i;k&lt;=j;k++)
+        {
+          if(k in h)
+          {
+            if((filepath == "*") || (h[k] in q))
+            {
+              out = out "\n" "get \\\"" h[k] "\\\""
+              out = out "\n" "!ls -l " h[k]
+            }
+          }
+        }
+
+        out = out "\n" "bye"
+
+        symtab["NR"] = 0
+
+        command = "echo \"" out "\" | " filter
+
+        while(command | getline line)
+        {
+          nf = split(line,field)
+
+          if(nf &gt; 8)
+          {
+            if(match(line,/^[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +/))
+            {
+              nf = 9
+              field[nf] = substr(line,RLENGTH+1)
+              field[nf+1] = substr(line,1,RLENGTH)
+            }
+
+            symtab[0] = line
+            symtab["NF"] = nf
+            symtab["NR"]++
+
+            for(k=1;k&lt;=nf+1;k++)
+              symtab[k] = field[k]
+
+            symtab[0] = symtab[nf+1] localdir "/" symtab[nf]
+            symtab[nf] = localdir "/" symtab[nf]
+
+            output(eval("@" buffer "@"))
+          }
+        }
+
+        close(command)
+      }
+    }
+  }
+
+  function dir(host,port,username,password,remotepath,filepath,isfirst   ,
+                logfile,out,command,filter,line,nf,field,found,np,path,k,rootdir,a,b,r,p,d,s,q,h)
+  {
+    if(!("stderr" in symtab))
+      filter = "ftp -n"
+    else
+    {
+      logfile = eval(symtab["stderr"])
+
+      filter = "tee -a " logfile " | ftp -n | tee -a " logfile
+    }
+
+    if(remotepath ~ /\/\.$/)
+    {
+      r = 0
+      sub("\/\.$","",remotepath)
+    }
+    else
+      r = 1
+
+    if(isfirst &amp;&amp; r &amp;&amp; filepath == "*")
+    {
+      nf = split(remotepath,field,"/")
+
+      if((nf &gt; 0) &amp;&amp; (field[nf] != ""))
+      {
+        out = "open " host " " port
+        out = out "\n" "user " username " " password
+        out = out "\n" "dir \\\"" remotepath "\\\""
+        out = out "\n" "bye"
+
+        command = "echo \"" out "\" | " filter
+
+        symtab["NR"] = 0
+
+        found = 0
+
+        while(command | getline line)
+        {
+          if(!found)
+          {
+            nf = split(line,field)
+
+            if((nf &gt; 8) &amp;&amp; !(line ~ /^d/))
+            {
+              if(match(line,/^[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +/))
+              {
+                nf = 9
+                field[nf] = substr(line,RLENGTH+1)
+
+                field[nf+1] = substr(line,1,RLENGTH)
+              }
+
+              for(k=1;k&lt;=nf+1;k++)
+                symtab[k] = field[k]
+
+              found = 1
+
+              symtab[0] = line
+              symtab["NF"] = nf
+              symtab["NR"]++
+
+              a = eval("@" buffer "@")
+            }
+            else
+            {
+              found = 0
+              break
+            }
+          }
+          else
+          {
+            found = 0
+            break
+          }
+        }
+
+        close(command)
+
+        if(found)
+        {
+          output(a)
+          return
+        }
+      }
+    }
+
+    if(isfirst &amp;&amp; remotepath != "")
+    {
+      rootdir = ""
+
+      nf = split(remotepath,field,"/")
+
+      for(i=1;i&lt;=nf;i++)
+      {
+        if(field[i] != "")
+        {
+          if(rootdir == "")
+            rootdir = field[i]
+          else
+            rootdir = rootdir "/" field[i]
+
+          found = 0
+
+          out = "open " host " " port
+          out = out "\n" "user " username " " password
+          out = out "\n" "cd \\\"" rootdir "/..\\\""
+          out = out "\n" "dir"
+          out = out "\n" "bye"
+
+          command = "echo \"" out "\" | " filter
+
+          while(command | getline line)
+          {
+            np = split(line,path)
+
+            if(np &gt; 8)
+            {
+              if(match(line,/^[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +/))
+              {
+                np = 9
+                path[np] = substr(line,RLENGTH+1)
+              }
+            }
+
+            if(line ~ /^d/)
+            {
+              if(path[np] == field[i])
+              {
+                found = 1
+                break
+              }
+            }
+          }
+
+          close(command)
+
+          if(!found)
+            return
+        }
+      }
+    }
+
+    out = "open " host " " port
+    out = out "\n" "user " username " " password
+    if(remotepath != "")
+      out = out "\n" "cd \\\"" remotepath "\\\""
+    out = out "\n" "dir"
+    out = out "\n" "bye"
+
+    command = "echo \"" out "\" | " filter
+
+    symtab["NR"] = 0
+
+    rootdir = remotepath
+
+    delete p
+    delete d
+    delete s
+    delete q
+    delete h
+
+    p[0] = 0
+    d[0] = 0
+    s[0] = 0
+
+    while(command | getline line)
+    {
+      nf = split(line,field)
+
+      if(nf &gt; 8)
+      {
+        if(match(line,/^[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +/))
+        {
+          nf = 9
+          field[nf] = substr(line,RLENGTH+1)
+
+          field[nf+1] = substr(line,1,RLENGTH)
+        }
+
+        p[0]++
+
+        symtab[0] = line
+        symtab["NF"] = nf
+        symtab["NR"]++
+
+        for(k=1;k&lt;=nf+1;k++)
+          symtab[k] = field[k]
+
+        if(line ~ /^d/)
+        {
+          s[0]++
+          s[s[0]] = symtab[nf]
+          d[p[0]] = symtab[nf]
+
+          symtab[0] = symtab[0] "/"
+          symtab[nf] = symtab[nf] "/"
+        }
+        else
+          h[p[0]] = field[nf]
+
+        if(rootdir != "")
+        {
+          symtab[0] = symtab[nf+1] rootdir "/" symtab[nf]
+          symtab[nf] = rootdir "/" symtab[nf]
+        }
+
+        p[p[0]] = eval("@" buffer "@")
+      }
+    }
+
+    close(command)
+
+    if(filepath != "*")
+    {
+      out = "open " host " " port
+      out = out "\n" "user " username " " password
+      if(remotepath != "")
+        out = out "\n" "cd \\\"" remotepath "\\\""
+      out = out "\n" "dir \\\"" filepath "\\\""
+      out = out "\n" "bye"
+
+      command = "echo \"" out "\" | " filter
+
+      while(command | getline line)
+      {
+        nf = split(line,field)
+
+        if(nf &gt; 8)
+        {
+          if(match(line,/^[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +/))
+          {
+            nf = 9
+            field[nf] = substr(line,RLENGTH+1)
+          }
+
+          q[field[nf]] = 1
+        }
+        else
+          break
+      }
+
+      close(command)
+    }
+
+    if(!r)
+    {
+      if(filepath == "*")
+      {
+        for(k=1;k&lt;=p[0];k++)
+          output(p[k])
+      }
+      else
+        for(k=1;k&lt;=p[0];k++)
+          if(h[k] in q)
+            output(p[k])
+    }
+    else
+      for(k=1;k&lt;=p[0];k++)
+      {
+        if(k in d)
+        {
+          output(p[k])
+          if((d[k] != ".") &amp;&amp; (d[k] != ".."))
+            if(remotepath == "")
+              dir(host,port,username,password,d[k],filepath)
+            else
+              dir(host,port,username,password,remotepath "/" d[k],filepath)
+        }
+        else
+          if(filepath == "*")
+            output(p[k])
+          else if(h[k] in q)
+            output(p[k])
+      }
+  }
+
+  function del(host,port,username,password,remotepath,filepath   ,
+                logfile,out,command,filter,line,nf,field,found,np,path,k,rootdir,a,b,r,p,d,s,q,h,f)
+  {
+    if(!("stderr" in symtab))
+      filter = "ftp -n"
+    else
+    {
+      logfile = eval(symtab["stderr"])
+
+      filter = "tee -a " logfile " | ftp -n | tee -a " logfile
+    }
+
+    if(remotepath ~ /\/\.$/)
+    {
+      r = 0
+      sub("\/\.$","",remotepath)
+    }
+    else
+      r = 1
+
+    nf = split(remotepath,field,"/")
+
+    if(remotepath ~ /\/$/)
+      sub("\/$","",remotepath)
+
+    if((nf &gt; 0) &amp;&amp; (field[nf] != ""))
+    {
+      out = "open " host " " port
+      out = out "\n" "user " username " " password
+
+      q = field[1]
+
+      if(nf &gt; 1)
+      {
+        for(k=1;k&lt;=nf-1;k++)
+          out = out "\n" "cd \"" field[k] "\""
+
+        for(k=2;k&lt;=nf-1;k++)
+          q = q "/" field[k]
+      }
+
+      out = out "\n" "dir"
+      out = out "\n" "bye"
+
+      command = "echo \"" out "\" | " filter
+
+      symtab["NR"] = 0
+
+      found = 0
+
+      s = field[nf]
+
+      while(command | getline line)
+      {
+        if(!found)
+        {
+          nf = split(line,field)
+
+          if(nf &gt; 8)
+          {
+            if(match(line,/^[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +/))
+            {
+              nf = 9
+              field[nf] = substr(line,RLENGTH+1)
+
+              field[nf+1] = substr(line,1,RLENGTH)
+            }
+
+            if(field[nf] == s)
+            {
+              field[nf] = remotepath
+
+              for(k=1;k&lt;=nf+1;k++)
+                symtab[k] = field[k]
+
+              if(line ~ /^d/)
+                symtab[nf] = symtab[nf] "/"
+
+              found = 1
+
+              symtab[0] = symtab[nf+1] remotepath
+              symtab["NF"] = nf
+              symtab["NR"]++
+
+              if(line ~ /^d/)
+                symtab[0] = symtab[0] "/"
+
+              a = eval("@" buffer "@")
+
+              if(line ~ /^d/)
+                f = 0
+              else
+                f = 1
+            }
+          }
+        }
+      }
+
+      close(command)
+
+      if(found)
+      {
+        if(f)
+        {
+          out = "open " host " " port
+          out = out "\n" "user " username " " password
+          out = out "\n" "del \"" remotepath "\""
+          out = out "\n" "bye"
+
+          command = "echo \"" out "\" | " filter
+
+          while(command | getline line) {}
+
+          close(command)
+
+          output(a)
+        }
+        else
+        {
+          if(r)
+          {
+            delete d
+
+            h = 0
+
+            out = "open " host " " port
+            out = out "\n" "user " username " " password
+            out = out "\n" "cd \"" remotepath "\""
+            out = out "\n" "dir"
+            out = out "\n" "bye"
+
+            command = "echo \"" out "\" | " filter
+
+            while(command | getline line)
+            {
+              nf = split(line,field)
+
+              if(nf &gt; 8)
+              {
+                if(match(line,/^[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +/))
+                {
+                  nf = 9
+                  field[nf] = substr(line,RLENGTH+1)
+
+                  field[nf+1] = substr(line,1,RLENGTH)
+                }
+
+                if(line ~ /^d/)
+                  d[++h] = field[nf]
+              }
+            }
+
+            close(command)
+
+            if(h &gt; 0)
+            {
+              for(k=1;k&lt;=h;k++)
+                del(host,port,username,password,remotepath "/" d[k],filepath)
+            }
+          }
+
+          out = "open " host " " port
+          out = out "\n" "user " username " " password
+          out = out "\n" "cd \"" remotepath "\""
+          out = out "\n" "dir \"" filepath "\""
+          out = out "\n" "bye"
+
+          command = "echo \"" out "\" | " filter
+
+          while(command | getline line)
+          {
+            nf = split(line,field)
+
+            if(nf &gt; 8)
+            {
+              if(match(line,/^[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+ +/))
+              {
+                nf = 9
+                field[nf] = substr(line,RLENGTH+1)
+
+                field[nf+1] = substr(line,1,RLENGTH)
+              }
+
+              if(!(line ~ /^d/))
+              {
+                for(k=1;k&lt;=nf+1;k++)
+                  symtab[k] = field[k]
+
+                symtab[0] = symtab[nf+1] remotepath "/" field[nf]
+                symtab["NF"] = nf
+                symtab["NR"]++
+
+                b = eval("@" buffer "@")
+
+                output(b)
+              }
+            }
+            else
+              break
+          }
+
+          close(command)
+
+          out = "open " host " " port
+          out = out "\n" "user " username " " password
+          out = out "\n" "prompt"
+          out = out "\n" "cd \"" remotepath "\""
+          out = out "\n" "mdel \"" filepath "\""
+          out = out "\n" "cd .."
+          out = out "\n" "rmdir \"" s "\""
+          out = out "\n" "bye"
+
+          command = "echo \"" out "\" | " filter
+
+          while(command | getline line) {}
+
+          close(command)
+
+          output(a)
+        }
+      }
+    }
+    else
+    {
+      out = "open " host " " port
+      out = out "\n" "user " username " " password
+      out = out "\n" "prompt"
+      out = out "\n" "mdel \"" filepath "\""
+      out = out "\n" "bye"
+
+      command = "echo \"" out "\" | " filter
+
+      while(command | getline line) {}
+
+      close(command)
+
+      output(a)
+    }
+  }
+
+  function output(s  ,t)
+  {
+    if(!("stdout" in symtab))
+      print s;
+    else
+    {
+      t = eval(symtab["stdout"])
+
+      if(t in symtab)
+      {
+        if(symtab[t] == "")
+          symtab[t] = s;
+        else
+          symtab[t] = symtab[t] "\n" s;
+      }
+      else if(t &amp;&amp; t!= "/dev/null")
+        print s &gt;&gt; t;
+    }
+  }
+
+  function value(s)
+  {
+    if(s in format)
+    {
+      t = format[s]
+      return sprintf(t,symtab[s])
+    }
+    else
+      return symtab[s]
+  }
+
+  function eval(s  ,i,j,p,q,name,template,command)
+  {
+    do
+    {
+      do
+      {
+        change = 0
+
+        for(i in symtab)
+        {
+          p = "@" i "@"
+
+          while((j = index(s,p)) &gt; 0)
+          {
+            change = 1
+
+            s = substr(s,1,j-1) value(i) substr(s,j+length(p))
+          }
+        }
+      }while(change)
+
+      if(match(s,/@[^@]+\+\+@/))
+      {
+        pattern = substr(s,RSTART+1,RLENGTH-2)
+
+        name = substr(pattern,1,RLENGTH-4)
+
+        if(name in symtab)
+        {
+          z = value(name)
+
+          symtab[name]++
+
+          p = "@" pattern "@"
+
+          while((j = index(s,p)) &gt; 0)
+          {
+            change = 1
+            s = substr(s,1,j-1) z substr(s,j+length(p))
+          }
+        }
+      }
+
+      if(match(s,/@[^@]+--@/))
+      {
+        pattern = substr(s,RSTART+1,RLENGTH-2)
+
+        name = substr(pattern,1,RLENGTH-4)
+
+        if(name in symtab)
+        {
+          z = value(name)
+
+          symtab[name]--
+
+          p = "@" pattern "@"
+
+          while((j = index(s,p)) &gt; 0)
+          {
+            change = 1
+            s = substr(s,1,j-1) z substr(s,j+length(p))
+          }
+        }
+      }
+
+      if(match(s,/@\+\+[^@]+@/))
+      {
+        pattern = substr(s,RSTART+1,RLENGTH-2)
+
+        name = substr(pattern,3,RLENGTH-4)
+
+        if(name in symtab)
+        {
+          symtab[name]++
+
+          z = value(name)
+
+          p = "@" pattern "@"
+
+          while((j = index(s,p)) &gt; 0)
+          {
+            change = 1
+            s = substr(s,1,j-1) z substr(s,j+length(p))
+          }
+        }
+      }
+
+      if(match(s,/@--[^@]+@/))
+      {
+        pattern = substr(s,RSTART+1,RLENGTH-2)
+
+        name = substr(pattern,3,RLENGTH-4)
+
+        if(name in symtab)
+        {
+          symtab[name]--
+
+          z = value(name)
+
+          p = "@" pattern "@"
+
+          while((j = index(s,p)) &gt; 0)
+          {
+            change = 1
+            s = substr(s,1,j-1) z substr(s,j+length(p))
+          }
+        }
+      }
+
+      if(match(s,/@[^@]+\[[0-9,]+\]@/) &amp;&amp;
+        !match(s,/@[^@]+\([^@]+\)\[[0-9,]+\]@/) &amp;&amp;
+        !match(s,/@[^@]+&lt;[^@]+&gt;\[[0-9,]+\]@/))
+      {
+        match(s,/@[^@]+\[[0-9,]+\]@/)
+        pattern = substr(s,RSTART+1,RLENGTH-2)
+
+        match(pattern,/\[.+\]/)
+        args = substr(pattern,RSTART+1,RLENGTH-2)
+        name = substr(pattern,1,RSTART-1)
+
+        if(name in symtab)
+        {
+          q = split(args,argvalues,",")
+
+          if(q == 1)
+          {
+            from = argvalues[1]
+          }
+          else
+          {
+            from = argvalues[1]
+            len = argvalues[2]
+          }
+
+          m = split(value(name),items,"\n")
+
+          z = ""
+          for(x=1;x&lt;=m;x++)
+          {
+            if(z == "")
+            {
+              if(q == 1)
+                z = substr(items[x],from)
+              else
+                z = substr(items[x],from,len)
+            }
+            else
+            {
+              if(q == 1)
+                z = z "\n" substr(items[x],from)
+              else
+                z = z "\n" substr(items[x],from,len)
+            }
+          }
+
+          p = "@" pattern "@"
+
+          while((j = index(s,p)) &gt; 0)
+          {
+            change = 1
+            s = substr(s,1,j-1) z substr(s,j+length(p))
+          }
+        }
+      }
+
+      if(match(s,/@[^@]+\([^@]+\)@/))
+      {
+        pattern = substr(s,RSTART+1,RLENGTH-2)
+        match(pattern,/\(.+\)/)
+        args = substr(pattern,RSTART+1,RLENGTH-2)
+        name = substr(pattern,1,RSTART-1)
+
+        if(name in symtab)
+        {
+          if(name in argtab)
+          {
+            m = split(argtab[name],argnames,",")
+            split(args,argvalues,",")
+
+            for(k=1;k&lt;=m;k++)
+              symtab[argnames[k]] = argvalues[k]
+          }
+
+          z = value(name)
+
+          p = "@" pattern "@"
+
+          while((j = index(s,p)) &gt; 0)
+          {
+            change = 1
+            s = substr(s,1,j-1) z substr(s,j+length(p))
+          }
+        }
+      }
+
+      if(match(s,/@[^@]+&lt;[^@]+&gt;@/))
+      {
+        pattern = substr(s,RSTART+1,RLENGTH-2)
+        match(pattern,/&lt;.+&gt;/)
+        args = substr(pattern,RSTART+1,RLENGTH-2)
+        name = substr(pattern,1,RSTART-1)
+
+        if(name in symtab)
+        {
+          templatename = name ".template"
+
+          delete template
+          delete symtab[templatename]
+
+          if(args in symtab)
+          {
+            q = split(symtab[args],items,"\n")
+
+            template["NR"] = 0
+
+            for(x=1;x&lt;=q;x++)
+            {
+              if("FS" in symtab)
+                nf = split(items[x],field,symtab["FS"])
+              else
+                nf = split(items[x],field)
+
+              template[0] = items[x]
+              template["NF"] = nf
+              template["NR"]++
+
+              if(name in argtab)
+              {
+                m = split(argtab[name],argnames,",");
+
+                for(k=1;k&lt;=nf;k++)
+                {
+                  template[k] = field[k];
+                  if(k&lt;=m)
+                    template[argnames[k]] = field[k];
+                }
+              }
+              else
+              {
+                for(k=1;k&lt;=nf;k++)
+                  template[k] = field[k];
+              }
+
+              if(name in format)
+              {
+                t = format[name]
+                z = sprintf(t,symtab[name])
+              }
+              else
+                z = symtab[name];
+
+              do
+              {
+                change = 0
+
+                for(i in template)
+                {
+                  symtab[i] = template[i]
+
+                  p = "@" i "@"
+
+                  while((j = index(z,p)) &gt; 0)
+                  {
+                    change = 1
+                    z = substr(z,1,j-1) value(i) substr(z,j+length(p))
+                  }
+
+                  while(match(z,"@" i "\[[0-9,]+\]@"))
+                  {
+                    change = 1
+                    p = substr(z,RSTART,RLENGTH)
+
+                    match(p,/\[.+\]/)
+                    range = substr(p,RSTART+1,RLENGTH-2)
+                    ranges = split(range,rangevalues,",")
+
+                    while((j = index(z,p)) &gt; 0)
+                    {
+                      if(ranges == 1)
+                      {
+                        from = rangevalues[1]
+
+                        z = substr(z,1,j-1) substr(value(i),from) substr(z,j+length(p));
+                      }
+                      else
+                      {
+                        from = rangevalues[1]
+                        len = rangevalues[2]
+
+                        z = substr(z,1,j-1) substr(value(i),from,len) substr(z,j+length(p));
+                      }
+                    }
+                  }
+                }
+              }while(change)
+
+              if(templatename in symtab)
+                symtab[templatename] = symtab[templatename] "\n" z;
+              else
+                symtab[templatename] = z;
+            }
+          }
+          else
+          {
+            template["NR"] = 0
+
+            while((getline &lt; args) &gt; 0)
+            {
+              if("FS" in symtab)
+                nf = split($0,field,symtab["FS"])
+              else
+                nf = split($0,field)
+
+              template[0] = $0
+              template["NF"] = nf
+              template["NR"]++
+
+              if(name in argtab)
+              {
+                m = split(argtab[name],argnames,",");
+
+                for(k=1;k&lt;=nf;k++)
+                {
+                  template[k] = field[k];
+                  if(k&lt;=m)
+                    template[argnames[k]] = field[k];
+                }
+              }
+              else
+              {
+                for(k=1;k&lt;=nf;k++)
+                  template[k] = field[k];
+              }
+
+              if(name in format)
+              {
+                t = format[name]
+                z = sprintf(t,symtab[name])
+              }
+              else
+                z = symtab[name];
+
+              do
+              {
+                change = 0
+
+                for(i in template)
+                {
+                  symtab[i] = template[i]
+
+                  p = "@" i "@"
+
+                  while((j = index(z,p)) &gt; 0)
+                  {
+                    change = 1
+                    z = substr(z,1,j-1) value(i) substr(z,j+length(p))
+                  }
+
+                  while(match(z,"@" i "\[[0-9,]+\]@"))
+                  {
+                    change = 1
+                    p = substr(z,RSTART,RLENGTH)
+
+                    match(p,/\[.+\]/)
+                    range = substr(p,RSTART+1,RLENGTH-2)
+                    ranges = split(range,rangevalues,",")
+
+                    while((j = index(z,p)) &gt; 0)
+                    {
+                      if(ranges == 1)
+                      {
+                        from = rangevalues[1]
+
+                        z = substr(z,1,j-1) substr(value(i),from) substr(z,j+length(p));
+                      }
+                      else
+                      {
+                        from = rangevalues[1]
+                        len = rangevalues[2]
+
+                        z = substr(z,1,j-1) substr(value(i),from,len) substr(z,j+length(p));
+                      }
+                    }
+                  }
+                }
+              }while(change)
+
+              if(templatename in symtab)
+                symtab[templatename] = symtab[templatename] "\n" z;
+              else
+                symtab[templatename] = z;
+            }
+
+            close(args)
+          }
+
+          p = "@" pattern "@"
+
+          while((j = index(s,p)) &gt; 0)
+          {
+            change = 1
+            s = substr(s,1,j-1) symtab[templatename] substr(s,j+length(p))
+          }
+        }
+      }
+
+      if(match(s,/@[^@]+\([^@]+\)\[[0-9,]+\]@/))
+      {
+        pattern = substr(s,RSTART+1,RLENGTH-2)
+        match(pattern,/\(.+\)/)
+        args = substr(pattern,RSTART+1,RLENGTH-2)
+        name = substr(pattern,1,RSTART-1)
+
+        if(name in symtab)
+        {
+          if(name in argtab)
+          {
+            m = split(argtab[name],argnames,",")
+            split(args,argvalues,",")
+
+            for(k=1;k&lt;=m;k++)
+              symtab[argnames[k]] = argvalues[k]
+          }
+
+          match(pattern,/\[.+\]/)
+          args = substr(pattern,RSTART+1,RLENGTH-2)
+
+          q = split(args,argvalues,",")
+
+          if(q == 1)
+          {
+            from = argvalues[1]
+          }
+          else
+          {
+            from = argvalues[1]
+            len = argvalues[2]
+          }
+
+          m = split(value(name),items,"\n")
+
+          z = ""
+
+          for(x=1;x&lt;=m;x++)
+          {
+            if(z == "")
+            {
+              if(q == 1)
+                z = substr(items[x],from)
+              else
+                z = substr(items[x],from,len)
+            }
+            else
+            {
+              if(q == 1)
+                z = z "\n" substr(items[x],from);
+              else
+                z = z "\n" substr(items[x],from,len);
+            }
+          }
+
+          p = "@" pattern "@"
+
+          while((j = index(s,p)) &gt; 0)
+          {
+            change = 1
+            s = substr(s,1,j-1) z substr(s,j+length(p))
+          }
+        }
+      }
+
+      if(match(s,/@[^@]+&lt;[^@]+&gt;\[[0-9,]+\]@/))
+      {
+        pattern = substr(s,RSTART+1,RLENGTH-2)
+        match(pattern,/&lt;.+&gt;/)
+        args = substr(pattern,RSTART+1,RLENGTH-2)
+        name = substr(pattern,1,RSTART-1)
+
+        match(pattern,/\[.+\]/)
+        range = substr(pattern,RSTART+1,RLENGTH-2)
+        ranges = split(range,rangevalues,",")
+
+        if(name in symtab)
+        {
+          templatename = name ".template"
+
+          delete template
+          delete symtab[templatename]
+
+          if(args in symtab)
+          {
+            q = split(symtab[args],items,"\n")
+
+            template["NR"] = 0
+
+            for(x=1;x&lt;=q;x++)
+            {
+              if("FS" in symtab)
+                nf = split(items[x],field,symtab["FS"])
+              else
+                nf = split(items[x],field)
+
+              template[0] = items[x]
+              template["NF"] = nf
+              template["NR"]++
+
+              if(name in argtab)
+              {
+                m = split(argtab[name],argnames,",");
+
+                for(k=1;k&lt;=nf;k++)
+                {
+                  template[k] = field[k];
+                  if(k&lt;=m)
+                    template[argnames[k]] = field[k];
+                }
+              }
+              else
+              {
+                for(k=1;k&lt;=nf;k++)
+                  template[k] = field[k];
+              }
+
+              if(name in format)
+              {
+                t = format[name]
+                z = sprintf(t,symtab[name])
+              }
+              else
+                z = symtab[name];
+
+              do
+              {
+                change = 0
+
+                for(i in template)
+                {
+                  symtab[i] = template[i]
+
+                  p = "@" i "@"
+
+                  while((j = index(z,p)) &gt; 0)
+                  {
+                    change = 1
+                    z = substr(z,1,j-1) value(i) substr(z,j+length(p))
+                  }
+
+                  while(match(z,"@" i "\[[0-9,]+\]@"))
+                  {
+                    change = 1
+                    p = substr(z,RSTART,RLENGTH)
+
+                    match(p,/\[.+\]/)
+                    range2 = substr(p,RSTART+1,RLENGTH-2)
+                    ranges2 = split(range2,rangevalues2,",")
+
+                    while((j = index(z,p)) &gt; 0)
+                    {
+                      if(ranges2 == 1)
+                      {
+                        from = rangevalues2[1]
+
+                        z = substr(z,1,j-1) substr(value(i),from) substr(z,j+length(p));
+                      }
+                      else
+                      {
+                        from = rangevalues2[1]
+                        len = rangevalues2[2]
+
+                        z = substr(z,1,j-1) substr(value(i),from,len) substr(z,j+length(p));
+                      }
+                    }
+                  }
+                }
+              }while(change)
+
+              if(ranges == 1)
+              {
+                from = rangevalues[1]
+
+                z = substr(z,from)
+              }
+              else
+              {
+                from = rangevalues[1]
+                len = rangevalues[2]
+
+                z = substr(z,from,len)
+              }
+
+              if(templatename in symtab)
+                symtab[templatename] = symtab[templatename] "\n" z;
+              else
+                symtab[templatename] = z;
+            }
+          }
+          else
+          {
+            template["NR"] = 0
+
+            while((getline &lt; args) &gt; 0)
+            {
+              if("FS" in symtab)
+                nf = split($0,field,symtab["FS"])
+              else
+                nf = split($0,field)
+
+              template[0] = $0
+              template["NF"] = nf
+              template["NR"]++
+
+              if(name in argtab)
+              {
+                m = split(argtab[name],argnames,",");
+
+                for(k=1;k&lt;=nf;k++)
+                {
+                  template[k] = field[k];
+                  if(k&lt;=m)
+                    template[argnames[k]] = field[k];
+                }
+              }
+              else
+              {
+                for(k=1;k&lt;=nf;k++)
+                  template[k] = field[k];
+              }
+
+              if(name in format)
+              {
+                t = format[name]
+                z = sprintf(t,symtab[name])
+              }
+              else
+                z = symtab[name];
+
+              do
+              {
+                change = 0
+
+                for(i in template)
+                {
+                  symtab[i] = template[i]
+
+                  p = "@" i "@"
+
+                  while((j = index(z,p)) &gt; 0)
+                  {
+                    change = 1
+                    z = substr(z,1,j-1) value(i) substr(z,j+length(p))
+                  }
+
+                  while(match(z,"@" i "\[[0-9,]+\]@"))
+                  {
+                    change = 1
+                    p = substr(z,RSTART,RLENGTH)
+
+                    match(p,/\[.+\]/)
+                    range2 = substr(p,RSTART+1,RLENGTH-2)
+                    ranges2 = split(range2,rangevalues2,",")
+
+                    while((j = index(z,p)) &gt; 0)
+                    {
+                      if(ranges2 == 1)
+                      {
+                        from = rangevalues2[1]
+
+                        z = substr(z,1,j-1) substr(value(i),from) substr(z,j+length(p));
+                      }
+                      else
+                      {
+                        from = rangevalues2[1]
+                        len = rangevalues2[2]
+
+                        z = substr(z,1,j-1) substr(value(i),from,len) substr(z,j+length(p));
+                      }
+                    }
+                  }
+                }
+              }while(change)
+
+              if(ranges == 1)
+              {
+                from = rangevalues[1]
+
+                z = substr(z,from)
+              }
+              else
+              {
+                from = rangevalues[1]
+                len = rangevalues[2]
+
+                z = substr(z,from,len)
+              }
+
+              if(templatename in symtab)
+                symtab[templatename] = symtab[templatename] "\n" z;
+              else
+                symtab[templatename] = z;
+            }
+
+            close(args)
+          }
+
+          p = "@" pattern "@"
+
+          while((j = index(s,p)) &gt; 0)
+          {
+            change = 1
+            s = substr(s,1,j-1) symtab[templatename] substr(s,j+length(p))
+          }
+        }
+      }
+    }while(change)
+
+    do
+    {
+      change = 0
+
+      if(match(s,/@\$\([^@]+\)@/))
+      {
+        change = 1
+
+        pattern = substr(s,RSTART,RLENGTH)
+        command = substr(s,RSTART+3,RLENGTH-5)
+
+        z = ""
+        while(command | getline y)
+        {
+          if(z == "")
+            z = y
+          else
+            z = z "\n" y
+        }
+        close(command)
+
+        p = pattern
+
+        if((j = index(s,p)) &gt; 0)
+          s = substr(s,1,j-1) z substr(s,j+length(p))
+      }
+
+      if(match(s,/@\?\([^@]+\)@/))
+      {
+        change = 1
+
+        pattern = substr(s,RSTART,RLENGTH)
+        command = substr(s,RSTART+3,RLENGTH-5)
+
+        status = system(command)
+
+        p = pattern
+
+        if((j = index(s,p)) &gt; 0)
+          s = substr(s,1,j-1) status substr(s,j+length(p))
+
+        symtab["?"] = status
+      }
+
+      if(match(s,/@[&gt;&lt;]\([^@]+\)@/))
+      {
+        change = 1
+
+        pattern = substr(s,RSTART,RLENGTH)
+        operator = substr(s,RSTART+1,1)
+        string = substr(s,RSTART+3,RLENGTH-5)
+
+        if(operator == "&gt;")
+          t = toupper(string)
+        else
+          t = tolower(string)
+
+        p = pattern
+
+        if((j = index(s,p)) &gt; 0)
+          s = substr(s,1,j-1) t substr(s,j+length(p))
+      }
+
+      if(match(s,/@-\([^@]+\)@/))
+      {
+        change = 1
+
+        pattern = substr(s,RSTART,RLENGTH)
+
+        if("WS" in symtab)
+          separator = symtab["WS"]
+        else
+          separator = "-"
+
+        src = substr(s,RSTART+3,RLENGTH-5)
+
+        for(i=1;i&lt;=length(src);i++)
+        {
+          j = substr(src,i,1)
+
+          if(i == 1)
+          {
+            id = tolower(j)
+          }
+          else
+          {
+            if(index(upper,j))
+            {
+              id = id separator tolower(j)
+            }
+            else
+            {
+              id = id tolower(j)
+            }
+          }
+        }
+
+        p = pattern
+
+        if((j = index(s,p)) &gt; 0)
+          s = substr(s,1,j-1) id substr(s,j+length(p))
+      }
+
+      if(match(s,/@\.\([^@]+\)@/))
+      {
+        change = 1
+
+        pattern = substr(s,RSTART,RLENGTH)
+
+        if("WS" in symtab)
+          separator = symtab["WS"]
+        else
+          separator = "-"
+
+        id = substr(s,RSTART+3,RLENGTH-5)
+
+        src = tolower(id)
+
+        for(i=1;i&lt;=length(lower);i++)
+        {
+          t = separator substr(lower,i,1)
+          q = substr(upper,i,1)
+
+          gsub(t,q,src)
+        }
+
+        p = pattern
+
+        if((j = index(s,p)) &gt; 0)
+          s = substr(s,1,j-1) src substr(s,j+length(p))
+      }
+    }while(change)
+
+    return s
+  }
+
+  {
+    symtab["__FILE__"] = FILENAME
+
+    do
+    {
+      if(j &lt; n)
+        $0 = line[++j];
+      else
+      {
+        if(include[0])
+        {
+          include[0]--
+
+          symtab["__FILE__"] = include[include[0],"__FILE__"]
+          symtab["__LINE__"] = include[include[0],"__LINE__"]
+        }
+      }
+
+      symtab["__LINE__"]++
+
+      if(!file &amp;&amp; !template &amp;&amp; ($0 ~ /^@file[ \t]/))
+      {
+        name = $2
+
+        delete filetab[name]
+
+        file = 1
+      }
+      else if(file &amp;&amp; ($0 ~ /^@end[ \t]/) &amp;&amp; ($2 == name))
+      {
+        file = 0
+
+        if(!(name in filetab))
+          filetab[name] = ""
+      }
+      else if(file)
+      {
+        if(name in filetab)
+          filetab[name] = filetab[name] "\n" $0
+        else
+          filetab[name] = $0
+      }
+      else if(!template &amp;&amp; ($0 ~ /^@template[ \t]/))
+      {
+        name = $2
+
+        if(match(name,/\(.*\)/))
+        {
+          args = substr(name,RSTART+1,RLENGTH-2)
+          name = substr(name,1,RSTART-1)
+
+          argtab[name] = args
+        }
+        else if(name in argtab)
+          delete argtab[name]
+
+        delete symtab[name]
+
+        template = 1
+      }
+      else if(template &amp;&amp; ($0 ~ /^@end[ \t]/) &amp;&amp; ($2 == name))
+      {
+        template = 0
+
+        if(!(name in symtab))
+          symtab[name] = ""
+      }
+      else if(template)
+      {
+        if(name in symtab)
+          symtab[name] = symtab[name] "\n" $0
+        else
+          symtab[name] = $0
+      }
+      else if(($0 ~ /^@end/) &amp;&amp; !($0 ~ /^@endif/))
+      {
+        if(define)
+        {
+          define = 0
+
+          if(!(name in deftab))
+          {
+            if(!(name in symtab))
+              symtab[name] = ""
+          }
+
+          if(name == "stdout")
+          {
+            filename = eval(symtab[name])
+
+            if(!(filename in symtab) &amp;&amp;
+                 filename &amp;&amp; filename != "/dev/null")
+            {
+              "dirname \"" filename "\"" | getline dirname
+
+              if(dirname != "." &amp;&amp;
+                 dirname != "..")
+                "mkdir -p \"" dirname "\"" | getline
+
+              "cp /dev/null \"" filename "\"" | getline
+            }
+          }
+        }
+        else if(foreach)
+        {
+          foreach = 0
+
+          if(issequence)
+          {
+            issequence = 0
+
+            if(nk[0] == 3)
+              sequence(nk[1],nk[2],nk[3])
+            else if(nk[0] == 4)
+              sequence(nk[1],nk[2],nk[3],nk[4])
+          }
+          else if(israndom)
+          {
+            israndom = 0
+
+            for(i=1;i&lt;=nk[0];i++)
+              random(nk[1],nk[2],nk[3])
+          }
+          else if(isftp)
+          {
+            isftp = 0
+
+            if(action == "dir")
+              dir(host,port,username,password,remotedir,filepath,1)
+            else if(action == "put")
+              put(host,port,username,password,localdir,remotedir,filepath)
+            else if(action == "get")
+              get(host,port,username,password,localdir,remotedir,filepath,1)
+            else if(action == "del")
+              del(host,port,username,password,remotedir,filepath)
+          }
+          else if(isfile)
+          {
+            symtab["NR"] = 0
+
+            while((getline &lt; name) &gt; 0)
+            {
+              if("FS" in symtab)
+                nf = split($0,field,symtab["FS"])
+              else
+                nf = split($0,field)
+
+              symtab[0] = $0
+              symtab["NF"] = nf
+              symtab["NR"]++
+
+              input = ""
+              for(k=1;k&lt;=nf;k++)
+              {
+                symtab[k] = field[k]
+                if(k == 1)
+                  input = "@" name "(" field[k]
+                else
+                  input = input "," field[k]
+              }
+              input = input ")@"
+
+              output(eval(input))
+           }
+
+           close(name)
+
+           delete symtab[name]
+         }
+         else
+         {
+           symtab["NR"] = 0
+
+           q = split(eval("@"substr(name,2)"@"),items,"\n")
+
+           for(x=1;x&lt;=q;x++)
+           {
+             if("FS" in symtab)
+               nf = split(items[x],field,symtab["FS"])
+             else
+               nf = split(items[x],field)
+
+             symtab[0] = items[x]
+             symtab["NF"] = nf
+             symtab["NR"]++
+
+             input = ""
+             for(k=1;k&lt;=nf;k++)
+             {
+               symtab[k] = field[k]
+               if(k == 1)
+                 input = "@" name "(" field[k]
+               else
+                 input = input "," field[k]
+             }
+             input = input ")@"
+
+             output(eval(input))
+           }
+
+           delete symtab[name]
+         }
+       }
+       else if(command)
+       {
+         command = 0
+
+         if(!(buffer in symtab))
+           symtab[buffer] = ""
+
+         if(symtab[buffer] != "")
+         {
+           status = system(eval(symtab[buffer]))
+
+           symtab["?"] = status
+         }
+       }
+     }
+     else if(define || foreach)
+     {
+       if(foreach &amp;&amp; (issequence || israndom || isftp))
+       {
+         if(buffer in symtab)
+           symtab[buffer] = symtab[buffer] "\n" $0
+         else
+           symtab[buffer] = $0
+       }
+       else if(!define || !(name in deftab))
+       {
+         if(name in symtab)
+           symtab[name] = symtab[name] "\n" $0
+         else
+           symtab[name] = $0
+       }
+     }
+     else if(command)
+     {
+       if(buffer in symtab)
+         symtab[buffer] = symtab[buffer] "\n" $0
+       else
+         symtab[buffer] = $0
+     }
+     else if(!($0 ~ /^@@/))
+     {
+       if ($0 ~ /^@else/)
+         reject = !reject
+       else if($0 ~ /^@endif/)
+         reject = 0
+       else if(!reject)
+       {
+         if($0 ~ /^@define[ \t]/)
+         {
+           name = $2
+
+           if(match(name,/\(.*\)/))
+           {
+             args = substr(name,RSTART+1,RLENGTH-2)
+             name = substr(name,1,RSTART-1)
+
+             argtab[name] = args
+           }
+           else if(name in argtab)
+             delete argtab[name]
+
+           if(NF &gt; 2)
+           {
+             $1 = $2 = ""; sub(/^[ \t]+/,"")
+
+             if(!(name in deftab))
+               symtab[name] = $0
+
+             if(name == "stdout")
+             {
+               filename = eval($0)
+
+               if(!(filename in symtab) &amp;&amp; filename &amp;&amp; filename != "/dev/null")
+               {
+                 "dirname \"" filename "\"" | getline dirname
+
+                 if(dirname != "." &amp;&amp;
+                    dirname != "..")
+                   "mkdir -p \"" dirname "\"" | getline
+
+                 "cp /dev/null \"" filename "\"" | getline
+               }
+             }
+           }
+           else
+           {
+             if(!(name in deftab))
+               delete symtab[name]
+             define = 1
+           }
+         }
+         else if($0 ~ /^@dir[ \t]/)
+         {
+           name = $2
+
+           args = eval(name)
+
+           if(args ~ /^ftp:\/\//)
+           {
+             sub(/^ftp:\/\//,"",args)
+
+             m = split(args,argvalues,"@")
+
+             if(m == 2)
+             {
+               m = split(argvalues[1],account,":")
+
+               username = account[1]
+
+               if(m == 1)
+                 password = ""
+               else
+                 password = account[2]
+
+               m = split(argvalues[2],hostinfo,"/")
+
+               if(m == 1)
+               {
+                 argvalues[2] = argvalues[2] "/"
+
+                 m = split(argvalues[2],hostinfo,"/")
+               }
+
+               if(m &gt; 1)
+               {
+                 remotedir = hostinfo[2]
+
+                 for(i=3;i&lt;=m;i++)
+                 {
+                   if(hostinfo[i] != "")
+                     remotedir = remotedir "/" hostinfo[i]
+                 }
+
+                 m = split(hostinfo[1],hostport,":")
+
+                 if(m == 1)
+                 {
+                   host = hostport[1]
+                   port = ""
+                 }
+                 else
+                 {
+                   host = hostport[1]
+                   port = hostport[2]
+                 }
+
+                 action = "dir"
+
+                 if(NF &gt; 2)
+                   filepath = eval($3)
+                 else
+                   filepath = "*"
+
+                 buffer = "__FTP__"
+
+                 if(buffer in symtab)
+                   delete symtab[buffer]
+
+                 symtab[buffer] = "@0@"
+
+                 dir(host,port,username,password,remotedir,filepath,1)
+               }
+             }
+           }
+         }
+         else if($0 ~ /^@del[ \t]/)
+         {
+           name = $2
+
+           args = eval(name)
+
+           if(args ~ /^ftp:\/\//)
+           {
+             sub(/^ftp:\/\//,"",args)
+
+             m = split(args,argvalues,"@")
+
+             if(m == 2)
+             {
+               m = split(argvalues[1],account,":")
+
+               username = account[1]
+
+               if(m == 1)
+                 password = ""
+               else
+                 password = account[2]
+
+               m = split(argvalues[2],hostinfo,"/")
+
+               if(m == 1)
+               {
+                 argvalues[2] = argvalues[2] "/"
+
+                 m = split(argvalues[2],hostinfo,"/")
+               }
+
+               if(m &gt; 1)
+               {
+                 remotedir = hostinfo[2]
+
+                 for(i=3;i&lt;=m;i++)
+                 {
+                   if(hostinfo[i] != "")
+                     remotedir = remotedir "/" hostinfo[i]
+                 }
+
+                 m = split(hostinfo[1],hostport,":")
+
+                 if(m == 1)
+                 {
+                   host = hostport[1]
+                   port = ""
+                 }
+                 else
+                 {
+                   host = hostport[1]
+                   port = hostport[2]
+                 }
+
+                 action = "del"
+
+                 if(NF &gt; 2)
+                   filepath = eval($3)
+                 else
+                   filepath = "*"
+
+                 buffer = "__FTP__"
+
+                 if(buffer in symtab)
+                   delete symtab[buffer]
+
+                 symtab[buffer] = "@0@"
+
+                 del(host,port,username,password,remotedir,filepath)
+               }
+             }
+           }
+         }
+         else if($0 ~ /^@put[ \t]/)
+         {
+           name = $2
+
+           args = eval(name)
+
+           if(args ~ /^ftp:\/\//)
+           {
+             sub(/^ftp:\/\//,"",args)
+
+             m = split(args,argvalues,"@")
+
+             if(m == 2)
+             {
+               m = split(argvalues[1],account,":")
+
+               username = account[1]
+
+               if(m == 1)
+                 password = ""
+               else
+                 password = account[2]
+
+               m = split(argvalues[2],hostinfo,"/")
+
+               if(m == 1)
+               {
+                 argvalues[2] = argvalues[2] "/"
+
+                 m = split(argvalues[2],hostinfo,"/")
+               }
+
+               if(m &gt; 1)
+               {
+                 remotedir = hostinfo[2]
+
+                 for(i=3;i&lt;=m;i++)
+                 {
+                   if(hostinfo[i] != "")
+                     remotedir = remotedir "/" hostinfo[i]
+                 }
+
+                 m = split(hostinfo[1],hostport,":")
+
+                 if(m == 1)
+                 {
+                   host = hostport[1]
+                   port = ""
+                 }
+                 else
+                 {
+                   host = hostport[1]
+                   port = hostport[2]
+                 }
+
+                 action = "put"
+
+                 if(NF &gt; 2)
+                 {
+                   localdir = eval($3)
+
+                   if(NF &gt; 3)
+                     filepath = eval($4)
+                   else
+                     filepath = "*"
+                 }
+                 else
+                 {
+                   localdir = "."
+                   filepath = "*"
+                 }
+
+                 buffer = "__FTP__"
+
+                 if(buffer in symtab)
+                   delete symtab[buffer]
+
+                 symtab[buffer] = "@0@"
+
+                 put(host,port,username,password,localdir,remotedir,filepath)
+               }
+             }
+           }
+         }
+         else if($0 ~ /^@get[ \t]/)
+         {
+           name = $2
+
+           args = eval(name)
+
+           if(args ~ /^ftp:\/\//)
+           {
+             sub(/^ftp:\/\//,"",args)
+
+             m = split(args,argvalues,"@")
+
+             if(m == 2)
+             {
+               m = split(argvalues[1],account,":")
+
+               username = account[1]
+
+               if(m == 1)
+                 password = ""
+               else
+                 password = account[2]
+
+               m = split(argvalues[2],hostinfo,"/")
+
+               if(m == 1)
+               {
+                 argvalues[2] = argvalues[2] "/"
+
+                 m = split(argvalues[2],hostinfo,"/")
+               }
+
+               if(m &gt; 1)
+               {
+                 remotedir = hostinfo[2]
+
+                 for(i=3;i&lt;=m;i++)
+                 {
+                   if(hostinfo[i] != "")
+                     remotedir = remotedir "/" hostinfo[i]
+                 }
+
+                 m = split(hostinfo[1],hostport,":")
+
+                 if(m == 1)
+                 {
+                   host = hostport[1]
+                   port = ""
+                 }
+                 else
+                 {
+                   host = hostport[1]
+                   port = hostport[2]
+                 }
+
+                 action = "get"
+
+                 if(NF &gt; 2)
+                 {
+                   localdir = eval($3)
+
+                   if(NF &gt; 3)
+                     filepath = eval($4)
+                   else
+                     filepath = "*"
+                 }
+                 else
+                 {
+                   localdir = "."
+                   filepath = "*"
+                 }
+
+                 buffer = "__FTP__"
+
+                 if(buffer in symtab)
+                   delete symtab[buffer]
+
+                 symtab[buffer] = "@0@"
+
+                 get(host,port,username,password,localdir,remotedir,filepath,1)
+               }
+             }
+           }
+         }
+         else if($0 ~ /^@foreach[ \t]/)
+         {
+           name = $2
+
+           args = eval(name)
+
+           if(args ~ /^ftp:\/\//)
+           {
+             sub(/^ftp:\/\//,"",args)
+
+             m = split(args,argvalues,"@")
+
+             if(m == 2)
+             {
+               m = split(argvalues[1],account,":")
+
+               username = account[1]
+
+               if(m == 1)
+                 password = ""
+               else
+                 password = account[2]
+
+               m = split(argvalues[2],hostinfo,"/")
+
+               if(m == 1)
+               {
+                 argvalues[2] = argvalues[2] "/"
+
+                 m = split(argvalues[2],hostinfo,"/")
+               }
+
+               if(m &gt; 1)
+               {
+                 remotedir = hostinfo[2]
+
+                 for(i=3;i&lt;=m;i++)
+                 {
+                   if(hostinfo[i] != "")
+                     remotedir = remotedir "/" hostinfo[i]
+                 }
+
+                 m = split(hostinfo[1],hostport,":")
+
+                 if(m == 1)
+                 {
+                   host = hostport[1]
+                   port = ""
+                 }
+                 else
+                 {
+                   host = hostport[1]
+                   port = hostport[2]
+                 }
+
+                 if(NF &gt; 2)
+                 {
+                   action = $3
+
+                   if((action == "dir")||(action == "del"))
+                   {
+                     if(NF &gt; 3)
+                       filepath = eval($4)
+                     else
+                       filepath = "*"
+                   }
+                   else
+                   {
+                     if(NF &gt; 3)
+                     {
+                       localdir = eval($4)
+
+                       if(NF &gt; 4)
+                         filepath = eval($5)
+                       else
+                         filepath = "*"
+                     }
+                     else
+                     {
+                       localdir = "."
+                       filepath = "*"
+                     }
+                   }
+                 }
+                 else
+                 {
+                   action = "dir"
+                   localdir = "."
+                   filepath = "*"
+                 }
+
+                 buffer = "__FTP__"
+
+                 if(buffer in symtab)
+                   delete symtab[buffer]
+
+                 foreach = 1
+
+                 isftp = 1
+               }
+             }
+           }
+           else if(match(args,/[0-9]+,[0-9]+/))
+           {
+             if($(NF) == "random")
+             {
+               if((NF &gt; 2) &amp;&amp; ($3 != "") &amp;&amp; ($3 != "random"))
+                 m = eval($3)
+               else
+                 m = 1
+
+               split(args,nk,",")
+
+               if(nk[1]&gt;nk[2])
+               {
+                 buffer = "__RANDOM__"
+
+                 if(buffer in symtab)
+                   delete symtab[buffer]
+
+                 nk[0] = m
+                 nk[3] = 1
+
+                 foreach = 1
+
+                 israndom = 1
+               }
+             }
+             else
+             {
+               split(args,nk,",")
+
+               if(NF &gt; 2)
+               {
+                 $1 = $2 = ""; sub(/^[ \t]+/,"")
+
+                 if(nk[1]&gt;nk[2])
+                 {
+                   nk[0] = 4
+                   nk[3] = 1
+                   nk[4] = $0
+
+                   foreach = 1
+
+                   issequence = 1
+
+                   buffer = "__SEQUENCE__"
+
+                   if(buffer in symtab)
+                     delete symtab[buffer]
+                 }
+               }
+               else
+               {
+                 if(nk[1]&gt;nk[2])
+                 {
+                   nk[0] = 3
+                   nk[3] = 1
+
+                   foreach = 1
+
+                   issequence = 1
+
+                   buffer = "__SEQUENCE__"
+
+                   if(buffer in symtab)
+                     delete symtab[buffer]
+                 }
+               }
+             }
+           }
+           else if(match(args,/[0-9]+\^[0-9]+/))
+           {
+             if($(NF) == "random")
+             {
+               if((NF &gt; 2) &amp;&amp; ($3 != "") &amp;&amp; ($3 != "random"))
+                 m = eval($3)
+               else
+                 m = 1
+
+               split(args,nk,",")
+
+               if(nk[1]&gt;nk[2])
+               {
+                 buffer = "__RANDOM__"
+
+                 if(buffer in symtab)
+                   delete symtab[buffer]
+
+                 nk[0] = m
+                 nk[3] = 0
+
+                 foreach = 1
+
+                 israndom = 1
+               }
+             }
+             else
+             {
+               split(args,nk,"^")
+
+               if(NF &gt; 2)
+               {
+                 $1 = $2 = ""; sub(/^[ \t]+/,"")
+
+                 nk[0] = 4
+                 nk[3] = 0
+                 nk[4] = $0
+
+                 foreach = 1
+
+                 issequence = 1
+
+                 buffer = "__SEQUENCE__"
+
+                 if(buffer in symtab)
+                   delete symtab[buffer]
+               }
+               else
+               {
+                 nk[0] = 3
+                 nk[3] = 0
+
+                 foreach = 1
+
+                 issequence = 1
+
+                 buffer = "__SEQUENCE__"
+
+                 if(buffer in symtab)
+                   delete symtab[buffer]
+               }
+             }
+           }
+           else if(match(args,/[0-9]+/))
+           {
+             if((NF &gt; 2) &amp;&amp; ($3 != "") &amp;&amp; ($3 != "random"))
+               m = eval($3)
+             else
+               m = 1
+
+             buffer = "__RANDOM__"
+
+             if(buffer in symtab)
+               delete symtab[buffer]
+
+             nk[0] = m
+             nk[1] = args
+             nk[2] = 1
+             nk[3] = 0
+
+             foreach = 1
+
+             israndom = 1
+           }
+           else if(match(name,/\(.*\)/))
+           {
+             isftp = 0
+             issequence = 0
+
+             args = substr(name,RSTART+1,RLENGTH-2)
+             name = substr(name,1,RSTART-1)
+
+             if(name in symtab)
+             {
+               isfile = 0
+
+               name = "." name
+             }
+             else
+               isfile = 1;
+
+             argtab[name] = args
+           }
+           else if(name in argtab)
+           {
+             isftp = 0
+             issequence = 0
+
+             if(name in symtab)
+             {
+               isfile = 0
+
+               name = "." name
+             }
+             else
+               isfile = 1;
+
+             delete argtab[name]
+           }
+           else
+           {
+             isftp = 0
+             issequence = 0
+
+             if(name in symtab)
+             {
+               isfile = 0;
+
+               name = "." name
+             }
+             else
+               isfile = 1;
+           }
+
+           if(!isftp &amp;&amp; !isfile &amp;&amp; !issequence &amp;&amp; !israndom)
+           {
+             if(NF &gt; 2)
+             {
+               $1 = $2 = ""; sub(/^[ \t]+/,"")
+
+               symtab[name] = $0
+
+               symtab["NR"] = 0
+
+               q = split(eval("@"substr(name,2)"@"),items,"\n")
+
+               for(x=1;x&lt;=q;x++)
+               {
+                 if("FS" in symtab)
+                   nf = split(items[x],field,symtab["FS"])
+                 else
+                   nf = split(items[x],field)
+
+                 symtab[0] = items[x]
+                 symtab["NF"] = nf
+                 symtab["NR"]++
+
+                 input = ""
+                 for(k=1;k&lt;=nf;k++)
+                 {
+                   symtab[k] = field[k]
+                   if(k == 1)
+                     input = "@" name "(" field[k]
+                   else
+                     input = input "," field[k]
+                 }
+                 input = input ")@"
+
+                 output(eval(input))
+               }
+
+               delete symtab[name]
+             }
+             else
+               foreach = 1
+           }
+           else if(!isftp &amp;&amp; !issequence &amp;&amp; !israndom)
+           {
+             name = eval(name)
+
+             if(NF &gt; 2)
+             {
+               $1 = $2 = ""; sub(/^[ \t]+/,"")
+
+               symtab[name] = $0
+
+               symtab["NR"] = 0
+
+               while((getline &lt; name) &gt; 0)
+               {
+                 if("FS" in symtab)
+                   nf = split($0,field,symtab["FS"])
+                 else
+                   nf = split($0,field)
+
+                 symtab[0] = $0
+                 symtab["NF"] = nf
+                 symtab["NR"]++
+
+                 input = ""
+                 for(k=1;k&lt;=nf;k++)
+                 {
+                   symtab[k] = field[k]
+                   if(k == 1)
+                     input = "@" name "(" field[k]
+                   else
+                     input = input "," field[k]
+                 }
+                 input = input ")@"
+
+                 output(eval(input))
+               }
+
+               close(name)
+
+               delete symtab[name]
+             }
+             else
+               foreach = 1
+           }
+         }
+         else if($0 ~ /^@undef/)
+         {
+           if(NF == 1)
+           {
+             for(i in symtab)
+             {
+               if(!(i in deftab))
+               {
+                 delete symtab[i]
+
+                 if(i in argtab)
+                   delete argtab[i];
+
+                 if(i in format)
+                   delete format[i];
+               }
+             }
+           }
+           else
+           {
+             name = eval($2)
+
+             if(!(name in deftab))
+             {
+               if(name in symtab)
+                 delete symtab[name]
+
+               if(name in format)
+                 delete format[name]
+             }
+           }
+         }
+         else if($0 ~ /^@include[ \t]/)
+         {
+           name = eval($2)
+
+           include[include[0],"__FILE__"] = symtab["__FILE__"]
+           include[include[0],"__LINE__"] = symtab["__LINE__"]
+           include[0]++
+
+           symtab["__FILE__"] = name
+           symtab["__LINE__"] = 0
+
+           while((getline &lt; name) &gt; 0)
+             line[++n] = $0
+         }
+         else if($0 ~ /^@ifdef[ \t]/)
+         {
+           name = $2
+
+           if(!(name in symtab))
+             reject = 1
+           else
+           {
+             if(NF &gt; 2)
+             {
+               $1 = $2 = ""; sub(/^[ \t]+/,"")
+
+               if(!match(symtab[name],$0))
+                 reject = 1
+             }
+           }
+         }
+         else if($0 ~ /^@ifndef[ \t]/)
+         {
+           name = $2
+
+           if(name in symtab)
+             reject = 1
+           else
+           {
+             if(NF &gt; 2)
+             {
+               $1 = $2 = ""; sub(/^[ \t]+/,"")
+
+               if(match(symtab[name],$0))
+                 reject = 1
+             }
+           }
+         }
+         else if($0 ~ /^@printf[ \t]/)
+         {
+           name = $2
+
+           if(NF == 2)
+           {
+             if(name in format)
+               delete format[name];
+           }
+           else
+           {
+             $1 = $2 = ""; sub(/^[ \t]+/,"")
+
+             format[name] = eval($0)
+           }
+         }
+         else if($0 ~ /^@system/)
+         {
+           if(NF == 1)
+           {
+             command = 1
+
+             buffer = "__SYSTEM__";
+
+             if(buffer in symtab)
+               delete symtab[buffer]
+           }
+           else
+           {
+             $1 = ""; sub(/^[ \t]+/,"")
+
+             status = system(eval($0))
+
+             symtab["?"] = status
+           }
+         }
+         else if($0 ~ /^@env/)
+         {
+           if(NF == 1)
+           {
+             for(i in ENVIRON)
+               symtab[i] = ENVIRON[i]
+           }
+           else
+           {
+             name = $2
+
+             if(name in ENVIRON)
+               symtab[name] = ENVIRON[name]
+           }
+         }
+         else if($0 ~ /^@exit/)
+         {
+           if(NF == 1)
+           {
+             exit
+           }
+           else if(NF == 2)
+           {
+             $1 = ""; sub(/^[ \t]+/,"")
+             code = eval($1)
+
+             exit code
+           }
+           else
+           {
+             $1 = ""; sub(/^[ \t]+/,"")
+             code = eval($1)
+
+             $1 = ""; sub(/^[ \t]+/,"")
+             output(eval($0))
+
+             exit code
+           }
+         }
+         else if($0 ~ /^@sequence[ \t]/)
+         {
+           if(NF &gt;= 2)
+           {
+             args = eval($2)
+
+             if(match(args,/[0-9]+,[0-9]+/))
+             {
+               split(args,nk,",")
+
+               if(NF &gt; 2)
+               {
+                 $1 = $2 = ""; sub(/^[ \t]+/,"")
+
+                 if(nk[1]&gt;nk[2])
+                 {
+                   buffer = "__SEQUENCE__"
+
+                   if(buffer in symtab)
+                     delete symtab[buffer]
+
+                   symtab[buffer] = "@0@"
+
+                   sequence(nk[1],nk[2],1,$0)
+                 }
+               }
+               else
+               {
+                 if(nk[1]&gt;nk[2])
+                 {
+                   buffer = "__SEQUENCE__"
+
+                   if(buffer in symtab)
+                     delete symtab[buffer]
+
+                   symtab[buffer] = "@0@"
+
+                   sequence(nk[1],nk[2],1)
+                 }
+               }
+             }
+             else if(match(args,/[0-9]+\^[0-9]+/))
+             {
+               split(args,nk,"^")
+
+               if(NF &gt; 2)
+               {
+                 $1 = $2 = ""; sub(/^[ \t]+/,"")
+
+                 buffer = "__SEQUENCE__"
+
+                 if(buffer in symtab)
+                   delete symtab[buffer]
+
+                 symtab[buffer] = "@0@"
+
+                 sequence(nk[1],nk[2],0,$0)
+               }
+               else
+               {
+                 buffer = "__SEQUENCE__"
+
+                 if(buffer in symtab)
+                   delete symtab[buffer]
+
+                 symtab[buffer] = "@0@"
+
+                 sequence(nk[1],nk[2],0)
+               }
+             }
+           }
+         }
+         else if($0 ~ /^@random[ \t]/)
+         {
+           if((NF == 2)||(NF == 3))
+           {
+             args = eval($2)
+
+             if(NF == 3)
+             {
+               m = eval($3)
+             }
+             else
+               m = 1
+
+             if(match(args,/[0-9]+,[0-9]+/))
+             {
+               split(args,nk,",")
+
+               if(nk[1]&gt;nk[2])
+               {
+                 buffer = "__RANDOM__"
+
+                 if(buffer in symtab)
+                   delete symtab[buffer]
+
+                 symtab[buffer] = "@0@"
+
+                 for(i=1;i&lt;=m;i++)
+                   random(nk[1],nk[2],1)
+               }
+             }
+             else if(match(args,/[0-9]+\^[0-9]+/))
+             {
+               split(args,nk,"^")
+
+               buffer = "__RANDOM__"
+
+               if(buffer in symtab)
+                 delete symtab[buffer]
+
+               symtab[buffer] = "@0@"
+
+               for(i=1;i&lt;=m;i++)
+                 random(nk[1],nk[2],0)
+             }
+             else if(match(args,/[0-9]+/))
+             {
+               buffer = "__RANDOM__"
+
+               if(buffer in symtab)
+                 delete symtab[buffer]
+
+               symtab[buffer] = "@0@"
+
+               for(i=1;i&lt;=m;i++)
+                 random(args,1,0)
+             }
+           }
+         }
+         else if($0 ~ /^@export[ \t]*/)
+         {
+           if(NF == 1)
+             export()
+           else
+           {
+             $1 = ""; sub(/^[ \t]+/,"")
+
+             export($0)
+           }
+         }
+         else if($0 ~ /^@extract[ \t]*/)
+         {
+           if(NF == 1)
+             extract(0)
+           else if((NF == 2) &amp;&amp; ($2 == "list"))
+             extract(2)
+           else if((NF == 2) &amp;&amp; ($2 == "stdout"))
+             extract(1)
+           else if((NF &gt; 2) &amp;&amp; ($2 == "stdout"))
+           {
+             $1 = $2 = ""; sub(/^[ \t]+/,"")
+
+             extract(1,$0)
+           }
+           else
+           {
+             $1 = ""; sub(/^[ \t]+/,"")
+
+             extract(0,$0)
+           }
+         }
+         else if($0 ~ /^@archive[ \t]*/)
+         {
+           if(NF == 1)
+             archive()
+           else if(NF == 2)
+             archive($2)
+           else
+             archive($2,$3)
+         }
+         else if($0 ~ /^@eval[ \t]/)
+         {
+           name = eval($2)
+
+           if(match(name,/\(.*\)/))
+           {
+             args = substr(name,RSTART+1,RLENGTH-2)
+             name = substr(name,1,RSTART-1)
+
+             if((name in argtab) &amp;&amp; (name in symtab))
+             {
+               m = split(argtab[name],argnames,",")
+               split(args,argvalues,",")
+
+               for(k=1;k&lt;=m;k++)
+                 symtab[argnames[k]] = argvalues[k]
+             }
+           }
+
+           if(name in symtab)
+           {
+             m = split(symtab[name],items,"\n")
+
+             for(k=1;k&lt;=m;k++)
+               line[++n] = items[k];
+           }
+         }
+         else
+         {
+           output(eval($0))
+         }
+       }
+     }
+    }while(j &lt; n)
+  }
+  ' "$@"
+}
+
+main()
+{
+  if [ "$ftp" != "" ]
+  then
+    if [ "$configfile" = "" ]
+    then
+      echo "@$action ${parameters}" | ${filter} ${define}
+    else
+      cat | awk "
+      BEGIN {
+        print \"@define stdout /dev/null\"
+      }
+      {
+        print \$0
+      }
+      END {
+        print \"@undef stdout\"
+
+        if(i = index(\"$template\",\"(\"))
+          print \"@ifndef \" substr(\"$template\",1,i-1);
+        else
+          print \"@ifndef $template\";
+        print \"@exit 1\"
+        print \"@endif\"
+        print \"@eval $template\"
+
+        print \"@$action ${parameters}\"
+      }" | ${filter} ${define}
+    fi
+
+    exit $?
+  fi
+
+  if [ "$xml" != "" ]
+  then
+    if [ "$parameters" = "" ]
+    then
+      filter="cat"
+    else
+      filter="find $parameters -type file -exec ls -l {} ;"
+    fi
+
+    $filter | sed -e 's/&amp;/&amp;amp;/g' -e "s/'/&amp;apos;/g" -e 's/\"/&amp;quot;/g' -e 's/&lt;/&amp;lt;/g' -e 's/&gt;/&amp;gt;/g' | awk  -F/ '
+      BEGIN {
+        dir="d"
+        file="f"
+        name="n"
+        perm="p"
+        user="u"
+        group="g"
+        size="s"
+      }
+      {
+        if(NR==1)
+          print "&lt;?xml version=\"1.0\"?&gt;"
+
+        if((split($1,m," ")) &lt; 8)
+          l = 0
+        else
+        {
+          l = 1
+
+          p = m[1]
+          u = m[3]
+          g = m[4]
+          s = m[5]
+
+          $1 = m[9]
+        }
+
+        j = 1
+
+        while((j &lt;= n) &amp;&amp; (j &lt; NF) &amp;&amp; ($j == stack[j]))
+          j++
+
+        for(i=n;i&gt;=j;i--)
+        {
+          print "&lt;/" dir "&gt;"
+        }
+
+        n = j-1
+
+        for(i=j;i&lt;NF;i++)
+        {
+          stack[++n] = $i
+
+          if((i==1) &amp;&amp; ($i == ""))
+            print "&lt;" dir " " name "=\"/\"&gt;"
+          else
+            print "&lt;" dir " " name "=\"" $i "\"&gt;"
+        }
+
+        if(l)
+          print "&lt;" file " " perm "=\"" p "\" " user "=\"" u "\" " group "=\"" g "\" " size "=\"" s "\" " name "=\"" $(NF) "\"/&gt;"
+        else
+          print "&lt;" file " " name "=\"" $(NF) "\"/&gt;"
+      }
+      END {
+        for(i=n;i&gt;=1;i--)
+        {
+          print "&lt;/" dir "&gt;"
+        }
+      }'
+
+    exit $?
+  fi
+
+  if [ "$archive" != "" ]
+  then
+    if [ "$configfile" = "" -a "$parameter" = "" ]
+    then
+      echo "@archive" | ${filter} ${define}
+    elif [ "$configfile" != "" -a "$parameter" = "" ]
+    then
+      echo "@archive $configfile" | ${filter} ${define}
+    else
+      echo "@archive $configfile $parameter" | ${filter} ${define}
+    fi
+
+    exit $?
+  fi
+
+  if [ "$sequence" != "" ]
+  then
+    cat /dev/null | awk "
+      END {
+        if(\"$separator\" != \"\")
+          print \"@define FS $separator\";
+
+        print \"@sequence $sequence\"
+      }" | ${filter} ${define}
+
+    exit $?
+  fi
+
+  if [ "$random" != "" ]
+  then
+    cat /dev/null | awk "
+      END {
+        if(\"$separator\" != \"\")
+          print \"@define FS $separator\";
+
+        print \"@random $random\"
+      }" | ${filter} ${define}
+
+    exit $?
+  fi
+
+  if [ "$configfile" = "" -a "$parameter" = "" ]
+  then
+    if [ "$export" = "" ]
+    then
+      if [ "$extract" = "" ]
+      then
+        if [ "$template" = "" ]
+        then
+          ${filter} ${define}
+        else
+          cat | awk "
+          BEGIN {
+            print \"@define stdout /dev/null\"
+          }
+          {
+            print \$0
+          }
+          END {
+            print \"@undef stdout\"
+
+            if(i = index(\"$template\",\"(\"))
+              print \"@ifndef \" substr(\"$template\",1,i-1);
+            else
+              print \"@ifndef $template\";
+            print \"@exit 1\"
+            print \"@endif\"
+            print \"@eval $template\"
+          }" | ${filter} ${define}
+        fi
+      else
+        cat | awk "
+        BEGIN {
+          print \"@define stdout /dev/null\"
+        }
+        {
+          print \$0
+        }
+        END {
+          if(\"$template\" != \"\")
+          {
+            if(i = index(\"$template\",\"(\"))
+              print \"@ifndef \" substr(\"$template\",1,i-1);
+            else
+              print \"@ifndef $template\";
+            print \"@exit 1\"
+            print \"@endif\"
+            print \"@eval $template\"
+          }
+
+          print \"@undef stdout\"
+
+          if(\"$stdout\" != \"\")
+            print \"@extract stdout\"
+          else if(\"$list\" != \"\")
+            print \"@extract list\"
+          else
+            print \"@extract\"
+        }" | ${filter} ${define}
+      fi
+
+      exit $?
+    else
+      cat | awk "
+      BEGIN {
+        print \"@define stdout /dev/null\"
+      }
+      {
+        print \$0
+      }
+      END {
+        if(\"$template\" != \"\")
+        {
+          if(i = index(\"$template\",\"(\"))
+            print \"@ifndef \" substr(\"$template\",1,i-1);
+          else
+            print \"@ifndef $template\";
+          print \"@exit 1\"
+          print \"@endif\"
+          print \"@eval $template\"
+        }
+
+        print \"@undef stdout\"
+
+        print \"@export\"
+      }" | ${filter} ${define}
+
+      exit $?
+    fi
+  fi
+
+  if [ ! -f $configfile ]
+  then
+    exit 1
+  fi
+
+  if [ "$parameter" = "" ]
+  then
+    if [ "$template" = "" ]
+    then
+      if [ "$export" = "" ]
+      then
+        if [ "$extract" = "" ]
+        then
+          cat $configfile | ${filter} ${define}
+        elif [ "$list" != "" ]
+        then
+          cat $configfile | awk "
+            BEGIN {
+              print \"@define stdout /dev/null\"
+            }
+            {
+              print \$0
+            }
+            END {
+              print \"@undef stdout\"
+              print \"@extract list\"
+            }" | ${filter} ${define}
+        else
+          ((cat $configfile | awk "
+            BEGIN {
+              print \"@define stdout /dev/null\"
+            }
+            {
+              print \$0
+            }
+            END {
+              print \"@undef stdout\"
+            }") ; (cat | awk "
+            {
+              n++
+
+              if(\"$stdout\" != \"\")
+                print \"@extract stdout \" \$0
+              else
+                print \"@extract \" \$0
+            }
+            END {
+              if(!n)
+              {
+                if(\"$stdout\" != \"\")
+                  print \"@extract stdout\"
+                else
+                  print \"@extract\"
+              }
+            }")) | ${filter} ${define}
+        fi
+      else
+        ((cat $configfile | awk "
+          BEGIN {
+            print \"@define stdout /dev/null\"
+          }
+          {
+            print \$0
+          }
+          END {
+            print \"@undef stdout\"
+          }") ; (cat | awk "
+          {
+            n++
+            print \"@export \" \$0
+          }
+          END {
+            if(!n)
+              print \"@export\"
+          }")) | ${filter} ${define}
+      fi
+    else
+      if [ "$export" = "" ]
+      then
+        if [ "$arguments" != "" ]
+        then
+          template=$template"("$arguments")"
+        fi
+
+        cat $configfile | awk "
+        {
+          print \$0
+        }
+        END {
+          if(i = index(\"$template\",\"(\"))
+            print \"@ifndef \" substr(\"$template\",1,i-1);
+          else
+            print \"@ifndef $template\";
+          print \"@exit 1\"
+          print \"@endif\"
+          print \"@eval $template\"
+        }" | ${filter} ${define}
+      else
+        if [ "$arguments" != "" ]
+        then
+          template=$template"("$arguments")"
+        fi
+
+        ((cat $configfile | awk "
+          BEGIN {
+            print \"@define stdout /dev/null\"
+          }
+          {
+            print \$0
+          }
+          END {
+            if(\"$template\" != \"\")
+            {
+              if(i = index(\"$template\",\"(\"))
+                print \"@ifndef \" substr(\"$template\",1,i-1);
+              else
+                print \"@ifndef $template\";
+              print \"@exit 1\"
+              print \"@endif\"
+              print \"@eval $template\"
+            }
+
+            print \"@undef stdout\"
+          }") ; (cat | awk "
+          {
+            n++
+            print \"@export \" \$0
+          }
+          END {
+            if(!n)
+              print \"@export\"
+          }")) | ${filter} ${define}
+      fi
+    fi
+
+    exit $?
+  fi
+
+  if [ "$export" != "" ]
+  then
+    if [ "$arguments" != "" ]
+    then
+      parameter=`echo "$parameter" | awk "
+      {
+        if(i = index(\\$0,\\"[\\"))
+          print substr(\\$0,1,i-1) \\"($arguments)\\" substr(\\$0,i);
+        else
+          print \\$0 \\"($arguments)\\";
+      }"`
+    fi
+
+    cat $configfile | awk "
+      BEGIN {
+        print \"@define stdout /dev/null\"
+      }
+      {
+        print \$0
+      }
+      END {
+        if(\"$template\" != \"\")
+        {
+          if(i = index(\"$template\",\"(\"))
+            print \"@ifndef \" substr(\"$template\",1,i-1);
+          else
+            print \"@ifndef $template\";
+          print \"@exit 1\"
+          print \"@endif\"
+          print \"@eval $template\"
+        }
+
+        print \"@undef stdout\"
+
+        print \"@export $parameter\"
+      }" | ${filter} ${define}
+
+    exit $?
+  fi
+
+  if [ "$extract" != "" ]
+  then
+    if [ "$arguments" != "" ]
+    then
+      parameter=`echo "$parameter" | awk "
+      {
+        if(i = index(\\$0,\\"[\\"))
+          print substr(\\$0,1,i-1) \\"($arguments)\\" substr(\\$0,i);
+        else
+          print \\$0 \\"($arguments)\\";
+      }"`
+    fi
+
+    cat $configfile | awk "
+      BEGIN {
+        print \"@define stdout /dev/null\"
+      }
+      {
+        print \$0
+      }
+      END {
+        if(\"$template\" != \"\")
+        {
+          if(i = index(\"$template\",\"(\"))
+            print \"@ifndef \" substr(\"$template\",1,i-1);
+          else
+            print \"@ifndef $template\";
+          print \"@exit 1\"
+          print \"@endif\"
+          print \"@eval $template\"
+        }
+
+        print \"@undef stdout\"
+
+        if(\"$stdout\" != \"\")
+          print \"extract stdout $parameter\"
+        else
+          print \"@extract $parameter\"
+      }" | ${filter} ${define}
+
+    exit $?
+  fi
+
+  if [ "$inputfile" = "" ]
+  then
+    if [ "$arguments" != "" ]
+    then
+      parameter=`echo "$parameter" | awk "
+      {
+        if(i = index(\\$0,\\"[\\"))
+          print substr(\\$0,1,i-1) \\"($arguments)\\" substr(\\$0,i);
+        else
+          print \\$0 \\"($arguments)\\";
+      }"`
+    fi
+
+    if [ "$foreach" = "" ]
+    then
+      cat $configfile | awk "
+        BEGIN {
+          print \"@define stdout /dev/null\"
+        }
+        {
+          print \$0
+        }
+        END {
+          if(\"$template\" != \"\")
+          {
+            if(i = index(\"$template\",\"(\"))
+              print \"@ifndef \" substr(\"$template\",1,i-1);
+            else
+              print \"@ifndef $template\";
+            print \"@exit 1\"
+            print \"@endif\"
+            print \"@eval $template\"
+          }
+
+          print \"@undef stdout\"
+
+          if(i = index(\"$parameter\",\"(\"))
+            print \"@ifndef \" substr(\"$parameter\",1,i-1);
+          else if(i = index(\"$parameter\",\"[\"))
+            print \"@ifndef \" substr(\"$parameter\",1,i-1);
+          else if(i = index(\"$parameter\",\"&lt;\"))
+            print \"@ifndef \" substr(\"$parameter\",1,i-1);
+          else
+            print \"@ifndef $parameter\";
+          print \"@exit 1\"
+          print \"@endif\"
+
+          if(\"$separator\" != \"\")
+            print \"@define FS $separator\";
+
+          if(\"$header\" != \"\")
+          {
+            if(i = index(\"$header\",\"(\"))
+              print \"@ifdef \" substr(\"$header\",1,i-1);
+            else if(i = index(\"$header\",\"[\"))
+              print \"@ifdef \" substr(\"$header\",1,i-1);
+            else if(i = index(\"$header\",\"&lt;\"))
+              print \"@ifdef \" substr(\"$header\",1,i-1);
+            else
+              print \"@ifdef $header\";
+            print \"@$header@\"
+            print \"@endif\"
+          }
+
+          print \"@$parameter@\"
+
+          if(\"$footer\" != \"\")
+          {
+            if(i = index(\"$footer\",\"(\"))
+              print \"@ifdef \" substr(\"$footer\",1,i-1);
+            else if(i = index(\"$footer\",\"[\"))
+              print \"@ifdef \" substr(\"$footer\",1,i-1);
+            else if(i = index(\"$footer\",\"&lt;\"))
+              print \"@ifdef \" substr(\"$footer\",1,i-1);
+            else
+              print \"@ifdef $footer\";
+            print \"@$footer@\"
+            print \"@endif\"
+          }
+
+          print \"@exit 0\"
+        }" | ${filter} ${define}
+    else
+      paramargs=`echo "$parameter" | awk '
+      {
+        if(i = index($0,"("))
+          print substr($0,i);
+      }' | sed -e 's/(/(@/g' -e 's/)/@)/g' -e 's/,/@,@/g'`
+
+      paramname=`echo "$parameter" | awk '
+      {
+        if(i = index($0,"("))
+          print substr($0,1,i-1);
+        else
+          print $0;
+      }'`
+
+      if [ "$paramargs" = "" ]
+      then
+        if [ "$arguments" != "" ]
+        then
+          parameter=$parameter"(@"`echo "$arguments" | sed 's/,/@,@/g'`"@)"
+        fi
+      else
+        parameter=${paramname}${paramargs}
+      fi
+
+      if [ "$outputfile" != "" ]
+      then
+        exec &gt; $outputfile
+      fi
+
+      ((cat $configfile | awk "
+        BEGIN {
+          print \"@define stdout /dev/null\"
+        }
+        {
+          print \$0
+        }
+        END {
+          if(\"$template\" != \"\")
+          {
+            if(i = index(\"$template\",\"(\"))
+              print \"@ifndef \" substr(\"$template\",1,i-1);
+            else
+              print \"@ifndef $template\";
+            print \"@exit 1\"
+            print \"@endif\"
+            print \"@eval $template\"
+          }
+
+          print \"@undef stdout\"
+
+          if(i = index(\"$parameter\",\"(\"))
+            print \"@ifndef \" substr(\"$parameter\",1,i-1);
+          else if(i = index(\"$parameter\",\"[\"))
+            print \"@ifndef \" substr(\"$parameter\",1,i-1);
+          else if(i = index(\"$parameter\",\"&lt;\"))
+            print \"@ifndef \" substr(\"$parameter\",1,i-1);
+          else
+            print \"@ifndef $parameter\";
+          print \"@exit 1\"
+          print \"@endif\"
+
+          if(\"$separator\" != \"\")
+            print \"@define FS $separator\";
+
+          if(\"$header\" != \"\")
+          {
+            if(i = index(\"$header\",\"(\"))
+              print \"@ifdef \" substr(\"$header\",1,i-1);
+            else if(i = index(\"$header\",\"[\"))
+              print \"@ifdef \" substr(\"$header\",1,i-1);
+            else if(i = index(\"$header\",\"&lt;\"))
+              print \"@ifdef \" substr(\"$header\",1,i-1);
+            else
+              print \"@ifdef $header\";
+            print \"@$header@\"
+            print \"@endif\"
+          }
+        }"); (cat | awk "
+        BEGIN {
+          print \"@define __FOREACH__\"
+        }
+        {
+          print \$0
+        }
+        END {
+          print \"@end\"
+
+          print \"@foreach __FOREACH__\"
+          print \"@$parameter@\"
+          print \"@end\"
+
+          if(\"$footer\" != \"\")
+          {
+            if(i = index(\"$footer\",\"(\"))
+              print \"@ifdef \" substr(\"$footer\",1,i-1);
+            else if(i = index(\"$footer\",\"[\"))
+              print \"@ifdef \" substr(\"$footer\",1,i-1);
+            else if(i = index(\"$footer\",\"&lt;\"))
+              print \"@ifdef \" substr(\"$footer\",1,i-1);
+            else
+              print \"@ifdef $footer\";
+            print \"@$footer@\"
+            print \"@endif\"
+          }
+
+          print \"@exit 0\"
+        }")) | ${filter} ${define}
+    fi
+  else
+    inputargs=`echo "$inputfile" | awk '
+    {
+      if(i = index($0,"("))
+        print substr($0,i);
+    }'`
+
+    inputfile=`echo "$inputfile" | awk '
+    {
+      if(i = index($0,"("))
+        print substr($0,1,i-1);
+      else
+        print $0;
+    }'`
+
+    paramargs=`echo "$parameter" | awk '
+    {
+      if(i = index($0,"("))
+        print substr($0,i);
+    }' | sed -e 's/(/(@/g' -e 's/)/@)/g' -e 's/,/@,@/g'`
+
+    paramname=`echo "$parameter" | awk '
+    {
+      if(i = index($0,"("))
+        print substr($0,1,i-1);
+      else
+        print $0;
+    }'`
+
+    if [ "$paramargs" = "" ]
+    then
+      if [ "$arguments" != "" ]
+      then
+        parameter=$parameter"(@"`echo "$arguments" | sed 's/,/@,@/g'`"@)"
+      fi
+    else
+      parameter=${paramname}${paramargs}
+    fi
+
+    if [ "$outputfile" != "" ]
+    then
+      exec &gt; $outputfile
+    fi
+
+    cat $configfile | awk "
+      BEGIN {
+        print \"@define stdout /dev/null\"
+      }
+      {
+       print \$0
+      }
+      END {
+        if(\"$template\" != \"\")
+        {
+          if(i = index(\"$template\",\"(\"))
+            print \"@ifndef \" substr(\"$template\",1,i-1);
+          else
+            print \"@ifndef $template\";
+          print \"@exit 1\"
+          print \"@endif\"
+          print \"@eval $template\"
+        }
+
+        print \"@undef stdout\"
+
+        if(i = index(\"$parameter\",\"(\"))
+          print \"@ifndef \" substr(\"$parameter\",1,i-1);
+        else if(i = index(\"$parameter\",\"[\"))
+          print \"@ifndef \" substr(\"$parameter\",1,i-1);
+        else if(i = index(\"$parameter\",\"&lt;\"))
+          print \"@ifndef \" substr(\"$parameter\",1,i-1);
+        else
+          print \"@ifndef $parameter\";
+        print \"@exit 1\"
+        print \"@endif\"
+
+        if(\"$header\" != \"\")
+        {
+          if(i = index(\"$header\",\"(\"))
+            print \"@ifndef \" substr(\"$header\",1,i-1);
+          else if(i = index(\"$header\",\"[\"))
+            print \"@ifndef \" substr(\"$header\",1,i-1);
+          else if(i = index(\"$header\",\"&lt;\"))
+            print \"@ifndef \" substr(\"$header\",1,i-1);
+          else
+            print \"@ifndef $header\";
+          print \"@exit 1\"
+          print \"@endif\"
+        }
+
+        if(\"$footer\" != \"\")
+        {
+          if(i = index(\"$footer\",\"(\"))
+            print \"@ifndef \" substr(\"$footer\",1,i-1);
+          else if(i = index(\"$footer\",\"[\"))
+            print \"@ifndef \" substr(\"$footer\",1,i-1);
+          else if(i = index(\"$footer\",\"&lt;\"))
+            print \"@ifndef \" substr(\"$footer\",1,i-1);
+          else
+            print \"@ifndef $footer\";
+          print \"@exit 1\"
+          print \"@endif\"
+        }
+
+        if(\"$separator\" != \"\")
+          print \"@define FS $separator\";
+
+        if(\"$header\" != \"\")
+          print \"@$header@\";
+
+        print \"@foreach $inputfile$inputargs\"
+        print \"@$parameter@\"
+        print \"@end\"
+
+        if(\"$footer\" != \"\")
+          print \"@$footer@\";
+
+        print \"@exit 0\"
+      }" | ${filter} ${define}
+  fi
+
+  exit $?
+}
+
+init "$@"
+args "$@"
+main "$@"
+
+# end of file</tt></pre>
+</div></div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 0.400<br />
+Last updated 2014-06-28 16:23:34 CEST
+</div>
+<div id="footer-badges">
+<img style="border:none; width:88px; height:31px;"
+     src="../images/gplv3-127x51.png"
+     alt="GPL Version 3" />
+<!-- Histats.com  START  -->
+<a href="http://www.histats.com" target="_blank" title="simple hit counter" >
+<script  type="text/javascript" language="javascript">
+var s_sid = 675659;var st_dominio = 4;
+var cimg = 0;var cwi =112;var che =48;
+</script></a><script  type="text/javascript" language="javascript" src="http://s10.histats.com/js9.js"></script>
+<noscript><a href="http://www.histats.com" target="_blank">
+<img  src="http://s4.histats.com/stats/0.gif?675659&1" alt="simple hit counter" border="0"></a>
+</noscript>
+<!-- Histats.com  END  -->
+</div>
+</div>
+</div>
+</td>
+</tr>
+</table>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-11334618-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>

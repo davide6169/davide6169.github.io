@@ -1,0 +1,2202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.5.2" />
+<meta name="description" content="an open source UNIX framework for shell script based web service provider" />
+<meta name="keywords" content="mysvc, shell script, web service, provider, service, soa, template, engine, myste, mysde, mysvcd" />
+<link rel="stylesheet" href="../xhtml11.css" type="text/css" />
+<link rel="stylesheet" href="../xhtml11-quirks.css" type="text/css" />
+<link rel="stylesheet" href="../layout1.css" type="text/css" />
+<title>MySVC</title>
+</head>
+<body>
+<div id="layout-banner">
+  <div id="layout-title">MySVC</div>
+  <div id="layout-description">an open source UNIX framework for shell script based web services provider</div>
+</div>
+<table>
+<tr valign="top">
+<td id="layout-menu">
+  <div>&#187;<a href="../index.html">Home</a></div>
+  <div>&#187;<a href="../tools.html">Tools</a></div>
+  <div>&#187;<a href="../manpage.html">Man&nbsp;Page</a></div>
+  <div>&#187;<a href="../userguide.html">User&nbsp;Guide</a></div>
+  <div>&#187;<a href="../changelog.html">ChangeLog</a></div>
+  <div>&#187;<a href="../install.html">Installation</a></div>
+  <div>&#187;<a href="../sourcecode.html">Source Code</a></div>
+  <div>&#187;<a href="../downloads.html">Downloads</a></div>
+  <div>&#187;<a href="../faq.html">FAQ</a></div>
+  <div>&#187;<a href="../support.html">Support</a></div>
+  <div>&#187;<a href="../license.html">License</a></div>
+  <hr/>
+  <div>&#187;<a href="../myapps/index.html">My Apps</a></div>
+  <div>
+  <hr/>
+  <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+  <input type="hidden" name="cmd" value="_s-xclick">
+  <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+  ">
+  <input type="image" src="https://www.paypal.com/en_US/IT/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="">
+  <img alt="" border="0" src="https://www.paypal.com/it_IT/i/scr/pixel.gif" width="1" height="1">
+  </form>
+  </div>
+</td>
+<td>
+<div id="layout-content">
+<div id="header">
+<h1>MySPL Source Code</h1>
+</div>
+<h2 id="_protocol_cc">protocol.cc</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre><tt>// $Id$
+
+//  myspl - My Service Protocol Library - Version 1.0 (www.mysvc.it)
+//  Copyright (C) 2009 Davide Cucciniello &lt;davide6169@gmail.com&gt;
+//
+//  This program is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+
+/* **********************************************************************
+ *
+ *  ***   **        *** **  **  ****
+ *   **  **        *  *  *  ** **  *
+ *   *** **  **  * ***   *  *  *
+ *   * ** *   * **   **   * *  *
+ *   * *  *   * *  *  *   **   **
+ *  ***  ***   **  ***     *    ****
+ *             *
+ *            *
+ *
+ *  My Service
+ *
+ * ***********************************************************************
+ *
+ *  ***   **        *** ****  ***
+ *   **  **        *  *  *  *  *
+ *   *** **  **  * ***   *  *  *
+ *   * ** *   * **   **  ***   *
+ *   * *  *   * *  *  *  *     *  *
+ *  ***  ***   **  ***  ***   *****
+ *             *
+ *            *
+ *
+ *  My Service Protocol Library
+ *
+ *  File: protocol.cc
+ *
+ *  Description:
+ *    C++ library to implement any TCP/IP socket client/server
+ *    for binary or ascii protocols
+ *
+ * ***********************************************************************
+ *
+ *  History:
+ *    1.0               first version
+ *
+ * *********************************************************************** */
+
+#include "protocol.hh"
+
+/*
+ *  class Exception
+ */
+
+Exception::Exception(string message__,
+                     int code__,
+                     string file__,
+                     int line__):
+  message_(message__),
+  code_(code__),
+  file_(file__),
+  line_(line__)
+{
+}
+
+string&amp; Exception::file()
+{
+  return file_;
+}
+
+int&amp; Exception::line()
+{
+  return line_;
+}
+
+string&amp; Exception::message()
+{
+  return message_;
+}
+
+int&amp; Exception::code()
+{
+  return code_;
+}
+
+void Exception::write(ostream&amp; os)
+{
+  os &lt;&lt; "Exception:" &lt;&lt; endl;
+  os &lt;&lt; "  message: " &lt;&lt; message_ &lt;&lt; endl;
+  os &lt;&lt; "  code: " &lt;&lt; code_ &lt;&lt; endl;
+  os &lt;&lt; "  file: " &lt;&lt; file_ &lt;&lt; endl;
+  os &lt;&lt; "  line: " &lt;&lt; line_ &lt;&lt; endl;
+}
+
+ostream&amp; operator&lt;&lt;(ostream&amp; os,Exception&amp; e)
+{
+  e.write(os);
+
+  return os;
+}
+
+/*
+ *  class SocketException
+ */
+
+SocketException::SocketException(string message__,
+                                 int code__,
+                                 string file__,
+                                 int line__):
+  Exception(message__,code__,file__,line__)
+{
+}
+
+/*
+ *  class SocketReader:
+ */
+
+SocketReader::SocketReader(int fd)
+{
+  this-&gt;fd = fd;
+}
+
+int SocketReader::read(char* buffer,int n,bool peek,bool line)
+{
+  if(!line)
+  {
+    if(peek)
+      return recv(fd,buffer,n,MSG_WAITALL|MSG_PEEK);
+    else
+      return recv(fd,buffer,n,MSG_WAITALL);
+  }
+  else
+  {
+    int i = -1;
+
+    do
+    {
+      i++;
+      if(recv(fd,buffer+i,1,MSG_WAITALL) &lt;= 0)
+        return -1;
+    }while((i&lt;n-1) &amp;&amp; (buffer[i] != '\n'));
+
+    buffer[i] = '\0';
+
+    return n;
+  }
+}
+
+/*
+ *  class SocketWriter
+ */
+
+SocketWriter::SocketWriter(int fd)
+{
+  this-&gt;fd = fd;
+}
+
+int SocketWriter::write(char* buffer,int n,bool line)
+{
+  if(!line)
+  {
+    size_t nleft = n;
+    size_t nwritten;
+
+    char* buffptr = (char*) buffer;
+
+    while(nleft &gt; 0)
+    {
+      if((nwritten = ::write(fd,buffptr,nleft)) &lt;= 0)
+        return nwritten;
+      else
+      {
+        nleft -= nwritten;
+        buffptr += nwritten;
+      }
+    }
+  }
+  else
+  {
+    int len = strlen(buffer);
+
+    if(buffer[len-1] == '\n')
+      send(fd,buffer,len,0);
+    else
+    {
+      strcat(buffer,"\n");
+
+      send(fd,buffer,len+1,0);
+    }
+  }
+
+  return n;
+}
+
+/*
+ *  class FileReader:
+ */
+
+FileReader::FileReader(int fd)
+{
+  this-&gt;fd = fd;
+}
+
+int FileReader::read(char* buffer,int n,bool peek,bool line)
+{
+  return ::read(fd,buffer,n);
+}
+
+/*
+ *  class FileWriter
+ */
+
+FileWriter::FileWriter(int fd)
+{
+  this-&gt;fd = fd;
+}
+
+int FileWriter::write(char* buffer,int n,bool line)
+{
+  return ::write(fd,buffer,n);
+}
+
+/*
+ *  class Field
+ */
+
+Field::Field()
+{
+  size_ = 0;
+  data_ = 0;
+}
+
+Field::Field(int size_,string name__):
+  name_(name__)
+{
+  this-&gt;size_ = size_;
+
+  if(size_ &gt; 0)
+  {
+    data_ = new char[size_];
+
+    empty();
+  }
+  else
+    data_ = 0;
+}
+
+Field::Field(const Field&amp; f)
+{
+  size_ = f.size_;
+
+  if(size_ &gt; 0)
+  {
+    data_ = new char[f.size_];
+
+    memcpy(data_,f.data_,f.size_);
+  }
+  else
+    data_ = 0;
+
+  name_ = f.name_;
+}
+
+void Field::copy(const Field&amp; f)
+{
+  size_ = f.size_;
+
+  if(size_ &gt; 0)
+  {
+    data_ = new char[f.size_];
+
+    memcpy(data_,f.data_,f.size_);
+  }
+  else
+    data_ = 0;
+
+  name_ = f.name_;
+}
+
+ostream&amp; operator&lt;&lt;(ostream&amp; os,Field&amp; f)
+{
+  f.write(os);
+
+  return os;
+}
+
+int Field::size()
+{
+  return size_;
+}
+
+char* Field::data()
+{
+  return data_;
+}
+
+void Field::init(int size_)
+{
+  if(data_)
+    delete[] data_;
+
+  this-&gt;size_ = size_;
+
+  if(size_ &gt; 0)
+  {
+    data_ = new char[size_];
+
+    memset(data_,0,size_);
+  }
+  else
+    data_ = 0;
+}
+
+char&amp; Field::operator[](int i)
+{
+  if(i &gt;= 0 &amp;&amp; i &lt; size_)
+    return data_[i];
+  else
+    throw Exception("char&amp; Field::operator[](int)",-1,__FILE__,__LINE__);
+}
+
+Field&amp; Field::operator=(Field&amp; f)
+{
+  if(this != &amp;f)
+  {
+    if(data_)
+      delete[] data_;
+
+    size_ = f.size_;
+
+    if(size_ &gt; 0)
+    {
+      data_ = new char[size_];
+
+      memcpy(data_,f.data_,f.size_);
+    }
+    else
+      data_ = 0;
+  }
+
+  return *this;
+}
+
+Field&amp; Field::operator=(string value)
+{
+  assign(value);
+
+  return *this;
+}
+
+void Field::assign(char* buffer,int n)
+{
+  if(!size())
+  {
+    init(n);
+    memcpy(data(),buffer,n);
+  }
+  else
+  {
+    if(n&lt;=size())
+      memcpy(data(),buffer,n);
+    else
+      throw Exception("void Field::assign(char*,int)",-1,__FILE__,__LINE__);
+  }
+}
+
+void Field::assign(string value)
+{
+  const char* s = value.c_str();
+
+  if(!size())
+  {
+    init(strlen(s)+2);
+
+    strcpy(data(),s);
+  }
+  else
+  {
+    if(strlen(s) &lt; size())
+      strcpy(data(),s);
+    else
+      throw Exception("void Field::assign(string)",-1,__FILE__,__LINE__);
+  }
+}
+
+bool Field::operator==(Field&amp; f)
+{
+  return equal(f);
+}
+
+bool Field::operator!=(Field&amp; f)
+{
+  return !equal(f);
+}
+
+bool Field::equal(Field&amp; f)
+{
+  return (size_ == f.size_) &amp;&amp; !memcmp(data_,f.data_,size_);
+}
+
+Field::operator char*()
+{
+  return data_;
+}
+
+Field* Field::clone()
+{
+  return new Field(*this);
+}
+
+string Field::name()
+{
+  return name_;
+}
+
+Field&amp; Field::operator&lt;&lt;(Reader&amp; r)
+{
+  read(r);
+
+  return *this;
+}
+
+Field&amp; Field::operator&gt;&gt;(Writer&amp; w)
+{
+  write(w);
+
+  return *this;
+}
+
+void Field::read(Reader&amp; r,bool peek,bool line)
+{
+  if(r.read(data_,size_,peek,line) != size_)
+    throw Exception("void Field::read(Reader&amp;,bool,bool)",errno,__FILE__,__LINE__);
+}
+
+void Field::write(Writer&amp; w,bool line)
+{
+  if(w.write(data_,size_,line) != size_)
+    throw Exception("void Field::write(Writer&amp;,bool)",errno,__FILE__,__LINE__);
+}
+
+void Field::read(Field&amp; f,int from)
+{
+  for(int i=0;i&lt;size_;i++)
+    (*this)[i] = f[i+from];
+}
+
+void Field::write(Field&amp; f,int from)
+{
+  for(int i=0;i&lt;size_;i++)
+    f[i+from] = (*this)[i];
+}
+
+bool Field::isAscii()
+{
+  return true;
+}
+
+void Field::write(ostream&amp; os)
+{
+  if(size_ &gt; 0)
+  {
+    if(isAscii())
+    {
+      os &lt;&lt; "    &lt;field&gt;" &lt;&lt; endl;
+      os &lt;&lt; "      &lt;name&gt; " &lt;&lt; name() &lt;&lt; " &lt;/name&gt;" &lt;&lt; endl;
+      os &lt;&lt; "      &lt;size&gt; " &lt;&lt; size_ &lt;&lt; " &lt;/size&gt;" &lt;&lt; endl;
+      os &lt;&lt; "      &lt;data&gt; " &lt;&lt; data_ &lt;&lt; " &lt;/data&gt;" &lt;&lt; endl;
+      os &lt;&lt; "    &lt;/field&gt;" &lt;&lt; endl;
+    }
+    else
+    {
+      os &lt;&lt; "    &lt;field&gt;" &lt;&lt; endl;
+      os &lt;&lt; "      &lt;name&gt; " &lt;&lt; name() &lt;&lt; " &lt;/name&gt;" &lt;&lt; endl;
+      os &lt;&lt; "      &lt;size&gt; " &lt;&lt; size_ &lt;&lt; " &lt;/size&gt;" &lt;&lt; endl;
+      os &lt;&lt; "      &lt;data&gt;" &lt;&lt; endl;
+
+      char byte[6];
+      char idx[8];
+
+      for(int i=0;i&lt;size_;i++)
+      {
+        sprintf(idx,"%.4d",i);
+        sprintf(byte,"%0.2X",(unsigned char)data_[i]);
+
+        os &lt;&lt; "        &lt;offset&gt; " &lt;&lt; idx &lt;&lt; " &lt;/offset&gt; "
+           &lt;&lt; "&lt;byte&gt; " &lt;&lt; byte &lt;&lt; " &lt;/byte&gt;";
+
+        if(isprint(data_[i]))
+        {
+          if(data_[i] == '&amp;')
+            os &lt;&lt; " &lt;ascii&gt; '&amp;amp;' &lt;/ascii&gt;";
+          else if(data_[i] == '&lt;')
+            os &lt;&lt; " &lt;ascii&gt; '&amp;lt;' &lt;/ascii&gt;";
+          else if(data_[i] == '&gt;')
+            os &lt;&lt; " &lt;ascii&gt; '&amp;gt;' &lt;/ascii&gt;";
+          else
+            os &lt;&lt; " &lt;ascii&gt; '" &lt;&lt; data_[i] &lt;&lt; "' &lt;/ascii&gt;";
+        }
+
+        os &lt;&lt; endl;
+      }
+
+      os &lt;&lt; "      &lt;/data&gt;" &lt;&lt; endl;
+
+      writeValue(os);
+
+      os &lt;&lt; "    &lt;/field&gt;" &lt;&lt; endl;
+    }
+  }
+}
+
+void Field::writeValue(ostream&amp; os)
+{
+}
+
+void Field::empty()
+{
+  if(size_ &gt; 0)
+    memset(data_,0,size_);
+}
+
+Field::~Field()
+{
+  if(size_ &gt;  0)
+    delete[] data_;
+}
+
+/*
+ *  class Message
+ */
+
+
+Message::Message()
+{
+  data_ = 0;
+  size_ = 0;
+
+  nextfield = 0;
+}
+
+Message::Message(int size_,string name__):
+  name_(name__)
+{
+  this-&gt;size_ = size_;
+
+  if(size_ &gt; 0)
+  {
+    data_ = new Field*[size_];
+
+    for(int i=0;i&lt;size_;i++)
+      data_[i] = 0;
+  }
+  else
+    data_ = 0;
+
+  nextfield = 0;
+}
+
+Message::Message(const Message&amp; m)
+{
+  size_ = m.size_;
+
+  if(size_ &gt; 0)
+  {
+    data_ = new Field*[size_];
+
+    for(int i=0;i&lt;size_;i++)
+      if(m.data_[i])
+        data_[i] = (m.data_[i])-&gt;clone();
+      else
+        data_[i] = 0;
+  }
+  else
+    data_ = 0;
+
+  name_ = m.name_;
+
+  nextfield = m.nextfield;
+}
+
+void Message::copy(const Message&amp; m)
+{
+  size_ = m.size_;
+
+  if(size_ &gt; 0)
+  {
+    data_ = new Field*[size_];
+
+    for(int i=0;i&lt;size_;i++)
+      if(m.data_[i])
+        data_[i] = (m.data_[i])-&gt;clone();
+      else
+        data_[i] = 0;
+  }
+  else
+    data_ = 0;
+
+  name_ = m.name_;
+
+  nextfield = m.nextfield;
+}
+
+ostream&amp; operator&lt;&lt;(ostream&amp; os,Message&amp; m)
+{
+  m.write(os);
+
+  return os;
+}
+
+void Message::write(ostream&amp; os)
+{
+  os &lt;&lt; "&lt;message&gt;" &lt;&lt; endl;
+  os &lt;&lt; "  &lt;name&gt; " &lt;&lt; name() &lt;&lt; " &lt;/name&gt;" &lt;&lt; endl;
+  os &lt;&lt; "  &lt;size&gt; " &lt;&lt; size_ &lt;&lt; " &lt;/size&gt;" &lt;&lt; endl;
+
+  if(size_ &gt; 0)
+  {
+    os &lt;&lt; "  &lt;data&gt;" &lt;&lt; endl;
+
+    char idx[8];
+
+    for(int i=0;i&lt;size_;i++)
+    {
+      sprintf(idx,"%.4d",i);
+
+      os &lt;&lt; "    &lt;offset&gt; " &lt;&lt; idx &lt;&lt; " &lt;/offset&gt;" &lt;&lt; endl;
+
+      if(data_[i])
+        os &lt;&lt; (*this)[i];
+      else
+        os &lt;&lt; "    &lt;field&gt; null &lt;/field&gt;" &lt;&lt; endl;
+    }
+
+    os &lt;&lt; "  &lt;/data&gt;" &lt;&lt; endl;
+  }
+
+  os &lt;&lt; "&lt;/message&gt;" &lt;&lt; endl;
+}
+
+void Message::assign(int i,Field* f)
+{
+  if(i&gt;=0 &amp;&amp; i&lt;size_)
+  {
+    if(data_[i])
+      delete data_[i];
+
+    data_[i] = f;
+  }
+  else
+    throw Exception("void Message::assign(int,Field*)",-1,__FILE__,__LINE__);
+}
+
+void Message::assign(Message* m)
+{
+  if(m &amp;&amp; (nextfield + m-&gt;size() &lt; size_))
+  {
+    for(int i=nextfield;i&lt;nextfield+(m-&gt;size());i++)
+    {
+      int j = i-nextfield;
+
+      Field* f = m-&gt;data_[j];
+
+      if(f)
+        assign(i,f-&gt;clone());
+      else
+        data_[i] = 0;
+    }
+
+    nextfield += m-&gt;size();
+
+    delete m;
+  }
+  else
+    throw Exception("void Message::assign(Message*)",-1,__FILE__,__LINE__);
+}
+
+int Message::size()
+{
+  return size_;
+}
+
+unsigned long Message::bytes()
+{
+  unsigned long n = 0;
+
+  for(int i=0;i&lt;size_;i++)
+    n += (data_[i]-&gt;size());
+
+  return n;
+}
+
+Field** Message::data()
+{
+  return data_;
+}
+
+Field*&amp; Message::data(int i)
+{
+  if(i &gt;= 0 &amp;&amp; i &lt; size_)
+    return data_[i];
+  else
+    throw Exception("Field* Message::data(int)",-1,__FILE__,__LINE__);
+}
+
+Field&amp; Message::operator[](int i)
+{
+  if(i &gt;= 0 &amp;&amp; i &lt; size_ &amp;&amp; data_[i])
+    return *(data_[i]);
+  else
+    throw Exception("Field&amp; Message::operator[](int)",-1,__FILE__,__LINE__);
+}
+
+Message&amp; Message::operator=(Message&amp; m)
+{
+  if(size_ &gt; 0)
+  {
+    for(int i=0;i&lt;size_;i++)
+      if(data_[i])
+        delete data_[i];
+
+    delete[] data_;
+  }
+
+  size_ = m.size_;
+
+  if(size_ &gt; 0)
+  {
+    data_ = new Field*[size_];
+
+    for(int i=0;i&lt;size_;i++)
+      if(m.data_[i])
+        data_[i] = (m.data_[i])-&gt;clone();
+      else
+        data_[i] = 0;
+  }
+  else
+    data_ = 0;
+
+  return *this;
+}
+
+bool Message::operator==(Message&amp; m)
+{
+  return equal(m);
+}
+
+bool Message::operator!=(Message&amp; m)
+{
+  return !equal(m);
+}
+
+bool Message::equal(Message&amp; m)
+{
+  if(size_ != m.size_)
+    return false;
+  else
+  {
+    for(int i=0;i&lt;size_;i++)
+    {
+      if(!data_[i])
+      {
+        if(m.data_[i])
+          return false;
+      }
+      else
+      {
+        if(!m.data_[i] || !(data_[i]-&gt;equal(*(m.data_[i]))))
+          return false;
+      }
+    }
+
+    return true;
+  }
+}
+
+string Message::name()
+{
+  return name_;
+}
+
+void Message::empty()
+{
+  if(size_ &gt; 0)
+  {
+    for(int i=0;i&lt;size_;i++)
+      if(data_[i])
+        data_[i]-&gt;empty();
+  }
+}
+
+Message&amp; Message::operator&lt;&lt;(Reader&amp; r)
+{
+  read(r);
+
+  return *this;
+}
+
+Message&amp; Message::operator&gt;&gt;(Writer&amp; w)
+{
+  write(w);
+
+  return *this;
+}
+
+void Message::read(Reader&amp; r,bool peek,bool line)
+{
+  if(peek)
+  {
+    int fsize = 0;
+
+    for(int i=0;i&lt;size_;i++)
+      fsize += (data_[i]-&gt;size());
+
+    Field f(fsize);
+
+    f.read(r,true);
+
+    int j = 0;
+
+    for(int i=0;i&lt;size_;i++)
+    {
+      data_[i]-&gt;read(f,j);
+
+      j += (data_[i]-&gt;size());
+    }
+  }
+  else
+  {
+    for(int i=0;i&lt;size_;i++)
+      if(data_[i])
+        data_[i]-&gt;read(r,false,line);
+  }
+}
+
+void Message::write(Writer&amp; w,bool line)
+{
+  for(int i=0;i&lt;size_;i++)
+    if(data_[i])
+      data_[i]-&gt;write(w,line);
+}
+
+Message* Message::clone()
+{
+  return new Message(*this);
+}
+
+Message::~Message()
+{
+  if(size_ &gt; 0)
+  {
+    for(int i=0;i&lt;size_;i++)
+      if(data_[i])
+        delete data_[i];
+
+    delete[] data_;
+  }
+}
+
+/*
+ *  class TreeMessage
+ */
+
+TreeMessage::TreeMessage()
+{
+  // empty tree
+
+  data_ = 0;
+  size_ = 0;
+  info_ = 0;
+}
+
+TreeMessage::TreeMessage(Message* info_)
+{
+  // leaf tree
+
+  data_ = 0;
+  size_ = 0;
+
+  this-&gt;info_ = info_;
+}
+
+TreeMessage::TreeMessage(int size_,string name__):
+  name_(name__)
+{
+  // tree with childes
+
+  info_ = 0;
+
+  this-&gt;size_ = size_;
+
+  if(size_ &gt; 0)
+  {
+    data_ = new TreeMessage*[size_];
+
+    for(int i=0;i&lt;size_;i++)
+      data_[i] = 0;
+  }
+  else
+    data_ = 0;
+}
+
+void TreeMessage::init(Message* info_)
+{
+  empty();
+
+  // leaf tree
+
+  data_ = 0;
+  size_ = 0;
+
+  this-&gt;info_ = info_;
+}
+
+void TreeMessage::init(int size_)
+{
+  empty();
+
+  // tree with childes
+
+  info_ = 0;
+
+  this-&gt;size_ = size_;
+
+  if(size_ &gt; 0)
+  {
+    data_ = new TreeMessage*[size_];
+
+    for(int i=0;i&lt;size_;i++)
+      data_[i] = 0;
+  }
+  else
+    data_ = 0;
+}
+
+TreeMessage* TreeMessage::clone()
+{
+  return new TreeMessage(*this);
+}
+
+bool TreeMessage::isEmpty()
+{
+  return ((data_ == 0) &amp;&amp; (info_ == 0));
+}
+
+bool TreeMessage::isTree()
+{
+  return ((data_ != 0) &amp;&amp; (info_ == 0));
+}
+
+bool TreeMessage::isLeaf()
+{
+  return ((data_ == 0) &amp;&amp; (info_ != 0));
+}
+
+TreeMessage::TreeMessage(const TreeMessage&amp; m)
+{
+  if(!m.data_ &amp;&amp; !m.info_)
+  {
+    data_ = 0;
+    size_ = 0;
+    info_ = 0;
+  }
+  else if(!m.data_ &amp;&amp; m.info_)
+  {
+    data_ = 0;
+    size_ = 0;
+
+    this-&gt;info_ = m.info_-&gt;clone();
+  }
+  else
+  {
+    info_ = 0;
+    size_ = m.size_;
+
+    if(size_ &gt; 0)
+    {
+      data_ = new TreeMessage*[size_];
+
+      for(int i=0;i&lt;size_;i++)
+        if(m.data_[i])
+          data_[i] = (m.data_[i])-&gt;clone();
+        else
+          data_[i] = 0;
+    }
+    else
+      data_ = 0;
+  }
+
+  name_ = m.name_;
+}
+
+unsigned long TreeMessage::bytes()
+{
+  if(isEmpty())
+    return 0;
+  else if(isLeaf())
+    return (*this)().bytes();
+  else
+  {
+    unsigned long n = 0;
+
+    for(int i=0;i&lt;size_;i++)
+      if((*this)(i))
+        n += (*this)[i].bytes();
+
+    return n;
+  }
+}
+
+ostream&amp; operator&lt;&lt;(ostream&amp; os,TreeMessage&amp; m)
+{
+  m.write(os);
+
+  return os;
+}
+
+void TreeMessage::write(ostream&amp; os)
+{
+  if(isLeaf())
+  {
+    os &lt;&lt; "&lt;tree&gt;" &lt;&lt; endl;
+    os &lt;&lt; "  &lt;name&gt; " &lt;&lt; name() &lt;&lt; " &lt;/name&gt;" &lt;&lt; endl;
+    os &lt;&lt; "  &lt;leaf&gt;" &lt;&lt; endl;
+    os &lt;&lt; *info_;
+    os &lt;&lt; "  &lt;/leaf&gt;" &lt;&lt; endl;
+    os &lt;&lt; "&lt;/tree&gt;" &lt;&lt; endl;
+  }
+  else if(isTree())
+  {
+    os &lt;&lt; "&lt;tree&gt;" &lt;&lt; endl;
+    os &lt;&lt; "  &lt;name&gt; " &lt;&lt; name() &lt;&lt; " &lt;/name&gt;" &lt;&lt; endl;
+    os &lt;&lt; "  &lt;node&gt;" &lt;&lt; endl;
+    os &lt;&lt; "  &lt;size&gt; " &lt;&lt; size_ &lt;&lt; " &lt;/size&gt;" &lt;&lt; endl;
+
+    if(size_ &gt; 0)
+    {
+      char idx[8];
+
+      for(int i=0;i&lt;size_;i++)
+        if((*this)(i))
+        {
+          sprintf(idx,"%.4d",i);
+
+          os &lt;&lt; "  &lt;offset&gt; " &lt;&lt; idx &lt;&lt; " &lt;/offset&gt;" &lt;&lt; endl;
+          os &lt;&lt; (*this)[i];
+        }
+        else
+          os &lt;&lt; "  &lt;message&gt; null &lt;/message&gt;" &lt;&lt; endl;
+    }
+
+    os &lt;&lt; "  &lt;/node&gt;" &lt;&lt; endl;
+    os &lt;&lt; "&lt;/tree&gt;" &lt;&lt; endl;
+  }
+  else
+  {
+    os &lt;&lt; "&lt;error&gt;" &lt;&lt; endl;
+    os &lt;&lt; "&lt;/error&gt;" &lt;&lt; endl;
+  }
+}
+
+void TreeMessage::assign(Message* info_)
+{
+  if(isTree())
+    throw Exception("void TreeMessage::assign(Message*)",-1,__FILE__,__LINE__);
+  else
+  {
+    if(this-&gt;info_)
+      delete this-&gt;info_;
+
+    this-&gt;info_ = info_;
+  }
+}
+
+void TreeMessage::assign(int i,TreeMessage* m)
+{
+  if(!isTree())
+    throw Exception("void TreeMessage::assign(int,TreeMessage*)",-1,__FILE__,__LINE__);
+  else
+  {
+    if(i&gt;=0 &amp;&amp; i&lt;size_)
+    {
+      if(data_[i])
+        delete data_[i];
+
+      data_[i] = m;
+    }
+    else
+      throw Exception("void TreeMessage::assign(int,TreeMessage*)",-1,__FILE__,__LINE__);
+  }
+}
+
+int TreeMessage::size()
+{
+  return size_;
+}
+
+TreeMessage** TreeMessage::data()
+{
+  return data_;
+}
+
+TreeMessage*&amp; TreeMessage::data(int i)
+{
+  if(i &gt;= 0 &amp;&amp; i &lt; size_)
+    return data_[i];
+  else
+    throw Exception("TreeMessage*&amp; TreeMessage::data(int)",-1,__FILE__,__LINE__);
+}
+
+TreeMessage&amp; TreeMessage::operator[](int i)
+{
+  if(i &gt;= 0 &amp;&amp; i &lt; size_ &amp;&amp; data_[i])
+    return *(data_[i]);
+  else
+    throw Exception("TreeMessage&amp; TreeMessage::operator[](int)",-1,__FILE__,__LINE__);
+}
+
+Message&amp; TreeMessage::operator()()
+{
+  if(info_)
+    return *info_;
+  else
+    throw Exception("Message&amp; TreeMessage::operator()()",-1,__FILE__,__LINE__);
+}
+
+TreeMessage*&amp; TreeMessage::operator()(int i)
+{
+  if(i &gt;= 0 &amp;&amp; i &lt; size_)
+    return data_[i];
+  else
+    throw Exception("TreeMessage&amp; TreeMessage::operator()(int)",-1,__FILE__,__LINE__);
+}
+
+Message*&amp; TreeMessage::info()
+{
+  return info_;
+}
+
+TreeMessage&amp; TreeMessage::operator=(TreeMessage&amp; m)
+{
+  if(info_)
+    delete info_;
+
+  if(size_ &gt; 0)
+  {
+    for(int i=0;i&lt;size_;i++)
+      if(data_[i])
+        delete data_[i];
+
+    delete[] data_;
+  }
+
+  if(m.info_)
+    info_ = m.info_-&gt;clone();
+  else
+    info_ = 0;
+
+  size_ = m.size_;
+
+  if(size_ &gt; 0)
+  {
+    data_ = new TreeMessage*[size_];
+
+    for(int i=0;i&lt;size_;i++)
+      if(m.data_[i])
+        data_[i] = (m.data_[i])-&gt;clone();
+      else
+        data_[i] = 0;
+  }
+  else
+    data_ = 0;
+
+  return *this;
+}
+
+bool TreeMessage::operator==(TreeMessage&amp; m)
+{
+  return equal(m);
+}
+
+bool TreeMessage::operator!=(TreeMessage&amp; m)
+{
+  return !equal(m);
+}
+
+bool TreeMessage::equal(TreeMessage&amp; m)
+{
+  if((info_  &amp;&amp; !m.info_) || (!info_ &amp;&amp; m.info_))
+    return false;
+  else if(info_ &amp;&amp; m.info_ &amp;&amp; (*info_ != *(m.info_)))
+    return false;
+  else if(size_ != m.size_)
+    return false;
+  else
+  {
+    for(int i=0;i&lt;size_;i++)
+    {
+      if(!data_[i])
+      {
+        if(m.data_[i])
+          return false;
+      }
+      else
+      {
+        if(!m.data_[i] || !(data_[i]-&gt;equal(*(m.data_[i]))))
+          return false;
+      }
+    }
+
+    return true;
+  }
+}
+
+string TreeMessage::name()
+{
+  return name_;
+}
+
+void TreeMessage::empty()
+{
+  if(info_)
+  {
+    delete info_;
+    info_ = 0;
+  }
+
+  if(size_ &gt; 0)
+  {
+    for(int i=0;i&lt;size_;i++)
+      if(data_[i])
+        data_[i]-&gt;empty();
+
+    delete[] data_;
+
+    data_ = 0;
+  }
+}
+
+TreeMessage&amp; TreeMessage::operator&lt;&lt;(Reader&amp; r)
+{
+  read(r);
+
+  return *this;
+}
+
+TreeMessage&amp; TreeMessage::operator&gt;&gt;(Writer&amp; w)
+{
+  write(w);
+
+  return *this;
+}
+
+void TreeMessage::update()
+{
+}
+
+void TreeMessage::updateTree()
+{
+  if(info_)
+    update();
+  else if(size_ &gt; 0)
+  {
+    for(int i=0;i&lt;size_;i++)
+      if(data_[i])
+        data_[i]-&gt;updateTree();
+
+     update();
+  }
+}
+
+int TreeMessage::update(int size_)
+{
+  return 0;
+}
+
+TreeMessage* TreeMessage::child(int pos)
+{
+  return new TreeMessage();
+}
+
+bool TreeMessage::isReadable(int i)
+{
+  return true;
+}
+
+void TreeMessage::read(Reader&amp; r,bool peek,bool line)
+{
+  if(info_)
+    info_-&gt;read(r,peek,line);
+  else if(size_ &gt; 0)
+  {
+    for(int i=0;i&lt;size_;i++)
+      if(data_[i] &amp;&amp; isReadable(i))
+        data_[i]-&gt;read(r,peek,line);
+
+    int newsize_;
+
+    while((newsize_ = update(size_)) &gt; 0)
+    {
+      TreeMessage* m = clone();
+
+      int j = size_;
+
+      init(newsize_);
+
+      for(int i=0;i&lt;j;i++)
+        if((*m)(i))
+          data_[i] = (*m)[i].clone();
+
+      delete m;
+
+      for(int i=j;i&lt;newsize_;i++)
+      {
+        data_[i] = child(i);
+        if(isReadable(i))
+          data_[i]-&gt;read(r,peek,line);
+      }
+    }
+  }
+}
+
+void TreeMessage::write(Writer&amp; w,bool line)
+{
+  update();
+
+  if(info_)
+    info_-&gt;write(w,line);
+  else if(size_ &gt; 0)
+  {
+    for(int i=0;i&lt;size_;i++)
+      if(data_[i])
+        data_[i]-&gt;write(w,line);
+  }
+}
+
+TreeMessage::~TreeMessage()
+{
+  if(info_)
+    delete info_;
+
+  if(size_ &gt; 0)
+  {
+    for(int i=0;i&lt;size_;i++)
+      if(data_[i])
+        delete data_[i];
+
+    delete[] data_;
+  }
+}
+
+/*
+ *  class Int2Field
+ */
+
+Int2Field::Int2Field(string name_,int value_):
+  Field(2,name_)
+{
+  assign(value_);
+}
+
+Field&amp; Int2Field::operator=(int value_)
+{
+  assign(value_);
+
+  return *this;
+}
+
+Field* Int2Field::clone()
+{
+  return new Int2Field(*this);
+}
+
+bool Int2Field::isAscii()
+{
+  return false;
+}
+
+int Int2Field::value()
+{
+  int value_ = ntohs(*((short*)data()));
+
+  return value_;
+}
+
+Int2Field::operator int()
+{
+  return value();
+}
+
+void Int2Field::assign(string value_)
+{
+  assign(atoi(value_.c_str()));
+}
+
+void Int2Field::write(ostream&amp; os)
+{
+  Field::write(os);
+}
+
+void Int2Field::writeValue(ostream&amp; os)
+{
+  os &lt;&lt; "      &lt;value&gt; " &lt;&lt; value() &lt;&lt; " &lt;/value&gt;" &lt;&lt; endl;
+}
+
+void Int2Field::assign(int value_)
+{
+  char byte0 = (char) (value_ &amp; 255);
+  char byte1 = (char) ((value_ &gt;&gt; 8) &amp; 255);
+
+  (*this)[0] = byte1;
+  (*this)[1] = byte0;
+}
+
+/*
+ *  class Int4Field
+ */
+
+Int4Field::Int4Field(string name_,int value_):
+  Field(4,name_)
+{
+  assign(value_);
+}
+
+Field&amp; Int4Field::operator=(int value_)
+{
+  assign(value_);
+
+  return *this;
+}
+
+bool Int4Field::isAscii()
+{
+  return false;
+}
+
+int Int4Field::value()
+{
+  int value_ = ntohl(*((int*)data()));
+
+  return value_;
+}
+
+Int4Field::operator int()
+{
+  return value();
+}
+
+Field* Int4Field::clone()
+{
+  return new Int4Field(*this);
+}
+
+void Int4Field::assign(string value_)
+{
+  assign(atoi(value_.c_str()));
+}
+
+void Int4Field::write(ostream&amp; os)
+{
+  Field::write(os);
+}
+
+void Int4Field::writeValue(ostream&amp; os)
+{
+  os &lt;&lt; "      &lt;value&gt; " &lt;&lt; value() &lt;&lt; " &lt;/value&gt;" &lt;&lt; endl;
+}
+
+void Int4Field::assign(int value_)
+{
+  char byte0 = (char) (value_ &amp; 255);
+  char byte1 = (char) ((value_ &gt;&gt; 8) &amp; 255);
+  char byte2 = (char) ((value_ &gt;&gt; 16) &amp; 255);
+  char byte3 = (char) ((value_ &gt;&gt; 24) &amp; 255);
+
+  (*this)[0] = byte3;
+  (*this)[1] = byte2;
+  (*this)[2] = byte1;
+  (*this)[3] = byte0;
+}
+
+/*
+ *  class BoolField
+ */
+
+BoolField::BoolField(string name_,bool value_,char truevalue_,char falsevalue_):
+  Field(1,name_),
+  truevalue(truevalue_),
+  falsevalue(falsevalue_)
+{
+  assign(value_);
+}
+
+Field* BoolField::clone()
+{
+  return new BoolField(*this);
+}
+
+Field&amp; BoolField::operator=(bool value_)
+{
+  assign(value_);
+
+  return *this;
+}
+
+void BoolField::assign(bool value_)
+{
+  if(value_)
+   (*this)[0] = truevalue;
+  else
+   (*this)[0] = falsevalue;
+}
+
+BoolField::operator bool()
+{
+  return value();
+}
+
+bool BoolField::value()
+{
+  if((*this)[0] == truevalue)
+    return true;
+  else
+    return false;
+}
+
+void BoolField::assign(string value_)
+{
+  if(value_ == "T" || value_ == "t" || value_ == "1" ||
+     value_ == "true" || value_ == "TRUE" || value_ == "True")
+    assign(true);
+  else
+    assign(false);
+}
+
+bool BoolField::isAscii()
+{
+  return false;
+}
+
+void BoolField::write(ostream&amp; os)
+{
+  Field::write(os);
+}
+
+void BoolField::writeValue(ostream&amp; os)
+{
+  if(value())
+    os &lt;&lt; "    &lt;value&gt; true &lt;/value&gt;" &lt;&lt; endl;
+  else
+    os &lt;&lt; "    &lt;value&gt; false &lt;/value&gt;" &lt;&lt; endl;
+}
+
+/*
+ *  class OctetField
+ */
+
+OctetField::OctetField(string name_,char value_):
+  Field(1,name_)
+{
+  assign(value_);
+}
+
+Field* OctetField::clone()
+{
+  return new OctetField(*this);
+}
+
+Field&amp; OctetField::operator=(char value_)
+{
+  assign(value_);
+
+  return *this;
+}
+
+void OctetField::assign(char value_)
+{
+   (*this)[0] = value_;
+}
+
+OctetField::operator char()
+{
+  return value();
+}
+
+char OctetField::value()
+{
+  return (*this)[0];
+}
+
+void OctetField::assign(string value_)
+{
+  assign(value_[0]);
+}
+
+bool OctetField::isAscii()
+{
+  return false;
+}
+
+void OctetField::write(ostream&amp; os)
+{
+  Field::write(os);
+}
+
+void OctetField::writeValue(ostream&amp; os)
+{
+  if(isprint(value()))
+  {
+    if(value() == '&amp;')
+      os &lt;&lt; " &lt;value&gt; '&amp;amp;' &lt;/value&gt;";
+    else if(value() == '&lt;')
+      os &lt;&lt; " &lt;value&gt; '&amp;lt;' &lt;/value&gt;";
+    else if(value() == '&gt;')
+      os &lt;&lt; " &lt;value&gt; '&amp;gt;' &lt;/value&gt;";
+    else
+      os &lt;&lt; "      &lt;value&gt; '" &lt;&lt; value() &lt;&lt; "' &lt;/value&gt;" &lt;&lt; endl;
+  }
+}
+
+/*
+ *  class StringField
+ */
+
+StringField::StringField(int size_,string name_,string value_):
+  Field(size_,name_),
+  isVariable(false)
+{
+  assign(value_);
+}
+
+StringField::StringField(string name_,string value_):
+  Field(value_.length()+2,name_),
+  isVariable(true)
+{
+  assign(value_);
+}
+
+Field* StringField::clone()
+{
+  return new StringField(*this);
+}
+
+Field&amp; StringField::operator=(string value_)
+{
+  assign(value_);
+
+  return *this;
+}
+
+void StringField::assign(string value_)
+{
+  const char* s = value_.c_str();
+
+  if(!isVariable)
+  {
+    if(strlen(s) &lt; size())
+      strcpy(data(),s);
+    else
+      throw Exception("void StringField::assign(string)",-1,__FILE__,__LINE__);
+  }
+  else
+  {
+    init(strlen(s)+2);
+
+    strcpy(data(),s);
+  }
+}
+
+string StringField::value()
+{
+  return string(data());
+}
+
+StringField::operator string()
+{
+  return value();
+}
+
+bool StringField::isAscii()
+{
+  return false;
+}
+
+void StringField::write(ostream&amp; os)
+{
+  Field::write(os);
+}
+
+void StringField::writeValue(ostream&amp; os)
+{
+  os &lt;&lt; "      &lt;value&gt; " &lt;&lt; value() &lt;&lt; " &lt;/value&gt;" &lt;&lt; endl;
+}
+
+/*
+ *  class Client
+ */
+
+Client::Client(bool binary)
+{
+  this-&gt;binary = binary;
+}
+
+void Client::peek(Field&amp; f)
+{
+  Reader* r = getReader();
+
+  f.read(*r,true);
+}
+
+void Client::peek(Message&amp; m)
+{
+  Reader* r = getReader();
+
+  m.read(*r,true);
+}
+
+void Client::peek(TreeMessage&amp; m)
+{
+  Reader* r = getReader();
+
+  m.read(*r,true);
+}
+
+Client&amp; Client::operator&gt;&gt;(TreeMessage&amp; m)
+{
+  Reader* r = getReader();
+
+  if(binary)
+    m &lt;&lt; (*r);
+  else
+    m.read(*r,false,true);
+
+  return *this;
+}
+
+Client&amp; Client::operator&lt;&lt;(TreeMessage&amp; m)
+{
+  Writer* w = getWriter();
+
+  if(binary)
+    m &gt;&gt; (*w);
+  else
+    m.write(*w,true);
+
+  return *this;
+}
+
+Client&amp; Client::operator&gt;&gt;(Message&amp; m)
+{
+  Reader* r = getReader();
+
+  if(binary)
+    m &lt;&lt; (*r);
+  else
+    m.read(*r,false,true);
+
+  return *this;
+}
+
+Client&amp; Client::operator&lt;&lt;(Message&amp; m)
+{
+  Writer* w = getWriter();
+
+  if(binary)
+    m &gt;&gt; (*w);
+  else
+    m.write(*w,true);
+
+  return *this;
+}
+
+Client&amp; Client::operator&gt;&gt;(Field&amp; f)
+{
+  Reader* r = getReader();
+
+  if(binary)
+    f &lt;&lt; (*r);
+  else
+    f.read(*r,false,true);
+
+  return *this;
+}
+
+Client&amp; Client::operator&lt;&lt;(Field&amp; f)
+{
+  Writer* w = getWriter();
+
+  if(binary)
+    f &gt;&gt; (*w);
+  else
+    f.write(*w,true);
+
+  return *this;
+}
+
+Client::~Client()
+{
+}
+
+Server::Server(bool binary)
+{
+  this-&gt;binary = binary;
+}
+
+Server::~Server()
+{
+}
+
+/*
+ *  class SocketClient
+ */
+
+SocketClient::SocketClient(string ipaddress_,int port_,bool binary):
+  Client(binary),
+  ipaddress(ipaddress_),
+  port(port_),
+  clientfd(-1),
+  reader(0),
+  writer(0),
+  isConnected(false)
+{
+  clientfd = init(ipaddress,port,sSockaddrin);
+}
+
+SocketClient::SocketClient(int socketfd,bool binary):
+  Client(binary)
+{
+  this-&gt;clientfd = socketfd;
+
+  isConnected = true;
+}
+
+int SocketClient::init(string ipaddress,int port,
+                        struct sockaddr_in&amp; sSockaddrin)
+{
+  struct hostent* sHostent;
+  struct linger sLinger;
+  struct in_addr* sInaddr;
+
+  int clientfd;
+
+  sHostent = gethostbyname(ipaddress.c_str());
+
+  if (!sHostent)
+    throw SocketException("void SocketClient::init()",SocketException::gethostbynameError,__FILE__,__LINE__);
+
+  clientfd = socket(AF_INET,SOCK_STREAM,0);
+
+  if(clientfd == -1)
+    throw SocketException("void SocketClient::init()",SocketException::socketError,__FILE__,__LINE__);
+
+  sLinger.l_onoff = 1;
+  sLinger.l_linger = 0;
+
+  if(setsockopt(clientfd,SOL_SOCKET,SO_LINGER,(char*)&amp;sLinger,sizeof(struct linger)) == -1)
+    throw SocketException("void SocketClient::init()",SocketException::setsockoptError,__FILE__,__LINE__);
+
+  sInaddr = (struct in_addr *)* (sHostent-&gt;h_addr_list);
+
+  sSockaddrin.sin_addr=*sInaddr;
+  sSockaddrin.sin_family=AF_INET;
+  sSockaddrin.sin_port=htons(port);
+
+  return clientfd;
+}
+
+void SocketClient::connect()
+{
+  if(::connect(clientfd,(struct sockaddr *) &amp;sSockaddrin, sizeof(sSockaddrin)) != 0)
+    throw SocketException("void SocketClient::connect()",SocketException::connectError,__FILE__,__LINE__);
+
+  isConnected = true;
+}
+
+void SocketClient::close()
+{
+  if(isConnected)
+  {
+    if((::close(clientfd)) == -1)
+      throw SocketException("void SocketClient::close()",SocketException::closeError,__FILE__,__LINE__);
+  }
+
+  isConnected = false;
+}
+
+Reader* SocketClient::getReader()
+{
+  if(reader)
+    return reader;
+  else
+  {
+    if(!isConnected)
+      throw Exception("Reader* SocketClient::getReader()",-1,__FILE__,__LINE__);
+    else
+    {
+      reader = new SocketReader(clientfd);
+      return reader;
+    }
+  }
+}
+
+Writer* SocketClient::getWriter()
+{
+  if(writer)
+    return writer;
+  else
+  {
+    if(!isConnected)
+      throw Exception("Writer* SocketClient::getWriter()",-1,__FILE__,__LINE__);
+    else
+    {
+      writer = new SocketWriter(clientfd);
+      return writer;
+    }
+  }
+}
+
+/*
+ *  class SocketServer
+ */
+
+SocketServer::SocketServer(int port_,bool binary):
+  Server(binary),
+  port(port_)
+{
+  serverfd = init(port,sSockaddrin);
+}
+
+int SocketServer::init(int port,struct sockaddr_in&amp; sSockaddrin)
+{
+  struct linger sLinger;
+  struct in_addr* sInaddr;
+
+  int option;
+
+  int serverfd;
+
+  serverfd = socket(AF_INET,SOCK_STREAM,0);
+
+  if(serverfd == -1)
+    throw SocketException("void SocketServer::init()",SocketException::socketError,__FILE__,__LINE__);
+
+  memset(&amp;sSockaddrin,0,sizeof(sSockaddrin));
+
+  sSockaddrin.sin_family = AF_INET;
+  sSockaddrin.sin_addr.s_addr = htonl(INADDR_ANY);
+  sSockaddrin.sin_port = htons(port);
+
+  option = 1;
+
+  if(setsockopt(serverfd,SOL_SOCKET,SO_REUSEADDR,(char*)&amp;option,sizeof(int)) == -1)
+    throw SocketException("void SocketServer::init()",SocketException::setsockoptError,__FILE__,__LINE__);
+
+  if(bind(serverfd,(struct sockaddr*)&amp;sSockaddrin,sizeof(sSockaddrin)))
+    throw SocketException("void SocketServer::init()",SocketException::bindError,__FILE__,__LINE__);
+
+  if(listen(serverfd,5) == -1)
+    throw SocketException("void SocketServer::init()",SocketException::listenError,__FILE__,__LINE__);
+
+  return serverfd;
+}
+
+Client* SocketServer::accept()
+{
+  int clientfd;
+
+  if((clientfd = ::accept(serverfd,(struct sockaddr *) 0,0)) == -1)
+    throw SocketException("void SocketServer::accept()",SocketException::acceptError,__FILE__,__LINE__);
+  else
+    return new SocketClient(clientfd,binary);
+}
+
+void SocketServer::close()
+{
+  if((::close(serverfd)) == -1)
+    throw SocketException("void SocketServer::close()",SocketException::closeError,__FILE__,__LINE__);
+}
+
+/*
+ *  class FileClient
+ */
+
+FileClient::FileClient(string infilename_,string outfilename_,bool binary):
+  Client(binary),
+  infilename(infilename_),
+  outfilename(outfilename_),
+  infd(-1),
+  outfd(-1),
+  reader(0),
+  writer(0),
+  isOpened(false)
+{
+}
+
+void FileClient::connect()
+{
+  if(!infilename.empty())
+  {
+    infd = ::open(infilename.c_str(),O_RDONLY);
+
+    if(infd == -1)
+      throw Exception("void FileClient::connect()",-1,__FILE__,__LINE__);
+  }
+
+  if(!outfilename.empty())
+  {
+    mode_t stdmode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
+
+    outfd = ::open(outfilename.c_str(),O_WRONLY | O_CREAT,stdmode);
+
+    if(outfd == -1)
+      throw Exception("void FileClient::connect()",-1,__FILE__,__LINE__);
+  }
+
+  isOpened = true;
+}
+
+void FileClient::close()
+{
+  if(isOpened)
+  {
+    if(((infd != -1) &amp;&amp; (::close(infd)) == -1) ||
+       ((outfd != -1) &amp;&amp; (::close(outfd)) == -1))
+      throw Exception("void FileClient::close()",-1,__FILE__,__LINE__);
+  }
+
+  isOpened = false;
+}
+
+Reader* FileClient::getReader()
+{
+  if(reader)
+    return reader;
+  else
+  {
+    if(!isOpened)
+      throw Exception("Reader* FileClient::getReader()",-1,__FILE__,__LINE__);
+    else
+    {
+      if(infd != -1)
+        reader = new FileReader(infd);
+
+      return reader;
+    }
+  }
+}
+
+Writer* FileClient::getWriter()
+{
+  if(writer)
+    return writer;
+  else
+  {
+    if(!isOpened)
+      throw Exception("Writer* FileClient::getWriter()",-1,__FILE__,__LINE__);
+    else
+    {
+      if(outfd != -1)
+        writer = new FileWriter(outfd);
+
+      return writer;
+    }
+  }
+}
+
+/*
+ *  Helper functions
+ */
+
+void daemon()
+{
+  int i;
+  pid_t pid;
+
+  if(((pid = fork()) != 0))
+    exit(0);
+
+  setsid();
+
+  signal(SIGHUP,SIG_IGN);
+
+  if((pid = fork()) != 0)
+    exit(0);
+}
+
+unsigned long getLocalIPAddress()
+{
+  struct hostent* hptr;
+  struct utsname local_host_name;
+
+  if(uname(&amp;local_host_name) == -1)
+    return 0;
+
+  if(!(hptr = gethostbyname(local_host_name.nodename)))
+    return 0;
+
+  return ((struct in_addr*) (hptr-&gt;h_addr_list[0]))-&gt;s_addr;
+}
+
+/* end of file */</tt></pre>
+</div></div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 0.400<br />
+Last updated 2014-06-28 16:23:42 CEST
+</div>
+<div id="footer-badges">
+<img style="border:none; width:88px; height:31px;"
+     src="../images/gplv3-127x51.png"
+     alt="GPL Version 3" />
+<!-- Histats.com  START  -->
+<a href="http://www.histats.com" target="_blank" title="simple hit counter" >
+<script  type="text/javascript" language="javascript">
+var s_sid = 675659;var st_dominio = 4;
+var cimg = 0;var cwi =112;var che =48;
+</script></a><script  type="text/javascript" language="javascript" src="http://s10.histats.com/js9.js"></script>
+<noscript><a href="http://www.histats.com" target="_blank">
+<img  src="http://s4.histats.com/stats/0.gif?675659&1" alt="simple hit counter" border="0"></a>
+</noscript>
+<!-- Histats.com  END  -->
+</div>
+</div>
+</div>
+</td>
+</tr>
+</table>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-11334618-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+If there is gas in the tank and the fuel line is ok
+then there is gas in the engine
+.
+(GasInTank and FuelLineOK) -> GasInEngine
